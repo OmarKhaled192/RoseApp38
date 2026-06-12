@@ -1,18 +1,39 @@
+import { DOCUMENT } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
 import {
   ApplicationConfig,
+  APP_INITIALIZER,
+  inject,
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { appRoutes } from './app.routes';
+
+const DEFAULT_LANG = 'ar';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideAnimationsAsync(),
+    provideHttpClient(),
     providePrimeNG({ theme: { preset: Aura } }),
+    provideTranslateService({ lang: DEFAULT_LANG, fallbackLang: DEFAULT_LANG }),
+    provideTranslateHttpLoader({ prefix: '/assets/i18n/', suffix: '.json' }),
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      useFactory: () => () => {
+        const document = inject(DOCUMENT);
+        document.documentElement.lang = DEFAULT_LANG;
+        document.documentElement.dir = DEFAULT_LANG === 'ar' ? 'rtl' : 'ltr';
+        return Promise.resolve();
+      },
+    },
     provideRouter(appRoutes),
   ],
 };

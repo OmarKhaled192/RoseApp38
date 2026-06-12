@@ -1,0 +1,10 @@
+{
+  "app": {
+    "title": "Shell App",
+    "welcome": "Welcome to the application"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel"
+  }
+}

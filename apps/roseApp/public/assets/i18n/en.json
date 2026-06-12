@@ -1,0 +1,13 @@
+{
+  "app": {
+    "title": "Rose App",
+    "welcome": "Welcome to the application",
+    "featureName": {
+
+    }
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel"
+  }
+}
