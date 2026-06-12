@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { ApiResponse } from '../models/api-response';
+import { ApiResponse, PaginationMetadata } from '../models/api-response';
 
 type Primitive = string | number | boolean;
 export type QueryParams = Record<string, Primitive | null | undefined>;
@@ -16,9 +16,17 @@ export abstract class ApiService<T> {
     return `${this.baseUrl}/${this.endpoint}`;
   }
 
-  getById<R = T>(id: number | string): Observable<R> {
-  return this.http.get<R>(`${this.fullUrl}/${id}`);
+  getById<R = T>(id: number | string): Observable<ApiResponse<R>> {
+  return this.http.get<ApiResponse<R>>(`${this.fullUrl}/${id}`);
 }
+
+
+
+  getByIdList<R = T, P extends Record<string, unknown> = { data: R; metadata: PaginationMetadata }>(
+    id: number | string
+  ): Observable<ApiResponse<R, P>> {
+    return this.http.get<ApiResponse<R, P>>(`${this.fullUrl}/${id}`);
+  }
 
   get<R = T>(params?: QueryParams): Observable<R> {
     return this.http.get<R>(this.fullUrl, {
