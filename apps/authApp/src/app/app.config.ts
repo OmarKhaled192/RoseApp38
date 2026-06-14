@@ -14,7 +14,7 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { appRoutes } from './app.routes';
 
-const DEFAULT_LANG = 'ar';
+const DEFAULT_LANG = 'en';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -33,7 +33,7 @@ export const appConfig: ApplicationConfig = {
       useFactory: () => () => {
         const document = inject(DOCUMENT);
         document.documentElement.lang = DEFAULT_LANG;
-        document.documentElement.dir = DEFAULT_LANG === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.dir = (DEFAULT_LANG as string) === 'ar' ? 'rtl' : 'ltr';
         return Promise.resolve();
       },
     },
