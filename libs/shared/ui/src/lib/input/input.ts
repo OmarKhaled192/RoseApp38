@@ -1,37 +1,37 @@
-
-import { Component, forwardRef, input } from '@angular/core';
+import { Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common';
+import { ErrorMessage } from "../error-message/error-message";
 
 export type InputType = 'text' | 'email' | 'password' | 'number';
 
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, InputTextModule, PasswordModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, InputTextModule, PasswordModule, ErrorMessage],
   templateUrl: './input.html',
   styleUrl: './input.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent ),
+      useExisting: forwardRef(() => InputComponent),
       multi: true,
     },
   ],
 })
-export class InputComponent  implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor {
   label = input<string>('');
-  type = input<'text' | 'email' | 'password' | 'number'>('text');
+  type = input<InputType>('text');
   placeholder = input<string>('');
   helperText = input<string>('');
   errorMessage = input<string>('');
   isDisabled = input<boolean>(false);
   isReadonly = input<boolean>(false);
 
-  value = '';
-  touched = false;
+  value = signal<string>('');
+  touched = signal<boolean>(false);
   disabled = false;
 
   onChange = (_: string) => {};
@@ -39,17 +39,17 @@ export class InputComponent  implements ControlValueAccessor {
 
   onInput(event: Event) {
     const val = (event.target as HTMLInputElement).value;
-    this.value = val;
+    this.value.set(val);
     this.onChange(val);
   }
 
   onBlur() {
-    this.touched = true;
+    this.touched.set(true);
     this.onTouched();
   }
 
   writeValue(val: string): void {
-    this.value = val ?? '';
+    this.value.set(val ?? '');
   }
 
   registerOnChange(fn: (_: string) => void): void {

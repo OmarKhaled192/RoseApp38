@@ -19,7 +19,7 @@ export default [
         {
           enforceBuildableLibDependency: true,
           allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
-          depConstraints: [
+        depConstraints: [
             {
               sourceTag: 'scope:shared',
               onlyDependOnLibsWithTags: ['scope:shared'],
@@ -34,7 +34,7 @@ export default [
             },
             {
               sourceTag: 'type:data',
-              onlyDependOnLibsWithTags: ['type:data'],
+              onlyDependOnLibsWithTags: ['type:data', 'scope:shared'], // ✅ أضفنا scope:shared
             },
           ],
         },
