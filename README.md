@@ -1,2 +1,2 @@
-# RoseApp38
-Rose App 38 Team 5 
+#Run App Cli
+>nx serve shell --devRemotes=adminDashboard,authApp,roseApp 
