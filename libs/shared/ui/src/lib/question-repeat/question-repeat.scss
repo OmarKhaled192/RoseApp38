@@ -1,0 +1,17 @@
+.question-repeat {
+  @apply flex items-center justify-center gap-1 text-base md:text-lg;
+}
+
+.question-text {
+  @apply text-gray-700 font-medium;
+}
+
+.answer-link {
+  @apply font-bold no-underline transition-colors duration-200;
+  color: #8b1e24;
+
+  &:hover {
+    color: #6d171c;
+    text-decoration: underline;
+  }
+}
