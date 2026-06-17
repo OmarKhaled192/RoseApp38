@@ -1,11 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'lib-title-form',
   standalone: true,
-  templateUrl: './title-form.html',
-  styleUrls: ['./title-form.scss']
+  templateUrl: './title-form.html'
 })
 export class TitleFormComponent {
-  @Input() title = '';
+  title = input.required<string>();
 }
