@@ -1,0 +1,25 @@
+<div class="paragraph-container">
+
+  @if (header) {
+  <h2 class="paragraph-header">
+    {{ header }}
+  </h2>
+  }
+
+  @if (descriptionBeforeLink || descriptionAfterLink || linkText) {
+  <p class="paragraph-description">
+
+    {{ descriptionBeforeLink }}
+
+    @if (linkText && linkRoute) {
+    <a class="paragraph-link" [routerLink]="linkRoute">
+      {{ linkText }}
+    </a>
+    }
+
+    {{ descriptionAfterLink }}
+
+  </p>
+  }
+
+</div>
