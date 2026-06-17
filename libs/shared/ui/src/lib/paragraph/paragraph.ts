@@ -1,21 +1,23 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'lib-paragraph',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './paragraph.html',
-  styleUrls: ['./paragraph.scss']
+  templateUrl: './paragraph.component.html',
+  host: {
+    class: 'block'
+  }
 })
 export class ParagraphComponent {
-  @Input() header?: string;
+  readonly header = input<string>();
 
-  @Input() descriptionBeforeLink?: string;
+  readonly descriptionBeforeLink = input<string>();
 
-  @Input() linkText?: string;
+  readonly linkText = input<string>();
 
-  @Input() linkRoute?: string | any[];
+  readonly linkRoute = input<string | readonly string[]>();
 
-  @Input() descriptionAfterLink?: string;
+  readonly descriptionAfterLink = input<string>();
 }
