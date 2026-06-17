@@ -1,16 +1,44 @@
+import { CommonModule } from '@angular/common';
 import { Component, forwardRef, input, signal } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
+
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
-import { CommonModule } from '@angular/common';
-import { ErrorMessage } from "../error-message/error-message";
+import { TextareaModule } from 'primeng/textarea';
+import { DatePickerModule } from 'primeng/datepicker';
 
-export type InputType = 'text' | 'email' | 'password' | 'number';
+import { ErrorMessage } from '../error-message/error-message';
+
+export type InputType =
+  | 'text'
+  | 'email'
+  | 'password'
+  | 'number'
+  | 'tel'
+  | 'url'
+  | 'search'
+  | 'date'
+  | 'textarea'
+  | 'calendar';
 
 @Component({
-  selector: 'app-input',
+  selector: 'lib-input',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, InputTextModule, PasswordModule, ErrorMessage],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    InputTextModule,
+    PasswordModule,
+    TextareaModule,
+    DatePickerModule,
+    ErrorMessage,
+  ],
   templateUrl: './input.html',
   styleUrl: './input.scss',
   providers: [
@@ -30,29 +58,47 @@ export class InputComponent implements ControlValueAccessor {
   isDisabled = input<boolean>(false);
   isReadonly = input<boolean>(false);
 
-  value = signal<string>('');
+  value = signal<any>('');
   touched = signal<boolean>(false);
+
   disabled = false;
 
-  onChange = (_: string) => {};
-  onTouched = () => {};
+  controlId = `input-${Math.random().toString(36).slice(2, 11)}`;
 
-  onInput(event: Event) {
-    const val = (event.target as HTMLInputElement).value;
-    this.value.set(val);
-    this.onChange(val);
+  onChange: (value: any) => void = () => { ; };
+  onTouched: () => void = () => { ; };
+
+  get isControlDisabled(): boolean {
+    return this.disabled || this.isDisabled();
   }
 
-  onBlur() {
+  onInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.value.set(value);
+    this.onChange(value);
+  }
+
+  onTextareaInput(event: Event): void {
+    const value = (event.target as HTMLTextAreaElement).value;
+    this.value.set(value);
+    this.onChange(value);
+  }
+
+  onValueChange(value: any): void {
+    this.value.set(value);
+    this.onChange(value);
+  }
+
+  onBlur(): void {
     this.touched.set(true);
     this.onTouched();
   }
 
-  writeValue(val: string): void {
-    this.value.set(val ?? '');
+  writeValue(value: any): void {
+    this.value.set(value ?? '');
   }
 
-  registerOnChange(fn: (_: string) => void): void {
+  registerOnChange(fn: (value: any) => void): void {
     this.onChange = fn;
   }
 
