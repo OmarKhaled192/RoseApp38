@@ -26,6 +26,8 @@ export type InputType =
   | 'textarea'
   | 'calendar';
 
+export type InputValue = string | number | Date | null;
+
 @Component({
   selector: 'lib-input',
   standalone: true,
@@ -58,15 +60,15 @@ export class InputComponent implements ControlValueAccessor {
   isDisabled = input<boolean>(false);
   isReadonly = input<boolean>(false);
 
-  value = signal<any>('');
-  touched = signal<boolean>(false);
+  value = signal<InputValue>(null);
+  touched = signal(false);
 
   disabled = false;
 
-  controlId = `input-${Math.random().toString(36).slice(2, 11)}`;
+  readonly controlId = `input-${crypto.randomUUID()}`;
 
-  onChange: (value: any) => void = () => { ; };
-  onTouched: () => void = () => { ; };
+  private onChange: (value: InputValue) => void = () => { ; };
+  private onTouched: () => void = () => { ; };
 
   get isControlDisabled(): boolean {
     return this.disabled || this.isDisabled();
@@ -74,19 +76,16 @@ export class InputComponent implements ControlValueAccessor {
 
   onInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
-    this.value.set(value);
-    this.onChange(value);
+    this.updateValue(value);
   }
 
   onTextareaInput(event: Event): void {
     const value = (event.target as HTMLTextAreaElement).value;
-    this.value.set(value);
-    this.onChange(value);
+    this.updateValue(value);
   }
 
-  onValueChange(value: any): void {
-    this.value.set(value);
-    this.onChange(value);
+  onValueChange(value: Date | null): void {
+    this.updateValue(value);
   }
 
   onBlur(): void {
@@ -94,11 +93,11 @@ export class InputComponent implements ControlValueAccessor {
     this.onTouched();
   }
 
-  writeValue(value: any): void {
-    this.value.set(value ?? '');
+  writeValue(value: InputValue): void {
+    this.value.set(value);
   }
 
-  registerOnChange(fn: (value: any) => void): void {
+  registerOnChange(fn: (value: InputValue) => void): void {
     this.onChange = fn;
   }
 
@@ -108,5 +107,10 @@ export class InputComponent implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  private updateValue(value: InputValue): void {
+    this.value.set(value);
+    this.onChange(value);
   }
 }
