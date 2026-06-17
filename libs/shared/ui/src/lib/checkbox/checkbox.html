@@ -1,0 +1,20 @@
+  <div class="cb-wrapper" [class.cb-disabled]="disabled()">
+      <p-checkbox
+        [(ngModel)]="checked"
+        [binary]="true"
+        [disabled]="disabled()"
+        [inputId]="inputId()"
+        (onChange)="handleChange($event)"
+      />
+
+      @if (label() || description()) {
+        <label [for]="inputId()" class="cb-label-wrap">
+          @if (label()) {
+            <span class="cb-label" [class]="'cb-label--' + size()">{{ label() }}</span>
+          }
+          @if (description()) {
+            <span class="cb-description">{{ description() }}</span>
+          }
+        </label>
+      }
+    </div>
