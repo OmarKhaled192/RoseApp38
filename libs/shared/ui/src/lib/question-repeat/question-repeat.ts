@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -6,10 +6,9 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './question-repeat.html',
-  styleUrls: ['./question-repeat.scss']
 })
 export class QuestionRepeatComponent {
-  @Input() question = '';
-  @Input() answer = '';
-  @Input() routerLink: string | any[] = '/';
+  readonly question = input.required<string>();
+  readonly answer = input.required<string>();
+  readonly routerLink = input<string | string[]>('/');
 }
