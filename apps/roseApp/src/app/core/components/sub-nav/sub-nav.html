@@ -1,0 +1,114 @@
+<nav class="w-full bg-[#6b0f24] px-6 py-0">
+  <ul class="flex items-center justify-center gap-1">
+    <!-- Home -->
+    <li>
+      <a
+        routerLink="/home"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link group flex items-center gap-2 px-5 py-3.5 text-sm text-white/80 hover:text-white relative transition-colors duration-200"
+      >
+        <img src="images/subnav/house.svg" alt="home icon" class="w-4 h-4 flex-shrink-0" />
+        Home
+        <span
+          class="active-bar absolute bottom-0 left-0 w-full h-0.5 bg-white scale-x-0 group-[.active-link]:scale-x-100 transition-transform duration-200 origin-center"
+        ></span>
+      </a>
+    </li>
+
+    <!-- Products -->
+    <li>
+      <a
+        routerLink="/products"
+        routerLinkActive="active-link"
+        class="nav-link relative flex items-center gap-2 px-5 py-4 text-sm text-white/70 hover:text-white transition-colors"
+      >
+        <!-- Gift/Products Icon -->
+        <svg
+          class="w-4 h-4 flex-shrink-0"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          viewBox="0 0 24 24"
+        >
+          <rect x="3" y="8" width="18" height="4" rx="1" />
+          <path d="M12 8v13M19 12v7a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-7" />
+          <path d="M7.5 8A2.5 2.5 0 0 1 10 5.5c1.5 0 2 1.5 2 2.5" />
+          <path d="M16.5 8A2.5 2.5 0 0 0 14 5.5c-1.5 0-2 1.5-2 2.5" />
+        </svg>
+        Products
+        <span
+          class="active-bar absolute bottom-0 left-0 w-full h-0.5 bg-white scale-x-0 group-[.active-link]:scale-x-100 transition-transform duration-200 origin-center"
+        ></span>
+      </a>
+    </li>
+
+    <!-- Categories -->
+    <li>
+      <a
+        routerLink="/categories"
+        routerLinkActive="active-link"
+        class="nav-link group flex items-center gap-2 px-5 py-3.5 text-sm text-white/80 hover:text-white relative transition-colors duration-200"
+      >
+        <!-- List/Categories Icon -->
+        <img
+          src="images/subnav/clipboard-list.svg"
+          alt="categories icon"
+          class="w-4 h-4 flex-shrink-0"
+        />
+        Categories
+        <span
+          class="active-bar absolute bottom-0 left-0 w-full h-0.5 bg-white scale-x-0 group-[.active-link]:scale-x-100 transition-transform duration-200 origin-center"
+        ></span>
+      </a>
+    </li>
+
+    <!-- Occasions -->
+    <li>
+      <a
+        routerLink="/occasions"
+        routerLinkActive="active-link"
+        class="nav-link group flex items-center gap-2 px-5 py-3.5 text-sm text-white/80 hover:text-white relative transition-colors duration-200"
+      >
+        <!-- Sparkle/Occasions Icon -->
+        <img src="images/subnav/party-popper.svg" alt="home icon" class="w-4 h-4 flex-shrink-0" />
+        Occasions
+        <span
+          class="active-bar absolute bottom-0 left-0 w-full h-0.5 bg-white scale-x-0 group-[.active-link]:scale-x-100 transition-transform duration-200 origin-center"
+        ></span>
+      </a>
+    </li>
+
+    <!-- Contact -->
+    <li>
+      <a
+        routerLink="/contact"
+        routerLinkActive="active-link"
+        class="nav-link group flex items-center gap-2 px-5 py-3.5 text-sm text-white/80 hover:text-white relative transition-colors duration-200"
+      >
+        <!-- Phone/Contact Icon -->
+        <img src="images/subnav/headset.svg" alt="home icon" class="w-4 h-4 flex-shrink-0" />
+        Contact
+        <span
+          class="active-bar absolute bottom-0 left-0 w-full h-0.5 bg-white scale-x-0 group-[.active-link]:scale-x-100 transition-transform duration-200 origin-center"
+        ></span>
+      </a>
+    </li>
+
+    <!-- About -->
+    <li>
+      <a
+        routerLink="/about"
+        routerLinkActive="active-link"
+        class="nav-link group flex items-center gap-2 px-5 py-3.5 text-sm text-white/80 hover:text-white relative transition-colors duration-200"
+      >
+        <!-- Info/About Icon -->
+        <img src="images/subnav/info.svg" alt="home icon" class="w-4 h-4 flex-shrink-0" />
+        About
+        <span
+          class="active-bar absolute bottom-0 left-0 w-full h-0.5 bg-white scale-x-0 group-[.active-link]:scale-x-100 transition-transform duration-200 origin-center"
+        ></span>
+      </a>
+    </li>
+  </ul>
+</nav>
