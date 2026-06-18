@@ -4,6 +4,17 @@
   height: 100%;
 }
 
+/* Hide scrollbars inside this component */
+:host * {
+  scrollbar-width: none;
+  -webkit-scrollbar: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+}
+
+
+
 .auth-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -117,10 +128,4 @@
   .auth-left {
     padding: 1.5rem;
   }
-}
-
-// for test layout only
-:host ::ng-deep p {
-  color: #000;
-  text-align: center;
 }
