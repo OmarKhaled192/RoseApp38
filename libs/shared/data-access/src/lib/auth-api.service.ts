@@ -2,18 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiService } from './api-service';
-
-export interface LoginRequest {
-  username?: string;
-  password?: string;
-}
-
-export interface LoginResponse {
-  status: boolean;
-  code: number;
-  message: string;
-  payload: string;
-}
+import { LoginRequest, LoginResponse } from '../core/models/login';
 
 @Injectable({
   providedIn: 'root',
