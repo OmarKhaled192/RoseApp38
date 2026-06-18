@@ -7,12 +7,11 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "executor": "@angular/build:application",
       "options": {
         "outputPath": "dist/apps/roseApp",
+        "browser": "apps/roseApp/src/main.ts",
         "index": "apps/roseApp/src/index.html",
-        "main": "apps/roseApp/src/main.ts",
         "tsConfig": "apps/roseApp/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -21,41 +20,17 @@
             "input": "apps/roseApp/public"
           }
         ],
-        "styles": ["apps/roseApp/src/styles.scss"],
-        "customWebpackConfig": {
-          "path": "apps/roseApp/webpack.config.ts"
-        }
+        "styles": [
+          "apps/roseApp/src/styles.scss"
+        ]
       },
       "configurations": {
-        "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "4kb",
-              "maximumError": "8kb"
-            }
-          ],
-          "outputHashing": "all",
-          "customWebpackConfig": {
-            "path": "apps/roseApp/webpack.prod.config.ts"
-          }
-        },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
-        }
+        "development": {},
+        "production": {}
       },
-      "defaultConfiguration": "production"
+      "defaultConfiguration": "development"
     },
+
     "serve": {
       "continuous": true,
       "executor": "@nx/angular:dev-server",
@@ -71,18 +46,20 @@
           "buildTarget": "roseApp:build:development"
         }
       },
-      "defaultConfiguration": "development",
-      "dependsOn": ["shell:serve"]
+      "defaultConfiguration": "development"
     },
+
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
         "buildTarget": "roseApp:build"
       }
     },
+
     "lint": {
       "executor": "@nx/eslint:lint"
     },
+
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",

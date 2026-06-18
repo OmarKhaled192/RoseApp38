@@ -1,9 +1,10 @@
 import { Route } from '@angular/router';
+import { Layout } from './features/auth/pages/layout/layout';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    loadChildren: () =>
-      import('./remote-entry/entry.routes').then((m) => m.remoteRoutes),
+    component: Layout,
+    children: [],
   },
 ];

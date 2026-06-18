@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NxWelcome } from './nx-welcome';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [NxWelcome],
-  selector: 'app-roseApp-entry',
-  template: `<app-nx-welcome></app-nx-welcome>`,
+  selector: 'app-roseapp-entry',
+  template: `<router-outlet></router-outlet>`,
+  standalone: true,
+  imports: [RouterOutlet]
 })
-export class RemoteEntry { }
+export class RoseApp { }
