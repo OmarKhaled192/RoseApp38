@@ -11,6 +11,7 @@ import { provideRouter } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { providePrimeNG } from 'primeng/config';
+import { MessageService } from 'primeng/api';
 import Aura from '@primeuix/themes/aura';
 import { appRoutes } from './app.routes';
 
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideAnimationsAsync(),
     provideHttpClient(),
+    MessageService,
     providePrimeNG({
       theme: {
         preset: Aura,

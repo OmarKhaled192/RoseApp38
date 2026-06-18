@@ -8,7 +8,8 @@ export type CheckboxSize = 'sm' | 'md' | 'lg';
   selector: 'lib-checkbox',
   imports: [CheckboxModule, FormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './checkbox.html'
+  templateUrl: './checkbox.html',
+  styleUrl: './checkbox.scss'
 })
 export class Checkbox {
   checked = model<boolean>(false);

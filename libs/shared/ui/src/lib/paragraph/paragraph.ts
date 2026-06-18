@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'lib-paragraph',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './paragraph.component.html',
+  templateUrl: './paragraph.html',
   host: {
     class: 'block'
   }

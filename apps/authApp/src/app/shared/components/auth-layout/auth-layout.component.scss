@@ -20,6 +20,10 @@
   align-content: center;
   background: #fff;
   max-height: 100%;
+
+  :host-context(.dark) & {
+    background: #000000;
+  }
 }
 
 .auth-topbar {
@@ -40,6 +44,10 @@
   color: #3F3F46;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
+
+  :host-context(.dark) & {
+    color: #FAFAFA;
+  }
 }
 
 
