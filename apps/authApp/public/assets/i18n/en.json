@@ -2,8 +2,13 @@
   "app": {
     "title": "Authentication App",
     "welcome": "Welcome to the application",
-    "featureName": {
-
+    "passwordReset": {
+      "title": "Password Reset Sent",
+      "msg1Prefix": "We have sent a password reset link to:",
+      "msg2": "Please check your inbox and follow the instructions to reset your password.",
+      "msg3": "If you don't see the email within a few minutes, check your spam or junk folder.",
+      "msg4": "Don't have an account?",
+      "msg5": "Create yours"
     }
   },
   "common": {
