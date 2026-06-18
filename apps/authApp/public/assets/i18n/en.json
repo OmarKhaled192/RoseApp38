@@ -1,13 +1,21 @@
 {
   "app": {
     "title": "Authentication App",
-    "welcome": "Welcome to the application",
-    "featureName": {
-
-    }
+    "welcome": "Welcome to the application"
   },
   "common": {
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "otherLanguage": "العربية"
+  },
+  "auth": {
+    "welcomeBack": "Welcome back!",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "rememberMe": "Remember me",
+    "login": "Login",
+    "noAccount": "Don't have an account yet?",
+    "createOne": "Create one now!"
   }
 }

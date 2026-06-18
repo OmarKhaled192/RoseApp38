@@ -1,13 +1,21 @@
 {
   "app": {
     "title": "تسجيل الدخول",
-    "welcome": "مرحبًا بك في التطبيق",
-    "featureName": {
-
-    }
+    "welcome": "مرحبًا بك في التطبيق"
   },
   "common": {
     "save": "حفظ",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "otherLanguage": "English"
+  },
+  "auth": {
+    "welcomeBack": "مرحباً بعودتك!",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "rememberMe": "تذكرني",
+    "login": "تسجيل الدخول",
+    "noAccount": "ليس لديك حساب بعد؟",
+    "createOne": "أنشئ حساباً الآن!"
   }
 }

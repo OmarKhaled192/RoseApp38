@@ -63,13 +63,21 @@
           "env": "NX_MF_DEV_REMOTES"
         }
       ]
+    },
+    "@nx/angular:package": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "release": {
-    "projects": ["api"],
+    "projects": ["data-access", "ui", "auth", "environments"],
     "projectsRelationship": "independent",
     "docker": {
       "skipVersionActions": true
+    },
+    "version": {
+      "preVersionCommand": "npx nx run-many -t build"
     }
   },
   "plugins": [

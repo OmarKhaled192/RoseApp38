@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { NxWelcome } from './nx-welcome';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  imports: [NxWelcome],
-  selector: 'app-roseApp-entry',
-  template: `<app-nx-welcome></app-nx-welcome>`,
+  imports: [ ReactiveFormsModule],
+  selector: 'app-rose-app-entry',
+  template: ` `,
 })
-export class RemoteEntry { }
+export class RemoteEntry {
+
+}
