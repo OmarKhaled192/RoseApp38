@@ -21,7 +21,7 @@
             "input": "apps/authApp/public"
           }
         ],
-        "styles": ["apps/authApp/src/styles.scss"],
+        "styles": ["apps/authApp/src/styles.css"],
         "customWebpackConfig": {
           "path": "apps/authApp/webpack.config.ts"
         }

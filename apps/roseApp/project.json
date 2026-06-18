@@ -21,7 +21,7 @@
           }
         ],
         "styles": [
-          "apps/roseApp/src/styles.scss"
+          "apps/roseApp/src/styles.css"
         ]
       },
       "configurations": {

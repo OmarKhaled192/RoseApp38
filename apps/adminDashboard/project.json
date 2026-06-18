@@ -21,7 +21,7 @@
             "input": "apps/adminDashboard/public"
           }
         ],
-        "styles": ["apps/adminDashboard/src/styles.scss"],
+        "styles": ["apps/adminDashboard/src/styles.css"],
         "customWebpackConfig": {
           "path": "apps/adminDashboard/webpack.config.ts"
         }
