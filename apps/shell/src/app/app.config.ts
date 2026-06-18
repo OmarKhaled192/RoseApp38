@@ -21,7 +21,14 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideAnimationsAsync(),
     provideHttpClient(),
-    providePrimeNG({ theme: { preset: Aura } }),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: '.dark',
+        },
+      },
+    }),
     provideTranslateService({
       lang: DEFAULT_LANG,
       fallbackLang: DEFAULT_LANG,
