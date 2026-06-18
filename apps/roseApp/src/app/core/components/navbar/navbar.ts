@@ -9,9 +9,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  searchQuery: string = '';
-  isArabic: boolean = true;
-  mobileSearchOpen: boolean = false;
+  searchQuery = '';
+  isArabic = true;
+  mobileSearchOpen = false;
 
   toggleMobileSearch(): void {
     this.mobileSearchOpen = !this.mobileSearchOpen;
