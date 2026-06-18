@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/authApp/src",
-  "tags": [],
+  "tags": ["scope:auth"],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
@@ -21,7 +21,10 @@
             "input": "apps/authApp/public"
           }
         ],
-        "styles": ["apps/authApp/src/styles.scss"],
+        "styles": [
+          "apps/authApp/src/styles.scss",
+          "node_modules/primeicons/primeicons.css"
+        ],
         "customWebpackConfig": {
           "path": "apps/authApp/webpack.config.ts"
         }

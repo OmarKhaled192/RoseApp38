@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   imports: [ ReactiveFormsModule],
-  selector: 'app-roseApp-entry',
+  selector: 'app-rose-app-entry',
   template: ` `,
 })
 export class RemoteEntry {

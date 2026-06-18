@@ -71,7 +71,7 @@
     }
   },
   "release": {
-    "projects": ["api", "data-access", "ui", "auth", "environments"],
+    "projects": ["data-access", "ui", "auth", "environments"],
     "projectsRelationship": "independent",
     "docker": {
       "skipVersionActions": true

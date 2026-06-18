@@ -7,14 +7,14 @@ export const appRoutes: Route[] = [
     path: 'home',
     loadChildren: () =>
       loadRemote<typeof import('roseApp/Routes')>('roseApp/Routes').then(
-        (m) => m!.remoteRoutes,
+        (m) => (m ? m.remoteRoutes : []),
       ),
   },
   {
     path: 'auth',
     loadChildren: () =>
       loadRemote<typeof import('authApp/Routes')>('authApp/Routes').then(
-        (m) => m!.remoteRoutes,
+        (m) => (m ? m.remoteRoutes : []),
       ),
   },
   {
@@ -22,7 +22,7 @@ export const appRoutes: Route[] = [
     loadChildren: () =>
       loadRemote<typeof import('adminDashboard/Routes')>(
         'adminDashboard/Routes',
-      ).then((m) => m!.remoteRoutes),
+      ).then((m) => (m ? m.remoteRoutes : [])),
   },
   {
     path: '',
