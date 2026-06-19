@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, forwardRef, input, signal } from '@angular/core';
 import {
   ControlValueAccessor,
+  FormControl,
   FormsModule,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
@@ -53,6 +54,7 @@ export type InputValue = string | number | Date | null;
 })
 export class InputComponent implements ControlValueAccessor {
   label = input<string>('');
+  control = input<FormControl>(new FormControl());
   type = input<InputType>('text');
   placeholder = input<string>('');
   helperText = input<string>('');
