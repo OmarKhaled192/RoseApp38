@@ -3,16 +3,9 @@
   width: 100%;
 }
 
-.register-wrapper {
+.register-email-wrapper {
   max-width: 420px;
   margin: 0 auto;
-}
-
-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
 }
 
 :host-context(.dark) {
@@ -29,7 +22,7 @@ select {
       color: #FFFFFF !important;
     }
 
-    .p-inputtext, .p-password-input {
+    .p-inputtext {
       background-color: #18181B !important;
       border-color: #3F3F46 !important;
       color: #FFFFFF !important;
@@ -39,12 +32,6 @@ select {
         box-shadow: 0 0 0 1px #FFA6B9 !important;
       }
     }
-  }
-
-  select {
-    background-color: #18181B !important;
-    border-color: #3F3F46 !important;
-    color: #FFFFFF !important;
   }
 
   lib-button ::ng-deep .p-button {

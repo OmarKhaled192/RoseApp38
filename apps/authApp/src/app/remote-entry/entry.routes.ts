@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { Route } from '@angular/router';
 import { RemoteEntry } from './entry';
 
@@ -22,6 +23,12 @@ export const remoteRoutes: Route[] = [
             path: 'login',
             loadComponent: () =>
               import('./login/login.component').then((m) => m.LoginComponent),
+          },
+
+          {
+            path: 'register1',
+            loadComponent: () =>
+              import('./register-email/register-email').then((m) => m.RegisterEmail),
           },
 
           {
