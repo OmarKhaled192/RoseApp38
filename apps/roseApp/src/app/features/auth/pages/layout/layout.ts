@@ -5,7 +5,7 @@ import { Footer } from '../../../../core/components/footer/footer';
 import { Header } from '../../../../core/components/header/header';
 
 @Component({
-  selector: 'rose-layout',
+  selector: 'app-layout',
   standalone: true,
   imports: [RouterOutlet, Header, Footer],
   templateUrl: './layout.html',

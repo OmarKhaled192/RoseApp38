@@ -25,10 +25,7 @@
         "styles": [
           "apps/roseApp/src/styles.scss",
           "node_modules/primeicons/primeicons.css"
-        ],
-        "customWebpackConfig": {
-          "path": "apps/roseApp/webpack.config.ts"
-        }
+        ]
       },
       "configurations": {
         "development": {},
