@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ResetPassword } from '../models/reset-password';
 import { ApiService } from '@org/data-access';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',

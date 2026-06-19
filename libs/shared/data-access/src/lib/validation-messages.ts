@@ -6,8 +6,6 @@ export interface ValidatorErrorMessageParams {
   validatorName: string;
   validatorValue?: { requiredLength?: number; max?: number; min?: number };
   fieldName?: string;
-  isEnPattern?: boolean;
-  isArPattern?: boolean;
   enter?: string;
   choose?: string;
   validMail?: string;
@@ -31,23 +29,19 @@ export class ValidationMessagesService {
       validatorName,
       validatorValue,
       fieldName,
-      isEnPattern,
-      isArPattern,
       enter,
       choose,
       validMail,
       least,
       maximum,
       pattern,
-      englishPatternMsg,
-      arabicPatternMsg
     } = params;
 
     const config: ValidatorMessageConfig = {
       required: `${enter} ${fieldName}`,
       validChose: `${choose} ${fieldName}`,
       email: validMail ?? '',
-      pattern: isEnPattern ? englishPatternMsg ?? '' : isArPattern ? arabicPatternMsg ?? '' : pattern ?? '',
+      pattern: pattern ?? '',
       minlength: `${enter} ${validatorValue?.requiredLength ?? 0} ${least}`,
       maxlength: `${enter} ${validatorValue?.requiredLength ?? 0} ${maximum}`,
       max: `${enter} ${validatorValue?.max ?? 0} ${maximum}`,
