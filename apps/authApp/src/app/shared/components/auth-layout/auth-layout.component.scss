@@ -14,6 +14,13 @@
 }
 
 
+.auth-content {
+  min-height: 100vh;
+}
+
+.auth-outlet {
+  width: 100%;
+}
 
 .auth-container {
   display: grid;
@@ -101,6 +108,7 @@
 
 .auth-right {
   min-height: 100vh;
+  height: 100%;
   background: #311113;
   position: sticky;
   top: 0;
