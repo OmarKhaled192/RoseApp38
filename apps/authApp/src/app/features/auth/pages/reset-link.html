@@ -27,7 +27,7 @@
     </p>
 
     <hr class="border-gray-200 mb-6" />
-    <app-paragraph header=" {{ 'passwordReset.msg4' | translate }}" linkText=" {{ 'passwordReset.msg5' | translate }}"
+    <app-paragraph [header]="'passwordReset.msg4' | translate" [linkText]="'passwordReset.msg5' | translate"
       [linkRoute]="['/register']" />
 
 
