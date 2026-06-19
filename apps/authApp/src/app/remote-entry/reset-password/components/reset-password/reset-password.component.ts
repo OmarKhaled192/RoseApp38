@@ -8,7 +8,6 @@ import { MustMatch } from '../../../../core/services/confirm-pass.validator';
 import { ResetPasswordService } from '../../services/reset-password';
 import { Message, ValidationMessagesService } from '@org/data-access';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
 @Component({
   selector: 'app-reset-password',
   standalone: true,
