@@ -11,7 +11,7 @@
   @case ('password') {
   <p-password [inputId]="controlId" [placeholder]="placeholder()" [disabled]="isControlDisabled" [feedback]="false"
     [formControl]="control()"
-    [toggleMask]="true" [ngModel]="value()" (ngModelChange)="onValueChange($event)" (onBlur)="onBlur()"
+    [toggleMask]="true"  (onBlur)="onBlur()"
     styleClass="w-full" inputStyleClass="w-full" />
   }
 
@@ -24,7 +24,7 @@
 
   @case ('calendar') {
   <p-datepicker [inputId]="controlId" [placeholder]="placeholder()" [disabled]="isControlDisabled"
-    [readonlyInput]="isReadonly()" [ngModel]="value()" (ngModelChange)="onValueChange($event)" (onBlur)="onBlur()"
+    [readonlyInput]="isReadonly()"  (onBlur)="onBlur()"
      [formControl]="control()"
     styleClass="w-full" />
   }
