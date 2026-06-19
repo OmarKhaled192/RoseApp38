@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { InputOtp } from 'primeng/inputotp';
-import { AuthApiService } from '@org/data-access';
 import { Message } from '@org/data-access';
 import {
   Button,
   TitleFormComponent,
   DarkModeService
 } from '@org/ui';
+import { AuthApiService } from '../../features/auth/services/auth-api.service';
 import { RegistrationStateService } from '../../core/services/registration-state.service';
 
 @Component({
@@ -33,7 +33,7 @@ export class OtpCodeComponent implements OnDestroy {
   private readonly messageService = inject(Message);
   private readonly router = inject(Router);
   private readonly darkModeService = inject(DarkModeService);
- readonly registrationState = inject(RegistrationStateService);
+  readonly registrationState = inject(RegistrationStateService);
 
   readonly isDark = this.darkModeService.isDark;
   readonly isLoading = signal(false);

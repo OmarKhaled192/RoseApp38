@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthApiService, Message, ValidationMessagesService } from '@org/data-access';
+import { Message, ValidationMessagesService } from '@org/data-access';
 import { DarkModeService, Button, QuestionRepeatComponent, InputComponent } from '@org/ui';
 import { ForgotPasswordService } from '../../services/forgot-password';
 
@@ -14,7 +14,7 @@ import { ForgotPasswordService } from '../../services/forgot-password';
   templateUrl: './forget-password.component.html'
 })
 export class ForgetPasswordComponent implements OnInit {
-   private readonly fb = inject(FormBuilder);
+  private readonly fb = inject(FormBuilder);
   private readonly forgotPasswordService = inject(ForgotPasswordService);
   private readonly translateService = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
@@ -36,7 +36,7 @@ export class ForgetPasswordComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]]
       },
     );
-    this.email = this.form.controls['newPassword'] as FormControl;
+    this.email = this.form.controls['email'] as FormControl;
   }
 
   onSubmit(): void {
@@ -54,11 +54,11 @@ export class ForgetPasswordComponent implements OnInit {
           error: () => {
             this.isLoading.set(false);
             this.form.reset();
-            this.messageService.show('error',this.translateService.instant('msg.invalid-email'));
+            this.messageService.show('error', this.translateService.instant('msg.invalid-email'));
           }
         });
     } else {
       this.validationMessagesService.validateAllFormFields(this.form);
     }
   }
- }
+}

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { AuthApiService } from '@org/data-access';
 import { Message } from '@org/data-access';
 import {
   InputComponent,
@@ -12,12 +11,13 @@ import {
   QuestionRepeatComponent,
   DarkModeService
 } from '@org/ui';
+import { AuthApiService } from '../../features/auth/services/auth-api.service';
 import { RegistrationStateService } from '../../core/services/registration-state.service';
 
 @Component({
   selector: 'app-register-email',
   imports: [
-     CommonModule,
+    CommonModule,
     ReactiveFormsModule,
     TranslatePipe,
     RouterLink,
@@ -76,7 +76,7 @@ export class RegisterEmail {
       },
       error: (err) => {
         this.isLoading.set(false);
-        this.messageService.show('error', err.errors?.message || 'Something went wrong. Please try again.');
+        this.messageService.show('error', err.error?.message || 'Something went wrong. Please try again.');
       }
     });
   }
