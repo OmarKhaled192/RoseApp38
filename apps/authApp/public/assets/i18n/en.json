@@ -48,7 +48,7 @@
   "msg": {
     "password-changed": "Password Was Changed Successfully",
     "invalid-email":"Email Is Incorrect",
-    "password-send": "New Password Has Been Sent To Your Email Successfully",
+    "password-send": "New Password Has Been Sent To Your Email Successfully"
    },
     "error": {
     "not-confirmed-password": "The Password And Confirmation Password Do Not Match",

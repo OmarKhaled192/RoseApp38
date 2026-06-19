@@ -2,19 +2,20 @@ import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthApiService, Message, ValidationMessagesService } from '@org/data-access';
-import { DarkModeService } from '@org/ui';
+import { DarkModeService, Button, QuestionRepeatComponent, InputComponent } from '@org/ui';
+import { ForgotPasswordService } from '../../services/forgot-password';
 
 @Component({
   selector: 'app-forget-password',
   standalone: true,
-  imports: [CommonModule, TranslatePipe],
+  imports: [CommonModule, TranslatePipe, ReactiveFormsModule, Button, QuestionRepeatComponent, InputComponent],
   templateUrl: './forget-password.component.html'
 })
 export class ForgetPasswordComponent implements OnInit {
    private readonly fb = inject(FormBuilder);
-  private readonly authApiService = inject(AuthApiService);
+  private readonly forgotPasswordService = inject(ForgotPasswordService);
   private readonly translateService = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly messageService = inject(Message);
@@ -41,7 +42,7 @@ export class ForgetPasswordComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       this.isLoading.set(true);
-      this.authApiService
+      this.forgotPasswordService
         .post(this.form.value)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
