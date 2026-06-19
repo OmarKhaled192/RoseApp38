@@ -26,6 +26,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: '',
-    component: NxWelcome,
+    redirectTo: 'home',
+    pathMatch: 'full',
   },
 ];
