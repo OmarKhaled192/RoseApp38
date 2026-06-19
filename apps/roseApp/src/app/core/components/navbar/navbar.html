@@ -1,30 +1,26 @@
 <nav class="w-full bg-white border-b border-gray-200 px-4 md:px-6 py-2 flex items-center gap-3 md:gap-4">
 
   <!-- Logo -->
-  <a href="#" class="flex-shrink-0">
+  <a href="#" class="logo-icon flex-shrink-0 ">
     <img src="/images/logo 1.png" alt="Rose Logo" class="w-10 md:w-12" />
   </a>
 
   <!-- Search Bar (hidden on mobile, visible md+) -->
-  <div class="hidden md:flex flex-1 items-center border border-gray-300 rounded-md px-4 py-2 gap-2 bg-white hover:border-gray-400 focus-within:border-[#e07090] transition-colors duration-200">
-    <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+  <div
+    class="hidden md:flex flex-1 items-center border border-gray-300 rounded-md px-4 py-2 gap-2 bg-white hover:border-gray-400 focus-within:border-[#e07090] transition-colors duration-200">
+    <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+      viewBox="0 0 24 24">
       <circle cx="11" cy="11" r="8" />
       <path d="m21 21-4.35-4.35" />
     </svg>
-    <input
-      type="text"
-      placeholder="What awesome gift are you looking for?"
-      [(ngModel)]="searchQuery"
+    <input type="text" placeholder="What awesome gift are you looking for?" [(ngModel)]="searchQuery"
       (keyup.enter)="onSearch()"
-      class="flex-1 bg-transparent outline-none text-sm text-gray-700 placeholder-gray-400"
-    />
+      class="flex-1 bg-transparent outline-none text-sm text-gray-700 placeholder-gray-400" />
   </div>
 
   <!-- Mobile: search icon button (opens search bar) -->
-  <button
-    class="md:hidden ml-auto text-gray-500 hover:text-[#e07090] transition-colors duration-200"
-    (click)="toggleMobileSearch()"
-  >
+  <button class="md:hidden ml-auto text-gray-500 hover:text-[#e07090] transition-colors duration-200"
+    (click)="toggleMobileSearch()">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
       <circle cx="11" cy="11" r="8" />
       <path d="m21 21-4.35-4.35" />
@@ -35,10 +31,8 @@
   <div class="flex items-center gap-3 md:gap-4 flex-shrink-0">
 
     <!-- Login (text hidden on small screens) -->
-    <button
-      (click)="onLogin()"
-      class="flex items-center gap-1.5 text-sm text-gray-700 hover:text-[#e07090] transition-colors duration-200 cursor-pointer"
-    >
+    <button (click)="onLogin()"
+      class="flex items-center gap-1.5 text-sm text-gray-700 hover:text-[#e07090] transition-colors duration-200 cursor-pointer">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
         <circle cx="12" cy="7" r="4" />
@@ -50,26 +44,18 @@
     <div class="w-px h-5 bg-gray-300"></div>
 
     <!-- Wishlist / Love -->
-    <button
-      (click)="onLove()"
-      class="text-gray-600 hover:text-[#e07090] transition-colors duration-200 cursor-pointer"
-    >
+    <button (click)="onLove()" class="text-gray-600 hover:text-[#e07090] transition-colors duration-200 cursor-pointer">
       <img src="images/navIcon/heart.svg" alt="Love Icon" class="w-5 h-5" />
     </button>
 
     <!-- Cart -->
-    <button
-      (click)="onCart()"
-      class="text-gray-600 hover:text-[#e07090] transition-colors duration-200 cursor-pointer"
-    >
+    <button (click)="onCart()" class="text-gray-600 hover:text-[#e07090] transition-colors duration-200 cursor-pointer">
       <img src="images/navIcon/shopping-cart.svg" alt="Cart Icon" class="w-5 h-5" />
     </button>
 
     <!-- Bell (hidden on xs, visible sm+) -->
-    <button
-      (click)="onNotifications()"
-      class="hidden sm:block text-gray-600 hover:text-[#e07090] transition-colors duration-200 cursor-pointer"
-    >
+    <button (click)="onNotifications()"
+      class="hidden sm:block text-gray-600 hover:text-[#e07090] transition-colors duration-200 cursor-pointer">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
         <path d="M13.73 21a2 2 0 0 1-3.46 0" />
@@ -80,38 +66,40 @@
     <div class="hidden sm:block w-px h-5 bg-gray-300"></div>
 
     <!-- Language Toggle -->
-    <button
-      (click)="toggleLanguage()"
-      class="text-sm text-gray-700 hover:text-[#e07090] font-medium transition-colors duration-200 cursor-pointer"
-    >
+    <!-- <button (click)="toggleLanguage()"
+      class="text-sm text-gray-700 hover:text-[#e07090] font-medium transition-colors duration-200 cursor-pointer">
       {{ isArabic ? 'EN' : 'العربية' }}
-    </button>
+    </button> -->
+
+
+    <div>
+      <lib-language-switcher
+        classList="text-gray-700 hover:text-[#e07090] font-medium transition-colors duration-200 cursor-pointer"></lib-language-switcher>
+      <lib-dark-mode></lib-dark-mode>
+    </div>
 
   </div>
 </nav>
 
 <!-- Mobile Search Bar (slides down when toggled) -->
-<div
-  *ngIf="mobileSearchOpen"
-  class="md:hidden bg-white border-b border-gray-200 px-4 py-2"
->
-  <div class="flex items-center border border-gray-300 rounded-md px-4 py-2 gap-2 focus-within:border-[#e07090] transition-colors duration-200">
-    <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+
+@if(mobileSearchOpen) {
+<div class="md:hidden bg-white border-b border-gray-200 px-4 py-2">
+  <div
+    class="flex items-center border border-gray-300 rounded-md px-4 py-2 gap-2 focus-within:border-[#e07090] transition-colors duration-200">
+    <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+      viewBox="0 0 24 24">
       <circle cx="11" cy="11" r="8" />
       <path d="m21 21-4.35-4.35" />
     </svg>
-    <input
-      #mobileSearchInput
-      type="text"
-      placeholder="What awesome gift are you looking for?"
-      [(ngModel)]="searchQuery"
+    <input #mobileSearchInput type="text" placeholder="What awesome gift are you looking for?" [(ngModel)]="searchQuery"
       (keyup.enter)="onSearch()"
-      class="flex-1 bg-transparent outline-none text-sm text-gray-700 placeholder-gray-400"
-    />
+      class="flex-1 bg-transparent outline-none text-sm text-gray-700 placeholder-gray-400" />
     <button (click)="toggleMobileSearch()" class="text-gray-400 hover:text-gray-600">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path d="M18 6 6 18M6 6l12 12"/>
+        <path d="M18 6 6 18M6 6l12 12" />
       </svg>
     </button>
   </div>
 </div>
+}
