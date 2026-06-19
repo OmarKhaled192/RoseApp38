@@ -1,4 +1,66 @@
-<section class="otp-code-wrap">
-  <h2>Verify OTP Code</h2>
-  <p>Enter the 6-digit code sent to your email or phone.</p>
-</section>
+<div class="otp-wrapper w-full flex flex-col gap-6">
+
+  <div class="header-container text-center">
+    <lib-title-form [title]="'auth.verifyOtp' | translate" />
+  </div>
+
+  <div class="divider border-b border-gray-200 w-full"></div>
+
+  <div class="flex flex-col gap-4 w-full">
+    <div>
+      <h3 class="text-lg font-semibold text-gray-700">{{ 'auth.verifyOtp' | translate }}</h3>
+    <p class=" text-sm text-gray-500">
+      {{ 'auth.otpSentTo' | translate }}
+      <span class="font-semibold text-gray-700">{{ registrationState.email() }}</span>
+      <a [routerLink]="['../register-email']" class="text-[#8D1C24] font-semibold hover:underline ml-1">
+        {{ 'auth.edit' | translate }}
+      </a>
+    </p>
+    </div>
+
+    <div class="flex justify-center">
+      <p-inputotp
+        [(ngModel)]="otpValue"
+        [length]="6"
+        [integerOnly]="true"
+      />
+    </div>
+
+    <div class="flex justify-end">
+      @if (cooldown() > 0) {
+        <span class="text-sm text-gray-500">
+          {{ 'auth.resendIn' | translate }} {{ cooldown() }}s
+        </span>
+      } @else {
+
+        <a  class="text-sm text-[#8D1C24] font-semibold hover:underline cursor-pointer"
+          (click)="onResend()"
+        >
+          {{ isResending() ? ('auth.resending' | translate) : ('auth.resendOtp' | translate) }}
+        </a>
+      }
+    </div>
+
+    <div class="w-full mt-2">
+      <lib-button
+        [label]="'auth.verify' | translate"
+        [loading]="isLoading()"
+        [disabled]="!isOtpComplete || isLoading()"
+        [color]="isDark() ? '#FFA6B9' : '#8D1C24'"
+        styleClass="w-full py-3 text-base font-semibold"
+        (click)="onSubmit()"
+      />
+    </div>
+
+  </div>
+
+  <div class="divider border-b border-gray-200 w-full"></div>
+
+  <div class="text-center text-sm text-gray-500">
+   {{ 'auth.needhelp' | translate }}
+    <a href="mailto:support@example.com" class="text-[#8D1C24] font-semibold hover:underline">
+      {{ 'auth.contact' | translate }}
+    </a>
+  </div>
+
+</div>
