@@ -1,12 +1,11 @@
 <lib-app-toast-msg />
-<div class="auth-container">
 
-  <div class="auth-left">
+<div class=" flex flex-col lg:flex-row h-screen">
 
+  <div class="flex-1 flex">
+    <div class="auth-content flex flex-col w-full">
 
-    <div class="auth-content">
-
-      <div class="auth-topbar">
+      <div class="auth-topbar flex justify-end gap-2 p-4">
         <lib-dark-mode></lib-dark-mode>
         <lib-language-switcher></lib-language-switcher>
       </div>
@@ -15,29 +14,25 @@
         <img src="/assets/surrond.svg" alt="Top Svg" />
       </div>
 
-      <div class=" auth-outlet">
+      <div class="auth-outlet flex-1 flex items-center justify-center px-4 py-8">
         <router-outlet></router-outlet>
       </div>
 
       <div class="auth-footer">
-        <div class="flourish" style="transform: scaleY(-1)">
-          <div class="flourish">
-            <img src="/assets/surrond.svg" alt="Top Svg" />
-          </div>
+        <div class="flourish rotate-180">
+          <img src="/assets/surrond.svg" alt="Bottom Svg" />
         </div>
       </div>
 
     </div>
-
-
   </div>
 
- <div class=" hidden lg:block  w-100 h-64 lg:h-screen">
-  <img
-    src="/assets/auth_bg.png"
-    alt="Luxury Gift Boxes"
-    class="auth-hero-img w-full h-full object-cover"
-  />
-</div>
+  <div class="hidden lg:block lg:w-1/2  lg:h-screen">
+    <img
+      src="/assets/auth_bg.png"
+      alt="Luxury Gift Boxes"
+      class="w-full h-screen object-cover"
+    />
+  </div>
 
 </div>
