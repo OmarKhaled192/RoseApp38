@@ -1,0 +1,19 @@
+<div class="cb-wrapper flex items-center gap-2.5" [class.cb-disabled]="disabled()"
+  [class]="disabled() ? 'opacity-50 cursor-not-allowed' : ''">
+  <p-checkbox [(ngModel)]="checked" [binary]="true" [disabled]="disabled()" [inputId]="inputId()"
+    (onChange)="handleChange($event)" />
+
+  @if (label() || description()) {
+  <label [for]="inputId()" class="cb-label-wrap flex flex-col cursor-pointer select-none">
+    @if (label()) {
+    <span class="cb-label text-gray-600 dark:text-gray-300"
+      [class]="'cb-label--' + size() + ' ' + (size() === 'sm' ? 'text-xs' : size() === 'lg' ? 'text-base' : 'text-sm')">
+      {{ label() }}
+    </span>
+    }
+    @if (description()) {
+    <span class="cb-description text-xs text-gray-400 dark:text-gray-500">{{ description() }}</span>
+    }
+  </label>
+  }
+</div>

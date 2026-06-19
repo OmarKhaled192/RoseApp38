@@ -1,0 +1,10 @@
+{
+  "name": "@org/environments",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "vite": "^7.3.2",
+    "@analogjs/vite-plugin-angular": "2.2.0",
+    "@nx/vite": "22.7.5"
+  },
+  "sideEffects": false
+}

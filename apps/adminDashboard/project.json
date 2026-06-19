@@ -4,11 +4,15 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/adminDashboard/src",
-  "tags": [],
+  "tags": [
+    "scope:admin"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/adminDashboard",
         "index": "apps/adminDashboard/src/index.html",
@@ -21,7 +25,10 @@
             "input": "apps/adminDashboard/public"
           }
         ],
-        "styles": ["apps/adminDashboard/src/styles.css"],
+        "styles": [
+          "apps/adminDashboard/src/styles.scss",
+          "node_modules/primeicons/primeicons.css"
+        ],
         "customWebpackConfig": {
           "path": "apps/adminDashboard/webpack.config.ts"
         }
@@ -72,7 +79,9 @@
         }
       },
       "defaultConfiguration": "development",
-      "dependsOn": ["shell:serve"]
+      "dependsOn": [
+        "shell:serve"
+      ]
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

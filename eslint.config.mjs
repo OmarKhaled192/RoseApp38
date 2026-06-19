@@ -24,19 +24,29 @@ export default [
               sourceTag: 'scope:shared',
               onlyDependOnLibsWithTags: ['scope:shared'],
             },
+
             {
-              sourceTag: 'scope:shop',
-              onlyDependOnLibsWithTags: ['scope:shop', 'scope:shared'],
+              sourceTag: 'scope:auth',
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:auth'],
             },
+
             {
-              sourceTag: 'scope:api',
-              onlyDependOnLibsWithTags: ['scope:api', 'scope:shared'],
+              sourceTag: 'scope:rose',
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:rose'],
             },
+
             {
-              sourceTag: 'type:data',
-              onlyDependOnLibsWithTags: ['type:data'],
+              sourceTag: 'scope:admin',
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:admin'],
             },
-          ],
+
+            {
+              sourceTag: 'scope:shell',
+              onlyDependOnLibsWithTags: ['scope:shared'],
+            },
+
+
+          ]
         },
       ],
     },
