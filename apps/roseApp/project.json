@@ -21,7 +21,10 @@
             "input": "apps/roseApp/public"
           }
         ],
-        "styles": ["apps/roseApp/src/styles.scss"],
+        "styles": [
+          "apps/roseApp/src/styles.scss",
+          "node_modules/primeicons/primeicons.css"
+        ],
         "customWebpackConfig": {
           "path": "apps/roseApp/webpack.config.ts"
         }
