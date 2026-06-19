@@ -46,7 +46,7 @@ export const remoteRoutes: Route[] = [
           {
             path: 'reset-password',
             loadComponent: () =>
-              import('./reset-password/reset-password.component').then(
+              import('./reset-password/components/reset-password/reset-password.component').then(
                 (m) => m.ResetPasswordComponent
               ),
           },

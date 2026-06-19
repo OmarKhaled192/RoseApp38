@@ -25,5 +25,18 @@
     "login": "Login",
     "noAccount": "Don't have an account yet?",
     "createOne": "Create one now!"
-  }
+  },
+  "resetPassword": {
+    "title": "Create a new password",
+    "subtitle": "Set a strong password to secure your account.",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "passwordPlaceholder": "********",
+    "submitButton": "Reset Password",
+    "needHelp": "Need help?",
+    "contactUs": "Contact us"
+   },
+  "msg": {
+    "password-changed": "Password Was Changed Successfully"
+   }
 }

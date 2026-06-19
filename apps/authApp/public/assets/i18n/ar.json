@@ -25,5 +25,18 @@
     "login": "تسجيل الدخول",
     "noAccount": "ليس لديك حساب بعد؟",
     "createOne": "أنشئ حساباً الآن!"
+  },
+  "resetPassword": {
+    "title": "إنشاء كلمة مرور جديدة",
+    "subtitle": "تعيين كلمة مرور قوية لتأمين حسابك.",
+    "passwordLabel": "كلمة المرور",
+    "confirmPasswordLabel": "تأكيد كلمة المرور",
+    "passwordPlaceholder": "********",
+    "submitButton": "إعادة تعيين كلمة المرور",
+    "needHelp": "هل تحتاج إلى مساعدة؟",
+    "contactUs": "اتصل بنا"
+  },
+  "msg": {
+  "password-changed": "تم تغيير كلمة المرور بنجاح"
   }
 }
