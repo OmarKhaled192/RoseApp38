@@ -1,10 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { AuthApiService } from '@org/data-access';
-import { Message } from '@org/data-access';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AuthFacade } from '../../features/auth/auth.facade';
 import {
   InputComponent,
   Button,
@@ -33,13 +33,12 @@ import {
 })
 export class LoginComponent {
   private readonly fb = inject(FormBuilder);
-  private readonly authApiService = inject(AuthApiService);
-  private readonly messageService = inject(Message);
-  private readonly router = inject(Router);
+  private readonly authFacade = inject(AuthFacade);
   private readonly darkModeService = inject(DarkModeService);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly isDark = this.darkModeService.isDark;
-  readonly isLoading = signal(false);
+  readonly isLoading = this.authFacade.isLoading;
   readonly rememberMe = signal(false);
 
   readonly loginForm: FormGroup = this.fb.group({
@@ -69,22 +68,8 @@ export class LoginComponent {
       return;
     }
 
-    this.isLoading.set(true);
-    this.authApiService.login(this.loginForm.value).subscribe({
-      next: (res) => {
-        this.isLoading.set(false);
-        if (res.status) {
-          localStorage.setItem('token', res.payload);
-          this.messageService.show('success', res.message || 'Login successful!');
-          this.router.navigate(['/']);
-        } else {
-          this.messageService.show('error', res.message || 'Login failed');
-        }
-      },
-      error: (err) => {
-        this.isLoading.set(false);
-        this.messageService.show('error', err.error?.message || 'Something went wrong. Please try again.');
-      }
-    });
+    this.authFacade.login(this.loginForm.value)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 }

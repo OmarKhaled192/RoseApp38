@@ -4,11 +4,15 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/shell/src",
-  "tags": ["scope:shell"],
+  "tags": [
+    "scope:shell"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/shell",
         "index": "apps/shell/src/index.html",
@@ -21,7 +25,10 @@
             "input": "apps/shell/public"
           }
         ],
-        "styles": ["apps/shell/src/styles.css"],
+        "styles": [
+          "apps/shell/src/styles.scss",
+          "node_modules/primeicons/primeicons.css"
+        ],
         "customWebpackConfig": {
           "path": "apps/shell/webpack.config.ts"
         }
