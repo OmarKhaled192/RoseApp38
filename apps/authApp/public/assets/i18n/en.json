@@ -20,7 +20,7 @@
     "welcomeBack": "Welcome back!",
     "email": "Email",
     "password": "Password",
-    "forgotPassword": "Forgot your password?",
+    "forgetPassword": "forget your password?",
     "rememberMe": "Remember me",
     "login": "Login",
     "noAccount": "Don't have an account yet?",
@@ -58,8 +58,8 @@
     "needHelp": "Need help?",
     "contactUs": "Contact us"
   },
-  "forgotPassword": {
-    "title": "Forgot Password?",
+  "forgetPassword": {
+    "title": "forget Password?",
     "subtitle": "Worry not, we'll send you instructions to help you reset it.",
     "emailLabel": "Email",
     "emailPlaceholder": "user@example.com",

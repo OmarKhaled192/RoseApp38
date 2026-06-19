@@ -20,7 +20,7 @@
     "welcomeBack": "مرحباً بعودتك!",
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
-    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "forgetPassword": "هل نسيت كلمة المرور؟",
     "rememberMe": "تذكرني",
     "login": "تسجيل الدخول",
     "noAccount": "ليس لديك حساب بعد؟",
@@ -58,7 +58,7 @@
     "needHelp": "هل تحتاج إلى مساعدة؟",
     "contactUs": "اتصل بنا"
   },
-  "forgotPassword": {
+  "forgetPassword": {
     "title": "هل نسيت كلمة المرور؟",
     "subtitle": "لا تقلق، سنرسل لك التعليمات لمساعدتك في إعادة تعيينها.",
     "emailLabel": "البريد الإلكتروني",

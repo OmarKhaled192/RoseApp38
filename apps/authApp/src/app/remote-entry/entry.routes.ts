@@ -18,18 +18,18 @@ export const remoteRoutes: Route[] = [
         loadComponent: () =>
           import('./login/login.component').then((m) => m.LoginComponent),
       },
-      {
-        path: 'register1',
-        loadComponent: () =>
-          import('./register-email/register-email').then((m) => m.RegisterEmail),
-      },
+      // {
+      //   path: 'register1',
+      //   loadComponent: () =>
+      //     import('./register-email/register-email').then((m) => m.RegisterEmail),
+      // },
       {
         path: 'register',
         loadComponent: () =>
           import('./register/register.component').then((m) => m.RegisterComponent),
       },
       {
-        path: 'forgot-password',
+        path: 'forget-password',
         loadComponent: () =>
           import('./forget-password/components/forget-password/forget-password.component').then(
             (m) => m.ForgetPasswordComponent

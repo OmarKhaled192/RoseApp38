@@ -5,7 +5,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Message, ValidationMessagesService } from '@org/data-access';
 import { DarkModeService, Button, QuestionRepeatComponent, InputComponent } from '@org/ui';
-import { ForgotPasswordService } from '../../services/forgot-password';
+import { forgetPasswordService } from '../../services/forget-password';
 
 @Component({
   selector: 'app-forget-password',
@@ -15,7 +15,7 @@ import { ForgotPasswordService } from '../../services/forgot-password';
 })
 export class ForgetPasswordComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
-  private readonly forgotPasswordService = inject(ForgotPasswordService);
+  private readonly forgetPasswordService = inject(forgetPasswordService);
   private readonly translateService = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly messageService = inject(Message);
@@ -42,7 +42,7 @@ export class ForgetPasswordComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       this.isLoading.set(true);
-      this.forgotPasswordService
+      this.forgetPasswordService
         .post(this.form.value)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
