@@ -36,8 +36,19 @@
     "needHelp": "هل تحتاج إلى مساعدة؟",
     "contactUs": "اتصل بنا"
   },
+  "forgotPassword": {
+    "title": "هل نسيت كلمة المرور؟",
+    "subtitle": "لا تقلق، سنرسل لك التعليمات لمساعدتك في إعادة تعيينها.",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "user@example.com",
+    "submitButton": "متابعة",
+    "noAccount": "ليس لديك حساب بعد؟",
+    "createAccount": "أنشئ حساباً الآن!"
+  },
   "msg": {
-  "password-changed": "تم تغيير كلمة المرور بنجاح"
+  "password-changed": "تم تغيير كلمة المرور بنجاح",
+  "invalid-email":"البريد الالكترونى غير صحيح",
+  "password-send": "تم ارسال كلمة المرور الجديدة الي بريدك الالكتروني بنجاح",
   },
   "error": {
     "not-confirmed-password": "كلمة المرور وتاكيد كلمة المرور غير متطابقين",
