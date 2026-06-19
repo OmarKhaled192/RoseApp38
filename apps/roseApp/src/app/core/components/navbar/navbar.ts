@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DarkModeComponent, LanguageSwitcherComponent, ToastMsg } from '@org/ui';
 
 @Component({
@@ -10,6 +11,8 @@ import { DarkModeComponent, LanguageSwitcherComponent, ToastMsg } from '@org/ui'
   styleUrl: './navbar.css',
 })
 export class Navbar {
+  private readonly router = inject(Router);
+
   searchQuery = '';
   isArabic = true;
 
@@ -26,7 +29,7 @@ export class Navbar {
   }
 
   onLogin(): void {
-    console.log('Login clicked');
+    this.router.navigate(['/auth']);
   }
 
   onLove(): void {
