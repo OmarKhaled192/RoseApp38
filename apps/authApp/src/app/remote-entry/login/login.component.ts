@@ -1,6 +1,6 @@
 import { Component, inject, signal, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -41,34 +41,22 @@ export class LoginComponent {
   readonly isLoading = this.authFacade.isLoading;
   readonly rememberMe = signal(false);
 
-  readonly loginForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]]
-  });
-
-  get usernameError(): string {
-    const control = this.loginForm.get('username');
-    if (control?.touched && control?.errors?.['required']) {
-      return 'Username is required';
-    }
-    return '';
-  }
-
-  get passwordError(): string {
-    const control = this.loginForm.get('password');
-    if (control?.touched && control?.errors?.['required']) {
-      return 'Password is required';
-    }
-    return '';
-  }
+  readonly loginForm = signal(
+    this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    }),
+  );
 
   onSubmit(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
+    const form = this.loginForm();
+
+    if (form.invalid) {
+      form.markAllAsTouched();
       return;
     }
 
-    this.authFacade.login(this.loginForm.value)
+    this.authFacade.login(form.getRawValue() as { username: string; password: string })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }

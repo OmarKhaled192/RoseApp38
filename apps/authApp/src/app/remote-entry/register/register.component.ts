@@ -41,14 +41,19 @@ export class RegisterComponent {
   readonly isDark = this.darkModeService.isDark;
   readonly isLoading = signal(false);
 
-  readonly registerForm: FormGroup = this.fb.group({
-    firstName: ['', [Validators.required]],
-    lastName: ['', [Validators.required]],
-    username: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    confirmPassword: ['', [Validators.required]],
-  }, { validators: this.passwordMatchValidator });
+  readonly registerForm = signal(
+    this.fb.group(
+      {
+        firstName: ['', [Validators.required]],
+        lastName: ['', [Validators.required]],
+        username: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required]],
+      },
+      { validators: this.passwordMatchValidator },
+    ),
+  );
 
   private passwordMatchValidator(form: FormGroup) {
     const password = form.get('password')?.value;
@@ -66,33 +71,15 @@ export class RegisterComponent {
     }
   }
 
-  getError(field: string): string {
-    const control = this.registerForm.get(field);
-    if (!control?.touched) return '';
-    if (control?.errors?.['required']) return `${field} is required`;
-    if (control?.errors?.['minlength']) return 'Password must be at least 8 characters';
-    if (control?.errors?.['mismatch']) return 'Passwords do not match';
-    return '';
-  }
-
-  get emailError(): string {
-    const control = this.registerForm.get('email');
-    if (!control?.touched) return '';
-    if (control?.errors?.['required']) return 'Email is required';
-    if (control?.errors?.['email']) return 'Please enter a valid email';
-    if (control?.value && control.value !== this.registrationState.email()) {
-      return 'Email does not match the one used for verification';
-    }
-    return '';
-  }
-
   onSubmit(): void {
-    if (this.registerForm.invalid) {
-      this.registerForm.markAllAsTouched();
+    const form = this.registerForm();
+
+    if (form.invalid) {
+      form.markAllAsTouched();
       return;
     }
 
-    const enteredEmail = this.registerForm.value.email;
+    const enteredEmail = form.value.email;
     if (enteredEmail !== this.registrationState.email()) {
       this.messageService.show('error', 'Email does not match the one used for verification');
       return;
@@ -100,7 +87,7 @@ export class RegisterComponent {
 
     this.isLoading.set(true);
     this.authApiService.register({
-      ...this.registerForm.value,
+      ...form.value,
     }).subscribe({
       next: (res) => {
         this.isLoading.set(false);

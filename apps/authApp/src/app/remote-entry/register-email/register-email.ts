@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Message } from '@org/data-access';
@@ -39,29 +39,22 @@ export class RegisterEmail {
   readonly isDark = this.darkModeService.isDark;
   readonly isLoading = signal(false);
 
-  readonly registerEmailForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]]
-  });
-
-  get emailError(): string {
-    const control = this.registerEmailForm.get('email');
-    if (control?.touched && control?.errors?.['required']) {
-      return 'Email is required';
-    }
-    if (control?.touched && control?.errors?.['email']) {
-      return 'Please enter a valid email';
-    }
-    return '';
-  }
+  readonly registerEmailForm = signal(
+    this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+    }),
+  );
 
   onSubmit(): void {
-    if (this.registerEmailForm.invalid) {
-      this.registerEmailForm.markAllAsTouched();
+    const form = this.registerEmailForm();
+
+    if (form.invalid) {
+      form.markAllAsTouched();
       return;
     }
 
     this.isLoading.set(true);
-    const email = this.registerEmailForm.value.email;
+    const email = form.getRawValue().email as string;
 
     this.authApiService.sendEmailVerification({ email }).subscribe({
       next: (res) => {
