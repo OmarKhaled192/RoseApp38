@@ -6,6 +6,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Message, ValidationMessagesService } from '@org/data-access';
 import { DarkModeService, Button, QuestionRepeatComponent, InputComponent, ParagraphComponent } from '@org/ui';
 import { forgetPasswordService } from '../../services/forget-password';
+import { forgetPassword } from '../../models/forget-password';
 
 @Component({
   selector: 'app-forget-password',
@@ -37,19 +38,31 @@ export class ForgetPasswordComponent {
     if (form.valid) {
       this.isLoading.set(true);
       this.forgetPasswordService
-        .post(form.value)
+        .forgotPassword(form.getRawValue() as forgetPassword)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
-          next: () => {
-            this.messageService.show('success', this.translateService.instant('msg.password-send'));
+          next: (res) => {
             this.isLoading.set(false);
-            form.reset();
+            if (res.status) {
+              this.messageService.show(
+                'success',
+                res.message || this.translateService.instant('msg.password-send'),
+              );
+              form.reset();
+            } else {
+              this.messageService.show(
+                'error',
+                res.message || this.translateService.instant('msg.invalid-email'),
+              );
+            }
           },
-          error: () => {
+          error: (err) => {
             this.isLoading.set(false);
-            form.reset();
-            this.messageService.show('error', this.translateService.instant('msg.invalid-email'));
-          }
+            this.messageService.show(
+              'error',
+              err.error?.message || this.translateService.instant('msg.invalid-email'),
+            );
+          },
         });
     } else {
       this.validationMessagesService.validateAllFormFields(form);

@@ -6,6 +6,7 @@ import { AbstractControlOptions, FormBuilder, ReactiveFormsModule, Validators } 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MustMatch } from '../../../../core/services/confirm-pass.validator';
 import { ResetPasswordService } from '../../services/reset-password';
+import { ResetPassword } from '../../models/reset-password';
 import { Message, ValidationMessagesService } from '@org/data-access';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -56,18 +57,31 @@ export class ResetPasswordComponent {
     if (form.valid) {
       this.isLoading.set(true);
       this.resetPasswordService
-        .post(form.value)
+        .resetPassword(form.getRawValue() as ResetPassword)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
-          next: () => {
-            this.messageService.show('success', this.translateService.instant('msg.password-changed'));
+          next: (res) => {
             this.isLoading.set(false);
-            form.reset();
-            this.router.navigate(['/auth/login']);
+            if (res.status) {
+              this.messageService.show(
+                'success',
+                res.message || this.translateService.instant('msg.password-changed'),
+              );
+              form.reset();
+              this.router.navigate(['/auth/login']);
+            } else {
+              this.messageService.show(
+                'error',
+                res.message || this.translateService.instant('msg.password-changed'),
+              );
+            }
           },
-          error: () => {
+          error: (err) => {
             this.isLoading.set(false);
-            form.reset();
+            this.messageService.show(
+              'error',
+              err.error?.message || this.translateService.instant('msg.invalid-email'),
+            );
           }
         });
     } else {

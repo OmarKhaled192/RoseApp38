@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ApiService } from '@org/data-access';
 import { LoginRequest, LoginResponse } from '../models/login.model';
 
@@ -40,39 +40,18 @@ export class AuthApiService extends ApiService<LoginResponse> {
   }
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
-    return of({
-      status: true,
-      message: 'Login successful!',
-      payload: 'mock-token-xyz',
-      code: 200
-    } as any);
+    return this.post(credentials);
   }
 
   sendEmailVerification(body: SendEmailVerificationRequest): Observable<AuthResponse> {
-    return of({
-      status: true,
-      code: 200,
-      message: 'OTP sent successfully!',
-      payload: ''
-    });
+    return this.http.post<AuthResponse>(`${this.baseUrl}/auth/send-email-verification`, body);
   }
 
   confirmEmailVerification(body: ConfirmEmailVerificationRequest): Observable<AuthResponse> {
-    return of({
-      status: true,
-      code: 200,
-      message: 'OTP verified successfully!',
-      payload: ''
-    });
+    return this.http.post<AuthResponse>(`${this.baseUrl}/auth/confirm-email-verification`, body);
   }
 
   register(body: RegisterRequest): Observable<AuthResponse> {
-    return of({
-      status: true,
-      code: 200,
-      message: 'Account created successfully!',
-      payload: ''
-    });
+    return this.http.post<AuthResponse>(`${this.baseUrl}/auth/register`, body);
   }
-
 }

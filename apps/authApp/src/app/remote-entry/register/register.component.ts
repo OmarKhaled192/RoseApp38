@@ -1,6 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControlOptions,
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Message } from '@org/data-access';
@@ -9,10 +14,11 @@ import {
   Button,
   TitleFormComponent,
   QuestionRepeatComponent,
-  DarkModeService
+  DarkModeService,
 } from '@org/ui';
 import { AuthApiService } from '../../features/auth/services/auth-api.service';
 import { RegistrationStateService } from '../../core/services/registration-state.service';
+import { MustMatch } from '../../core/services/confirm-pass.validator';
 
 @Component({
   selector: 'app-register',
@@ -25,12 +31,12 @@ import { RegistrationStateService } from '../../core/services/registration-state
     InputComponent,
     Button,
     TitleFormComponent,
-    QuestionRepeatComponent
+    QuestionRepeatComponent,
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly authApiService = inject(AuthApiService);
   private readonly messageService = inject(Message);
@@ -51,24 +57,23 @@ export class RegisterComponent {
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', [Validators.required]],
       },
-      { validators: this.passwordMatchValidator },
+      {
+        validators: MustMatch('password', 'confirmPassword'),
+      } as AbstractControlOptions,
     ),
   );
 
-  private passwordMatchValidator(form: FormGroup) {
-    const password = form.get('password')?.value;
-    const confirmPassword = form.get('confirmPassword')?.value;
-    if (password !== confirmPassword) {
-      form.get('confirmPassword')?.setErrors({ mismatch: true });
-    } else {
-      const errors = form.get('confirmPassword')?.errors;
-      if (errors) {
-        delete errors['mismatch'];
-        Object.keys(errors).length === 0
-          ? form.get('confirmPassword')?.setErrors(null)
-          : form.get('confirmPassword')?.setErrors(errors);
-      }
+  ngOnInit(): void {
+    const verifiedEmail = this.registrationState.email();
+
+    if (!verifiedEmail) {
+      this.router.navigate(['../register']);
+      return;
     }
+
+    const form = this.registerForm();
+    form.patchValue({ email: verifiedEmail });
+    form.controls.email.disable();
   }
 
   onSubmit(): void {
@@ -79,30 +84,39 @@ export class RegisterComponent {
       return;
     }
 
-    const enteredEmail = form.value.email;
-    if (enteredEmail !== this.registrationState.email()) {
-      this.messageService.show('error', 'Email does not match the one used for verification');
-      return;
-    }
+    const { firstName, lastName, username, password, confirmPassword } = form.getRawValue();
 
     this.isLoading.set(true);
-    this.authApiService.register({
-      ...form.value,
-    }).subscribe({
-      next: (res) => {
-        this.isLoading.set(false);
-        if (res.status) {
-          this.registrationState.clear();
-          this.messageService.show('success', res.message || 'Account created successfully!');
-          this.router.navigate(['../login']);
-        } else {
-          this.messageService.show('error', res.message || 'Registration failed');
-        }
-      },
-      error: (err) => {
-        this.isLoading.set(false);
-        this.messageService.show('error', err.error?.message || 'Something went wrong. Please try again.');
-      }
-    });
+    this.authApiService
+      .register({
+        firstName: firstName!,
+        lastName: lastName!,
+        username: username!,
+        email: this.registrationState.email(),
+        password: password!,
+        confirmPassword: confirmPassword!,
+      })
+      .subscribe({
+        next: (res) => {
+          this.isLoading.set(false);
+          if (res.status) {
+            this.registrationState.clear();
+            this.messageService.show(
+              'success',
+              res.message || 'Account created successfully!',
+            );
+            this.router.navigate(['../login']);
+          } else {
+            this.messageService.show('error', res.message || 'Registration failed');
+          }
+        },
+        error: (err) => {
+          this.isLoading.set(false);
+          this.messageService.show(
+            'error',
+            err.error?.message || 'Something went wrong. Please try again.',
+          );
+        },
+      });
   }
 }

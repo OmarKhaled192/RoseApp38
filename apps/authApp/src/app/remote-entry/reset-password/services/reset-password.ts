@@ -1,26 +1,21 @@
 import { Injectable } from '@angular/core';
-import { ResetPassword } from '../models/reset-password';
-import { ApiService } from '@org/data-access';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { ApiService } from '@org/data-access';
+import { AuthResponse } from '../../../features/auth/services/auth-api.service';
+import { ResetPassword } from '../models/reset-password';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ResetPasswordService extends ApiService<ResetPassword>  {
-
+export class ResetPasswordService extends ApiService<ResetPassword> {
   protected override endpoint = 'auth/reset-password';
 
   constructor(http: HttpClient) {
     super(http);
   }
 
-  override post(body: any): Observable<any> {
-    return of({
-      status: true,
-      code: 200,
-      message: 'Password Was Changed Successfully'
-    });
+  resetPassword(body: ResetPassword): Observable<AuthResponse> {
+    return this.post<ResetPassword, AuthResponse>(body);
   }
-
 }
