@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { InputComponent, Button, QuestionRepeatComponent, DarkModeService } from "@org/ui";
+import { InputComponent, Button, QuestionRepeatComponent, DarkModeService, ParagraphComponent } from "@org/ui";
 import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MustMatch } from '../../../../core/services/confirm-pass.validator';
@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-reset-password',
   standalone: true,
-  imports: [CommonModule, TranslatePipe, InputComponent, Button, QuestionRepeatComponent , ReactiveFormsModule],
+  imports: [CommonModule, TranslatePipe, InputComponent, Button, QuestionRepeatComponent, ParagraphComponent, ReactiveFormsModule],
   templateUrl: './reset-password.component.html'
 })
 export class ResetPasswordComponent implements OnInit {

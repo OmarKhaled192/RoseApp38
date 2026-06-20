@@ -8,7 +8,8 @@ import { Message } from '@org/data-access';
 import {
   Button,
   TitleFormComponent,
-  DarkModeService
+  DarkModeService,
+  ParagraphComponent,
 } from '@org/ui';
 import { AuthApiService } from '../../features/auth/services/auth-api.service';
 import { RegistrationStateService } from '../../core/services/registration-state.service';
@@ -24,6 +25,7 @@ import { RegistrationStateService } from '../../core/services/registration-state
     InputOtp,
     Button,
     TitleFormComponent,
+    ParagraphComponent,
   ],
   templateUrl: './otp-code.component.html',
   styleUrls: ['./otp-code.component.scss'],
@@ -99,7 +101,10 @@ export class OtpCodeComponent implements OnDestroy {
     this.cooldownInterval = setInterval(() => {
       this.cooldown.update(v => {
         if (v <= 1) {
-          clearInterval(this.cooldownInterval!);
+          if (this.cooldownInterval) {
+            clearInterval(this.cooldownInterval);
+            this.cooldownInterval = null;
+          }
           return 0;
         }
         return v - 1;

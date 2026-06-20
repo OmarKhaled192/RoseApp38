@@ -4,13 +4,13 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Message, ValidationMessagesService } from '@org/data-access';
-import { DarkModeService, Button, QuestionRepeatComponent, InputComponent } from '@org/ui';
+import { DarkModeService, Button, QuestionRepeatComponent, InputComponent, ParagraphComponent } from '@org/ui';
 import { forgetPasswordService } from '../../services/forget-password';
 
 @Component({
   selector: 'app-forget-password',
   standalone: true,
-  imports: [CommonModule, TranslatePipe, ReactiveFormsModule, Button, QuestionRepeatComponent, InputComponent],
+  imports: [CommonModule, TranslatePipe, ReactiveFormsModule, Button, QuestionRepeatComponent, InputComponent, ParagraphComponent],
   templateUrl: './forget-password.component.html'
 })
 export class ForgetPasswordComponent implements OnInit {
