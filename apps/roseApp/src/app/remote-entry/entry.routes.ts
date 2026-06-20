@@ -1,7 +1,13 @@
 import { Route } from '@angular/router';
 import { HomeComponent } from '../features/auth/pages/home/home';
-// import { RoseApp } from './entry';
+import { RoseApp } from './entry';
 
 export const remoteRoutes: Route[] = [
-  { path: '', component: HomeComponent }
+  {
+    path: '',
+    component: RoseApp,
+    children: [
+      { path: '', component: HomeComponent }
+    ]
+  }
 ];

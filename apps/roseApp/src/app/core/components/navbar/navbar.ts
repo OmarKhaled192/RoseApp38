@@ -27,9 +27,20 @@ export class Navbar {
       this.mobileSearchOpen = false;
     }
   }
-
   onLogin(): void {
-    this.router.navigate(['/auth']);
+    this.router.navigateByUrl('/auth/login');
+  }
+
+  isLoggedIn(): boolean {
+    if (typeof document === 'undefined') return false;
+    return document.cookie.includes('token=');
+  }
+
+  onSignout(): void {
+    if (typeof document !== 'undefined') {
+      document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+    this.router.navigateByUrl('/auth/login');
   }
 
   onLove(): void {

@@ -9,11 +9,14 @@
   ],
   "targets": {
     "build": {
-      "executor": "@angular/build:application",
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/roseApp",
-        "browser": "apps/roseApp/src/main.ts",
         "index": "apps/roseApp/src/index.html",
+        "main": "apps/roseApp/src/main.ts",
         "tsConfig": "apps/roseApp/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -25,17 +28,44 @@
         "styles": [
           "apps/roseApp/src/styles.scss",
           "node_modules/primeicons/primeicons.css"
-        ]
+        ],
+        "customWebpackConfig": {
+          "path": "apps/roseApp/webpack.config.ts"
+        }
       },
       "configurations": {
-        "development": {},
-        "production": {}
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/roseApp/webpack.prod.config.ts"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "production"
     },
     "serve": {
       "continuous": true,
-      "executor": "@nx/angular:dev-server",
+      "executor": "@nx/angular:module-federation-dev-server",
       "options": {
         "port": 4203,
         "publicHost": "http://localhost:4203"

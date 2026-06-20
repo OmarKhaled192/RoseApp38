@@ -28,7 +28,7 @@ export class AuthFacade {
           if (res.status) {
             this.authService.setToken(res.payload);
             this.messageService.show('success', res.message || 'Login successful!');
-            this.router.navigate(['/home']);
+            this.router.navigate(['/roseApp']);
           } else {
             this.messageService.show('error', res.message || 'Login failed');
           }

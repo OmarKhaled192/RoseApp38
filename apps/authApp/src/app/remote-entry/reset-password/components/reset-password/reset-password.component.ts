@@ -7,7 +7,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MustMatch } from '../../../../core/services/confirm-pass.validator';
 import { ResetPasswordService } from '../../services/reset-password';
 import { Message, ValidationMessagesService } from '@org/data-access';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-reset-password',
   standalone: true,
@@ -18,7 +18,8 @@ export class ResetPasswordComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly resetPasswordService = inject(ResetPasswordService);
   private readonly translateService = inject(TranslateService);
-  private route = inject(ActivatedRoute);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   private readonly destroyRef = inject(DestroyRef);
   private readonly messageService = inject(Message);
@@ -47,9 +48,10 @@ export class ResetPasswordComponent implements OnInit {
     );
     this.newPassword = this.form.controls['newPassword'] as FormControl;
     this.confirmPassword = this.form.controls['confirmPassword'] as FormControl;
+    this.token = this.form.controls['token'] as FormControl;
     this.route.queryParams.subscribe(params => {
       if (params['token']) {
-        this.token.setValue(this.token)
+        this.token.setValue(params['token']);
       }
     });
   }
@@ -65,6 +67,7 @@ export class ResetPasswordComponent implements OnInit {
             this.messageService.show('success', this.translateService.instant('msg.password-changed'));
             this.isLoading.set(false);
             this.form.reset();
+            this.router.navigate(['/auth/login']);
           },
           error: () => {
             this.isLoading.set(false);
