@@ -62,7 +62,7 @@ export class MultiTranslateHttpLoader implements TranslateLoader {
   }
 }
 
-const DEFAULT_LANG = 'ar';
+const DEFAULT_LANG: string = 'en';
 
 export const appConfig: ApplicationConfig = {
   providers: [

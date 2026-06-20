@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ApiService } from '@org/data-access';
 import { LoginRequest, LoginResponse } from '../models/login.model';
 
@@ -40,22 +40,39 @@ export class AuthApiService extends ApiService<LoginResponse> {
   }
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.post<LoginRequest, LoginResponse>(credentials);
+    return of({
+      status: true,
+      message: 'Login successful!',
+      payload: 'mock-token-xyz',
+      code: 200
+    } as any);
   }
 
-sendEmailVerification(body: SendEmailVerificationRequest): Observable<AuthResponse> {
-    this.endpoint = 'auth/send-email-verification';
-    return this.post<SendEmailVerificationRequest, AuthResponse>(body);
+  sendEmailVerification(body: SendEmailVerificationRequest): Observable<AuthResponse> {
+    return of({
+      status: true,
+      code: 200,
+      message: 'OTP sent successfully!',
+      payload: ''
+    });
   }
 
   confirmEmailVerification(body: ConfirmEmailVerificationRequest): Observable<AuthResponse> {
-    this.endpoint = 'auth/confirm-email-verification';
-    return this.post<ConfirmEmailVerificationRequest, AuthResponse>(body);
+    return of({
+      status: true,
+      code: 200,
+      message: 'OTP verified successfully!',
+      payload: ''
+    });
   }
 
   register(body: RegisterRequest): Observable<AuthResponse> {
-    this.endpoint = 'auth/register';
-    return this.post<RegisterRequest, AuthResponse>(body);
+    return of({
+      status: true,
+      code: 200,
+      message: 'Account created successfully!',
+      payload: ''
+    });
   }
 
 }
