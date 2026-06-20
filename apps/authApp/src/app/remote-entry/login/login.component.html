@@ -9,11 +9,12 @@
   <form [formGroup]="loginForm()" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full">
 
     <div class="form-field">
-      <lib-input formControlName="username" [label]="'auth.email' | translate" placeholder="user@example.com" />
+      <lib-input formControlName="username" [label]="'auth.username' | translate" placeholder="user@example.com" />
     </div>
 
     <div class="form-field">
-      <lib-input type="password" formControlName="password" [label]="'auth.password' | translate" placeholder="********" />
+      <lib-input type="password" formControlName="password" [label]="'auth.password' | translate"
+        placeholder="********" />
     </div>
 
     <div class="flex justify-end">

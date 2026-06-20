@@ -62,7 +62,7 @@ export class RegisterEmail {
         if (res.status) {
           this.registrationState.setEmail(email);
           this.messageService.show('success', res.message || 'OTP sent successfully!');
-          this.router.navigate(['../otp-code']);
+          this.router.navigate(['../auth/otp-code']);
         } else {
           this.messageService.show('error', res.message || 'Email already registered');
         }

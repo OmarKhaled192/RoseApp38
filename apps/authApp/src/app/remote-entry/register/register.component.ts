@@ -47,6 +47,11 @@ export class RegisterComponent implements OnInit {
   readonly isDark = this.darkModeService.isDark;
   readonly isLoading = signal(false);
 
+  readonly genderOptions = [
+    { label: 'Male', value: 'MALE' },
+    { label: 'Female', value: 'FEMALE' },
+  ];
+
   readonly registerForm = signal(
     this.fb.group(
       {
@@ -67,7 +72,7 @@ export class RegisterComponent implements OnInit {
     const verifiedEmail = this.registrationState.email();
 
     if (!verifiedEmail) {
-      this.router.navigate(['../register']);
+      this.router.navigate(['/auth/register']);
       return;
     }
 
@@ -84,9 +89,16 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    const { firstName, lastName, username, password, confirmPassword } = form.getRawValue();
+    const {
+      firstName,
+      lastName,
+      username,
+      password,
+      confirmPassword,
+    } = form.getRawValue();
 
     this.isLoading.set(true);
+
     this.authApiService
       .register({
         firstName: firstName!,
@@ -99,22 +111,23 @@ export class RegisterComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          if (res.status) {
-            this.registrationState.clear();
-            this.messageService.show(
-              'success',
-              res.message || 'Account created successfully!',
-            );
-            this.router.navigate(['../login']);
-          } else {
-            this.messageService.show('error', res.message || 'Registration failed');
-          }
+
+          this.registrationState.clear();
+
+          this.messageService.show(
+            'success',
+            res?.message || 'Account created successfully!',
+          );
+
+          void this.router.navigateByUrl('/auth/login');
         },
         error: (err) => {
           this.isLoading.set(false);
+
           this.messageService.show(
             'error',
-            err.error?.message || 'Something went wrong. Please try again.',
+            err?.error?.message ||
+            'Something went wrong. Please try again.',
           );
         },
       });

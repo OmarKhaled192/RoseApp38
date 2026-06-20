@@ -61,7 +61,7 @@ export class OtpCodeComponent implements OnDestroy {
         this.isLoading.set(false);
         if (res.status) {
           this.messageService.show('success', res.message || 'OTP verified successfully!');
-          this.router.navigate(['../register-details']);
+          this.router.navigate(['../auth/register-details']);
         } else {
           this.messageService.show('error', res.message || 'Invalid or expired OTP');
         }
