@@ -9,5 +9,25 @@
   "common": {
     "save": "Save",
     "cancel": "Cancel"
+  },
+   "FOOTER": {
+    "APP_NAME": "Rose E-Commerce App",
+    "RIGHTS": "All rights reserved | 2025",
+    "DISCOVER": "Discover our website",
+    "HOME": "Home",
+    "PRODUCTS": "Products",
+    "CATEGORIES": "Categories",
+    "OCCASIONS": "Occasions",
+    "CONTACT": "Contact",
+    "ABOUT": "About",
+    "TERMS": "Terms & Conditions",
+    "PRIVACY": "Privacy Policy",
+    "FAQS": "FAQs",
+    "GET": "Get",
+    "DISCOUNT_TITLE": "  Off Discount Coupon",
+    "NEWSLETTER_TEXT": "By subscribing to our Newsletter!",
+    "EMAIL_PLACEHOLDER": "Enter Your Email",
+    "SUBSCRIBE": "Subscribe",
+    "INVALID_EMAIL": "Please enter a valid email address."
   }
 }

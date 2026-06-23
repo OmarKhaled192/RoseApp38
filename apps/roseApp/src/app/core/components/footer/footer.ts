@@ -1,25 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  standalone: true,
+  imports: [TranslatePipe],
   templateUrl: './footer.html',
-  styleUrl: './footer.css',
 })
 export class Footer {
+  translate = inject(TranslateService);
 
-    
   email = '';
+
+
 
   onSubscribe(): void {
     if (this.email && this.email.includes('@')) {
-      alert(
-        `Thank you! Your 20% discount coupon will be sent to ${this.email}`,
-      );
       this.email = '';
     } else {
       alert('Please enter a valid email address.');
     }
   }
-  
 }
