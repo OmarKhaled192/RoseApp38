@@ -2,32 +2,49 @@
   "app": {
     "title": "تطبيق روز",
     "welcome": "مرحبًا بك في التطبيق",
-    "featureName": {
-
-    }
+    "featureName": {}
   },
   "common": {
     "save": "حفظ",
     "cancel": "إلغاء"
   },
-   "FOOTER": {
-    "APP_NAME": "متجر روز الإلكتروني",
-    "RIGHTS": "جميع الحقوق محفوظة | 2025",
-    "DISCOVER": "اكتشف موقعنا",
-    "HOME": "الرئيسية",
-    "PRODUCTS": "المنتجات",
-    "CATEGORIES": "التصنيفات",
-    "OCCASIONS": "المناسبات",
-    "CONTACT": "تواصل معنا",
-    "ABOUT": "من نحن",
-    "TERMS": "الشروط والأحكام",
-    "PRIVACY": "سياسة الخصوصية",
-    "FAQS": "الأسئلة الشائعة",
-    "GET": "احصل على",
-    "DISCOUNT_TITLE": "خصم ",
-    "NEWSLETTER_TEXT": "من خلال الاشتراك في النشرة البريدية!",
-    "EMAIL_PLACEHOLDER": "أدخل بريدك الإلكتروني",
-    "SUBSCRIBE": "اشترك",
-    "INVALID_EMAIL": "يرجى إدخال بريد إلكتروني صحيح."
+  "footer": {
+    "app_name": "متجر روز الإلكتروني",
+    "rights": "جميع الحقوق محفوظة | 2025",
+
+    "discover": "اكتشف موقعنا",
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "categories": "التصنيفات",
+    "occasions": "المناسبات",
+    "contact": "تواصل معنا",
+    "about": "من نحن",
+
+    "terms": "الشروط والأحكام",
+    "privacy": "سياسة الخصوصية",
+    "faqs": "الأسئلة الشائعة",
+
+    "get": "احصل على",
+    "discount_title": "خصم ",
+    "newsletter_text": "من خلال الاشتراك في النشرة البريدية!",
+    "email_placeholder": "أدخل بريدك الإلكتروني",
+    "subscribe": "اشترك",
+    "invalid_email": "يرجى إدخال بريد إلكتروني صحيح."
+  },
+  "navbar": {
+    "deliverTo": "التوصيل إلى",
+    "location": "القاهرة",
+
+    "searchPlaceholder": "ما الهدية الرائعة التي تبحث عنها؟",
+
+    "hello": "مرحباً",
+    "myProfile": "الملف الشخصي",
+    "orders": "الطلبات",
+    "signOut": "تسجيل الخروج",
+    "login": "تسجيل الدخول",
+
+    "wishlist": "المفضلة",
+    "cart": "السلة",
+    "notifications": "الإشعارات"
   }
 }

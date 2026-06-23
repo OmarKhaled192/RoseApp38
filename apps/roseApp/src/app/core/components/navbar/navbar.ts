@@ -2,16 +2,29 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DarkModeComponent, LanguageSwitcherComponent, ToastMsg } from '@org/ui';
+import {
+  DarkModeComponent,
+  LanguageSwitcherComponent,
+  ToastMsg,
+} from '@org/ui';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
-  imports: [FormsModule, CommonModule, DarkModeComponent, LanguageSwitcherComponent, ToastMsg],
+  imports: [
+    FormsModule,
+    CommonModule,
+    DarkModeComponent,
+    LanguageSwitcherComponent,
+    ToastMsg,
+    TranslatePipe,
+  ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar {
   private readonly router = inject(Router);
+  translate = inject(TranslateService);
 
   searchQuery = '';
   isArabic = true;
@@ -38,7 +51,8 @@ export class Navbar {
 
   onSignout(): void {
     if (typeof document !== 'undefined') {
-      document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      document.cookie =
+        'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
     this.router.navigateByUrl('/auth/login');
   }
@@ -57,5 +71,15 @@ export class Navbar {
 
   toggleLanguage(): void {
     this.isArabic = !this.isArabic;
+  }
+
+  userMenuOpen = false;
+
+  toggleUserMenu() {
+    this.userMenuOpen = !this.userMenuOpen;
+  }
+
+  openLocationDropdown() {
+    console.log('Open location dropdown');
   }
 }

@@ -2,32 +2,50 @@
   "app": {
     "title": "Rose App",
     "welcome": "Welcome to the application",
-    "featureName": {
-
-    }
+    "featureName": {}
   },
   "common": {
     "save": "Save",
     "cancel": "Cancel"
   },
-   "FOOTER": {
-    "APP_NAME": "Rose E-Commerce App",
-    "RIGHTS": "All rights reserved | 2025",
-    "DISCOVER": "Discover our website",
-    "HOME": "Home",
-    "PRODUCTS": "Products",
-    "CATEGORIES": "Categories",
-    "OCCASIONS": "Occasions",
-    "CONTACT": "Contact",
-    "ABOUT": "About",
-    "TERMS": "Terms & Conditions",
-    "PRIVACY": "Privacy Policy",
-    "FAQS": "FAQs",
-    "GET": "Get",
-    "DISCOUNT_TITLE": "  Off Discount Coupon",
-    "NEWSLETTER_TEXT": "By subscribing to our Newsletter!",
-    "EMAIL_PLACEHOLDER": "Enter Your Email",
-    "SUBSCRIBE": "Subscribe",
-    "INVALID_EMAIL": "Please enter a valid email address."
+  "footer": {
+    "app_name": "Rose E-Commerce App",
+    "rights": "All rights reserved | 2025",
+
+    "discover": "Discover our website",
+    "home": "Home",
+    "products": "Products",
+    "categories": "Categories",
+    "occasions": "Occasions",
+    "contact": "Contact",
+    "about": "About",
+
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "faqs": "FAQs",
+
+    "get": "Get",
+    "discount_title": "Off Discount Coupon",
+    "newsletter_text": "By subscribing to our Newsletter!",
+    "email_placeholder": "Enter Your Email",
+    "subscribe": "Subscribe",
+    "invalid_email": "Please enter a valid email address."
+  },
+
+  "navbar": {
+    "deliverTo": "Deliver to",
+    "location": "Cairo",
+
+    "searchPlaceholder": "What awesome gift are you looking for?",
+
+    "hello": "Hello",
+    "myProfile": "My Profile",
+    "orders": "Orders",
+    "signOut": "Sign out",
+    "login": "Login",
+
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "notifications": "Notifications"
   }
 }
