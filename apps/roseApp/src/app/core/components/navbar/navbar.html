@@ -5,7 +5,7 @@
     <img src="/images/logo 1.png" alt="Rose Logo" class="w-10 md:w-12" />
   </a>
 
-  <!-- Search Bar (hidden on mobile, visible md+) -->
+ 
   <div
     class="hidden md:flex flex-1 items-center border border-gray-300 rounded-md px-4 py-2 gap-2 bg-white hover:border-gray-400 focus-within:border-[#e07090] transition-colors duration-200">
     <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -17,7 +17,6 @@
       class="flex-1 bg-transparent outline-none text-sm text-gray-700 placeholder-gray-400" />
   </div>
 
-  <!-- Mobile: search icon button (opens search bar) -->
   <button class="md:hidden ml-auto text-gray-500 hover:text-[#e07090] transition-colors duration-200"
     (click)="toggleMobileSearch()">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -26,10 +25,8 @@
     </svg>
   </button>
 
-  <!-- Right Actions -->
   <div class="flex items-center gap-3 md:gap-4 shrink-0">
 
-    <!-- Login / Signout (text hidden on small screens) -->
     @if (isLoggedIn()) {
       <button (click)="onSignout()"
         class="flex items-center gap-1.5 text-sm text-gray-700 hover:text-[#e07090] transition-colors duration-200 cursor-pointer">
@@ -51,10 +48,10 @@
       </button>
     }
 
-    <!-- Divider -->
+
     <div class="w-px h-5 bg-gray-300"></div>
 
-    <!-- Wishlist / Love -->
+
     <button (click)="onLove()" class="text-gray-600 hover:text-[#e07090] transition-colors duration-200 cursor-pointer">
       <img src="images/navIcon/heart.svg" alt="Love Icon" class="w-5 h-5" />
     </button>
@@ -64,7 +61,6 @@
       <img src="images/navIcon/shopping-cart.svg" alt="Cart Icon" class="w-5 h-5" />
     </button>
 
-    <!-- Bell (hidden on xs, visible sm+) -->
     <button (click)="onNotifications()"
       class="hidden sm:block text-gray-600 hover:text-[#e07090] transition-colors duration-200 cursor-pointer">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
@@ -73,14 +69,10 @@
       </svg>
     </button>
 
-    <!-- Divider -->
+  
     <div class="hidden sm:block w-px h-5 bg-gray-300"></div>
 
-    <!-- Language Toggle -->
-    <!-- <button (click)="toggleLanguage()"
-      class="text-sm text-gray-700 hover:text-[#e07090] font-medium transition-colors duration-200 cursor-pointer">
-      {{ isArabic ? 'EN' : 'العربية' }}
-    </button> -->
+
 
 
     <div>
@@ -92,7 +84,6 @@
   </div>
 </nav>
 
-<!-- Mobile Search Bar (slides down when toggled) -->
 
 @if(mobileSearchOpen) {
 <div class="md:hidden bg-white border-b border-gray-200 px-4 py-2">
