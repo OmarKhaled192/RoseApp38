@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Message } from '@org/data-access';
 import {
   InputComponent,
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly darkModeService = inject(DarkModeService);
   readonly registrationState = inject(RegistrationStateService);
-
+  private readonly translateService = inject(TranslateService);
   readonly isDark = this.darkModeService.isDark;
   readonly isLoading = signal(false);
 
@@ -71,10 +71,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     const verifiedEmail = this.registrationState.email();
 
-    if (!verifiedEmail) {
-      this.router.navigate(['/auth/register']);
-      return;
-    }
+    // if (!verifiedEmail) {
+    //   this.router.navigate(['/auth/register']);
+    //   return;
+    // }
 
     const form = this.registerForm();
     form.patchValue({ email: verifiedEmail });
@@ -111,25 +111,18 @@ export class RegisterComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.isLoading.set(false);
-
+          if (res.status) {
           this.registrationState.clear();
-
-          this.messageService.show(
-            'success',
-            res?.message || 'Account created successfully!',
-          );
-
-          void this.router.navigateByUrl('/auth/login');
-        },
-        error: (err) => {
-          this.isLoading.set(false);
-
-          this.messageService.show(
-            'error',
-            err?.error?.message ||
-            'Something went wrong. Please try again.',
-          );
-        },
-      });
+          this.messageService.show('success', res.message || this.translateService.instant('auth.accountCreated'));
+          this.router.navigate(['/auth/login']);
+        } else {
+          this.messageService.show('error', res.message || this.translateService.instant('auth.registrationFailed'));
+        }
+      },
+      error: (err) => {
+        this.isLoading.set(false);
+        this.messageService.show('error', err.error?.message || this.translateService.instant('common.somethingWentWrong'));
+      }
+    });
   }
 }

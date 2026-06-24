@@ -57,7 +57,7 @@ export class ResetPasswordComponent {
     if (form.valid) {
       this.isLoading.set(true);
       this.resetPasswordService
-        .resetPassword(form.getRawValue() as ResetPassword)
+        .post(form.value)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: (res) => {

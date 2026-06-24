@@ -40,9 +40,10 @@ export abstract class ApiService<T> {
     });
   }
 
-  post<B, R = T>(body: B): Observable<R> {
-    return this.http.post<R>(this.fullUrl, body);
-  }
+  post<B, R = T>(body: B, path?: string): Observable<ApiResponse<R>> {
+  const url = path ? `${this.fullUrl}${path}` : this.fullUrl;
+  return this.http.post<ApiResponse<R>>(url, body);
+}
 
   put<B, R = T>(body: B): Observable<R> {
     return this.http.put<R>(this.fullUrl, body);

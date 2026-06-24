@@ -1,57 +1,36 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiService } from '@org/data-access';
-import { LoginRequest, LoginResponse } from '../models/login.model';
+import { ApiResponse, ApiService } from '@org/data-access';
+import { LoginRequest } from '../models/login';
+import { ConfirmEmailVerificationRequest, SendEmailVerificationRequest } from '../models/verification-messages';
+import { RegisterRequest, RegisterResponse } from '../models/register';
 
-export interface SendEmailVerificationRequest {
-  email: string;
-}
 
-export interface ConfirmEmailVerificationRequest {
-  email: string;
-  code: string;
-}
-
-export interface RegisterRequest {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  firstName: string;
-  lastName: string;
-}
-
-export interface AuthResponse {
-  status: boolean;
-  code: number;
-  message: string;
-  payload: string;
-}
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthApiService extends ApiService<LoginResponse> {
-  protected override endpoint = 'auth/login';
+export class AuthApiService extends ApiService<LoginRequest> {
+  protected override endpoint = 'auth/';
 
-  constructor() {
-    super(inject(HttpClient));
+  constructor( http: HttpClient) {
+    super(http);
   }
 
-  login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.post(credentials);
+  login(body: LoginRequest): Observable<any> {
+     return this.post(body,`login`);
   }
 
-  sendEmailVerification(body: SendEmailVerificationRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/auth/send-email-verification`, body);
+  sendEmailVerification(body: SendEmailVerificationRequest): Observable<ApiResponse<void>> {
+     return this.post(body,`send-email-verification`);
   }
 
-  confirmEmailVerification(body: ConfirmEmailVerificationRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/auth/confirm-email-verification`, body);
+  confirmEmailVerification(body: ConfirmEmailVerificationRequest): Observable<ApiResponse<void>> {
+    return this.post(body,`confirm-email-verification`);
   }
 
-  register(body: RegisterRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/auth/register`, body);
+  register(body: RegisterRequest): Observable<ApiResponse<RegisterResponse>> {
+    return this.post(body,`register`);
   }
 }

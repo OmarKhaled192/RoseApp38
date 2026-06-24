@@ -13,6 +13,7 @@ import {
   QuestionRepeatComponent,
   DarkModeService
 } from '@org/ui';
+import { LoginRequest } from '../../features/auth/models/login';
 
 @Component({
   selector: 'app-login',
@@ -56,7 +57,7 @@ export class LoginComponent {
       return;
     }
 
-    this.authFacade.login(form.getRawValue() as { username: string; password: string })
+    this.authFacade.login(form.value as LoginRequest)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }

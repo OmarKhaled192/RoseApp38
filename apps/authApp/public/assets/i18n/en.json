@@ -14,7 +14,8 @@
   "common": {
     "save": "Save",
     "cancel": "Cancel",
-    "otherLanguage": "العربية"
+    "otherLanguage": "العربية",
+    "somethingWentWrong": "Something went wrong. Please try again."
   },
   "auth": {
     "welcomeBack": "Welcome back!",
@@ -25,6 +26,9 @@
     "login": "Login",
     "noAccount": "Don't have an account yet?",
     "createOne": "Create one now!",
+    "accountCreated": "Account created successfully!",
+    "registrationFailed": "Registration failed",
+    "emailMismatch": "Email does not match the one used for verification",
     "createAccount": "Create Account",
     "haveAccount": "Already have an account?",
     "writeyouraccount": "Write your email account",

@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthApiService } from './services/auth-api.service';
 import { AuthService } from './services/auth.service';
-import { Message } from '@org/data-access';
-import { LoginRequest, LoginResponse } from './models/login.model';
+import { ApiResponse, Message } from '@org/data-access';
+import { LoginRequest } from './models/login';
+import { RegisterResponse } from './models/register';
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +20,14 @@ export class AuthFacade {
   private readonly _isLoading = signal(false);
   readonly isLoading = this._isLoading.asReadonly();
 
-  login(credentials: LoginRequest): Observable<LoginResponse> {
+  login(credentials: LoginRequest): Observable<any> {
     this._isLoading.set(true);
     return this.authApiService.login(credentials).pipe(
       tap({
         next: (res) => {
           this._isLoading.set(false);
           if (res.status) {
-            this.authService.setToken(res.payload);
+            this.authService.setToken(res.payload.token);
             this.messageService.show('success', res.message || 'Login successful!');
             this.router.navigate(['/roseApp']);
           } else {

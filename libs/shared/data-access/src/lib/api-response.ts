@@ -5,8 +5,10 @@ export interface PaginationMetadata {
   totalPages: number;
 }
 
-export interface ApiResponse<T, P extends Record<string, unknown> = { data: T; metadata: PaginationMetadata }> {
+export interface ApiResponse<T, P extends Record<string, unknown> = { data: T;  metadata: PaginationMetadata }> {
   status: boolean;
   code: number;
   payload: P;
+  message?: string;
 }
+

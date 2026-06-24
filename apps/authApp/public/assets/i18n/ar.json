@@ -14,7 +14,8 @@
   "common": {
     "save": "حفظ",
     "cancel": "إلغاء",
-    "otherLanguage": "English"
+    "otherLanguage": "English",
+    "somethingWentWrong": "حدث خطأ ما. حاول مرة أخرى."
   },
   "auth": {
     "welcomeBack": "مرحباً بعودتك!",
@@ -30,6 +31,8 @@
     "writeyouraccount": "اكتب بريدك الإلكتروني",
     "continue": "متابعة",
     "verifyOtp": "أدخل رمز التحقق",
+    "registrationFailed": "فشل التسجيل",
+    "emailMismatch": "البريد الإلكتروني لا يطابق البريد المستخدم في التحقق",
     "otpSentTo": "لقد أرسلنا رمزاً مكوناً من 6 أرقام إلى بريدك الإلكتروني",
     "verify": "تحقق",
     "resendOtp": "إرسال رمز جديد",
