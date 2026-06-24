@@ -10,8 +10,9 @@
 
   @case ('password') {
   <p-password [inputId]="controlId" [placeholder]="placeholder()" [disabled]="isControlDisabled" [feedback]="false"
-    [toggleMask]="true" [ngModel]="value()" (ngModelChange)="updateValue($event)" [ngModelOptions]="{ standalone: true }"
-    (onBlur)="onBlur()" styleClass="w-full" inputStyleClass="w-full" />
+    [formControl]="control()"
+    [toggleMask]="true"  (onBlur)="onBlur()"
+    styleClass="w-full" inputStyleClass="w-full" />
   }
 
   @case ('textarea') {
@@ -22,8 +23,9 @@
 
   @case ('calendar') {
   <p-datepicker [inputId]="controlId" [placeholder]="placeholder()" [disabled]="isControlDisabled"
-    [readonlyInput]="isReadonly()" [ngModel]="value()" (ngModelChange)="updateValue($event)"
-    [ngModelOptions]="{ standalone: true }" (onBlur)="onBlur()" styleClass="w-full" />
+    [readonlyInput]="isReadonly()"  (onBlur)="onBlur()"
+     [formControl]="control()"
+    styleClass="w-full" />
   }
 
   @default {
