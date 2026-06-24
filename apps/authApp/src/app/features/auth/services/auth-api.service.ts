@@ -18,7 +18,7 @@ export class AuthApiService extends ApiService<LoginRequest> {
     super(http);
   }
 
-  login(body: LoginRequest): Observable<ApiResponse<RegisterResponse>> {
+  login(body: LoginRequest): Observable<any> {
      return this.post(body,`login`);
   }
 

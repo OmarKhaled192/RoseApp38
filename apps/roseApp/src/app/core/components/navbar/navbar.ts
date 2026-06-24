@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DarkModeComponent, LanguageSwitcherComponent, ToastMsg } from '@org/ui';
+import { DarkModeComponent, LanguageSwitcherComponent } from '@org/ui';
 
 @Component({
   selector: 'app-navbar',
-  imports: [FormsModule, CommonModule, DarkModeComponent, LanguageSwitcherComponent, ToastMsg],
+  imports: [FormsModule, CommonModule, DarkModeComponent, LanguageSwitcherComponent],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })

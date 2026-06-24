@@ -6,7 +6,6 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Message, ValidationMessagesService } from '@org/data-access';
 import { DarkModeService, Button, QuestionRepeatComponent, InputComponent, ParagraphComponent } from '@org/ui';
 import { forgetPasswordService } from '../../services/forget-password';
-import { forgetPassword } from '../../models/forget-password';
 
 @Component({
   selector: 'app-forget-password',
@@ -38,7 +37,7 @@ export class ForgetPasswordComponent {
     if (form.valid) {
       this.isLoading.set(true);
       this.forgetPasswordService
-        .forgotPassword(form.getRawValue() as forgetPassword)
+        .post(form.value)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: (res) => {
