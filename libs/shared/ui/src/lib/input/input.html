@@ -17,7 +17,6 @@
 
   @case ('textarea') {
   <textarea pTextarea [id]="controlId" [placeholder]="placeholder()" [disabled]="isControlDisabled"
-   [formControl]="control()"
     [readOnly]="isReadonly()" [value]="value()" (input)="onTextareaInput($event)" (blur)="onBlur()" class="w-full"
     rows="4"></textarea>
   }
@@ -31,16 +30,14 @@
 
   @default {
   <input pInputText [id]="controlId" [type]="type()" [placeholder]="placeholder()" [disabled]="isControlDisabled"
-   [formControl]="control()"
-    [readOnly]="isReadonly()" [value]="value()" (input)="onInput($event)" (blur)="onBlur()" class="w-full block" />
+    [readOnly]="isReadonly()" [value]="value() ?? ''" (input)="onInput($event)" (blur)="onBlur()"
+    class="w-full block" />
   }
 
   }
 
-  @if (errorMessage()) {
- <small class="text-red-500 text-xs block">
-    <lib-error-message  [control]="control()" [message]="label()" />
-  </small>
+  @if (formControl(); as ctrl) {
+  <lib-error-message [control]="ctrl" [fieldName]="label()" />
   } @else if (helperText()) {
   <small class="text-gray-500 text-xs block">
     {{ helperText() }}

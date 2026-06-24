@@ -20,11 +20,33 @@
     "welcomeBack": "مرحباً بعودتك!",
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
-    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "forgetPassword": "هل نسيت كلمة المرور؟",
     "rememberMe": "تذكرني",
     "login": "تسجيل الدخول",
     "noAccount": "ليس لديك حساب بعد؟",
-    "createOne": "أنشئ حساباً الآن!"
+    "createOne": "أنشئ حساباً الآن!",
+    "createAccount": "إنشاء حساب",
+    "haveAccount": "لديك حساب بالفعل؟",
+    "writeyouraccount": "اكتب بريدك الإلكتروني",
+    "continue": "متابعة",
+    "verifyOtp": "أدخل رمز التحقق",
+    "otpSentTo": "لقد أرسلنا رمزاً مكوناً من 6 أرقام إلى بريدك الإلكتروني",
+    "verify": "تحقق",
+    "resendOtp": "إرسال رمز جديد",
+    "resendIn": "إعادة الإرسال خلال",
+    "resending": "جاري الإرسال...",
+    "edit": "تعديل",
+    "needhelp": "يوجد لديك مشكلة؟",
+    "contact": "اتصل بنا",
+    "firstName": "الاسم الأول",
+    "lastName": "الاسم الأخير",
+    "username": "اسم المستخدم",
+    "gender": "الجنس",
+    "selectGender": "اختر الجنس",
+    "male": "ذكر",
+    "female": "أنثى",
+    "genderRequired": "الجنس مطلوب",
+    "confirmPassword": "تأكيد كلمة المرور"
   },
   "resetPassword": {
     "title": "إنشاء كلمة مرور جديدة",
@@ -36,30 +58,30 @@
     "needHelp": "هل تحتاج إلى مساعدة؟",
     "contactUs": "اتصل بنا"
   },
-  "forgotPassword": {
+  "forgetPassword": {
     "title": "هل نسيت كلمة المرور؟",
     "subtitle": "لا تقلق، سنرسل لك التعليمات لمساعدتك في إعادة تعيينها.",
     "emailLabel": "البريد الإلكتروني",
-    "emailPlaceholder": "user@example.com",
+    "emailPlaceholder": "[user@example.com](mailto:user@example.com)",
     "submitButton": "متابعة",
     "noAccount": "ليس لديك حساب بعد؟",
     "createAccount": "أنشئ حساباً الآن!"
   },
   "msg": {
-  "password-changed": "تم تغيير كلمة المرور بنجاح",
-  "invalid-email":"البريد الالكترونى غير صحيح",
-  "password-send": "تم ارسال كلمة المرور الجديدة الي بريدك الالكتروني بنجاح",
+    "password-changed": "تم تغيير كلمة المرور بنجاح",
+    "invalid-email": "البريد الالكتروني غير صحيح",
+    "password-send": "تم ارسال كلمة المرور الجديدة إلى بريدك الإلكتروني بنجاح"
   },
   "error": {
-    "not-confirmed-password": "كلمة المرور وتاكيد كلمة المرور غير متطابقين",
-      "enter-plz": " يرجي إدخال ",
-      "choose-plz": "يرجي إختيار",
-      "number": " رقم",
-      "numbers": " ارقام",
-      "valid-mail": "  الرجاء إدخال بريد إلكتروني صحيح مثل (xyz@xyz.xyz)",
-      "enter-more-plz": "يرجى إدخال اكثر من ",
-      "maximum": "كحد أقصى",
-      "at-least": "كحد أدني",
-      "pattern": "يرجي إدخال صيغه صحيحه"
+    "not-confirmed-password": "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
+    "enter-plz": "يرجى إدخال ",
+    "choose-plz": "يرجى اختيار ",
+    "number": " رقم",
+    "numbers": " أرقام",
+    "valid-mail": "الرجاء إدخال بريد إلكتروني صحيح مثل ([xyz@xyz.xyz](mailto:xyz@xyz.xyz))",
+    "enter-more-plz": "يرجى إدخال أكثر من ",
+    "maximum": "كحد أقصى",
+    "at-least": "كحد أدنى",
+    "pattern": "يرجى إدخال صيغة صحيحة"
   }
 }

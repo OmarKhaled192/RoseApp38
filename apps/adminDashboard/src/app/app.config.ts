@@ -14,7 +14,7 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { appRoutes } from './app.routes';
 
-const DEFAULT_LANG = 'ar';
+const DEFAULT_LANG: string = 'en';
 
 export const appConfig: ApplicationConfig = {
   providers: [
