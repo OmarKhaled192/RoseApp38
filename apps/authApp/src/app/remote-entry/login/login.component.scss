@@ -8,7 +8,7 @@
   margin: 0 auto;
 }
 
-.forgot-password-link {
+.forget-password-link {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
@@ -32,7 +32,8 @@ lib-checkbox ::ng-deep {
       color: #FFFFFF !important;
     }
 
-    .p-inputtext, .p-password-input {
+    .p-inputtext,
+    .p-password-input {
       background-color: #18181B !important;
       border-color: #3F3F46 !important;
       color: #FFFFFF !important;
@@ -44,7 +45,7 @@ lib-checkbox ::ng-deep {
     }
   }
 
-  .forgot-password-link {
+  .forget-password-link {
     color: #FFA6B9 !important;
 
     &:hover {
@@ -87,6 +88,7 @@ lib-checkbox ::ng-deep {
     span {
       color: #A1A1AA !important;
     }
+
     a {
       color: #FFA6B9 !important;
 

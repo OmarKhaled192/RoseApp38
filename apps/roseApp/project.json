@@ -4,11 +4,15 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/roseApp/src",
-  "tags": ["scope:rose"],
+  "tags": [
+    "scope:rose"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/roseApp",
         "index": "apps/roseApp/src/index.html",
@@ -21,7 +25,10 @@
             "input": "apps/roseApp/public"
           }
         ],
-        "styles": ["apps/roseApp/src/styles.scss"],
+        "styles": [
+          "apps/roseApp/src/styles.scss",
+          "node_modules/primeicons/primeicons.css"
+        ],
         "customWebpackConfig": {
           "path": "apps/roseApp/webpack.config.ts"
         }
@@ -58,7 +65,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@nx/angular:dev-server",
+      "executor": "@nx/angular:module-federation-dev-server",
       "options": {
         "port": 4203,
         "publicHost": "http://localhost:4203"
@@ -71,8 +78,7 @@
           "buildTarget": "roseApp:build:development"
         }
       },
-      "defaultConfiguration": "development",
-      "dependsOn": ["shell:serve"]
+      "defaultConfiguration": "development"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
