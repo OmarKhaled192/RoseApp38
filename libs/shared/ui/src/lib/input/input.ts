@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, forwardRef, input, signal } from '@angular/core';
+import { Component, computed, forwardRef, inject, Injector, input, OnInit, signal } from '@angular/core';
 import {
   ControlValueAccessor,
+  FormControl,
   FormsModule,
   NG_VALUE_ACCESSOR,
-  ReactiveFormsModule,
+  NgControl,
 } from '@angular/forms';
 
 import { InputTextModule } from 'primeng/inputtext';
@@ -33,7 +34,6 @@ export type InputValue = string | number | Date | null;
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     FormsModule,
     InputTextModule,
     PasswordModule,
@@ -51,46 +51,57 @@ export type InputValue = string | number | Date | null;
     },
   ],
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor, OnInit {
+  private readonly injector = inject(Injector);
+
   label = input<string>('');
+  controlInput = input<FormControl | null>(null, { alias: 'control' });
   type = input<InputType>('text');
   placeholder = input<string>('');
   helperText = input<string>('');
-  errorMessage = input<string>('');
   isDisabled = input<boolean>(false);
   isReadonly = input<boolean>(false);
 
-  value = signal<InputValue>(null);
-  touched = signal(false);
+  readonly value = signal<InputValue>(null);
+  readonly disabled = signal(false);
+  private readonly parentControl = signal<FormControl | null>(null);
 
-  disabled = false;
+  readonly formControl = computed(() => this.controlInput() ?? this.parentControl());
 
   readonly controlId = `input-${crypto.randomUUID()}`;
 
-  private onChange: (value: InputValue) => void = () => { ; };
-  private onTouched: () => void = () => { ; };
+  private onChange: (value: InputValue) => void = () => {
+    /* noop */
+  };
+  private onTouched: () => void = () => {
+    /* noop */
+  };
 
+  ngOnInit(): void {
+    if (this.controlInput()) {
+      return;
+    }
+
+    const ngControl = this.injector.get(NgControl, null, { self: true, optional: true });
+    this.parentControl.set((ngControl?.control as FormControl | null) ?? null);
+  }
   get isControlDisabled(): boolean {
-    return this.disabled || this.isDisabled();
+    return this.disabled() || this.isDisabled();
   }
 
   onInput(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.updateValue(value);
+    const nextValue = (event.target as HTMLInputElement).value;
+    this.updateValue(nextValue);
   }
 
   onTextareaInput(event: Event): void {
-    const value = (event.target as HTMLTextAreaElement).value;
-    this.updateValue(value);
-  }
-
-  onValueChange(value: Date | null): void {
-    this.updateValue(value);
+    const nextValue = (event.target as HTMLTextAreaElement).value;
+    this.updateValue(nextValue);
   }
 
   onBlur(): void {
-    this.touched.set(true);
     this.onTouched();
+    this.formControl()?.markAsTouched({ onlySelf: true });
   }
 
   writeValue(value: InputValue): void {
@@ -106,10 +117,10 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled.set(isDisabled);
   }
 
-  private updateValue(value: InputValue): void {
+  updateValue(value: InputValue): void {
     this.value.set(value);
     this.onChange(value);
   }

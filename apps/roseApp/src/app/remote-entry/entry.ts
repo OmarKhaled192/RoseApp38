@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Layout } from '../features/auth/pages/layout/layout';
 
 @Component({
-  imports: [ ReactiveFormsModule],
-  selector: 'app-rose-app-entry',
-  template: ` `,
+  selector: 'app-roseapp-entry',
+  template: `<app-layout></app-layout>`,
+  standalone: true,
+  imports: [Layout]
 })
-export class RemoteEntry {
-
-}
+export class RoseApp { }

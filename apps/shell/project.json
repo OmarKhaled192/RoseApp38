@@ -4,11 +4,15 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/shell/src",
-  "tags": ["scope:shell"],
+  "tags": [
+    "scope:shell"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/shell",
         "index": "apps/shell/src/index.html",
@@ -19,9 +23,37 @@
           {
             "glob": "**/*",
             "input": "apps/shell/public"
+          },
+          {
+            "glob": "*.{png,svg,jpg,jpeg,gif,ico}",
+            "input": "apps/authApp/public/assets",
+            "output": "/assets"
+          },
+          {
+            "glob": "*.json",
+            "input": "apps/authApp/public/assets/i18n",
+            "output": "/assets/i18n/authApp"
+          },
+          {
+            "glob": "*.json",
+            "input": "apps/roseApp/public/assets/i18n",
+            "output": "/assets/i18n/roseApp"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/roseApp/public/images",
+            "output": "/images"
+          },
+          {
+            "glob": "*.json",
+            "input": "apps/adminDashboard/public/assets/i18n",
+            "output": "/assets/i18n/adminDashboard"
           }
         ],
-        "styles": ["apps/shell/src/styles.scss"],
+        "styles": [
+          "apps/shell/src/styles.scss",
+          "node_modules/primeicons/primeicons.css"
+        ],
         "customWebpackConfig": {
           "path": "apps/shell/webpack.config.ts"
         }

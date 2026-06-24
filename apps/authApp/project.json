@@ -4,11 +4,15 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/authApp/src",
-  "tags": ["scope:auth"],
+  "tags": [
+    "scope:auth"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/authApp",
         "index": "apps/authApp/src/index.html",
@@ -61,7 +65,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@nx/angular:dev-server",
+      "executor": "@nx/angular:module-federation-dev-server",
       "options": {
         "port": 4202,
         "publicHost": "http://localhost:4202"
@@ -75,7 +79,9 @@
         }
       },
       "defaultConfiguration": "development",
-      "dependsOn": ["shell:serve"]
+      "dependsOn": [
+        "shell:serve"
+      ]
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

@@ -1,0 +1,7 @@
+.active-link {
+  color: #ffd9e2;
+}
+
+.active-link .active-bar {
+  opacity: 1;
+}

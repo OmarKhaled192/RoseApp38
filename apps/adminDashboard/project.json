@@ -4,11 +4,15 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/adminDashboard/src",
-  "tags": ["scope:admin"],
+  "tags": [
+    "scope:admin"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/adminDashboard",
         "index": "apps/adminDashboard/src/index.html",
@@ -61,7 +65,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@nx/angular:dev-server",
+      "executor": "@nx/angular:module-federation-dev-server",
       "options": {
         "port": 4201,
         "publicHost": "http://localhost:4201"
@@ -75,7 +79,9 @@
         }
       },
       "defaultConfiguration": "development",
-      "dependsOn": ["shell:serve"]
+      "dependsOn": [
+        "shell:serve"
+      ]
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

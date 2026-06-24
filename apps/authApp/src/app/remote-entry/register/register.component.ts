@@ -1,18 +1,24 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControlOptions,
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { AuthApiService } from '@org/data-access';
 import { Message } from '@org/data-access';
 import {
   InputComponent,
   Button,
   TitleFormComponent,
   QuestionRepeatComponent,
-  DarkModeService
+  DarkModeService,
 } from '@org/ui';
+import { AuthApiService } from '../../features/auth/services/auth-api.service';
 import { RegistrationStateService } from '../../core/services/registration-state.service';
+import { MustMatch } from '../../core/services/confirm-pass.validator';
 
 @Component({
   selector: 'app-register',
@@ -25,12 +31,12 @@ import { RegistrationStateService } from '../../core/services/registration-state
     InputComponent,
     Button,
     TitleFormComponent,
-    QuestionRepeatComponent
+    QuestionRepeatComponent,
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly authApiService = inject(AuthApiService);
   private readonly messageService = inject(Message);
@@ -41,73 +47,74 @@ export class RegisterComponent {
   readonly isDark = this.darkModeService.isDark;
   readonly isLoading = signal(false);
 
-  readonly registerForm: FormGroup = this.fb.group({
-    firstName: ['', [Validators.required]],
-    lastName: ['', [Validators.required]],
-    username: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    confirmPassword: ['', [Validators.required]],
-  }, { validators: this.passwordMatchValidator });
+  readonly genderOptions = [
+    { label: 'Male', value: 'MALE' },
+    { label: 'Female', value: 'FEMALE' },
+  ];
 
-  private passwordMatchValidator(form: FormGroup) {
-    const password = form.get('password')?.value;
-    const confirmPassword = form.get('confirmPassword')?.value;
-    if (password !== confirmPassword) {
-      form.get('confirmPassword')?.setErrors({ mismatch: true });
-    } else {
-      const errors = form.get('confirmPassword')?.errors;
-      if (errors) {
-        delete errors['mismatch'];
-        Object.keys(errors).length === 0
-          ? form.get('confirmPassword')?.setErrors(null)
-          : form.get('confirmPassword')?.setErrors(errors);
-      }
-    }
-  }
+  readonly registerForm = signal(
+    this.fb.group(
+      {
+        firstName: ['', [Validators.required]],
+        lastName: ['', [Validators.required]],
+        username: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required]],
+      },
+      {
+        validators: MustMatch('password', 'confirmPassword'),
+      } as AbstractControlOptions,
+    ),
+  );
 
-  getError(field: string): string {
-    const control = this.registerForm.get(field);
-    if (!control?.touched) return '';
-    if (control?.errors?.['required']) return `${field} is required`;
-    if (control?.errors?.['minlength']) return 'Password must be at least 8 characters';
-    if (control?.errors?.['mismatch']) return 'Passwords do not match';
-    return '';
-  }
+  ngOnInit(): void {
+    const verifiedEmail = this.registrationState.email();
 
-  get emailError(): string {
-    const control = this.registerForm.get('email');
-    if (!control?.touched) return '';
-    if (control?.errors?.['required']) return 'Email is required';
-    if (control?.errors?.['email']) return 'Please enter a valid email';
-    if (control?.value && control.value !== this.registrationState.email()) {
-      return 'Email does not match the one used for verification';
-    }
-    return '';
+    // if (!verifiedEmail) {
+    //   this.router.navigate(['/auth/register']);
+    //   return;
+    // }
+
+    const form = this.registerForm();
+    form.patchValue({ email: verifiedEmail });
+    form.controls.email.disable();
   }
 
   onSubmit(): void {
-    if (this.registerForm.invalid) {
-      this.registerForm.markAllAsTouched();
+    const form = this.registerForm();
+
+    if (form.invalid) {
+      form.markAllAsTouched();
       return;
     }
 
-    const enteredEmail = this.registerForm.value.email;
-    if (enteredEmail !== this.registrationState.email()) {
-      this.messageService.show('error', 'Email does not match the one used for verification');
-      return;
-    }
+    const {
+      firstName,
+      lastName,
+      username,
+      password,
+      confirmPassword,
+    } = form.getRawValue();
 
     this.isLoading.set(true);
-    this.authApiService.register({
-      ...this.registerForm.value,
-    }).subscribe({
-      next: (res) => {
-        this.isLoading.set(false);
-        if (res.status) {
+
+    this.authApiService
+      .register({
+        firstName: firstName!,
+        lastName: lastName!,
+        username: username!,
+        email: this.registrationState.email(),
+        password: password!,
+        confirmPassword: confirmPassword!,
+      })
+      .subscribe({
+        next: (res) => {
+          this.isLoading.set(false);
+          if (res.status) {
           this.registrationState.clear();
           this.messageService.show('success', res.message || this.translateService.instant('auth.accountCreated'));
-          this.router.navigate(['../login']);
+          this.router.navigate(['/auth/login']);
         } else {
           this.messageService.show('error', res.message || this.translateService.instant('auth.registrationFailed'));
         }

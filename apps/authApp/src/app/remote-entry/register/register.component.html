@@ -6,7 +6,7 @@
 
     <div class="divider border-b border-gray-200 w-full"></div>
 
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full">
+    <form [formGroup]="registerForm()" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full">
 
       <div class="flex gap-4">
         <div class="form-field flex-1">
@@ -14,7 +14,6 @@
             formControlName="firstName"
             [label]="'auth.firstName' | translate"
             placeholder="Jonathan"
-            [errorMessage]="getError('firstName')"
           />
         </div>
         <div class="form-field flex-1">
@@ -22,7 +21,6 @@
             formControlName="lastName"
             [label]="'auth.lastName' | translate"
             placeholder="Adrian"
-            [errorMessage]="getError('lastName')"
           />
         </div>
       </div>
@@ -32,7 +30,7 @@
       formControlName="email"
       [label]="'auth.email' | translate"
       placeholder="jonathan.adrian@example.com"
-      [errorMessage]="emailError"
+      [isReadonly]="true"
     />
   </div>
 
@@ -41,7 +39,6 @@
           formControlName="username"
           [label]="'auth.username' | translate"
           placeholder="jonathan_adrian"
-          [errorMessage]="getError('username')"
         />
       </div>
 
@@ -51,7 +48,6 @@
           formControlName="password"
           [label]="'auth.password' | translate"
           placeholder="********"
-          [errorMessage]="getError('password')"
         />
       </div>
 
@@ -61,7 +57,6 @@
           formControlName="confirmPassword"
           [label]="'auth.confirmPassword' | translate"
           placeholder="********"
-          [errorMessage]="getError('confirmPassword')"
         />
       </div>
 
@@ -70,7 +65,7 @@
           type="submit"
           [label]="'auth.createAccount' | translate"
           [loading]="isLoading()"
-          [disabled]="registerForm.invalid || isLoading()"
+          [disabled]="registerForm().invalid || isLoading()"
           [color]="isDark() ? '#FFA6B9' : '#8D1C24'"
           styleClass="w-full py-3 text-base font-semibold"
         />

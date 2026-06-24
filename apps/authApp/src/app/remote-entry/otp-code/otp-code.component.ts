@@ -1,18 +1,19 @@
 import { Component, inject, signal, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InputOtp } from 'primeng/inputotp';
 import { timer } from 'rxjs';
-import { AuthApiService } from '@org/data-access';
 import { Message } from '@org/data-access';
 import {
   Button,
   TitleFormComponent,
-  DarkModeService
+  DarkModeService,
+  ParagraphComponent,
 } from '@org/ui';
+import { AuthApiService } from '../../features/auth/services/auth-api.service';
 import { RegistrationStateService } from '../../core/services/registration-state.service';
 
 @Component({
@@ -22,10 +23,10 @@ import { RegistrationStateService } from '../../core/services/registration-state
     CommonModule,
     FormsModule,
     TranslatePipe,
-    RouterLink,
     InputOtp,
     Button,
     TitleFormComponent,
+    ParagraphComponent,
   ],
   templateUrl: './otp-code.component.html',
   styleUrls: ['./otp-code.component.scss'],
@@ -63,7 +64,7 @@ export class OtpCodeComponent {
           this.isLoading.set(false);
           if (res.status) {
             this.messageService.show('success', res.message || 'OTP verified successfully!');
-            this.router.navigate(['../register']);
+            this.router.navigate(['/auth/register-details']);
           } else {
             this.messageService.show('error', res.message || 'Invalid or expired OTP');
           }
