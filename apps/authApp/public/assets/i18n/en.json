@@ -36,8 +36,19 @@
     "needHelp": "Need help?",
     "contactUs": "Contact us"
    },
+   "forgotPassword": {
+    "title": "Forgot Password?",
+    "subtitle": "Worry not, we'll send you instructions to help you reset it.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "user@example.com",
+    "submitButton": "Continue",
+    "noAccount": "Don't have an account yet?",
+    "createAccount": "Create one now!"
+  },
   "msg": {
-    "password-changed": "Password Was Changed Successfully"
+    "password-changed": "Password Was Changed Successfully",
+    "invalid-email":"Email Is Incorrect",
+    "password-send": "New Password Has Been Sent To Your Email Successfully"
    },
     "error": {
     "not-confirmed-password": "The Password And Confirmation Password Do Not Match",
