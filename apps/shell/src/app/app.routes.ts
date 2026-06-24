@@ -4,7 +4,7 @@ import { loadRemote } from '@module-federation/enhanced/runtime';
 
 export const appRoutes: Route[] = [
   {
-    path: 'home',
+    path: 'roseApp',
     loadChildren: () =>
       loadRemote<typeof import('roseApp/Routes')>('roseApp/Routes').then(
         (m) => (m ? m.remoteRoutes : []),
@@ -26,6 +26,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: '',
-    component: NxWelcome,
+    redirectTo: 'roseApp',
+    pathMatch: 'full',
   },
 ];

@@ -30,14 +30,14 @@
   width: 58px;
   height: 30px;
   border-radius: 9999px;
-  background-color: #F8F1E7; // Light cream color matching the image
+  background-color: #F8F1E7;
   border: 1px solid rgba(220, 200, 180, 0.4);
   transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
 
   &.dark {
-    background-color: #1A1333; // Dark indigo/purple matching the image
+    background-color: #1A1333;
     border-color: rgba(30, 20, 60, 0.4);
   }
 }
@@ -49,7 +49,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: #FFB800; // Bright yellow sun button
+  background-color: #8B1E24;
   color: #FFFFFF;
   display: flex;
   align-items: center;
@@ -59,7 +59,7 @@
 
   &.dark {
     transform: translateX(28px);
-    background-color: #533B8E; // Darker violet moon button
+    background-color: #533B8E;
     box-shadow: 0 2px 6px rgba(83, 59, 142, 0.35);
     color: #E6DFFA;
   }
@@ -75,17 +75,16 @@
   }
 }
 
-// Sparkly rotation for sun
 @keyframes rotateSun {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-// Stars overlay for dark mode
 .stars-container {
   position: absolute;
   top: 0;
@@ -137,6 +136,7 @@
     opacity: 0.3;
     transform: scale(0.8);
   }
+
   100% {
     opacity: 1;
     transform: scale(1.2);

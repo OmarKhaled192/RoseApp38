@@ -5,3 +5,8 @@ export * from './lib/language-switcher/language-switcher.component';
 export * from './lib/language-switcher/language.service';
 export * from './lib/dark-mode/dark-mode.component';
 export * from './services/dark-mode.service';
+export * from './lib/input/input';
+export * from './lib/title-form/title-form';
+export * from './lib/question-repeat/question-repeat';
+export * from './lib/paragraph/paragraph';
+export * from './lib/error-message/error-message';
