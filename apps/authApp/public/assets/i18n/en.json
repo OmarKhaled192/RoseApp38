@@ -6,7 +6,8 @@
   "common": {
     "save": "Save",
     "cancel": "Cancel",
-    "otherLanguage": "العربية"
+    "otherLanguage": "العربية",
+    "somethingWentWrong": "Something went wrong. Please try again."
   },
   "auth": {
     "welcomeBack": "Welcome back!",
@@ -38,6 +39,9 @@
 "male": "Male",
 "female": "Female",
 "genderRequired": "Gender is required",
-"confirmPassword": "Confirm Password"
+"confirmPassword": "Confirm Password",
+"accountCreated": "Account created successfully!",
+"registrationFailed": "Registration failed",
+"emailMismatch": "Email does not match the one used for verification"
   }
 }

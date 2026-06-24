@@ -6,7 +6,8 @@
   "common": {
     "save": "حفظ",
     "cancel": "إلغاء",
-    "otherLanguage": "English"
+    "otherLanguage": "English",
+    "somethingWentWrong": "حدث خطأ ما. حاول مرة أخرى."
   },
   "auth": {
     "welcomeBack": "مرحباً بعودتك!",
@@ -38,6 +39,9 @@
 "male": "ذكر",
 "female": "أنثى",
 "genderRequired": "الجنس مطلوب",
-"confirmPassword": "تأكيد كلمة المرور"
+"confirmPassword": "تأكيد كلمة المرور",
+"accountCreated": "تم إنشاء الحساب بنجاح!",
+"registrationFailed": "فشل التسجيل",
+"emailMismatch": "البريد الإلكتروني لا يطابق البريد المستخدم في التحقق"
   }
 }

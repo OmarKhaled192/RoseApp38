@@ -2,43 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiService } from './api-service';
+import { AuthResponse, ConfirmEmailVerificationRequest, LoginRequest, LoginResponse, RegisterRequest, SendEmailVerificationRequest } from './auth-api.interface';
 
-export interface LoginRequest {
-  username?: string;
-  password?: string;
-}
 
-export interface LoginResponse {
-  status: boolean;
-  code: number;
-  message: string;
-  payload: string;
-}
-
-export interface SendEmailVerificationRequest {
-  email: string;
-}
-
-export interface ConfirmEmailVerificationRequest {
-  email: string;
-  code: string;
-}
-
-export interface RegisterRequest {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  firstName: string;
-  lastName: string;
-}
-
-export interface AuthResponse {
-  status: boolean;
-  code: number;
-  message: string;
-  payload: string;
-}
 
 @Injectable({
   providedIn: 'root',

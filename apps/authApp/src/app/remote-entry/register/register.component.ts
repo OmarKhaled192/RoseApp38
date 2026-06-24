@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AuthApiService } from '@org/data-access';
 import { Message } from '@org/data-access';
 import {
@@ -37,7 +37,7 @@ export class RegisterComponent {
   private readonly router = inject(Router);
   private readonly darkModeService = inject(DarkModeService);
   readonly registrationState = inject(RegistrationStateService);
-
+  private readonly translateService = inject(TranslateService);
   readonly isDark = this.darkModeService.isDark;
   readonly isLoading = signal(false);
 
@@ -106,15 +106,15 @@ export class RegisterComponent {
         this.isLoading.set(false);
         if (res.status) {
           this.registrationState.clear();
-          this.messageService.show('success', res.message || 'Account created successfully!');
+          this.messageService.show('success', res.message || this.translateService.instant('auth.accountCreated'));
           this.router.navigate(['../login']);
         } else {
-          this.messageService.show('error', res.message || 'Registration failed');
+          this.messageService.show('error', res.message || this.translateService.instant('auth.registrationFailed'));
         }
       },
       error: (err) => {
         this.isLoading.set(false);
-        this.messageService.show('error', err.error?.message || 'Something went wrong. Please try again.');
+        this.messageService.show('error', err.error?.message || this.translateService.instant('common.somethingWentWrong'));
       }
     });
   }
