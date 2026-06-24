@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "تطبيق روز",
-    "welcome": "مرحبًا بك في التطبيق",
+    "welcome": "مرحباً بك في التطبيق",
     "featureName": {}
   },
   "common": {
@@ -9,13 +9,13 @@
     "cancel": "إلغاء"
   },
   "footer": {
-    "app_name": "متجر روز الإلكتروني",
+    "app_name": "تطبيق روز للتجارة الإلكترونية",
     "rights": "جميع الحقوق محفوظة | 2025",
 
     "discover": "اكتشف موقعنا",
     "home": "الرئيسية",
     "products": "المنتجات",
-    "categories": "التصنيفات",
+    "categories": "الفئات",
     "occasions": "المناسبات",
     "contact": "تواصل معنا",
     "about": "من نحن",
@@ -25,12 +25,13 @@
     "faqs": "الأسئلة الشائعة",
 
     "get": "احصل على",
-    "discount_title": "خصم ",
-    "newsletter_text": "من خلال الاشتراك في النشرة البريدية!",
+    "discount_title": "كوبون خصم",
+    "newsletter_text": "بالاشتراك في نشرتنا البريدية!",
     "email_placeholder": "أدخل بريدك الإلكتروني",
     "subscribe": "اشترك",
     "invalid_email": "يرجى إدخال بريد إلكتروني صحيح."
   },
+
   "navbar": {
     "deliverTo": "التوصيل إلى",
     "location": "القاهرة",
@@ -38,13 +39,17 @@
     "searchPlaceholder": "ما الهدية الرائعة التي تبحث عنها؟",
 
     "hello": "مرحباً",
-    "myProfile": "الملف الشخصي",
+    "myProfile": "ملفي الشخصي",
     "orders": "الطلبات",
     "signOut": "تسجيل الخروج",
     "login": "تسجيل الدخول",
 
     "wishlist": "المفضلة",
     "cart": "السلة",
-    "notifications": "الإشعارات"
+    "notifications": "الإشعارات",
+
+    "account": "الحساب",
+    "addresses": "العناوين",
+    "dashboard": "لوحة التحكم"
   }
 }

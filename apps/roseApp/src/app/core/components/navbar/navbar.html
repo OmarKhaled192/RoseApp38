@@ -1,11 +1,10 @@
 <nav
   class="w-full bg-white border-b border-gray-200 px-4 py-2 md:px-6 flex items-center gap-3 md:gap-4"
 >
-
+  <!-- Logo -->
   <a href="#" class="logo-icon shrink-0">
     <img src="/images/logo 1.png" alt="Rose Logo" class="w-10 md:w-12" />
   </a>
-
 
   @if (isLoggedIn()) {
   <div class="hidden md:flex items-center gap-2 text-sm text-gray-600 ml-2">
@@ -43,7 +42,6 @@
   </div>
   }
 
-
   <div
     class="hidden md:flex flex-1 items-center border border-gray-300 rounded-md px-4 py-2 gap-2 bg-white hover:border-gray-400 focus-within:border-[#e07090] transition-colors duration-200"
   >
@@ -67,7 +65,6 @@
     />
   </div>
 
- 
   <button
     class="md:hidden ml-auto text-gray-500 hover:text-[#e07090]"
     (click)="toggleMobileSearch()"
@@ -78,25 +75,25 @@
     </svg>
   </button>
 
-
   <div class="flex items-center gap-3 md:gap-4 shrink-0">
-   
     @if (isLoggedIn()) {
-
     <div class="relative hidden md:block">
       <button
         (click)="toggleUserMenu()"
-        class="flex items-center gap-1 text-sm text-gray-700 hover:text-[#e07090]"
+        class="flex items-center gap-2 hover:opacity-80 transition-opacity"
       >
-        <span>
-          {{ 'navbar.hello' | translate }},
-          <span class="font-medium">Jonathan</span>
-        </span>
+        <div class="flex flex-col items-start leading-tight">
+          <span class="text-xs text-gray-400 font-normal">
+            {{ 'navbar.hello' | translate }}
+          </span>
+          <span class="text-sm font-semibold text-[#8B1A1A]">Jonathan</span>
+        </div>
 
         <svg
-          class="w-3 h-3"
+          class="w-3 h-3 text-gray-500 mt-1"
           fill="none"
           stroke="currentColor"
+          stroke-width="2"
           viewBox="0 0 24 24"
         >
           <path d="m6 9 6 6 6-6" />
@@ -105,27 +102,59 @@
 
       @if (userMenuOpen) {
       <div
-        class="absolute right-0 mt-2 w-44 bg-white border shadow-lg rounded-md z-50"
+        class="absolute right-0 mt-2 w-52 bg-white border border-gray-200 shadow-xl rounded-xl z-50 overflow-hidden"
       >
-        <button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
-          {{ 'navbar.myProfile' | translate }}
+        <!-- Name Header -->
+        <div
+          class="px-4 py-3 text-sm font-semibold text-red-500 border-b border-dashed border-gray-200"
+        >
+          {{ userName }}
+        </div>
+
+        <!-- Account -->
+        <button
+          class="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 border-b border-dashed border-gray-200"
+        >
+          <i class="pi pi-user text-gray-400 text-base"></i>
+          {{ 'navbar.account' | translate }}
         </button>
 
-        <button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
+        <!-- Addresses -->
+        <button
+          class="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 border-b border-dashed border-gray-200"
+        >
+          <i class="pi pi-map-marker text-gray-400 text-base"></i>
+          {{ 'navbar.addresses' | translate }}
+        </button>
+
+        <!-- Orders -->
+        <button
+          class="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 border-b border-dashed border-gray-200"
+        >
+          <i class="pi pi-file-edit text-gray-400 text-base"></i>
           {{ 'navbar.orders' | translate }}
         </button>
 
+        <!-- Dashboard -->
+        <button
+          class="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 border-b border-dashed border-gray-200"
+        >
+          <i class="pi pi-cog text-gray-400 text-base"></i>
+          {{ 'navbar.dashboard' | translate }}
+        </button>
+
+        <!-- Log out -->
         <button
           (click)="onSignout()"
-          class="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100"
+          class="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-red-500 hover:bg-gray-50"
         >
+          <i class="pi pi-sign-out text-red-500 text-base"></i>
           {{ 'navbar.signOut' | translate }}
         </button>
       </div>
       }
     </div>
-
-    } @else {
+    }@else {
     <button
       (click)="onLogin()"
       class="flex items-center gap-1.5 text-sm text-gray-700 hover:text-[#e07090]"
@@ -143,9 +172,7 @@
       <span class="hidden sm:inline"> {{ 'navbar.login' | translate }} </span>
     </button>
     }
-
     <div class="w-px h-5 bg-gray-300"></div>
-
 
     <button (click)="onLove()" class="text-gray-600 hover:text-[#e07090]">
       <img src="images/navIcon/heart.svg" class="w-5 h-5" />

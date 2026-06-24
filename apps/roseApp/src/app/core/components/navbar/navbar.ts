@@ -28,8 +28,10 @@ export class Navbar {
 
   searchQuery = '';
   isArabic = true;
-
   mobileSearchOpen = false;
+  userMenuOpen = false;
+  userName = 'Jonathan Adrian'; // ✅ Add this
+
   toggleMobileSearch(): void {
     this.mobileSearchOpen = !this.mobileSearchOpen;
   }
@@ -40,6 +42,7 @@ export class Navbar {
       this.mobileSearchOpen = false;
     }
   }
+
   onLogin(): void {
     this.router.navigateByUrl('/auth/login');
   }
@@ -54,6 +57,7 @@ export class Navbar {
       document.cookie =
         'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
+    this.userMenuOpen = false; // ✅ Close menu on signout
     this.router.navigateByUrl('/auth/login');
   }
 
@@ -73,13 +77,11 @@ export class Navbar {
     this.isArabic = !this.isArabic;
   }
 
-  userMenuOpen = false;
-
-  toggleUserMenu() {
+  toggleUserMenu(): void {
     this.userMenuOpen = !this.userMenuOpen;
   }
 
-  openLocationDropdown() {
+  openLocationDropdown(): void {
     console.log('Open location dropdown');
   }
 }

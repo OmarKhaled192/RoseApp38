@@ -46,6 +46,10 @@
 
     "wishlist": "Wishlist",
     "cart": "Cart",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+
+    "account": "Account",
+    "addresses": "Addresses",
+    "dashboard": "Dashboard"
   }
 }
