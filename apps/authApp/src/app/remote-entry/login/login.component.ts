@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthFacade } from '../../features/auth/auth.facade';
 import {
   InputComponent,
@@ -14,6 +13,7 @@ import {
   DarkModeService
 } from '@org/ui';
 import { LoginRequest } from '../../features/auth/models/login';
+import { authStore } from '../../features/auth/state/auth.store';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +37,7 @@ export class LoginComponent {
   private readonly authFacade = inject(AuthFacade);
   private readonly darkModeService = inject(DarkModeService);
   private readonly destroyRef = inject(DestroyRef);
-
+  private readonly authStore = inject(authStore);
   readonly isDark = this.darkModeService.isDark;
   readonly isLoading = this.authFacade.isLoading;
   readonly rememberMe = signal(false);
@@ -56,9 +56,6 @@ export class LoginComponent {
       form.markAllAsTouched();
       return;
     }
-
-    this.authFacade.login(form.value as LoginRequest)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+    this.authStore.login(form.value as LoginRequest);
   }
 }

@@ -24,4 +24,8 @@ export interface ApiResponse<T, P extends Record<string, unknown> = { data: T;  
   message?: string;
 }
 
+export interface LoadingState {
+  isLoading: boolean;
+}
+
 export type DataResponse<T> = BaseResponse<T>;
