@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   AbstractControlOptions,
@@ -80,6 +80,19 @@ export class RegisterComponent implements OnInit {
     form.patchValue({ email: verifiedEmail });
     form.controls.email.disable();
   }
+
+    constructor() {
+    effect(() => {
+      const verifiedEmail = this.registrationState.email();
+      if (!verifiedEmail) {
+        this.router.navigate(['/auth/register']);
+        return;
+      }
+      const form = this.registerForm();
+   form.controls['email'].setValue(verifiedEmail);
+    });
+  }
+
 
   onSubmit(): void {
     const form = this.registerForm();

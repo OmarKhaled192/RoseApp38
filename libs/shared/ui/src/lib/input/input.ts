@@ -6,6 +6,7 @@ import {
   FormsModule,
   NG_VALUE_ACCESSOR,
   NgControl,
+  ReactiveFormsModule,
 } from '@angular/forms';
 
 import { InputTextModule } from 'primeng/inputtext';
@@ -36,6 +37,7 @@ export type InputValue = string | number | Date | null;
     CommonModule,
     FormsModule,
     InputTextModule,
+    ReactiveFormsModule,
     PasswordModule,
     TextareaModule,
     DatePickerModule,
@@ -55,7 +57,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   private readonly injector = inject(Injector);
 
   label = input<string>('');
-  controlInput = input<FormControl | null>(null, { alias: 'control' });
+  control = input<FormControl>(new FormControl());
   type = input<InputType>('text');
   placeholder = input<string>('');
   helperText = input<string>('');
@@ -66,19 +68,17 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   readonly disabled = signal(false);
   private readonly parentControl = signal<FormControl | null>(null);
 
-  readonly formControl = computed(() => this.controlInput() ?? this.parentControl());
+  readonly formControl = computed(() => this.parentControl() ?? this.control() ?? new FormControl());
+
 
   readonly controlId = `input-${crypto.randomUUID()}`;
 
-  private onChange: (value: InputValue) => void = () => {
-    /* noop */
-  };
-  private onTouched: () => void = () => {
-    /* noop */
-  };
+  private onChange: (value: InputValue) => void = () => { ; };
+
+  private onTouched: () => void = () => { ; };
 
   ngOnInit(): void {
-    if (this.controlInput()) {
+    if (this.control()) {
       return;
     }
 

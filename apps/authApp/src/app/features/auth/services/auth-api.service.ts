@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiResponse, ApiService } from '@org/data-access';
+import { ApiResponse, ApiService, DataResponse } from '@org/data-access';
 import { LoginRequest } from '../models/login';
 import { ConfirmEmailVerificationRequest, SendEmailVerificationRequest } from '../models/verification-messages';
 import { RegisterRequest, RegisterResponse } from '../models/register';
@@ -18,7 +18,7 @@ export class AuthApiService extends ApiService<LoginRequest> {
     super(http);
   }
 
-  login(body: LoginRequest): Observable<any> {
+  login(body: LoginRequest): Observable<DataResponse<RegisterResponse>> {
      return this.post(body,`login`);
   }
 

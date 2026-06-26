@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://exam-app.elevate-bootcamp.cloud/api'
+  baseUrl: 'https://rose-app.elevate-bootcamp.cloud/api'
 };
 
 /*
