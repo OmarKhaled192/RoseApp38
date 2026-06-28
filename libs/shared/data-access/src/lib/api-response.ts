@@ -1,9 +1,4 @@
-export interface PaginationMetadata {
-  page: number;
-  limit: number;
-  total: number;
-  totalPages: number;
-}
+import { PaginationMetadata } from "./models/pagination";
 
 interface BaseResponse<P> {
   status: boolean;

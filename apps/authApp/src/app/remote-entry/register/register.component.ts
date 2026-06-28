@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   AbstractControlOptions,
@@ -36,7 +36,7 @@ import { MustMatch } from '../../core/services/confirm-pass.validator';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authApiService = inject(AuthApiService);
   private readonly messageService = inject(Message);
@@ -68,18 +68,6 @@ export class RegisterComponent implements OnInit {
     ),
   );
 
-  ngOnInit(): void {
-    const verifiedEmail = this.registrationState.email();
-
-    // if (!verifiedEmail) {
-    //   this.router.navigate(['/auth/register']);
-    //   return;
-    // }
-
-    const form = this.registerForm();
-    form.patchValue({ email: verifiedEmail });
-    form.controls.email.disable();
-  }
 
     constructor() {
     effect(() => {
@@ -89,7 +77,8 @@ export class RegisterComponent implements OnInit {
         return;
       }
       const form = this.registerForm();
-   form.controls['email'].setValue(verifiedEmail);
+     form.controls['email'].setValue(verifiedEmail);
+     form.controls.email.disable();
     });
   }
 
