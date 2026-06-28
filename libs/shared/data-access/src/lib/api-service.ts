@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, httpResource, HttpResourceRef } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@org/environments';
-import { ApiResponse, PaginationMetadata } from  './api-response';
+import { ApiResponse, DataResponse, PaginationMetadata } from './api-response';
 
 type Primitive = string | number | boolean;
 export type QueryParams = Record<string, Primitive | null | undefined>;
@@ -17,8 +17,8 @@ export abstract class ApiService<T> {
   }
 
   getById<R = T>(id: number | string): Observable<ApiResponse<R>> {
-  return this.http.get<ApiResponse<R>>(`${this.fullUrl}/${id}`);
-}
+    return this.http.get<ApiResponse<R>>(`${this.fullUrl}/${id}`);
+  }
 
 
 
@@ -40,10 +40,17 @@ export abstract class ApiService<T> {
     });
   }
 
-  post<B, R = T>(body: B, path?: string): Observable<ApiResponse<R>> {
-  const url = path ? `${this.fullUrl}${path}` : this.fullUrl;
-  return this.http.post<ApiResponse<R>>(url, body);
-}
+  getListResource<R = T>(params?: () => QueryParams): HttpResourceRef<ApiResponse<R[]> | undefined> {
+    return httpResource<ApiResponse<R[]>>(() => {
+      const queryString = this.buildParams(params?.());
+      return queryString ? `${this.fullUrl}?${queryString}` : this.fullUrl;
+    });
+  }
+
+  post<B, R = T>(body: B, path?: string): Observable<DataResponse<R>> {
+    const url = path ? `${this.fullUrl}${path}` : this.fullUrl;
+    return this.http.post<DataResponse<R>>(url, body);
+  }
 
   put<B, R = T>(body: B): Observable<R> {
     return this.http.put<R>(this.fullUrl, body);

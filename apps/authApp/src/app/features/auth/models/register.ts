@@ -1,3 +1,5 @@
+import { LoadingState } from "@org/data-access";
+
 export interface RegisterRequest {
   username: string;
   email: string;
@@ -8,8 +10,8 @@ export interface RegisterRequest {
 }
 
 
-export interface RegisterResponse{
-  user: User
+export interface RegisterResponse extends LoadingState{
+  user: User | null
   token: string
 }
 
@@ -17,7 +19,7 @@ export interface User {
   id: string
   username: string
   email: string
-  phone: any
+  phone: string
   firstName: string
   lastName: string
   gender: string

@@ -6,7 +6,6 @@ import { AbstractControlOptions, FormBuilder, ReactiveFormsModule, Validators } 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MustMatch } from '../../../../core/services/confirm-pass.validator';
 import { ResetPasswordService } from '../../services/reset-password';
-import { ResetPassword } from '../../models/reset-password';
 import { Message, ValidationMessagesService } from '@org/data-access';
 import { ActivatedRoute, Router } from '@angular/router';
 

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthApiService } from './services/auth-api.service';
 import { AuthService } from './services/auth.service';
-import { ApiResponse, Message } from '@org/data-access';
+import {  DataResponse, Message } from '@org/data-access';
 import { LoginRequest } from './models/login';
 import { RegisterResponse } from './models/register';
 
@@ -20,7 +20,7 @@ export class AuthFacade {
   private readonly _isLoading = signal(false);
   readonly isLoading = this._isLoading.asReadonly();
 
-  login(credentials: LoginRequest): Observable<any> {
+  login(credentials: LoginRequest): Observable<DataResponse<RegisterResponse>> {
     this._isLoading.set(true);
     return this.authApiService.login(credentials).pipe(
       tap({

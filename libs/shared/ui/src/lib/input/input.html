@@ -8,15 +8,22 @@
 
   @switch (type()) {
 
-  @case ('password') {
-  <p-password [inputId]="controlId" [placeholder]="placeholder()" [disabled]="isControlDisabled" [feedback]="false"
+@case ('password') {
+  <p-password
+    [inputId]="controlId"
+    [placeholder]="placeholder()"
+    [disabled]="isControlDisabled"
+    [feedback]="false"
     [formControl]="control()"
-    [toggleMask]="true"  (onBlur)="onBlur()"
-    styleClass="w-full" inputStyleClass="w-full" />
-  }
-
+    [toggleMask]="true"
+    (onBlur)="onBlur()"
+    (input)="onInput($event)"
+    styleClass="w-full"
+    inputStyleClass="w-full" />
+}
   @case ('textarea') {
   <textarea pTextarea [id]="controlId" [placeholder]="placeholder()" [disabled]="isControlDisabled"
+   [formControl]="control()"
     [readOnly]="isReadonly()" [value]="value()" (input)="onTextareaInput($event)" (blur)="onBlur()" class="w-full"
     rows="4"></textarea>
   }
@@ -29,15 +36,25 @@
   }
 
   @default {
-  <input pInputText [id]="controlId" [type]="type()" [placeholder]="placeholder()" [disabled]="isControlDisabled"
-    [readOnly]="isReadonly()" [value]="value() ?? ''" (input)="onInput($event)" (blur)="onBlur()"
+  <input pInputText
+    [id]="controlId"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [disabled]="isControlDisabled"
+    [readOnly]="isReadonly()"
+    [value]="value() ?? ''"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
     class="w-full block" />
   }
 
   }
 
-  @if (formControl(); as ctrl) {
-  <lib-error-message [control]="ctrl" [fieldName]="label()" />
+   <small class="text-red-500 text-xs block">
+    <lib-error-message  [control]="control()!" [message]="label()" />
+  </small>
+  @if (control()) {
+
   } @else if (helperText()) {
   <small class="text-gray-500 text-xs block">
     {{ helperText() }}
