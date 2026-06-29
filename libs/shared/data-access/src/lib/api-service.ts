@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams, httpResource, HttpResourceRef } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@org/environments';
-import { ApiResponse, DataResponse, PaginationMetadata } from './api-response';
+import { ApiResponse, DataResponse } from './api-response';
+import { PaginationMetadata } from './models/pagination';
 
 type Primitive = string | number | boolean;
 export type QueryParams = Record<string, Primitive | null | undefined>;
