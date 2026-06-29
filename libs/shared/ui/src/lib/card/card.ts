@@ -1,10 +1,11 @@
 import { Component, computed, input, output } from '@angular/core';
 import { BadgeType, CardAction, CardData } from '../../models/card-type';
 import { NgClass } from '@angular/common';
+import { StarRating } from "../star-rating/star-rating";
 
 @Component({
   selector: 'lib-card',
-  imports: [NgClass],
+  imports: [NgClass, StarRating],
   templateUrl: './card.html'
 })
 export class Card {
