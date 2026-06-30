@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ServicesHightlights } from "../../../services-highlights/component/servicesHightlights";
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, ServicesHightlights],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })

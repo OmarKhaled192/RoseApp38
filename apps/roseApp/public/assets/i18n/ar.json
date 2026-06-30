@@ -9,5 +9,24 @@
   "common": {
     "save": "حفظ",
     "cancel": "إلغاء"
+  },
+  "SERVICE_HIGHLIGHTS": {
+    "freeDelivery": {
+      "title": "توصيل مجاني",
+      "description": "للطلبات التي تزيد عن 120 جنيه"
+    },
+    "getRefund": {
+      "title": "استرداد الأموال",
+      "description": "استرداد خلال 30 يومًا"
+    },
+    "safePayment": {
+      "title": "دفع آمن",
+      "description": "دفع آمن بنسبة 100%"
+    },
+    "support": {
+      "title": "دعم 24/7",
+      "description": "تواصل معنا في أي وقت"
+    }
   }
+
 }
