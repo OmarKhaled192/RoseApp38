@@ -9,5 +9,10 @@
   "common": {
     "save": "حفظ",
     "cancel": "إلغاء"
+  },
+   "trustedBy": {
+    "trustedCompanies": "موثوق به من قبل أكثر من",
+    "number": "4.5 ألف+",
+    "companies": "شركة"
   }
 }

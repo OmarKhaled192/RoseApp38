@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TrustedBy } from "../../../Trusted by Section/components/trusted-by/trusted-by";
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, TrustedBy],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
