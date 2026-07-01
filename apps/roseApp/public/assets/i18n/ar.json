@@ -27,6 +27,27 @@
       "title": "دعم 24/7",
       "description": "تواصل معنا في أي وقت"
     }
+  "productDetail": {
+    "loading": "جاري تحميل المنتج…",
+    "imageAlt": "صورة",
+    "thumbnailAlt": "صورة مصغرة",
+    "currency": "ج.م",
+    "stockCount": "متبقي {{count}} فقط في المخزن",
+    "ratingLabel": "التقييم",
+    "ratingsCount": "{{count}} تقييم",
+    "ariaWishlist": "إضافة إلى قائمة الأمنيات",
+    "outOfStock": "نفد من المخزن",
+    "addToCart": "إضافة إلى العربة"
+  },
+  "productReview": {
+    "heading": "تقييمات المنتج",
+    "generalRating": "التقييم العام:",
+    "ratingsCount": "تقييمات",
+    "noReviews": "لا توجد تقييمات بعد.",
+    "yourRating": "تقييمك:",
+    "titleLabel": "العنوان",
+    "contentLabel": "التعليق",
+    "submitButton": "إرسال التقييم"
   }
 
 }

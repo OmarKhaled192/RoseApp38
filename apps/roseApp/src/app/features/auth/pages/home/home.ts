@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServicesHightlights } from "../../../services-highlights/component/servicesHightlights";
+import { GallerySection } from '../../../sections/components/gallery-section/gallery-section';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, ServicesHightlights],
+  imports: [CommonModule, GallerySection,ServicesHightlights],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
