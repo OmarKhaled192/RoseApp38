@@ -2,9 +2,10 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Card, CardAction } from '@org/ui';
 import { Check } from '@primeicons/angular/check';
+import { MostPopular } from './components/most-popular/most-popular';
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, Card,Check],
+  imports: [CommonModule, Card,Check, MostPopular],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
@@ -14,6 +15,7 @@ export class HomeComponent {
     {
       label: 'View',
       icon: 'check',
+      variant: 'primary',
       action: () => {
         console.log('View action clicked');
       }
@@ -23,7 +25,7 @@ export class HomeComponent {
     title: 'iPhone 15',
     description: 'Apple smartphone',
     price: 999,
-    rating: 5,
+    rating: 4.1,
     image: 'https://picsum.photos/300',
     badge: 'new'
   };
