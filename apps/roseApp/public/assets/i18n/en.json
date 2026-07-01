@@ -9,5 +9,27 @@
   "common": {
     "save": "Save",
     "cancel": "Cancel"
+  },
+  "productDetail": {
+    "loading": "Loading product…",
+    "imageAlt": "image",
+    "thumbnailAlt": "thumbnail",
+    "currency": "EGP",
+    "stockCount": "{{count}} left in stock",
+    "ratingLabel": "Rating",
+    "ratingsCount": "{{count}} ratings",
+    "ariaWishlist": "Add to wishlist",
+    "outOfStock": "Out of stock",
+    "addToCart": "Add to Cart"
+  },
+  "productReview": {
+    "heading": "Product Reviews",
+    "generalRating": "General rating:",
+    "ratingsCount": "ratings",
+    "noReviews": "No reviews yet.",
+    "yourRating": "Your rating:",
+    "titleLabel": "Title",
+    "contentLabel": "Review",
+    "submitButton": "Submit Review"
   }
 }
