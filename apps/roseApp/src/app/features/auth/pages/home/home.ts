@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BestSeller } from '../best-seller/best-seller';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule , BestSeller],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
