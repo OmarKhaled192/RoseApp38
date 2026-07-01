@@ -48,6 +48,12 @@ export abstract class ApiService<T> {
     });
   }
 
+  getResourceById<R = T>(id: string): HttpResourceRef<DataResponse<R> | undefined> {
+  return httpResource<DataResponse<R>>(() => {
+     return `${this.fullUrl}/${id}`;
+    });
+  }
+
   post<B, R = T>(body: B, path?: string): Observable<DataResponse<R>> {
     const url = path ? `${this.fullUrl}${path}` : this.fullUrl;
     return this.http.post<DataResponse<R>>(url, body);

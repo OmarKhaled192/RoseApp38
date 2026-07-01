@@ -14,3 +14,4 @@ export * from './lib/card/card';
 export * from './lib/pagination/pagination';
 export * from './models/card-type';
 // export * from './lib/star/star';
+export * from './lib/title-section/title-section'

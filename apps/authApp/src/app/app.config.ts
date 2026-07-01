@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   ApplicationConfig,
   APP_INITIALIZER,
@@ -14,6 +14,7 @@ import { providePrimeNG } from 'primeng/config';
 import { MessageService } from 'primeng/api';
 import Aura from '@primeuix/themes/aura';
 import { appRoutes } from './app.routes';
+import { authenticationInterceptor } from '@org/auth';
 
 const DEFAULT_LANG = 'en';
 
@@ -21,7 +22,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideAnimationsAsync(),
-    provideHttpClient(),
+  provideHttpClient(withInterceptors([authenticationInterceptor])),
     MessageService,
     providePrimeNG({
       theme: {
