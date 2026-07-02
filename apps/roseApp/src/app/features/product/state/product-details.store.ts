@@ -5,13 +5,11 @@ import {  inject } from "@angular/core";
 import { ProductService } from "../services/product";
 
 export interface ProductState extends LoadingState {
-  products: Product[];
   selectedId: string | null;
   isLoading: false
 }
 
 const initialState: ProductState = {
-  products: [],
   selectedId: null,
   isLoading: false
 };
@@ -22,7 +20,10 @@ export const ProductStore = signalStore(
   withState(initialState),
   withMethods((state, productService = inject(ProductService)) => ({
     getProductResource(id: () => string) {
-      return productService.getResourceById(id());
+      return productService.getProductDetail(id());
+    },
+     getAllProduct() {
+      return productService.getListResource();
     }
   })),
 

@@ -9,8 +9,8 @@ export interface ProductData {
   ratings: number
   stock: number
   price: string
-  discountType: string
-  discountValue: string
+  discountType: 'PERCENT' | 'FIXED' | null;
+  discountValue: string | null;
   cover: string
   gallery: string
   categoryId: string
