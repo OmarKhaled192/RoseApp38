@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BestSeller } from '../best-seller/best-seller';
 import { GallerySection } from '../../../sections/components/gallery-section/gallery-section';
+import { BestSeller } from './components/best-seller/best-seller';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +11,4 @@ import { GallerySection } from '../../../sections/components/gallery-section/gal
 })
 export class HomeComponent {
   title = 'Home';
-
-  welcomeMessage = 'Welcome To Home';
-
-  constructor() {
-    console.log('Home Component Initialized');
-  }
 }

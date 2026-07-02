@@ -16,39 +16,39 @@
       </div>
     </div>
 
-    <div class="flex flex-col min-h-0">
-      <div class="max-h-[500px] overflow-y-auto min-h-0 pr-1">
-        <div class="divide-y divide-gray-200 border-t border-gray-200">
-          @for (review of reviews(); track review.id) {
-          <article class="py-5 flex gap-3">
-            <div
-              class="flex-shrink-0 w-10 h-10 rounded-full bg-rose-700 text-white flex items-center justify-center font-semibold">
-              {{ initial(review) }}
+<div class="max-h-[200px] flex flex-col min-h-0 overflow-hidden">
+    <div class="overflow-y-auto min-h-0 pr-1 h-full custom-scrollbar">
+      <div class="divide-y divide-gray-200 border-t border-gray-200">
+        @for (review of reviews(); track review.id) {
+        <article class="py-5 flex gap-3">
+          <div
+            class="shrink-0 w-10 h-10 rounded-full bg-rose-700 text-white flex items-center justify-center font-semibold">
+            {{ initial(review) }}
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <div class="flex items-baseline gap-2 flex-wrap">
+              <span class="font-semibold text-gray-900">{{ review.user.firstName }} {{ review.user.lastName }}</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-1">{{ review.createdAt | date:'mediumDate' }}</p>
+
+            <div class="flex items-center gap-1 mb-2 flex-wrap">
+              <lib-star-rating [rating]="review.rating" />
+              <span class="text-xs text-gray-500 ml-1">({{ review.rating }})</span>
             </div>
 
-            <div class="flex-1 min-w-0">
-              <div class="flex items-baseline gap-2 flex-wrap">
-                <span class="font-semibold text-gray-900">{{ review.user.firstName }} {{ review.user.lastName }}</span>
-              </div>
-              <p class="text-xs text-gray-400 mb-1">{{ review.createdAt | date:'mediumDate' }}</p>
-
-              <div class="flex items-center gap-1 mb-2 flex-wrap">
-                <lib-star-rating [rating]="review.rating" />
-                <span class="text-xs text-gray-500 ml-1">({{ review.rating }})</span>
-              </div>
-
-              @if (review.headline) {
-              <h3 class="font-semibold text-gray-900 mb-1 text-start break-words">{{ review.headline }}</h3>
-              }
-              <p class="text-sm text-gray-600 leading-relaxed break-words">{{ review.content }}</p>
-            </div>
-          </article>
-          } @empty {
-          <p class="py-8 text-center text-gray-400 text-sm">{{ 'productReview.noReviews' | translate }}</p>
-          }
-        </div>
+            @if (review.headline) {
+            <h3 class="font-semibold text-gray-900 mb-1 text-start wrap-break-word">{{ review.headline }}</h3>
+            }
+            <p class="text-sm text-gray-600 leading-relaxed wrap-break-word">{{ review.content }}</p>
+          </div>
+        </article>
+        } @empty {
+        <p class="py-8 text-center text-gray-400 text-sm">{{ 'productReview.noReviews' | translate }}</p>
+        }
       </div>
     </div>
+</div>
   </section>
 
   <aside class="lg:border-l lg:border-gray-200 lg:pl-8 pt-2 lg:pt-0">

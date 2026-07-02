@@ -9,7 +9,7 @@
     <div class="mt-4 mb-8 md:mt-8 md:mb-16">
       <div class="max-w-2xl mx-auto">
         <div class="overflow-hidden rounded-2xl bg-stone-100 h-64 sm:h-80 md:h-[420px]">
-          <img [attr.draggable]="false" [src]="parseImages(p.gallery[selectedIndex()])"
+          <img [attr.draggable]="false" [src]="selectedImage()"
             [alt]="p.title + ('productDetail.imageAlt' | translate) + (selectedIndex() + 1)"
             class="h-full w-full object-cover select-none" />
         </div>
@@ -79,10 +79,10 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-amber-400 text-amber-400" viewBox="0 0 24 24">
             <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
           </svg>
-          {{ 'productDetail.ratingLabel' | translate }}: {{ p.rating }}/5
+          {{ 'productDetail.ratingLabel' | translate }}: {{ p.rating | number: '1.1-1' }}/5
         </span>
         <a href="#" class="text-blue-600 hover:underline">( {{ 'productDetail.ratingsCount' | translate:{count:
-          p.ratings} }})</a>
+          p.ratings } }})</a>
       </div>
 
       <p class="mt-4 max-w-prose text-sm leading-relaxed text-stone-600">

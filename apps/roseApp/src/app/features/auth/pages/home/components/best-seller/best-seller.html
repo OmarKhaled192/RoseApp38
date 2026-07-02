@@ -2,7 +2,7 @@
   <div class="flex flex-col lg:flex-row lg:items-center gap-8">
 
     <div class="lg:w-1/4 flex-shrink-0">
-      <span class="text-[11px] font-semibold tracking-widest text-[#A6252A]">{{ 'bestSeller.eyebrow' | translate
+      <span class="text-[11px] font-semibold tracking-widest text-[#FF668B]">{{ 'bestSeller.eyebrow' | translate
         }}</span>
 
       <h2 class="mt-2 text-2xl sm:text-3xl font-bold leading-tight text-gray-900"
@@ -12,12 +12,12 @@
       <p class="mt-3 text-sm text-gray-500 leading-relaxed">
         {{ 'bestSeller.description' | translate }}
       </p>
+      <div class="mt-[3rem]">
+        <lib-button type="submit" [label]="'bestSeller.exploreGifts' | translate" [icon]="'pi pi-arrow-right'"
+          [iconPos]="'right'" [color]="isDark() ? '#FFA6B9' : '#8D1C24'" (click)="exploreGifts()"
+          styleClass="w-full py-2.5 sm:py-3 text-sm sm:text-base font-semibold" />
+      </div>
 
-      <lib-button type="submit" [label]="'bestSeller.exploreGifts' | translate"
-        [icon]="'pi-arrow-right'"
-        [iconPos]="'right'"
-        [color]="isDark() ? '#FFA6B9' : '#8D1C24'" (click)="exploreGifts()"
-        styleClass="w-full py-2.5 sm:py-3 text-sm sm:text-base font-semibold" />
     </div>
 
     <div class="flex-1 min-w-0">
