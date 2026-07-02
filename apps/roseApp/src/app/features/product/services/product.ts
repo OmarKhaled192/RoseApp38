@@ -9,12 +9,13 @@ import { HttpClient } from '@angular/common/http';
 export class ProductService extends ApiService<ProductData> {
   protected override endpoint = 'products';
 
-  constructor( http: HttpClient) {
+  constructor(http: HttpClient) {
     super(http);
   }
 
-    getProductDetail(id: string) {
+  getProductDetail(id: string) {
     return this.getResourceById<Product>(id);
   }
 
+  
 }
