@@ -10,6 +10,11 @@ export * from './lib/title-form/title-form';
 export * from './lib/question-repeat/question-repeat';
 export * from './lib/paragraph/paragraph';
 export * from './lib/error-message/error-message';
+export * from './lib/card/card';
+export * from './lib/pagination/pagination';
+export * from './models/card-type';
+export * from './lib/star-rating/star-rating';
+export * from './lib/title-section/title-section'
 export * from './lib/title-section/title-section';
 export * from './lib/star-rating/star-rating';
 export * from './lib/card/card';

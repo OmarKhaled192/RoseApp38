@@ -1,6 +1,6 @@
 @use 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
-// @import 'primeicons/primeicons.css';
+/* @import 'primeicons/primeicons.css'; */
 
 @theme {
   --font-sans: 'Plus Jakarta Sans', sans-serif;

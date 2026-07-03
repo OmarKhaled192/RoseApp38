@@ -1,96 +1,83 @@
-   <div
-      class="group relative w-50 rounded-xl border border-gray-100 bg-white
-             flex flex-col overflow-hidden cursor-pointer
-             transition-shadow duration-200 hover:shadow-lg">
+<div
+  class="group relative w-full h-full rounded-xl bg-white flex flex-col overflow-hidden cursor-pointer transition-shadow duration-200 hover:shadow-lg"
+>
+  <div class="relative aspect-[4/3] overflow-hidden bg-[#f5f0eb] shrink-0">
+    <img
+      [src]="card().image"
+      [alt]="card().title"
+      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+    />
 
-      <div class="relative h-40 overflow-hidden bg-[#f5f0eb]">
-        <img
-          [src]="card().image"
-          [alt]="card().title"
-          class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+    @if (card().badges?.length) {
+    <div class="absolute top-2 right-2 flex flex-col items-end gap-1">
+      @for (badge of card().badges; track badge) {
+      <span
+        [ngClass]="badgeClass(badge)"
+        class="text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wide whitespace-nowrap"
+      >
+        {{ badgeLabel(badge) }}
+      </span>
+      }
+    </div>
+    } @if (hoverActions().length) {
+    <div
+      class="absolute inset-0  opacity-0 group-hover:opacity-100 bg-[#E65073]/50 transition-opacity duration-200"
+    ></div>
+    <div
+      class="absolute inset-0 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+    >
+      @for (action of hoverActions(); track action.label) {
+      <button
+        type="button"
+        (click)="$event.stopPropagation(); action.action()"
+        [disabled]="action.isDisabled"
+        class="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center text-gray-600 hover:text-[#A6252A] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        [attr.aria-label]="action.label"
+      >
+        <i class="pi text-sm" [ngClass]="action.icon"></i>
+      </button>
+      }
+    </div>
+    }
+  </div>
 
-        @if (card().badges?.length) {
-          <div class="absolute top-2 right-2 flex gap-1">
-            @for (badge of card().badges; track badge) {
-              <span [ngClass]="badgeClass(badge)"
-                    class="text-[10px] font-semibold px-2 py-0.5 rounded-full tracking-wide">
-                {{ badgeLabel(badge) }}
-              </span>
-            }
-          </div>
-        }
+  <div class="flex flex-col flex-1 gap-1 pt-2.5 p-3">
+    <p
+      class="text-sm sm:text-base font-semibold text-[#A6252A] leading-snug line-clamp-1"
+    >
+      {{ card().title }}
+    </p>
 
-        @if (hoverActions().length) {
-          <div class="absolute inset-0 flex items-center justify-center gap-2
-                      opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            @for (action of hoverActions(); track action.label) {
-              <button
-                type="button"
-                (click)="$event.stopPropagation(); action.action()"
-                [disabled]="action.isDisabled"
-                class="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center
-                       text-gray-600 hover:text-rose-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                [attr.aria-label]="action.label">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"
-                     fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor" stroke-width="2"
-                     [innerHTML]="action.icon">
-                </svg>
-              </button>
-            }
-          </div>
-        }
-      </div>
+    <div class="h-[16px] flex items-center">
+      @if (card().rating !== undefined) {
+      <lib-star-rating [rating]="card().rating!" />
+      }
+    </div>
 
-      <div class="flex flex-col gap-1.5 px-3 pt-2.5 pb-1">
-        <p class="text-[13px] font-medium text-gray-900 leading-snug line-clamp-2">
-          {{ card().title }}
-        </p>
-
-        @if (card().subtitle) {
-          <p class="text-[11px] text-gray-400 leading-snug line-clamp-1">
-            {{ card().subtitle }}
-          </p>
-        }
-        @if (card().rating !== undefined) {
-         <lib-star-rating [rating]="card().rating!"/>
-        }
-
+    <div class="flex items-center justify-between mt-auto pt-1">
+      <div class="flex items-baseline gap-2">
         @if (card().price !== undefined) {
-          <div class="flex items-center gap-2">
-            <span class="text-[13px] font-medium text-gray-900">
-              {{ card().price!.toFixed(2) }} {{ card().currency ?? 'EGP' }}
-            </span>
-            @if (card().oldPrice) {
-              <span class="text-[12px] text-gray-400 line-through">
-                {{ card().oldPrice!.toFixed(2) }} {{ card().currency ?? 'EGP' }}
-              </span>
-            }
-          </div>
-        }
+        <span class="text-sm font-semibold text-gray-900">
+          {{ card().price!.toFixed(2) }} {{ card().currency ?? 'EGP' }}
+        </span>
+        @if (card().oldPrice) {
+        <span class="text-xs text-gray-400 line-through">
+          {{ card().oldPrice!.toFixed(2) }} {{ card().currency ?? 'EGP' }}
+        </span>
+        } }
       </div>
 
       @if (footerActions().length) {
-        <div class="flex justify-end gap-2 px-3 pb-3 pt-1">
-          @for (action of footerActions(); track action.label) {
-            <button
-              type="button"
-              (click)="action.action()"
-              [disabled]="action.isDisabled"
-              class="w-9 h-9 rounded-full flex items-center justify-center
-                     disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-              [ngClass]="action.variant === 'ghost'
-                ? 'bg-white border border-gray-200 text-gray-600 hover:text-rose-600'
-                : 'bg-rose-700 text-white hover:bg-rose-800'"
-              [attr.aria-label]="action.label">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"
-                   fill="none" viewBox="0 0 24 24"
-                   stroke="currentColor" stroke-width="2"
-                   [innerHTML]="action.icon">
-              </svg>
-            </button>
-          }
-        </div>
+      <button
+        type="button"
+        (click)="footerActions()[0].action()"
+        [disabled]="footerActions()[0].isDisabled"
+        class="w-9 h-9 rounded-full flex items-center justify-center bg-[#A6252A] text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0"
+        [attr.aria-label]="footerActions()[0].label"
+      >
+        <i class="pi text-sm" [ngClass]="footerActions()[0].icon"></i>
+      </button>
       }
-
     </div>
+  </div>
+</div>
