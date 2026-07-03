@@ -6,6 +6,7 @@
   </div>
   } @else if (product(); as p) {
   <div class="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 sm:px-6 py-6 md:grid-cols-2 md:gap-10 md:py-10">
+    @if (p.gallery.length > 1) {
     <div class="mt-4 mb-8 md:mt-8 md:mb-16">
       <div class="max-w-2xl mx-auto">
         <div class="overflow-hidden rounded-2xl bg-stone-100 h-64 sm:h-80 md:h-[420px]">
@@ -16,8 +17,7 @@
 
         @if (p.gallery.length > 1) {
         <p-carousel class="mt-3 block" [value]="parseImages(p.gallery)" [numVisible]="4" [numScroll]="1"
-          [circular]="false"
-          [showNavigators]="false" [showIndicators]="false" [responsiveOptions]="[
+          [circular]="false" [showNavigators]="false" [showIndicators]="false" [responsiveOptions]="[
       { breakpoint: '768px', numVisible: 4, numScroll: 1 },
       { breakpoint: '640px', numVisible: 3, numScroll: 1 },
       { breakpoint: '420px', numVisible: 2, numScroll: 1 }
@@ -39,7 +39,7 @@
         }
       </div>
     </div>
-
+      }
     <div class="flex flex-col">
       <h1 class="text-2xl sm:text-3xl font-semibold text-stone-900">{{ p.title }}</h1>
 
@@ -81,7 +81,7 @@
           </svg>
           {{ 'productDetail.ratingLabel' | translate }}: {{ p.rating | number: '1.1-1' }}/5
         </span>
-        <a href="#" class="text-blue-600 hover:underline">( {{ 'productDetail.ratingsCount' | translate:{count:
+        <a  class="text-blue-600 hover:underline">( {{ 'productDetail.ratingsCount' | translate:{count:
           p.ratings } }})</a>
       </div>
 
@@ -91,18 +91,18 @@
 
       <div class="mt-auto flex items-center gap-3 pt-6 md:pt-10">
         <button type="button" (click)="toggleWishlist()"
-          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-stone-200 transition hover:bg-stone-50"
+          class="flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-stone-200 transition hover:bg-stone-50"
           [attr.aria-pressed]="isWishlist()" aria-label="'productDetail.ariaWishlist' | translate">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" [class.fill-red-700]="isWishlist()"
-            [class.text-red-700]="isWishlist()" [class.text-stone-500]="!isWishlist()" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="1.8">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" [class.fill-red-700]="p._count.wishlistItems !== 0"
+            [class.text-red-700]="p._count.wishlistItems !== 0" [class.text-stone-500]="p._count.wishlistItems === 0"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <path
               d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z" />
           </svg>
         </button>
 
         <button type="button" [disabled]="p.stock === 0" (click)="addToCart()"
-          class="flex h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-red-700 px-2 text-sm sm:text-base font-medium text-white transition hover:bg-red-800 active:bg-red-800 disabled:cursor-not-allowed disabled:bg-stone-300">
+          class="flex h-12 flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-red-700 px-2 text-sm sm:text-base font-medium text-white transition hover:bg-red-800 active:bg-red-800 disabled:cursor-not-allowed disabled:bg-stone-300">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="1.8">
             <circle cx="9" cy="21" r="1" />
