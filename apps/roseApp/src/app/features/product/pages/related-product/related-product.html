@@ -1,0 +1,38 @@
+<section class="w-full">
+  <!-- <lib-title-section
+    title="Our Services"
+    subtitle="What We Do"
+    align="left"
+    [highlightWidth]="'60%'"
+    [highlightHeight]="'45%'"
+    [underlineWidth]="'32px'"
+    [underlineHeight]="'4px'"
+    
+  /> -->
+ 
+  <div class="flex flex-col lg:flex-row lg:items-center gap-8">
+    <div class="flex-1 min-w-0">
+      @if(products() && products().length){
+      <p-carousel
+        [value]="products()"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="false"
+        [responsiveOptions]="responsiveOptions"
+        [showIndicators]="false"
+        contentClass="gap-4"
+      >
+        <ng-template #item let-product>
+          <div class="px-1.5">
+            <lib-card
+              [card]="product"
+              [hoverActions]="[actionsFor(product)[0], actionsFor(product)[1]]"
+              [footerActions]="[actionsFor(product)[2]]"
+            />
+          </div>
+        </ng-template>
+      </p-carousel>
+      }
+    </div>
+  </div>
+</section>

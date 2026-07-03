@@ -5,10 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { ProductInfo } from "../product-info/product-info";
 import { ProductReview } from "../product-review/product-review";
+import { RelatedProduct } from '../related-product/related-product';
 
 @Component({
   selector: 'app-product-details',
-  imports: [ProductInfo, ProductReview],
+  imports: [ProductInfo, ProductReview,RelatedProduct],
   templateUrl: './product-details.html'
 })
 export class ProductDetails {

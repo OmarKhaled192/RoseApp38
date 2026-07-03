@@ -10,6 +10,7 @@ import { BestSeller } from './components/best-seller/best-seller';
 
 import { Card } from '@org/ui';
 import { Check } from '@primeicons/angular/check';
+import { RelatedProduct } from '../../../product/pages/related-product/related-product';
 
 @Component({
   selector: 'app-home',
@@ -22,8 +23,9 @@ import { Check } from '@primeicons/angular/check';
     ServicesHightlights,
     MostPopular,
     BestSeller,
-    Card,
-    Check,
+    
+    
+    RelatedProduct
   ],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
