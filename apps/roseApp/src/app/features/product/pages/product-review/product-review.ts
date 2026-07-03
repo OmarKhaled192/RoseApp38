@@ -8,7 +8,8 @@ import { ReviewStore } from '../../state/review.store';
 @Component({
   selector: 'app-product-review',
   imports: [DatePipe, InputComponent, TranslatePipe, FormField, Button, StarRating],
-  templateUrl: './product-review.html'
+  templateUrl: './product-review.html',
+  styleUrls: ['./product-review.css']
 })
 export class ProductReview {
   reviews = input<Review[]>([]);
