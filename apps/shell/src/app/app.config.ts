@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   ApplicationConfig,
   APP_INITIALIZER,
@@ -15,6 +15,7 @@ import Aura from '@primeuix/themes/aura';
 import { appRoutes } from './app.routes';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { authenticationInterceptor } from '@org/auth';
 
 export class MultiTranslateHttpLoader implements TranslateLoader {
   constructor(private http: HttpClient) {}
@@ -68,7 +69,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideAnimationsAsync(),
-    provideHttpClient(),
+  provideHttpClient(withInterceptors([authenticationInterceptor])),
     MessageService,
     providePrimeNG({
       theme: {

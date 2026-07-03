@@ -14,5 +14,33 @@
     "trustedCompanies": "موثوق به من قبل أكثر من",
     "number": "4.5 ألف+",
     "companies": "شركة"
+  },
+  "productDetail": {
+    "loading": "جاري تحميل المنتج…",
+    "imageAlt": "صورة",
+    "thumbnailAlt": "صورة مصغرة",
+    "currency": "ج.م",
+    "stockCount": "متبقي {{count}} فقط في المخزن",
+    "ratingLabel": "التقييم",
+    "ratingsCount": "{{count}} تقييم",
+    "ariaWishlist": "إضافة إلى قائمة الأمنيات",
+    "outOfStock": "نفد من المخزن",
+    "addToCart": "إضافة إلى العربة"
+  },
+  "productReview": {
+    "heading": "تقييمات المنتج",
+    "generalRating": "التقييم العام:",
+    "ratingsCount": "تقييمات",
+    "noReviews": "لا توجد تقييمات بعد.",
+    "yourRating": "تقييمك:",
+    "titleLabel": "العنوان",
+    "contentLabel": "التعليق",
+    "submitButton": "إرسال التقييم"
+  },
+  "bestSeller": {
+    "eyebrow": "الأكثر مبيعاً",
+    "heading": "<span class=\"text-[#E65073]\">اكتشف</span> ما يشتريه <span class=\"text-[#E65073]\">الجميع</span> الآن",
+    "description": "لست متأكداً مما تختار؟ ابدأ بالمنتجات الأكثر مبيعاً لدينا، فهذه هي الهدايا التي يستمر عملاؤنا في العودة لأجلها. سواء كنت تحتفل بعيد ميلاد، أو ذكرى سنوية، أو حفل زفاف، نضمن لك أن خياراتنا المميزة ستترك انطباعاً يدوم طويلاً.",
+    "exploreGifts": "استكشف الهدايا"
   }
 }
