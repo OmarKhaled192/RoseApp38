@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from '@org/environments';
 import { ApiResponse, DataResponse } from './api-response';
 import { PaginationMetadata } from './models/pagination';
+import { inject, Injector, runInInjectionContext } from '@angular/core';
 
 type Primitive = string | number | boolean;
 export type QueryParams = Record<string, Primitive | null | undefined>;
@@ -10,7 +11,7 @@ export type QueryParams = Record<string, Primitive | null | undefined>;
 export abstract class ApiService<T> {
   protected baseUrl = environment.baseUrl;
   protected abstract endpoint: string;
-
+  private injector = inject(Injector);
   constructor(protected http: HttpClient) { }
 
   private get fullUrl(): string {
@@ -42,12 +43,13 @@ export abstract class ApiService<T> {
   }
 
   getListResource<R = T>(params?: () => QueryParams): HttpResourceRef<ApiResponse<R[]> | undefined> {
-    return httpResource<ApiResponse<R[]>>(() => {
-      const queryString = this.buildParams(params?.());
-      return queryString ? `${this.fullUrl}?${queryString}` : this.fullUrl;
-    });
+    return runInInjectionContext(this.injector, () =>
+      httpResource<ApiResponse<R[]>>(() => {
+        const queryString = this.buildParams(params?.()).toString();
+        return queryString ? `${this.fullUrl}?${queryString}` : this.fullUrl;
+      })
+    );
   }
-
   getResourceById<R = T>(id: string): HttpResourceRef<DataResponse<R> | undefined> {
   return httpResource<DataResponse<R>>(() => {
      return `${this.fullUrl}/${id}`;

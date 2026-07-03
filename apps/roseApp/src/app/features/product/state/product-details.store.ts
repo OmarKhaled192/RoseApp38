@@ -1,19 +1,18 @@
-import {  LoadingState } from "@org/data-access";
-import { Product } from "../models/product";
-import {  signalStore, withMethods, withState } from '@ngrx/signals';
-import {  inject } from "@angular/core";
-import { ProductService } from "../services/product";
+import { LoadingState, QueryParams } from '@org/data-access';
+import { Product } from '../models/product';
+import { signalStore, withMethods, withState } from '@ngrx/signals';
+import { inject } from '@angular/core';
+import { ProductService } from '../services/product';
 
 export interface ProductState extends LoadingState {
   selectedId: string | null;
-  isLoading: false
+  isLoading: false;
 }
 
 const initialState: ProductState = {
   selectedId: null,
-  isLoading: false
+  isLoading: false,
 };
-
 
 export const ProductStore = signalStore(
   { providedIn: 'root' },
@@ -22,9 +21,8 @@ export const ProductStore = signalStore(
     getProductResource(id: () => string) {
       return productService.getProductDetail(id());
     },
-     getAllProduct() {
-      return productService.getListResource();
-    }
+    getAllProduct(params?: () => QueryParams) {
+      return productService.getListResource(params);
+    },
   })),
-
-)
+);

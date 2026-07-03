@@ -15,6 +15,23 @@
     "number": "4.5k+",
     "companies": "companies"
   },
+  "ServicesHighlits": {
+    "freeDelivery": {
+      "title": "Free Delivery",
+      "description": "For orders above 120 EGP"
+    },
+    "getRefund": {
+      "title": "Get Refund",
+      "description": "Refunds within 30 days"
+    },
+    "safePayment": {
+      "title": "Safe Payment",
+      "description": "100% Secure Payment"
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Contact us at any time"
+    },
   "productDetail": {
     "loading": "Loading product…",
     "imageAlt": "image",
@@ -42,5 +59,6 @@
     "heading": "<span class=\"text-[#E65073]\">Check Out</span> What Everyone's <span class=\"text-[#E65073]\">Buying</span> Right Now",
     "description": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
     "exploreGifts": "Explore gifts"
+  }
   }
 }

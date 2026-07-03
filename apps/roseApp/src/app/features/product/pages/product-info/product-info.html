@@ -1,0 +1,118 @@
+<div class="min-h-screen bg-white">
+  <div class="h-1.5 w-full bg-linear-to-r from-rose-200 via-red-700 to-red-800"></div>
+
+  @if (isLoading()) {
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-20 text-center text-stone-500">{{ 'productDetail.loading' | translate }}
+  </div>
+  } @else if (product(); as p) {
+  <div class="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 sm:px-6 py-6 md:grid-cols-2 md:gap-10 md:py-10">
+    <div class="mt-4 mb-8 md:mt-8 md:mb-16">
+      <div class="max-w-2xl mx-auto">
+        <div class="overflow-hidden rounded-2xl bg-stone-100 h-64 sm:h-80 md:h-[420px]">
+          <img [attr.draggable]="false" [src]="selectedImage()"
+            [alt]="p.title + ('productDetail.imageAlt' | translate) + (selectedIndex() + 1)"
+            class="h-full w-full object-cover select-none" />
+        </div>
+
+        @if (p.gallery.length > 1) {
+        <p-carousel class="mt-3 block" [value]="parseImages(p.gallery)" [numVisible]="4" [numScroll]="1"
+          [circular]="false"
+          [showNavigators]="false" [showIndicators]="false" [responsiveOptions]="[
+      { breakpoint: '768px', numVisible: 4, numScroll: 1 },
+      { breakpoint: '640px', numVisible: 3, numScroll: 1 },
+      { breakpoint: '420px', numVisible: 2, numScroll: 1 }
+    ]">
+          <ng-template let-image let-i="index" pTemplate="item">
+            <button type="button"
+              class="mx-1 h-16 sm:h-20 w-full cursor-pointer overflow-hidden rounded-lg border-2 transition-all p-0"
+              [style.border-color]="selectedImage() === image ? '#A6252A' : 'transparent'"
+              [class.opacity-60]="selectedImage() !== image" [class.hover:opacity-80]="selectedImage() !== image"
+              (click)="selectImage(image, i)"
+              [attr.aria-label]="p.title + ('productDetail.thumbnailAlt' | translate) + (i + 1)"
+              [attr.aria-pressed]="selectedImage() === image">
+              <img [attr.draggable]="false" [src]="image"
+                [alt]="p.title + ('productDetail.thumbnailAlt' | translate) + (i + 1)"
+                class="h-full w-full object-cover select-none pointer-events-none" />
+            </button>
+          </ng-template>
+        </p-carousel>
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col">
+      <h1 class="text-2xl sm:text-3xl font-semibold text-stone-900">{{ p.title }}</h1>
+
+      <div class="mt-3 flex flex-wrap items-center gap-2 sm:gap-3">
+        @if (p.discountValue) {
+        <span class="text-base sm:text-lg text-stone-400 line-through">
+          {{ p.price }}
+        </span>
+        <span class="text-xl sm:text-2xl font-bold text-stone-900">
+          {{ (p.discountType === 'PERCENT' ? (+p.price * (+p.discountValue / 100)) : +p.price) | number: '1.2-2' }}
+          <span class="text-sm sm:text-base font-semibold">{{ 'productDetail.currency' | translate }}</span>
+        </span>
+        } @else {
+        <span class="text-xl sm:text-2xl font-bold text-stone-900">
+          {{ p.price }}
+          <span class="text-sm sm:text-base font-semibold">{{ 'productDetail.currency' | translate }}</span>
+        </span>
+        }
+
+        <span
+          class="ml-0 sm:ml-2 inline-flex items-center gap-1 rounded-full bg-stone-100 px-3 py-1 text-xs sm:text-sm text-stone-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.5">
+            <path
+              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+            <path d="m3.27 6.96 8.73 5.05 8.73-5.05" />
+            <path d="M12 22.08V12" />
+          </svg>
+          {{ 'productDetail.stockCount' | translate: { count: p.stock } }}
+        </span>
+      </div>
+
+      <hr class="mt-5 border-stone-200" />
+
+      <div class="mt-4 flex flex-wrap items-center gap-2 text-sm">
+        <span class="flex items-center gap-1 font-medium text-stone-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-amber-400 text-amber-400" viewBox="0 0 24 24">
+            <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+          </svg>
+          {{ 'productDetail.ratingLabel' | translate }}: {{ p.rating | number: '1.1-1' }}/5
+        </span>
+        <a href="#" class="text-blue-600 hover:underline">( {{ 'productDetail.ratingsCount' | translate:{count:
+          p.ratings } }})</a>
+      </div>
+
+      <p class="mt-4 max-w-prose text-sm leading-relaxed text-stone-600">
+        {{ p.description }}
+      </p>
+
+      <div class="mt-auto flex items-center gap-3 pt-6 md:pt-10">
+        <button type="button" (click)="toggleWishlist()"
+          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-stone-200 transition hover:bg-stone-50"
+          [attr.aria-pressed]="isWishlist()" aria-label="'productDetail.ariaWishlist' | translate">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" [class.fill-red-700]="isWishlist()"
+            [class.text-red-700]="isWishlist()" [class.text-stone-500]="!isWishlist()" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.8">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z" />
+          </svg>
+        </button>
+
+        <button type="button" [disabled]="p.stock === 0" (click)="addToCart()"
+          class="flex h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-red-700 px-2 text-sm sm:text-base font-medium text-white transition hover:bg-red-800 active:bg-red-800 disabled:cursor-not-allowed disabled:bg-stone-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.8">
+            <circle cx="9" cy="21" r="1" />
+            <circle cx="20" cy="21" r="1" />
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+          </svg>
+          {{ (p.stock === 0 ? 'productDetail.outOfStock' : 'productDetail.addToCart') | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+</div>
