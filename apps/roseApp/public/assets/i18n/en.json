@@ -26,7 +26,7 @@
     "support": {
       "title": "24/7 Support",
       "description": "Contact us at any time"
-    }
+    },
   "productDetail": {
     "loading": "Loading product…",
     "imageAlt": "image",
@@ -48,5 +48,6 @@
     "titleLabel": "Title",
     "contentLabel": "Review",
     "submitButton": "Submit Review"
+  }
   }
 }

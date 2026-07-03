@@ -4,7 +4,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-services-hightlights',
   imports: [TranslatePipe],
-  templateUrl: './servicesHightlights.html',
-  styleUrl: './servicesHightlights.css',
+  templateUrl: './servicesHightlights.html'
 })
 export class ServicesHightlights {}
