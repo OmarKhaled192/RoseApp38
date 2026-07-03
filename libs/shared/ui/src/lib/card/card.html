@@ -1,81 +1,109 @@
 <div
-  class="group relative w-full h-full rounded-xl bg-white flex flex-col overflow-hidden cursor-pointer transition-shadow duration-200 hover:shadow-lg"
->
-  <div class="relative aspect-[4/3] overflow-hidden bg-[#f5f0eb] shrink-0">
-    <img
-      [src]="card().image"
-      [alt]="card().title"
-      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-    />
+  class="group flex h-100 flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
 
-    @if (card().badges?.length) {
-    <div class="absolute top-2 right-2 flex flex-col items-end gap-1">
-      @for (badge of card().badges; track badge) {
+  <div class="relative aspect-4/5 overflow-hidden bg-[#f5f0eb]">
+
+    <img [src]="card().image || 'assets/img/placeholder.png'" [alt]="''"
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      @if(showWishlist()){
+
+    <button
+      class="group absolute left-3 top-3 inline-flex items-center gap-0 rounded-full bg-[#1c1b1f]/90 p-2 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 ease-in-out hover:gap-2 hover:px-4 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2">
+
+      @if (card().wishlist !== 0) {
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"
+        class="shrink-0">
+        <path
+          d="M11.157 14.2429L10.131 15.2351C9.99125 15.3957 9.81895 15.5246 9.62554 15.6134C9.43212 15.7022 9.22203 15.7488 9.00922 15.7501C8.7964 15.7515 8.58574 15.7075 8.39122 15.6212C8.19669 15.5349 8.02277 15.4081 7.881 15.2494L3.75 11.2504C2.625 10.1254 1.5 8.8504 1.5 7.1254C1.50002 6.2908 1.7532 5.47583 2.2261 4.78814C2.699 4.10045 3.36939 3.57239 4.14871 3.2737C4.92803 2.975 5.77962 2.91973 6.59101 3.11518C7.4024 3.31063 8.13542 3.74761 8.69325 4.3684C8.73254 4.41041 8.78004 4.4439 8.83281 4.4668C8.88557 4.48969 8.94248 4.50151 9 4.50151C9.05752 4.50151 9.11443 4.48969 9.16719 4.4668C9.21996 4.4439 9.26746 4.41041 9.30675 4.3684C9.86283 3.74357 10.596 3.30292 11.4087 3.1051C12.2214 2.90727 13.0751 2.96166 13.8562 3.26101C14.6372 3.56036 15.3085 4.09049 15.7808 4.78082C16.2531 5.47116 16.504 6.28897 16.5 7.1254C16.4998 7.52546 16.4381 7.92311 16.317 8.3044M11.25 11.2504H15.75"
+          stroke="#F4F4F5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+
       <span
-        [ngClass]="badgeClass(badge)"
-        class="text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wide whitespace-nowrap"
-      >
+        class="max-w-0 inline-block overflow-hidden opacity-0 whitespace-nowrap transition-all duration-300 ease-in-out group-hover:max-w-xs group-hover:opacity-100">
+        Remove from wishlist
+      </span>
+
+      } @else {
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"
+        class="shrink-0">
+        <path
+          d="M10.125 14.625L9 15.75L3.75 10.5C2.625 9.4125 1.5 8.1 1.5 6.375C1.5 5.28098 1.9346 4.23177 2.70818 3.45818C3.48177 2.6846 4.53098 2.25 5.625 2.25C6.945 2.25 7.875 2.625 9 3.75C10.125 2.625 11.055 2.25 12.375 2.25C12.9798 2.2507 13.5771 2.38439 14.1245 2.64162C14.6719 2.89884 15.1561 3.2733 15.5427 3.73846C15.9293 4.20363 16.2088 4.74811 16.3616 5.33335C16.5143 5.91858 16.5365 6.53024 16.4265 7.125M11.25 11.25H15.75M13.5 9V13.5"
+          stroke="#A6252A" stroke-width="1.45833" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+
+      <span
+        class="max-w-0 inline-block overflow-hidden opacity-0 whitespace-nowrap transition-all duration-300 ease-in-out group-hover:max-w-xs group-hover:opacity-100">
+        Add to wishlist
+      </span>
+      }
+    </button>
+  }
+    @if(card().badges?.length){
+
+    <div class="absolute right-3 top-3 z-20 flex flex-wrap gap-1">
+      @for(badge of card().badges; track badge){
+      <span [ngClass]="badgeClass(badge)" class="rounded-full px-3 py-1 text-[10px] font-semibold uppercase shadow-sm">
         {{ badgeLabel(badge) }}
       </span>
       }
     </div>
-    } @if (hoverActions().length) {
-    <div
-      class="absolute inset-0  opacity-0 group-hover:opacity-100 bg-[#E65073]/50 transition-opacity duration-200"
-    ></div>
-    <div
-      class="absolute inset-0 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-    >
-      @for (action of hoverActions(); track action.label) {
-      <button
-        type="button"
-        (click)="$event.stopPropagation(); action.action()"
-        [disabled]="action.isDisabled"
-        class="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center text-gray-600 hover:text-[#A6252A] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-        [attr.aria-label]="action.label"
-      >
-        <i class="pi text-sm" [ngClass]="action.icon"></i>
-      </button>
-      }
-    </div>
+
     }
+
+    @if(hoverActions().length){
+
+    <div
+      class="absolute inset-0 z-20 flex items-center justify-center gap-4 opacity-0 transition-all duration-300 group-hover:opacity-100">
+
+      @for(action of hoverActions(); track action.label){
+
+      <button (click)="$event.stopPropagation(); action.action()"
+        class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-gray-700 shadow-lg transition-all duration-200 hover:scale-110 hover:bg-[#A6252A] hover:text-white">
+        <i class="pi text-lg" [ngClass]="action.icon"></i>
+      </button>
+
+      }
+
+    </div>
+
+    }
+
   </div>
 
-  <div class="flex flex-col flex-1 gap-1 pt-2.5 p-3">
-    <p
-      class="text-sm sm:text-base font-semibold text-[#A6252A] leading-snug line-clamp-1"
-    >
+  <div class="flex flex-1 flex-col p-4">
+    <h3 class="min-h-[48px] line-clamp-2 text-base font-semibold leading-6 text-[#7A1F20]">
       {{ card().title }}
-    </p>
+    </h3>
 
-    <div class="h-[16px] flex items-center">
-      @if (card().rating !== undefined) {
+    <div class="mt-2">
       <lib-star-rating [rating]="card().rating!" />
-      }
     </div>
 
-    <div class="flex items-center justify-between mt-auto pt-1">
-      <div class="flex items-baseline gap-2">
-        @if (card().price !== undefined) {
-        <span class="text-sm font-semibold text-gray-900">
-          {{ card().price!.toFixed(2) }} {{ card().currency ?? 'EGP' }}
+    <div class="mt-auto flex items-end justify-between pt-4">
+
+      <div class="flex flex-wrap items-center gap-2">
+
+        <span class="text-xl font-bold text-[#A6252A]">
+          {{ card().price | number:'1.2-2' }}
+          {{ card().currency }}
         </span>
-        @if (card().oldPrice) {
-        <span class="text-xs text-gray-400 line-through">
-          {{ card().oldPrice!.toFixed(2) }} {{ card().currency ?? 'EGP' }}
+
+        @if(card().oldPrice){
+
+        <span class="text-sm text-gray-400 line-through">
+          {{ card().oldPrice | number:'1.2-2' }}
+          {{ card().currency }}
         </span>
-        } }
+
+        }
+
       </div>
 
-      @if (footerActions().length) {
-      <button
-        type="button"
-        (click)="footerActions()[0].action()"
-        [disabled]="footerActions()[0].isDisabled"
-        class="w-9 h-9 rounded-full flex items-center justify-center bg-[#A6252A] text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0"
-        [attr.aria-label]="footerActions()[0].label"
-      >
-        <i class="pi text-sm" [ngClass]="footerActions()[0].icon"></i>
+      @if(footerActions().length){
+
+      <button (click)="footerActions()[0].action()"
+        class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#A6252A] text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-[#8F1D22]">
+        <i class="pi pi-shopping-cart text-lg"></i>
       </button>
       }
     </div>

@@ -19,4 +19,6 @@ export interface CardData {
   currency?: string;
   badges?: BadgeType[];
   inStock?: boolean;
+  wishlist: number;
+  create: string;
 }
