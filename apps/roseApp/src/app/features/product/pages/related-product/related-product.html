@@ -1,16 +1,15 @@
 <section class="w-full">
-  <!-- <lib-title-section
-    title="Our Services"
-    subtitle="What We Do"
+  <lib-title-section
+    title="{{'product.relatedProducts' | translate}}"
+    subtitle=" "
     align="left"
     [highlightWidth]="'60%'"
     [highlightHeight]="'45%'"
-    [underlineWidth]="'32px'"
-    [underlineHeight]="'4px'"
-    
-  /> -->
- 
-  <div class="flex flex-col lg:flex-row lg:items-center gap-8">
+    [underlineWidth]="'60px'"
+    [underlineHeight]="'2px'"
+  />
+
+  <div class="flex flex-col lg:flex-row lg:items-center gap-8 my-4">
     <div class="flex-1 min-w-0">
       @if(products() && products().length){
       <p-carousel

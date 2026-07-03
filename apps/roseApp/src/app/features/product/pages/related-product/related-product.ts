@@ -1,13 +1,14 @@
 import { Component, computed, inject, signal } from '@angular/core';
+
 import { Card, DarkModeService, TitleSection } from '@org/ui';
 import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
 import { ProductStore } from 'apps/roseApp/src/app/features/product/state/product-details.store';
 import { CardAction, CardData } from 'libs/shared/ui/src/models/card-type';
 import { Carousel } from 'primeng/carousel';
-
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-related-product',
-  imports: [Card, Carousel, TitleSection],
+  imports: [Card, Carousel, TitleSection, TranslatePipe],
   templateUrl: './related-product.html',
 })
 export class RelatedProduct {

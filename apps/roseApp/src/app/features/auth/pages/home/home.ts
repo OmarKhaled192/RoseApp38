@@ -24,6 +24,9 @@ import { Testimonials } from '../../../sections/components/testimonials/testimon
     ServicesHightlights,
     MostPopular,
     BestSeller,
+    Testimonials,
+    RelatedProduct,
+
   
   ],
   templateUrl: './home.html',
