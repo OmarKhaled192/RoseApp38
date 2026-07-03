@@ -1,10 +1,10 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Card, Button, DarkModeService } from "@org/ui";
+import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
+import { ProductStore } from 'apps/roseApp/src/app/features/product/state/product-details.store';
 import { CardAction, CardData } from 'libs/shared/ui/src/models/card-type';
 import { Carousel } from "primeng/carousel";
-import { ProductStore } from '../../../product/state/product-details.store';
-import { mapProductToCardData } from '../../../product/services/product-to-card.mapper';
 
 @Component({
   selector: 'app-best-seller',

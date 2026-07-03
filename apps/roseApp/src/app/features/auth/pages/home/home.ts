@@ -8,6 +8,14 @@ import { BestSeller } from '../best-seller/best-seller';
 @Component({
   selector: 'app-home',
   imports: [CommonModule, Card, Check, MostPopular, GallerySection,BestSeller],
+import { ServicesHightlights } from "../../../services-highlights/component/servicesHightlights";
+import { BestSeller } from '../best-seller/best-seller';
+import { GallerySection } from '../../../sections/components/gallery-section/gallery-section';
+import { BestSeller } from './components/best-seller/best-seller';
+
+@Component({
+  selector: 'app-home',
+  imports: [CommonModule, GallerySection,ServicesHightlights,BestSeller],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
