@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReviewCardI, TitleSection } from '@org/ui';
+import { Review, TitleSection } from '@org/ui';
 import { CardReview } from '@org/ui';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
@@ -10,7 +10,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
   styleUrl: './testimonials.css',
 })
 export class Testimonials {
-  reviews: ReviewCardI[] = [
+  reviews: Review[] = [
     {
       id: 1,
       name: 'Jake Miller',

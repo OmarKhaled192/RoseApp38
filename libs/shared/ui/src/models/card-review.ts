@@ -1,4 +1,4 @@
-export interface ReviewCardI {
+export interface Review {
   id: number;
   name: string;
   avatar: string;
