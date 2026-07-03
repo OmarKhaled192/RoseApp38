@@ -1,24 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
 
 import { Card, CardAction, CardData, DarkModeService } from '@org/ui';
 import { ProductData } from 'apps/roseApp/src/app/features/product/models/product';
-import { Category } from 'apps/roseApp/src/app/features/product/services/category';
 import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
 import { ProductStore } from 'apps/roseApp/src/app/features/product/state/product-details.store';
-import { TabsModule } from 'primeng/tabs';
+
+import { Subscription } from 'rxjs';
+import { ICategory } from '../../model/category';
+import { Category } from 'apps/roseApp/src/app/features/product/services/category';
 
 @Component({
   selector: 'app-most-popular',
-  imports: [Card, TabsModule, CommonModule],
+  imports: [Card, CommonModule],
   templateUrl: './most-popular.html',
   styleUrl: './most-popular.css',
 })
-export class MostPopular implements OnInit {
+export class MostPopular implements OnInit ,OnDestroy  {
   private readonly darkModeService = inject(DarkModeService);
   readonly store = inject(ProductStore);
   private categories = inject(Category);
-
+  private categoriesSubscription?: Subscription;
   wishlist = signal<Set<string>>(new Set());
 
   tabs = signal<{ label: string; value: string }[]>([
@@ -91,20 +93,26 @@ export class MostPopular implements OnInit {
   }
 
   getAllCategories() {
-    this.categories.getCategories(1, 20).subscribe((res) => {
-      this.tabs.set([
-        { label: 'All', value: 'all' },
-        ...res.payload.data
-          .filter((category: any) => (category._count?.products ?? 0) > 0)
-          .map((category: any) => ({
-            label: category.title,
-            value: category.id,
-          })),
-      ]);
-    });
+    this.categoriesSubscription = this.categories
+      .getCategories(1, 20)
+      .subscribe((res) => {
+        this.tabs.set([
+          { label: 'All', value: 'all' },
+          ...res.payload.data
+            .filter((category: ICategory) => (category._count?.products ?? 0) > 0)
+            .map((category: ICategory) => ({
+              label: category.title,
+              value: category.id,
+            })),
+        ]);
+      });
   }
 
   ngOnInit() {
     this.getAllCategories();
+  }
+
+    ngOnDestroy(): void {
+    this.categoriesSubscription?.unsubscribe();
   }
 }
