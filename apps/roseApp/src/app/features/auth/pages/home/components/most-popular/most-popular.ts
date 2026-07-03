@@ -1,14 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  signal
+} from '@angular/core';
 
 import { Card, CardAction, CardData, DarkModeService } from '@org/ui';
 import { ProductData } from 'apps/roseApp/src/app/features/product/models/product';
 import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
-import { ProductStore } from 'apps/roseApp/src/app/features/product/state/product-details.store';
+import { ProductStore } from 'apps/roseApp/src/app/features/product/state/product.store';
 
-import { Subscription } from 'rxjs';
+import { CategoryStore } from 'apps/roseApp/src/app/features/product/state/cateory.store';
 import { ICategory } from '../../model/category';
-import { Category } from 'apps/roseApp/src/app/features/product/services/category';
 
 @Component({
   selector: 'app-most-popular',
@@ -16,11 +21,12 @@ import { Category } from 'apps/roseApp/src/app/features/product/services/categor
   templateUrl: './most-popular.html',
   styleUrl: './most-popular.css',
 })
-export class MostPopular implements OnInit ,OnDestroy  {
+export class MostPopular  {
   private readonly darkModeService = inject(DarkModeService);
   readonly store = inject(ProductStore);
-  private categories = inject(Category);
-  private categoriesSubscription?: Subscription;
+  private categoryStore = inject(CategoryStore);
+
+
   wishlist = signal<Set<string>>(new Set());
 
   tabs = signal<{ label: string; value: string }[]>([
@@ -33,11 +39,34 @@ export class MostPopular implements OnInit ,OnDestroy  {
     categoryId: this.activeTab() === 'all' ? undefined : this.activeTab(),
   }));
 
+  private categoryResource = this.categoryStore.getAllCategory(() => ({
+    page: 1,
+    limit: 20,
+  }));
+
   readonly products = computed<CardData[]>(() => {
     const data: ProductData[] =
       this.productResource.value()?.payload.data ?? [];
     return data.map(mapProductToCardData);
   });
+
+  categories = computed<{ label: string; value: string }[]>(() => {
+    const data: ICategory[] = this.categoryResource.value()?.payload.data ?? [];
+
+    const filterData = data
+      .filter((category: ICategory) => (category._count?.products ?? 0) > 0)
+      .map((category: ICategory) => ({
+        label: category.title,
+        value: category.id,
+      }));
+    return [{ label: 'All', value: 'all' }, ...filterData];
+  });
+
+  constructor() {
+    effect(() => {
+      this.tabs.set(this.categories());
+    });
+  }
 
   readonly isLoading = computed(() => this.productResource.isLoading());
 
@@ -92,27 +121,7 @@ export class MostPopular implements OnInit ,OnDestroy  {
     ];
   }
 
-  getAllCategories() {
-    this.categoriesSubscription = this.categories
-      .getCategories(1, 20)
-      .subscribe((res) => {
-        this.tabs.set([
-          { label: 'All', value: 'all' },
-          ...res.payload.data
-            .filter((category: ICategory) => (category._count?.products ?? 0) > 0)
-            .map((category: ICategory) => ({
-              label: category.title,
-              value: category.id,
-            })),
-        ]);
-      });
-  }
 
-  ngOnInit() {
-    this.getAllCategories();
-  }
 
-    ngOnDestroy(): void {
-    this.categoriesSubscription?.unsubscribe();
-  }
+
 }

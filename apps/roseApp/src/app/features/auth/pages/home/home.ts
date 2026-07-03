@@ -1,13 +1,11 @@
-import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { GallerySection } from '../../../sections/components/gallery-section/gallery-section';
-import { Card, CardAction } from '@org/ui';
-import { Check } from '@primeicons/angular/check';
-import { MostPopular } from './components/most-popular/most-popular';
 import { BestSeller } from '../best-seller/best-seller';
+import { MostPopular } from './components/most-popular/most-popular';
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, Card, Check, MostPopular, GallerySection,BestSeller],
+  imports: [CommonModule, MostPopular, GallerySection,BestSeller],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })

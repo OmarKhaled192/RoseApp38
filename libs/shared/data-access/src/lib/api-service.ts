@@ -50,6 +50,7 @@ export abstract class ApiService<T> {
       })
     );
   }
+  
   getResourceById<R = T>(id: string): HttpResourceRef<DataResponse<R> | undefined> {
   return httpResource<DataResponse<R>>(() => {
      return `${this.fullUrl}/${id}`;
