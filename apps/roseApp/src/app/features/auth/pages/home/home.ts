@@ -1,5 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AboutUs } from './components/about-us/about-us';
+
+@Component({
+  selector: 'app-home',
+  imports: [CommonModule, AboutUs],
 import { TrustedBy } from "../../../Trusted by Section/components/trusted-by/trusted-by";
 import { GallerySection } from '../../../sections/components/gallery-section/gallery-section';
 import { Card, CardAction } from '@org/ui';
