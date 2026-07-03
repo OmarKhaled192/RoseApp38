@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  computed,
-  inject,
-  OnInit,
-  Signal,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 
 import { Card, CardAction, CardData, DarkModeService } from '@org/ui';
 import { ProductData } from 'apps/roseApp/src/app/features/product/models/product';
@@ -25,22 +18,26 @@ export class MostPopular implements OnInit {
   private readonly darkModeService = inject(DarkModeService);
   readonly store = inject(ProductStore);
   private categories = inject(Category);
-  products = signal<any[]>([]);
+
   wishlist = signal<Set<string>>(new Set());
 
-  tabs = signal([{ label: 'All', value: 'all' }]);
+  tabs = signal<{ label: string; value: string }[]>([
+    { label: 'All', value: 'all' },
+  ]);
 
-  activeTab = signal('all');
+  activeTab = signal<string>('all');
 
-  selectTab(value: string) {
-    this.activeTab.set(value);
-    if (this.activeTab() == 'all') {
-      this.useProduct();
-    } else {
-      this.useProduct(value);
-    }
-    console.log('Selected tab:', value);
-  }
+  private productResource = this.store.getAllProduct(() => ({
+    categoryId: this.activeTab() === 'all' ? undefined : this.activeTab(),
+  }));
+
+  readonly products = computed<CardData[]>(() => {
+    const data: ProductData[] =
+      this.productResource.value()?.payload.data ?? [];
+    return data.map(mapProductToCardData);
+  });
+
+  readonly isLoading = computed(() => this.productResource.isLoading());
 
   responsiveOptions = [
     { breakpoint: '1024px', numVisible: 3, numScroll: 1 },
@@ -48,6 +45,10 @@ export class MostPopular implements OnInit {
     { breakpoint: '560px', numVisible: 1, numScroll: 1 },
   ];
   readonly isDark = this.darkModeService.isDark;
+
+  selectTab(value: string) {
+    this.activeTab.set(value);
+  }
 
   toggleWishlist(id: string) {
     console.log('Wishlist ', id);
@@ -89,7 +90,7 @@ export class MostPopular implements OnInit {
     ];
   }
 
-  getAllCateogries() {
+  getAllCategories() {
     this.categories.getCategories(1, 20).subscribe((res) => {
       this.tabs.set([
         { label: 'All', value: 'all' },
@@ -103,22 +104,7 @@ export class MostPopular implements OnInit {
     });
   }
 
-  useProduct(categoryId?: string) {
-    const productResource = this.store.getAllProduct(() => ({
-      categoryId: categoryId,
-    }));
-    this.products.set(productResource.value()?.payload.data ?? []);
-    // return {
-    //   product: computed(() => productResource.value()?.payload.data ?? null),
-    //   isLoading: computed(() => productResource.isLoading()),
-    // };
-  }
-
   ngOnInit() {
-    this.getAllCateogries();
-    if (this.activeTab() == 'all') {
-      this.useProduct();
-    }
-    console.log('tabs', this.tabs());
+    this.getAllCategories();
   }
 }
