@@ -9,6 +9,7 @@ export interface CardAction {
 }
 
 export interface CardData {
+  id:string;
   image: string;
   title: string;
   subtitle?: string;
