@@ -1,8 +1,10 @@
-import { Component, computed, effect, input, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DecimalPipe } from '@angular/common';
 import { ProductData } from '../../models/product';
+import { CartStore } from '../../state/cart.store';
+import { WishlistStore } from '../../state/wishlist.store';
 
 @Component({
   selector: 'app-product-info',
@@ -10,7 +12,8 @@ import { ProductData } from '../../models/product';
   templateUrl: './product-info.html'
 })
 export class ProductInfo {
-
+  readonly cartStore = inject(CartStore);
+  readonly wishlistStore = inject(WishlistStore);
   isWishlist = signal(false);
   product = input<ProductData | null>(null);
   productId = input<string>();
@@ -19,7 +22,6 @@ export class ProductInfo {
   selectedImage = signal<string | null>(null);
   constructor() {
     effect(() => {
-      console.log('1- product:', this.product());
       const product = this.product();
       if (!product) return;
       const images = this.parseImages(product.gallery);
@@ -38,12 +40,17 @@ export class ProductInfo {
   }
 
 
-  toggleWishlist() {
-    this.isWishlist.update((v) => !v);
-  }
+ toggleWishlist() {
+  this.isWishlist.set(true)
+  const productId = this.productId();
+  if (!productId) return;
+  this.wishlistStore.addToWishlist({ productId });
+}
 
   addToCart() {
-    console.log('Added to cart:');
+  const productId = this.productId();
+  if (!productId) return;
+   this.cartStore.addToCart({productId, quantity:1});
   }
 
   parseImages(data: string): string[] {

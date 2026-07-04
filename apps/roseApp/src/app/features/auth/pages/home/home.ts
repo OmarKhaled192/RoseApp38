@@ -12,6 +12,10 @@ import { SpecialGifts } from "../../../SpecialGifts/component/special-gifts/spec
 // import { Card } from '@org/ui';
 // import { Check } from '@primeicons/angular/check';
 
+import { Card } from '@org/ui';
+import { Check } from '@primeicons/angular/check';
+import { RelatedProduct } from '../../../product/pages/related-product/related-product';
+import { Testimonials } from '../../../sections/components/testimonials/testimonials';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +29,9 @@ import { SpecialGifts } from "../../../SpecialGifts/component/special-gifts/spec
     MostPopular,
     BestSeller,
     SpecialGifts
-],
+    Testimonials,
+    RelatedProduct,  
+  ],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })

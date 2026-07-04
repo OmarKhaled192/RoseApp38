@@ -2,16 +2,14 @@
   "app": {
     "title": "Rose App",
     "welcome": "Welcome to the application",
-    "featureName": {
-
-    }
+    "featureName": {}
   },
   "common": {
     "save": "Save",
     "cancel": "Cancel"
   },
   "trustedBy": {
-     "trustedCompanies": "Trusted by over companies",
+    "trustedCompanies": "Trusted by over companies",
     "number": "4.5k+",
     "companies": "companies"
   },
@@ -32,6 +30,35 @@
       "title": "24/7 Support",
       "description": "Contact us at any time"
     },
+    "productDetail": {
+      "loading": "Loading product…",
+      "imageAlt": "image",
+      "thumbnailAlt": "thumbnail",
+      "currency": "EGP",
+      "stockCount": "{{count}} left in stock",
+      "ratingLabel": "Rating",
+      "ratingsCount": "{{count}} ratings",
+      "ariaWishlist": "Add to wishlist",
+      "outOfStock": "Out of stock",
+      "addToCart": "Add to Cart"
+    },
+    "productReview": {
+      "heading": "Product Reviews",
+      "generalRating": "General rating:",
+      "ratingsCount": "ratings",
+      "noReviews": "No reviews yet.",
+      "yourRating": "Your rating:",
+      "titleLabel": "Title",
+      "contentLabel": "Review",
+      "submitButton": "Submit Review"
+    },
+    "bestSeller": {
+      "eyebrow": "BEST SELLING",
+      "heading": "<span class=\"text-[#E65073]\">Check Out</span> What Everyone's <span class=\"text-[#E65073]\">Buying</span> Right Now",
+      "description": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+      "exploreGifts": "Explore gifts"
+    }
+  },
   "productDetail": {
     "loading": "Loading product…",
     "imageAlt": "image",
@@ -59,7 +86,7 @@
     "heading": "<span class=\"text-[#E65073]\">Check Out</span> What Everyone's <span class=\"text-[#E65073]\">Buying</span> Right Now",
     "description": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
     "exploreGifts": "Explore gifts"
-  }
+    }
   },
   "specialGifts": {
   "startingFrom": "Starting from 10.99 EGP",
@@ -90,6 +117,25 @@
       "badge": "Anniversary",
       "title": "Mark Every Year of Love with a Meaningful Surprise"
     }
+  },
+  "aboutUs": {
+    "about": "ABOUT",
+    "titlePart1": "Delivering the ",
+    "titlePart2": "Finest",
+    "titlePart3": " Gift Boxes for Your ",
+    "titlePart4": "Special",
+    "titlePart5": " Moments",
+    "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress. Whether it's for a birthday, wedding, or a simple \"thank you,\" our gift boxes are crafted to leave a lasting impression—because thoughtful gifting starts here.",
+    "discover": "Discover",
+    "features": {
+      "competitivePrices": "Competitive Prices & Easy Shopping",
+      "premiumQuality": "Premium Quality & Elegant Packaging",
+      "perfectOccasion": "Perfect for Every Occasion",
+      "fastDelivery": "Fast & Reliable Delivery"
+    },
+
+  "product": {
+    "relatedProducts": "Related Products"
   }
-}
+ }
 }
