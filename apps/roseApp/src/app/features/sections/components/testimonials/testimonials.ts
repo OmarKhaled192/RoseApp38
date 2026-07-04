@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Component, inject } from '@angular/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Review, TitleSection } from '@org/ui';
 import { CardReview } from '@org/ui';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
@@ -13,6 +13,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
 })
 export class Testimonials {
+  private translateService = inject(TranslateService)
   reviews: Review[] = [
     {
       id: 1,
@@ -49,6 +50,7 @@ export class Testimonials {
     autoplayTimeout: 4000,
     autoplayHoverPause: true,
     navSpeed: 700,
+    rtl: document.documentElement.dir === 'ar',
     responsive: {
       0: { items: 1 },
       576: { items: 2 },

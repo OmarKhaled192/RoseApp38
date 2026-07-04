@@ -1,6 +1,7 @@
 <section class="gallery-section">
-  <lib-title-section subtitle="Gallery" title="Check Out our Wonderful Gallery">
+  <lib-title-section [subtitle]="'gallery.subtitle'| translate " [title]="'gallery.title' | translate">
   </lib-title-section>
+
   <div class="gallery-wrapper">
     <div class="gallery-grid">
       @for (item of gallery; track item.image) {

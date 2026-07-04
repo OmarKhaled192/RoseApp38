@@ -146,5 +146,20 @@
         "date": "January 12, 2025"
       }
     }
+  },
+  "mostPopular": {
+    "title": "Most Popular",
+    "viewMore": "View More",
+    "tabs": {
+      "all": "All",
+      "newArrival": "New Arrival",
+      "bestSeller": "Best Seller",
+      "featured": "Featured",
+      "sale": "Sale"
+    }
+  },
+  "gallery": {
+    "subtitle": "Gallery",
+    "title": "Check Out our Wonderful Gallery"
   }
 }

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { TitleSection } from '@org/ui';
 import { GalleryItem } from '../../models/galleryItems';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-gallery-section',
-  imports: [TitleSection],
+  imports: [TitleSection, TranslatePipe],
   templateUrl: './gallery-section.html',
   styleUrl: './gallery-section.css',
 })

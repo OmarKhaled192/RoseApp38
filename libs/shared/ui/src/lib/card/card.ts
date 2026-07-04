@@ -3,10 +3,11 @@ import { BadgeType, CardAction, CardData } from '../../models/card-type';
 import { DecimalPipe, NgClass } from '@angular/common';
 import { StarRating } from '../star-rating/star-rating';
 import { TranslatePipe } from '@ngx-translate/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'lib-card',
-  imports: [NgClass, StarRating, DecimalPipe, TranslatePipe],
+  imports: [NgClass, StarRating, DecimalPipe, TranslatePipe, RouterLink],
   templateUrl: './card.html',
 })
 export class Card {
@@ -14,8 +15,18 @@ export class Card {
   showWishlist = input<boolean>(false);
   wishlistToggle = input<(() => void) | undefined>(undefined);
   hoverActions = input<CardAction[]>([]);
-
   footerActions = input<CardAction[]>([]);
+
+  readonly placeholderImage = 'https://placehold.co/600x400';
+
+  onImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+
+    // Prevent infinite loop if placeholder is also missing
+    img.onerror = null;
+
+    img.src = this.placeholderImage;
+  }
 
   badgeClass(badge: string): string {
     const variants: Record<string, string> = {
@@ -23,6 +34,7 @@ export class Card {
       hot: 'bg-[#FBEAEA] text-[#A6252A]',
       'out-of-stock': 'bg-[#A6252A] text-white',
     };
+
     return variants[badge] ?? 'bg-white text-gray-700 border border-gray-200';
   }
 
@@ -40,5 +52,4 @@ export class Card {
         return badge.toUpperCase();
     }
   }
-
 }

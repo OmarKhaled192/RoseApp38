@@ -14,10 +14,11 @@ import { ProductStore } from 'apps/roseApp/src/app/features/product/state/produc
 
 import { CategoryStore } from 'apps/roseApp/src/app/features/product/state/cateory.store';
 import { ICategory } from '../../model/category';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-most-popular',
-  imports: [Card, CommonModule, TitleSection],
+  imports: [Card, CommonModule, TitleSection, TranslatePipe],
   templateUrl: './most-popular.html',
 })
 export class MostPopular {
@@ -28,7 +29,7 @@ export class MostPopular {
   wishlist = signal<Set<string>>(new Set());
 
   tabs = signal<{ label: string; value: string }[]>([
-    { label: 'All', value: 'all' },
+    { label: 'mostPopular.tabs.all', value: 'all' },
   ]);
 
   activeTab = signal<string>('all');
