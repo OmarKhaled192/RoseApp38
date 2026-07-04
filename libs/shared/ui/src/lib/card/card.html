@@ -3,8 +3,9 @@
 
   <div class="relative aspect-4/5 overflow-hidden bg-[#f5f0eb]">
 
-    <img [src]="card().image || placeholderImage" [alt]="card().title" (error)="onImageError($event)"
-      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+    <img [src]="card().image || '/assets/img/placeholder.png'" [alt]="''"
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      (error)="$any($event.target).onerror=null; $any($event.target).src='/assets/img/placeholder.png'" />
 
     @if (showWishlist()) {
 
