@@ -22,11 +22,4 @@ import { ServicesHightlights } from '../../../services-highlights/component/serv
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
-export class HomeComponent {
-  title = 'Home';
-  welcomeMessage = 'Welcome To Home';
-
-  constructor() {
-    console.log('Home Component Initialized');
-  }
-}
+export class HomeComponent {}

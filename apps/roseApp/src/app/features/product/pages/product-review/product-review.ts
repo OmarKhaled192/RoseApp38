@@ -2,12 +2,12 @@ import { Component, computed, inject, input, signal } from '@angular/core';
 import { Review } from '../../models/review';
 import { DatePipe } from '@angular/common';
 import { min, form, FormField, required, max } from '@angular/forms/signals';
-import { InputComponent, Button, DarkModeService, StarRating } from "@org/ui";
+import { InputComponent, Button, DarkModeService, StarRating, TitleSection } from "@org/ui";
 import { TranslatePipe } from '@ngx-translate/core';
 import { ReviewStore } from '../../state/review.store';
 @Component({
   selector: 'app-product-review',
-  imports: [DatePipe, InputComponent, TranslatePipe, FormField, Button, StarRating],
+  imports: [DatePipe, InputComponent, TranslatePipe, FormField, Button, StarRating, TitleSection],
   templateUrl: './product-review.html',
   styleUrls: ['./product-review.css']
 })

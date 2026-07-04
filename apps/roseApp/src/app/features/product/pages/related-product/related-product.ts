@@ -10,6 +10,7 @@ import { ProductStore } from '../../state/product.store';
   selector: 'app-related-product',
   imports: [Card, Carousel, TitleSection, TranslatePipe],
   templateUrl: './related-product.html',
+  styleUrl: '../../../auth/pages/home/components/best-seller/best-seller.css'
 })
 export class RelatedProduct {
   private readonly darkModeService = inject(DarkModeService);
