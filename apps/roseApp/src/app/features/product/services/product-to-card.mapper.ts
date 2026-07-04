@@ -1,5 +1,5 @@
-import { CardData } from "libs/shared/ui/src/models/card-type";
-import {  ProductData } from "../models/product";
+import { CardData } from "@org/ui";
+import { ProductData } from "../models/product";
 
 export function mapProductToCardData(product: ProductData): CardData {
   const price = Number(product.price);
