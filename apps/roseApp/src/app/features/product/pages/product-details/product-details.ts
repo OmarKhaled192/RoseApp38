@@ -1,6 +1,6 @@
 import { Component, inject, computed } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ProductStore } from '../../state/product-details.store';
+import { ProductStore } from '../../state/product.store';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { ProductInfo } from "../product-info/product-info";

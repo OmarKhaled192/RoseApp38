@@ -1,15 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ApiService } from '@org/data-access';
+import { ICategory } from '../../auth/pages/home/model/category';
 
 @Injectable({
   providedIn: 'root',
 })
-export class Category {
-  HttpClient = inject(HttpClient);
+export class CategoryService extends ApiService<ICategory> {
+  protected override endpoint = 'categories';
 
-
-  getCategories(page:number, limit:number):Observable<any> {
-    return this.HttpClient.get(`https://rose-app.elevate-bootcamp.cloud/api/categories?page=${page}&limit=${limit}`);
+  constructor(http: HttpClient) {
+    super(http);
   }
+
+
+
 }
