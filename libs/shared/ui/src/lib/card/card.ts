@@ -2,10 +2,11 @@ import { Component, input } from '@angular/core';
 import { BadgeType, CardAction, CardData } from '../../models/card-type';
 import { DecimalPipe, NgClass } from '@angular/common';
 import { StarRating } from '../star-rating/star-rating';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'lib-card',
-  imports: [NgClass, StarRating, DecimalPipe],
+  imports: [NgClass, StarRating, DecimalPipe, TranslatePipe],
   templateUrl: './card.html',
 })
 export class Card {
