@@ -1,12 +1,14 @@
 <section>
-
   <div class="flex items-center justify-between w-full py-3">
-    <div class="title-section">
-
-      <h2 class="title">
-        <span>Most Popular</span>
-      </h2>
-    </div>
+    <lib-title-section
+      title="Most Popular"
+      subtitle=" "
+      align="center"
+      [highlightWidth]="'60%'"
+      [highlightHeight]="'45%'"
+      [underlineWidth]="'50px'"
+      [underlineHeight]="'2px'"
+    />
 
     <div class="flex items-center gap-4 sm:gap-6">
       @for (tab of tabs(); track tab.value) {
@@ -37,7 +39,6 @@
     />
     }
   </div>
-
 
   <div class="w-full flex justify-end my-6 sm:my-8">
     <button

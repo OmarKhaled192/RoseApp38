@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  signal
-} from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 
-import { Card, CardAction, CardData, DarkModeService } from '@org/ui';
+import {
+  Card,
+  CardAction,
+  CardData,
+  DarkModeService,
+  TitleSection,
+} from '@org/ui';
 import { ProductData } from 'apps/roseApp/src/app/features/product/models/product';
 import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
 import { ProductStore } from 'apps/roseApp/src/app/features/product/state/product.store';
@@ -17,15 +17,13 @@ import { ICategory } from '../../model/category';
 
 @Component({
   selector: 'app-most-popular',
-  imports: [Card, CommonModule],
+  imports: [Card, CommonModule, TitleSection],
   templateUrl: './most-popular.html',
-  styleUrl: './most-popular.css',
 })
-export class MostPopular  {
+export class MostPopular {
   private readonly darkModeService = inject(DarkModeService);
   readonly store = inject(ProductStore);
   private categoryStore = inject(CategoryStore);
-
 
   wishlist = signal<Set<string>>(new Set());
 
@@ -120,8 +118,4 @@ export class MostPopular  {
       },
     ];
   }
-
-
-
-
 }
