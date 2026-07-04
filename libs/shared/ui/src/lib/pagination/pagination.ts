@@ -4,20 +4,19 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator';
   selector: 'lib-pagination',
   imports: [PaginatorModule],
   template: `
-    <div class="flex justify-center">
+<div class="flex justify-center custom-paginator">
        <p-paginator
         (onPageChange)="onPageChange($event)"
         [first]="first()"
         [rows]="size()"
         [totalRecords]="totalRecords()"
-        [rowsPerPageOptions]="rowsPerPageOptions()"
       />
     </div>
-    `
+    `,
+  styleUrl: './pagination.css',
 })
 export class Pagination {
   totalRecords = input<number>(0);
-  rowsPerPageOptions = input<number[]>([10, 20, 30]);
 
   pageChange = output<{ page: number; size: number; first: number }>();
 

@@ -1,36 +1,43 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { BadgeType, CardAction, CardData } from '../../models/card-type';
-import { NgClass } from '@angular/common';
+import { DecimalPipe, NgClass } from '@angular/common';
 import { StarRating } from '../star-rating/star-rating';
 
 @Component({
   selector: 'lib-card',
-  imports: [NgClass, StarRating],
+  imports: [NgClass, StarRating, DecimalPipe],
   templateUrl: './card.html',
 })
 export class Card {
   card = input.required<CardData>();
-
+  showWishlist = input<boolean>(false);
+  wishlistToggle = input<(() => void) | undefined>(undefined);
   hoverActions = input<CardAction[]>([]);
 
   footerActions = input<CardAction[]>([]);
 
   badgeClass(badge: string): string {
     const variants: Record<string, string> = {
-      new: 'bg-white text-gray-700 border border-gray-200',
-      hot: 'bg-[#E65073] text-white',
+      new: 'bg-[#F4F4F5] text-gray-700 border border-gray-200',
+      hot: 'bg-[#FBEAEA] text-[#A6252A]',
       'out-of-stock': 'bg-[#A6252A] text-white',
     };
     return variants[badge] ?? 'bg-white text-gray-700 border border-gray-200';
   }
 
   badgeLabel(badge: BadgeType): string {
-    const map: Record<string, string> = {
-      new: 'NEW',
-      sale: 'SALE',
-      hot: 'HOT',
-      'out-of-stock': 'OUT',
-    };
-    return map[badge] ?? badge.toUpperCase();
+    switch (badge) {
+      case 'new':
+        return 'NEW';
+      case 'sale':
+        return 'SALE';
+      case 'hot':
+        return 'Hot';
+      case 'out-of-stock':
+        return 'OUT OF STOCK';
+      default:
+        return badge.toUpperCase();
+    }
   }
+
 }
