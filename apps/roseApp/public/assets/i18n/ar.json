@@ -107,6 +107,10 @@
         "ctaLabel": "تسوق الآن"
       }
     },
+    "productCard": {
+      "addToWishlist": "أضف إلى المفضلة",
+      "removeFromWishlist": "إزالة من المفضلة"
+    },
     "cards": {
       "wedding": {
         "badge": "زفاف",

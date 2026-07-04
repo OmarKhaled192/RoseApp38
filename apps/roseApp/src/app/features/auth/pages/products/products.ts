@@ -1,10 +1,13 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Card, Pagination } from '@org/ui';
 import { CardAction, CardData } from '@org/ui';
 import { ProductsCategory } from './components/products-category/products-category';
 import { Filters } from './components/filters/filters';
 import { CategoryItem, OccasionItem, ProductFilters } from './models/products.models';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ProductData } from '../../../product/models/product';
+import { mapProductToCardData } from '../../../product/services/product-to-card.mapper';
+import { ProductStore } from '../../../product/state/product.store';
 
 @Component({
   selector: 'app-products',
@@ -35,6 +38,16 @@ export class Products {
     { id: 'fathers-day', label: "Father's Day", image: '/images/filters/occasions/fathers-day.png' },
     { id: 'graduation', label: 'Graduation', image: '/images/filters/occasions/graduation.jpg' },
   ];
+  readonly store = inject(ProductStore);
+
+  private productResource = this.store.getAllProduct();
+
+  readonly products = computed<CardData[]>(() => {
+    const data: ProductData[] =
+      this.productResource.value()?.payload.data ?? [];
+    return data.map(mapProductToCardData);
+  });
+
 
   // ---- Product source (replace with API call) ----
   private allProducts = signal<CardData[]>([
@@ -144,15 +157,6 @@ export class Products {
     this.pageSize.set(event.size);
   }
 
-  hoverActions(product: CardData): CardAction[] {
-    return [
-      {
-        label: 'Add to wishlist',
-        icon: this.wishlist().has(product.title) ? 'pi-heart-fill' : 'pi-heart',
-        action: () => this.toggleWishlist(product),
-      },
-    ];
-  }
 
   footerActions(product: CardData): CardAction[] {
     return [
@@ -165,15 +169,41 @@ export class Products {
     ];
   }
 
-  private toggleWishlist(product: CardData) {
-    const set = new Set(this.wishlist());
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    set.has(product.title) ? set.delete(product.title) : set.add(product.title);
-    this.wishlist.set(set);
+
+  toggleWishlist(id: string) {
+    console.log('Wishlist ', id);
   }
 
   private addToCart(product: CardData) {
     // TODO: wire to cart service
     console.log('add to cart', product.title);
+  }
+
+  quickView(product: CardData) {
+    console.log('quick view', product.title);
+  }
+
+  actionsFor(product: CardData): CardAction[] {
+    const isOut = product.badges?.includes('out-of-stock') ?? false;
+    return [
+      {
+        label: 'Favorite',
+        icon: this.wishlist().has(product.id) ? 'pi-heart-fill' : 'pi-heart',
+        variant: 'ghost',
+        action: () => this.toggleWishlist(product.id),
+      },
+      {
+        label: 'Quick view',
+        icon: 'pi-eye',
+        variant: 'ghost',
+        action: () => this.quickView(product),
+      },
+      {
+        label: 'Add to cart',
+        icon: 'pi-shopping-cart',
+        isDisabled: isOut,
+        action: () => this.addToCart(product),
+      },
+    ];
   }
 }

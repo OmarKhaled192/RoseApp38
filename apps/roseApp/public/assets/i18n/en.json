@@ -122,6 +122,10 @@
       }
     }
   },
+  "productCard": {
+    "addToWishlist": "Add to wishlist",
+    "removeFromWishlist": "Remove from wishlist"
+  },
   "testimonials": {
     "subtitle": "Testimonials",
     "title": "Real Words from Happy Customers",
