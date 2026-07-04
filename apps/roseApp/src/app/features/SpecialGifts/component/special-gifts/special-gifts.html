@@ -1,0 +1,75 @@
+<section class="max-w-7xl w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+  <div
+    class="relative rounded-2xl overflow-hidden min-h-[420px] bg-cover bg-center flex flex-col justify-end p-5"
+    style="background-image: url('/images/SpecialGifts/SpecialGifts.png');"
+  >
+    <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="relative z-10">
+      <span class="inline-block bg-white/90 text-[#741C21] text-xs font-semibold px-3 py-1 rounded-full mb-3">
+        {{ 'specialGifts.startingFrom' | translate }}
+      </span>
+      <h3 class="text-white text-xl font-bold mb-4 leading-snug">
+        {{ 'specialGifts.sectionTitle' | translate }}
+      </h3>
+      <button class="bg-white text-[#741C21] text-sm font-semibold px-4 py-2 rounded-full hover:bg-gray-100 transition">
+        {{ 'specialGifts.shopNow' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div class="md:col-span-2 relative rounded-2xl overflow-hidden">
+    <p-carousel
+      [value]="slides"
+      [numVisible]="1"
+      [numScroll]="1"
+      [circular]="true"
+      [autoplayInterval]="5000"
+      [showIndicators]="true"
+      [showNavigators]="true"
+      [prevButtonProps]="{
+        styleClass: 'absolute! bottom-4! right-14! top-auto! left-auto! translate-y-0! z-20! w-8! h-8! rounded-full! bg-white/85! text-[#741C21]! border-none!'
+      }"
+      [nextButtonProps]="{
+        styleClass: 'absolute! bottom-4! right-4! top-auto! left-auto! translate-y-0! z-20! w-8! h-8! rounded-full! bg-white/85! text-[#741C21]! border-none!'
+      }"
+      indicatorsContentClass="absolute! top-4! right-4! bottom-auto! left-auto! translate-x-0! z-20! flex! gap-1.5!"
+      [dt]="{ indicator: { activeBackground: '#741C21' } }"
+    >
+      <ng-template let-slide pTemplate="item">
+        <div
+          class="relative min-h-[420px] bg-cover bg-center flex items-end px-8 pb-6"
+          [style.background-image]="'url(' + slide.image + ')'"
+        >
+          <div class="absolute inset-0 bg-black/40"></div>
+          <div class="absolute inset-0 bg-linear-to-t from-black/60 via-black/30 to-transparent"></div>
+          <div class="relative z-10 max-w-xs">
+            <h3 class="text-white text-2xl font-bold mb-2">{{ slide.titleKey | translate }}</h3>
+            <p class="text-white/90 text-sm mb-5">{{ slide.subtitleKey | translate }}</p>
+            <button class="bg-white/90 text-[#741C21] text-sm font-semibold px-4 py-2 rounded-full hover:bg-white transition">
+              {{ slide.ctaLabelKey | translate }}
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</section>
+
+<section class="max-w-7xl w-full mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+  @for (card of cards; track card.titleKey) {
+    <div
+      class="relative rounded-2xl overflow-hidden min-h-[200px] bg-cover bg-center flex flex-col justify-end p-4"
+      [style.background-image]="'url(' + card.image + ')'"
+    >
+      <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent"></div>
+      <div class="relative z-10">
+        <span class="inline-block bg-white/90 text-[#741C21] text-xs font-semibold px-3 py-1 rounded-full mb-2">
+          {{ card.badgeKey | translate }}
+        </span>
+        <h3 class="text-white text-base font-bold leading-snug">
+          {{ card.titleKey | translate }}
+        </h3>
+      </div>
+    </div>
+  }
+</section>

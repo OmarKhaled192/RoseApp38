@@ -7,9 +7,11 @@ import { GallerySection } from '../../../sections/components/gallery-section/gal
 import { ServicesHightlights } from '../../../services-highlights/component/servicesHightlights';
 import { MostPopular } from './components/most-popular/most-popular';
 import { BestSeller } from './components/best-seller/best-seller';
+import { SpecialGifts } from "../../../SpecialGifts/component/special-gifts/special-gifts";
 
-import { Card } from '@org/ui';
-import { Check } from '@primeicons/angular/check';
+// import { Card } from '@org/ui';
+// import { Check } from '@primeicons/angular/check';
+
 
 @Component({
   selector: 'app-home',
@@ -22,9 +24,8 @@ import { Check } from '@primeicons/angular/check';
     ServicesHightlights,
     MostPopular,
     BestSeller,
-    Card,
-    Check,
-  ],
+    SpecialGifts
+],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
