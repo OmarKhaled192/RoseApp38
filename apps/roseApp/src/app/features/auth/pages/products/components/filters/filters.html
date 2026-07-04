@@ -1,0 +1,79 @@
+<div class="flex flex-col gap-5">
+  <!-- Occasion -->
+  <div class="bg-white rounded-xl border border-gray-100 p-3">
+    <div class="flex items-center justify-between px-2 pb-2">
+      <h3 class="text-sm font-semibold text-gray-700">Occasion</h3>
+      @if (selectedOccasions().length) {
+      <button type="button" (click)="resetOccasions()" class="text-xs text-[#A6252A] hover:underline">
+        <i class="pi pi-times text-[10px] align-middle"></i> Reset
+      </button>
+      }
+    </div>
+
+    <div class="grid grid-cols-2 gap-2 p-2">
+      @for (occasion of occasions(); track occasion.id) {
+      <button type="button" (click)="toggleOccasion(occasion.id)"
+        class="relative h-16 rounded-lg overflow-hidden bg-gray-200 bg-cover bg-center ring-2 transition-all"
+        [ngClass]="selectedOccasions().includes(occasion.id) ? 'ring-[#A6252A]' : 'ring-transparent'"
+        [style.backgroundImage]="'url(' + occasion.image + ')'">
+        <span class="absolute inset-0 bg-black/35"></span>
+        <span class="relative text-xs font-medium text-white">{{ occasion.label }}</span>
+      </button>
+      }
+    </div>
+  </div>
+
+  <!-- Rating -->
+  <div class="bg-white rounded-xl border border-gray-100 p-3">
+    <div class="flex items-center justify-between px-2 pb-2">
+      <h3 class="text-sm font-semibold text-gray-700">Rating</h3>
+      @if (selectedRating()) {
+      <button type="button" (click)="resetRating()" class="text-xs text-[#A6252A] hover:underline">
+        <i class="pi pi-times text-[10px] align-middle"></i> Reset
+      </button>
+      }
+    </div>
+
+    <div class="flex items-center gap-1 px-2 pb-1">
+      @for (star of stars; track star) {
+      <button type="button" (click)="setRating(star)" [attr.aria-label]="star + ' stars & up'">
+        <i class="pi text-lg"
+          [ngClass]="star <= (selectedRating() ?? 0) ? 'pi-star-fill text-[#F5A623]' : 'pi-star text-gray-300'"></i>
+      </button>
+      }
+    </div>
+  </div>
+
+  <!-- Price -->
+  <div class="bg-white rounded-xl border border-gray-100 p-3">
+    <div class="flex items-center justify-between px-2 pb-2">
+      <h3 class="text-sm font-semibold text-gray-700">Price</h3>
+      @if (priceFrom() !== null || priceTo() !== null) {
+      <button type="button" (click)="resetPrice()" class="text-xs text-[#A6252A] hover:underline">
+        <i class="pi pi-times text-[10px] align-middle"></i> Reset
+      </button>
+      }
+    </div>
+
+    <div class="flex items-end gap-2 px-2 pb-2">
+      <div class="flex-1">
+        <label class="text-[11px] text-gray-400">from</label>
+        <input type="number" min="0" [value]="priceFrom()" (input)="onPriceFromChange($any($event.target).value)"
+          class="w-full mt-1 rounded-md border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-[#A6252A]" />
+      </div>
+      <span class="text-gray-300 pb-2">-</span>
+      <div class="flex-1">
+        <label class="text-[11px] text-gray-400">to</label>
+        <input type="number" min="0" [value]="priceTo()" (input)="onPriceToChange($any($event.target).value)"
+          class="w-full mt-1 rounded-md border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-[#A6252A]" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Reset all -->
+  <button type="button" (click)="resetEverything()"
+    class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-[#FBE7EA] text-[#A6252A] text-sm font-medium hover:bg-[#F6D3D8] transition-colors">
+    <i class="pi pi-refresh text-xs"></i>
+    Reset All
+  </button>
+</div>
