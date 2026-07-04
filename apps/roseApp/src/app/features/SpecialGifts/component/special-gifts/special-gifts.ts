@@ -12,6 +12,14 @@ import { BannerSlide, FeaturedCard } from '../../models/specialgift.interface';
 export class SpecialGifts {
     private translateService = inject(TranslateService)
   currentLang = this.translateService.currentLang();
+  isRtl = document.documentElement.dir === 'rtl';
+  constructor() {
+  this.translateService.onLangChange.subscribe(() => {
+    this.isRtl = this.translateService.currentLang() === 'ar';
+  });
+
+  this.isRtl = this.translateService.currentLang() === 'ar';
+}
   slides = signal<BannerSlide[]>([
     {
       image: '/images/SpecialGifts/carousel.png',
