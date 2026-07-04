@@ -1,20 +1,18 @@
 <section class="w-full">
   <div
-    class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-10 md:gap-8 lg:gap-10 items-center px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14"
+    class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 items-center px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14"
   >
    
-    <div class="lg:col-span-2 order-1">
-      <div class="w-full max-w-[280px] sm:max-w-sm mx-auto">
+    <div class="hidden lg:block lg:col-span-2 rtl:lg:order-2 ltr:lg:order-1">
+      <div class="w-full max-w-sm mx-auto">
         <div class="grid grid-cols-3 gap-2 sm:gap-3">
           <div class="col-span-2 relative aspect-[4/5]">
             <div
-              class="absolute -top-2 -left-2 w-full h-full border-2 border-red-800"
-              style="border-radius: 45% 55% 42% 58% / 48% 42% 58% 52%"
+              class="absolute -top-2 -left-2 rtl:-left-auto rtl:-right-2 w-full h-full border-2 border-red-800 rounded-[45%_55%_42%_58%/48%_42%_58%_52%]"
             ></div>
 
             <div
-              class="absolute inset-0 overflow-hidden bg-orange-200"
-              style="border-radius: 45% 55% 42% 58% / 48% 42% 58% 52%"
+              class="absolute inset-0 overflow-hidden bg-orange-200 rounded-[45%_55%_42%_58%/48%_42%_58%_52%]"
             >
               <img
                 src="images/aboutUs/Rectangle 3.svg"
@@ -36,12 +34,11 @@
             </div>
 
             <div
-              class="relative mt-16  w-full aspect-square overflow-hidden bg-cyan-200"
-              style="border-radius: 45% 55% 42% 58% / 48% 42% 58% 52%"
+              class="relative mt-16 w-full aspect-square overflow-hidden bg-cyan-200 rounded-[45%_55%_42%_58%/48%_42%_58%_52%]"
             >
               <img
                 src="images/aboutUs/Rectangle 5.svg"
-                alt="Pastel balloon bouquet above a small wrapped gift box with greeting cards, on a teal background"
+                alt="Gift box"
                 class="w-full h-full object-cover object-[center_15%] scale-110"
               />
             </div>
@@ -50,49 +47,41 @@
       </div>
     </div>
 
-
-    <div class="lg:col-span-3 order-2 text-center lg:text-left">
-      <p
-        class="text-pink-500 font-bold tracking-[0.2em] text-xs sm:text-sm mb-3"
-      >
-        ABOUT
+   
+    <div class="lg:col-span-3 rtl:lg:order-1 ltr:lg:order-2 text-center lg:text-start">
+      <p class="text-pink-500 font-bold tracking-[0.2em] text-xs sm:text-sm mb-3">
+        {{ 'aboutUs.about' | translate }}
       </p>
 
       <h2
         class="text-xl sm:text-2xl md:text-3xl font-extrabold leading-snug mb-3 max-w-xl mx-auto lg:mx-0"
       >
-        <span class="text-red-950">Delivering the </span>
-        <span class="text-pink-500">Finest</span>
-        <span class="text-red-950"> Gift Boxes for Your </span>
-        <span class="text-pink-500">Special</span>
-        <span class="text-red-950"> Moments</span>
+        <span class="text-red-950">{{ 'aboutUs.titlePart1' | translate }}</span>
+        <span class="text-pink-500">{{ 'aboutUs.titlePart2' | translate }}</span>
+        <span class="text-red-950">{{ 'aboutUs.titlePart3' | translate }}</span>
+        <span class="text-pink-500">{{ 'aboutUs.titlePart4' | translate }}</span>
+        <span class="text-red-950">{{ 'aboutUs.titlePart5' | translate }}</span>
       </h2>
 
-      <p
-        class="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto lg:mx-0 mb-6"
-      >
-        Make every moment memorable with our premium gift boxes. Carefully
-        curated and beautifully packaged, each box is filled with handpicked
-        items designed to impress. Whether it's for a birthday, wedding, or a
-        simple &ldquo;thank you,&rdquo; our gift boxes are crafted to leave a
-        lasting impression &mdash; because thoughtful gifting starts here.
+      <p class="text-gray-400 text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 mb-6">
+        {{ 'aboutUs.description' | translate }}
       </p>
 
       <button
         type="button"
         class="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-red-800 hover:bg-red-900 transition-colors text-white text-sm font-medium px-5 py-2.5 rounded-full mb-8"
       >
-        Discover
-        <span aria-hidden="true">&rarr;</span>
+        {{ 'aboutUs.discover' | translate }}
+        <span aria-hidden="true" class="inline-block rtl:rotate-180">&rarr;</span>
       </button>
 
       <ul
-        class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 sm:gap-x-10 gap-y-3 text-left max-w-md mx-auto lg:mx-0 lg:max-w-none"
+        class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 sm:gap-x-10 gap-y-3 text-start max-w-md mx-auto lg:mx-0 lg:max-w-none"
       >
         @for (feature of features; track feature) {
         <li class="flex items-center gap-2 text-gray-700 text-sm">
           <span class="text-red-900 font-bold shrink-0">&#10003;</span>
-          <span>{{ feature }}</span>
+          <span>{{ feature | translate }}</span>
         </li>
         }
       </ul>

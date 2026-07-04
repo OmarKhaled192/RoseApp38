@@ -1,0 +1,38 @@
+.testimonials-section-slider {
+  margin-top: 3rem;
+  padding: 4rem 1.5rem;
+  background-color: #fdeeee;
+  overflow: hidden;
+}
+
+.testimonials-carousel {
+  margin-top: 3rem;
+  max-width: 80%;
+  margin-inline: auto;
+}
+
+.testimonials-carousel ::ng-deep .owl-stage {
+  display: flex;
+}
+
+.testimonials-carousel ::ng-deep .owl-item {
+  display: flex;
+}
+
+.testimonials-carousel ::ng-deep .owl-dots {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.testimonials-carousel ::ng-deep .owl-dot span {
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #e5c9c9;
+}
+
+.testimonials-carousel ::ng-deep .owl-dot.active span {
+  background: #1f2937;
+}
