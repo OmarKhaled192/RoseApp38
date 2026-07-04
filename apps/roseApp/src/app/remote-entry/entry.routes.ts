@@ -8,7 +8,14 @@ export const remoteRoutes: Route[] = [
     component: RoseApp,
     children: [
       { path: '', component: HomeComponent },
-       {
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('../features/auth/pages/products/products').then(
+            (m) => m.Products
+          ),
+      },
+      {
         path: 'product/:id',
         loadComponent: () =>
           import('../features/product/pages/product-details/product-details').then(

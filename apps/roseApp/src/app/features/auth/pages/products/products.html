@@ -1,0 +1,28 @@
+<div class="max-w-[1200px] mx-auto px-4 py-6 flex flex-col lg:flex-row gap-6">
+  <aside class="w-full lg:w-[260px] shrink-0 flex flex-col gap-5">
+    <app-products-category [categories]="categories" [selectedId]="selectedCategoryId()"
+      (categorySelect)="onCategorySelect($event)" />
+
+    <app-filters [occasions]="occasions" [value]="filters()" (filtersChange)="onFiltersChange($event)"
+      (resetAll)="onResetAll()" />
+  </aside>
+
+  <section class="flex-1 flex flex-col gap-6">
+    @if (pagedProducts().length) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+      @for (product of pagedProducts(); track product.title) {
+      <div class="h-[300px]">
+        <lib-card [card]="product" [hoverActions]="hoverActions(product)" [footerActions]="footerActions(product)" />
+      </div>
+      }
+    </div>
+
+    <lib-pagination [totalRecords]="filteredProducts().length" (pageChange)="onPageChange($event)" />
+    } @else {
+    <div class="flex flex-col items-center justify-center py-20 text-center gap-2">
+      <i class="pi pi-inbox text-3xl text-gray-300"></i>
+      <p class="text-sm text-gray-500">No products match these filters.</p>
+    </div>
+    }
+  </section>
+</div>

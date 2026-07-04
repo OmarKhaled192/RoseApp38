@@ -86,6 +86,37 @@
     "heading": "<span class=\"text-[#E65073]\">Check Out</span> What Everyone's <span class=\"text-[#E65073]\">Buying</span> Right Now",
     "description": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
     "exploreGifts": "Explore gifts"
+    }
+  },
+  "specialGifts": {
+  "startingFrom": "Starting from 10.99 EGP",
+  "sectionTitle": "Special Gifts For The People You Love",
+  "shopNow": "Shop Now ",
+  "slides": {
+    "flowers": {
+      "title": "Say It with Flowers",
+      "subtitle": "Elegant gifts for every special moment.",
+      "ctaLabel": "I'm buying!"
+    },
+    "chocolates": {
+      "title": "Sweeten Every Moment",
+      "subtitle": "Handpicked chocolates for your loved ones.",
+      "ctaLabel": "Shop Now"
+    }
+  },
+  "cards": {
+    "wedding": {
+      "badge": "Wedding",
+      "title": "Celebrate Her Forever with a Gift She'll Always Remember"
+    },
+    "engagement": {
+      "badge": "Engagement",
+      "title": "Honor the Beginning of a Beautiful Journey Together"
+    },
+    "anniversary": {
+      "badge": "Anniversary",
+      "title": "Mark Every Year of Love with a Meaningful Surprise"
+    }
   },
   "aboutUs": {
     "about": "ABOUT",
@@ -106,4 +137,5 @@
   "product": {
     "relatedProducts": "Related Products"
   }
+ }
 }

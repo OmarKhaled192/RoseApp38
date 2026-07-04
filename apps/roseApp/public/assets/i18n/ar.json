@@ -106,4 +106,35 @@
   "product": {
     "relatedProducts": "منتجات ذات صلة"
   }
+},
+"specialGifts": {
+  "startingFrom": "يبدأ من 10.99 ج.م",
+  "sectionTitle": "هدايا مميزة لمن تحب",
+  "shopNow": "تسوق الآن ←",
+  "slides": {
+    "flowers": {
+      "title": "عبّر بالزهور",
+      "subtitle": "هدايا أنيقة لكل لحظة مميزة.",
+      "ctaLabel": "سأشتري!"
+    },
+    "chocolates": {
+      "title": "حلّي كل لحظة",
+      "subtitle": "شوكولاتة مختارة بعناية لأحبائك.",
+      "ctaLabel": "تسوق الآن"
+    }
+  },
+  "cards": {
+    "wedding": {
+      "badge": "زفاف",
+      "title": "احتفلي معها إلى الأبد بهدية لن تُنسى"
+    },
+    "engagement": {
+      "badge": "خطوبة",
+      "title": "كرّم بداية رحلة جميلة معاً"
+    },
+    "anniversary": {
+      "badge": "ذكرى سنوية",
+      "title": "احتفل بكل عام من الحب بمفاجأة معبّرة"
+    }
+  }
 }
