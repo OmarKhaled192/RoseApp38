@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "Rose App",
-    "welcome": "Welcome to the application"
+    "welcome": "Welcome to the application",
+    "featureName": {}
   },
   "common": {
     "save": "Save",
@@ -28,6 +29,34 @@
     "support": {
       "title": "24/7 Support",
       "description": "Contact us at any time"
+    },
+    "productDetail": {
+      "loading": "Loading product…",
+      "imageAlt": "image",
+      "thumbnailAlt": "thumbnail",
+      "currency": "EGP",
+      "stockCount": "{{count}} left in stock",
+      "ratingLabel": "Rating",
+      "ratingsCount": "{{count}} ratings",
+      "ariaWishlist": "Add to wishlist",
+      "outOfStock": "Out of stock",
+      "addToCart": "Add to Cart"
+    },
+    "productReview": {
+      "heading": "Product Reviews",
+      "generalRating": "General rating:",
+      "ratingsCount": "ratings",
+      "noReviews": "No reviews yet.",
+      "yourRating": "Your rating:",
+      "titleLabel": "Title",
+      "contentLabel": "Review",
+      "submitButton": "Submit Review"
+    },
+    "bestSeller": {
+      "eyebrow": "BEST SELLING",
+      "heading": "<span class=\"text-[#E65073]\">Check Out</span> What Everyone's <span class=\"text-[#E65073]\">Buying</span> Right Now",
+      "description": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+      "exploreGifts": "Explore gifts"
     }
   },
   "productDetail": {
@@ -72,6 +101,9 @@
       "premiumQuality": "Premium Quality & Elegant Packaging",
       "perfectOccasion": "Perfect for Every Occasion",
       "fastDelivery": "Fast & Reliable Delivery"
-    }
+    },
+
+  "product": {
+    "relatedProducts": "Related Products"
   }
 }
