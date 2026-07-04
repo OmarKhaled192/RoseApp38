@@ -2,17 +2,17 @@
   <div
     class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 items-center px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14"
   >
-   
+
     <div class="hidden lg:block lg:col-span-2 rtl:lg:order-2 ltr:lg:order-1">
       <div class="w-full max-w-sm mx-auto">
         <div class="grid grid-cols-3 gap-2 sm:gap-3">
           <div class="col-span-2 relative aspect-[4/5]">
             <div
-              class="absolute -top-2 -left-2 rtl:-left-auto rtl:-right-2 w-full h-full border-2 border-red-800 rounded-[45%_55%_42%_58%/48%_42%_58%_52%]"
+              class="absolute -top-2 -left-3 -bottom-2 rtl:-left-auto rtl:-right-2 w-full h-full border-2 border-red-800 rounded-[15%_33%_38%_38%]"
             ></div>
 
             <div
-              class="absolute inset-0 overflow-hidden bg-orange-200 rounded-[45%_55%_42%_58%/48%_42%_58%_52%]"
+              class="absolute inset-0 overflow-hidden bg-orange-200 rounded-[15%_33%_38%_38%] mt-2"
             >
               <img
                 src="images/aboutUs/Rectangle 3.svg"
@@ -22,24 +22,24 @@
             </div>
           </div>
 
-          <div class="col-span-1 flex flex-col gap-2 sm:gap-3">
+          <div class="col-span-1 flex flex-col gap-2 sm:gap-3 mt-10">
             <div
-              class="relative w-full aspect-square rounded-full overflow-hidden bg-amber-100"
+              class="relative  w-full rounded-full bg-amber-100"
             >
               <img
                 src="images/aboutUs/Rectangle 4.svg"
-                alt="Wrapped gift box with confetti"
-                class="w-full h-full object-cover"
+                alt="Wrapped gift box with "
+                class="w-full h-full "
               />
             </div>
 
             <div
-              class="relative mt-16 w-full aspect-square overflow-hidden bg-cyan-200 rounded-[45%_55%_42%_58%/48%_42%_58%_52%]"
+              class="relative pt-1  w-full aspect-square overflow-hidden bg-cyan-200 rounded-[30%_50%_50%_30%]"
             >
               <img
                 src="images/aboutUs/Rectangle 5.svg"
                 alt="Gift box"
-                class="w-full h-full object-cover object-[center_15%] scale-110"
+                class="w-full h-full  scale-200"
               />
             </div>
           </div>
@@ -47,29 +47,29 @@
       </div>
     </div>
 
-   
+
     <div class="lg:col-span-3 rtl:lg:order-1 ltr:lg:order-2 text-center lg:text-start">
-      <p class="text-pink-500 font-bold tracking-[0.2em] text-xs sm:text-sm mb-3">
+      <p class="text-[#FF668B] font-bold tracking-[0.2em] text-xs sm:text-sm mb-3">
         {{ 'aboutUs.about' | translate }}
       </p>
 
       <h2
-        class="text-xl sm:text-2xl md:text-3xl font-extrabold leading-snug mb-3 max-w-xl mx-auto lg:mx-0"
+        class="text-sm sm:text-2xl md:text-3xl font-bold leading-snug  mx-auto lg:mx-0"
       >
-        <span class="text-red-950">{{ 'aboutUs.titlePart1' | translate }}</span>
-        <span class="text-pink-500">{{ 'aboutUs.titlePart2' | translate }}</span>
-        <span class="text-red-950">{{ 'aboutUs.titlePart3' | translate }}</span>
-        <span class="text-pink-500">{{ 'aboutUs.titlePart4' | translate }}</span>
-        <span class="text-red-950">{{ 'aboutUs.titlePart5' | translate }}</span>
+        <span class="text-[#741C21]">{{ 'aboutUs.titlePart1' | translate }}</span>
+        <span class="text-[#FF668B] font-semibold">{{ 'aboutUs.titlePart2' | translate }}</span>
+        <span class="text-[#741C21]">{{ 'aboutUs.titlePart3' | translate }}</span>
+        <span class="text-[#FF668B] font-semibold">{{ 'aboutUs.titlePart4' | translate }}</span>
+        <span class="text-[#741C21]">{{ 'aboutUs.titlePart5' | translate }}</span>
       </h2>
 
-      <p class="text-gray-400 text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 mb-6">
+      <p class="text-gray-400 text-xs  leading-none  max-w-xl mx-auto lg:mx-0 mb-6 mt-2">
         {{ 'aboutUs.description' | translate }}
       </p>
 
       <button
         type="button"
-        class="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-red-800 hover:bg-red-900 transition-colors text-white text-sm font-medium px-5 py-2.5 rounded-full mb-8"
+        class="inline-flex items-center justify-center  w-full sm:w-auto bg-red-800 hover:bg-red-900 transition-colors text-white text-sm font-medium px-5 py-2.5 rounded-full mb-2"
       >
         {{ 'aboutUs.discover' | translate }}
         <span aria-hidden="true" class="inline-block rtl:rotate-180">&rarr;</span>

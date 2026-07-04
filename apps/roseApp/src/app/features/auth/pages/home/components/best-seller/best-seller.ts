@@ -12,6 +12,7 @@ import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/serv
   selector: 'app-best-seller',
   imports: [Card, Button, TranslatePipe, Carousel],
   templateUrl: './best-seller.html',
+  styleUrl: './best-seller.css',
 })
 export class BestSeller {
   private readonly darkModeService = inject(DarkModeService);
