@@ -20,12 +20,10 @@ export class Products {
       id: 'flowers',
       label: 'Flowers',
       icon: 'pi-heart',
-      children: [
-        { id: 'flowers-cards', label: 'Cards', icon: 'pi-id-card' },
-        { id: 'flowers-chocolate', label: 'Chocolate', icon: 'pi-gift' },
-        { id: 'flowers-cards-2', label: 'Cards', icon: 'pi-id-card' },
-      ],
     },
+    { id: 'cards-1', label: 'Cards', icon: 'pi-id-card' },
+    { id: 'chocolate-1', label: 'Chocolate', icon: 'pi-gift' },
+    { id: 'cards-2', label: 'Cards', icon: 'pi-id-card' },
   ];
 
   occasions: OccasionItem[] = [
@@ -41,7 +39,7 @@ export class Products {
   private allProducts = signal<CardData[]>([
     {
       id: '1',
-      image: 'assets/products/dreamy-white-roses.jpg',
+      // image: 'assets/products/dreamy-white-roses.jpg',
       title: 'Dreamy White Roses Bouquet',
       subtitle: 'Fresh white roses bouquet',
       rating: 3,
@@ -55,7 +53,7 @@ export class Products {
     },
     {
       id: '2',
-      image: 'assets/products/fuchsia-brilliance-vase.jpg',
+      // image: 'assets/products/fuchsia-brilliance-vase.jpg',
       title: 'Fuchsia Brilliance Vase',
       subtitle: 'Elegant floral vase arrangement',
       rating: 3,
@@ -69,7 +67,7 @@ export class Products {
     },
     {
       id: '3',
-      image: 'assets/products/moko-chocolate-set.jpg',
+      // image: 'assets/products/moko-chocolate-set.jpg',
       title: 'Moko Chocolate Set | Esperance',
       subtitle: 'Premium chocolate gift set',
       rating: 3,

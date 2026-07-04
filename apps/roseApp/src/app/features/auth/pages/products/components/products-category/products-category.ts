@@ -13,7 +13,6 @@ export class ProductsCategory {
 
   categorySelect = output<string>();
 
-  /** Flattens the tree, expanding only the children of the selected node. */
   visibleItems = computed(() => {
     const rows: { item: CategoryItem; depth: number }[] = [];
 

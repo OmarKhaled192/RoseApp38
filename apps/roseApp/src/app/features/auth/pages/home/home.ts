@@ -28,9 +28,9 @@ import { Testimonials } from '../../../sections/components/testimonials/testimon
     ServicesHightlights,
     MostPopular,
     BestSeller,
-    SpecialGifts
+    SpecialGifts,
     Testimonials,
-    RelatedProduct,  
+    RelatedProduct,
   ],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
