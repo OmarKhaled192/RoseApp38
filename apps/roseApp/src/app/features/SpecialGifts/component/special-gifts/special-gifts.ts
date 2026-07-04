@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { BannerSlide, FeaturedCard } from '../../models/specialgift.interface';
 
 @Component({
@@ -10,6 +10,8 @@ import { BannerSlide, FeaturedCard } from '../../models/specialgift.interface';
   templateUrl: './special-gifts.html',
 })
 export class SpecialGifts {
+    private translateService = inject(TranslateService)
+  currentLang = this.translateService.currentLang();
   slides = signal<BannerSlide[]>([
     {
       image: '/images/SpecialGifts/carousel.png',
