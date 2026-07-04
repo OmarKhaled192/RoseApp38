@@ -1,10 +1,10 @@
-<div class="max-w-6xl mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-8 lg:gap-10">
+<div class="w-full grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-8 lg:gap-10">
   <section>
       <lib-title-section title="{{'productReview.heading' | translate}}" subtitle=" " align="left" [highlightWidth]="'60%'"
         [highlightHeight]="'45%'" [underlineWidth]="'60px'" [underlineHeight]="'2px'" />
 
     <div class="mb-6">
-      <p class="text-sm font-semibold text-gray-700">{{ 'productReview.generalRating' | translate }}</p>
+      <p class="text-sm font-semibold text-gray-700 mt-2">{{ 'productReview.generalRating' | translate }}</p>
       <div class="flex items-center gap-2 flex-wrap">
         <span class="text-2xl font-bold text-gray-900">{{ averageRating() }}</span>
         <span class="text-sm text-gray-500">({{ reviews().length }} {{ 'productReview.ratingsCount' | translate
