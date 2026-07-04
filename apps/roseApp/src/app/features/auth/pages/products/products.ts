@@ -4,10 +4,11 @@ import { CardAction, CardData } from '@org/ui';
 import { ProductsCategory } from './components/products-category/products-category';
 import { Filters } from './components/filters/filters';
 import { CategoryItem, OccasionItem, ProductFilters } from './models/products.models';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products',
-  imports: [Card, Pagination, ProductsCategory, Filters],
+  imports: [Card, TranslatePipe, Pagination, ProductsCategory, Filters],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
@@ -20,28 +21,26 @@ export class Products {
       id: 'flowers',
       label: 'Flowers',
       icon: 'pi-heart',
-      children: [
-        { id: 'flowers-cards', label: 'Cards', icon: 'pi-id-card' },
-        { id: 'flowers-chocolate', label: 'Chocolate', icon: 'pi-gift' },
-        { id: 'flowers-cards-2', label: 'Cards', icon: 'pi-id-card' },
-      ],
     },
+    { id: 'cards-1', label: 'Cards', icon: 'pi-id-card' },
+    { id: 'chocolate-1', label: 'Chocolate', icon: 'pi-gift' },
+    { id: 'cards-2', label: 'Cards', icon: 'pi-id-card' },
   ];
 
   occasions: OccasionItem[] = [
-    { id: 'wedding', label: 'Wedding', image: 'assets/occasions/wedding.jpg' },
-    { id: 'anniversary', label: 'Anniversary', image: 'assets/occasions/anniversary.jpg' },
-    { id: 'graduation', label: 'Graduation', image: 'assets/occasions/graduation.jpg' },
-    { id: 'wedding-2', label: 'Wedding', image: 'assets/occasions/wedding-2.jpg' },
-    { id: 'fathers-day', label: "Father's Day", image: 'assets/occasions/fathers-day.jpg' },
-    { id: 'graduation-2', label: 'Graduation', image: 'assets/occasions/graduation-2.jpg' },
+    { id: 'wedding', label: 'Wedding', image: '/images/filters/occasions/wedding.jpg' },
+    { id: 'anniversary', label: 'Anniversary', image: '/images/filters/occasions/wedding.jpg' },
+    { id: 'graduation', label: 'Graduation', image: '/images/filters/occasions/graduation.jpg' },
+    { id: 'wedding', label: 'Wedding', image: '/images/filters/occasions/wedding.jpg' },
+    { id: 'fathers-day', label: "Father's Day", image: '/images/filters/occasions/fathers-day.png' },
+    { id: 'graduation', label: 'Graduation', image: '/images/filters/occasions/graduation.jpg' },
   ];
 
   // ---- Product source (replace with API call) ----
   private allProducts = signal<CardData[]>([
     {
       id: '1',
-      image: 'assets/products/dreamy-white-roses.jpg',
+      // image: 'assets/products/dreamy-white-roses.jpg',
       title: 'Dreamy White Roses Bouquet',
       subtitle: 'Fresh white roses bouquet',
       rating: 3,
@@ -55,7 +54,7 @@ export class Products {
     },
     {
       id: '2',
-      image: 'assets/products/fuchsia-brilliance-vase.jpg',
+      // image: 'assets/products/fuchsia-brilliance-vase.jpg',
       title: 'Fuchsia Brilliance Vase',
       subtitle: 'Elegant floral vase arrangement',
       rating: 3,
@@ -69,7 +68,7 @@ export class Products {
     },
     {
       id: '3',
-      image: 'assets/products/moko-chocolate-set.jpg',
+      // image: 'assets/products/moko-chocolate-set.jpg',
       title: 'Moko Chocolate Set | Esperance',
       subtitle: 'Premium chocolate gift set',
       rating: 3,
@@ -117,7 +116,7 @@ export class Products {
   });
 
   // ---- Handlers ----
-  onCategorySelect(id: string) {
+  onCategorySelect(id: string | null) {
     this.selectedCategoryId.set(id);
     this.filters.update((f) => ({ ...f, categoryId: id }));
     this.page.set(0);

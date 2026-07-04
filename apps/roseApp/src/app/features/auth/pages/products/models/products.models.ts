@@ -1,6 +1,7 @@
 export interface CategoryItem {
   id: string;
   label: string;
+  badge?: string;
   icon?: string; // PrimeIcons class, e.g. 'pi pi-id-card'
   children?: CategoryItem[];
 }

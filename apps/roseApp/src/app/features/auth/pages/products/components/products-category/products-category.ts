@@ -1,19 +1,19 @@
 import { Component, computed, input, output } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { FilterSection } from '../filter-section/filter-section';
 import { CategoryItem } from '../../models/products.models';
 
 @Component({
   selector: 'app-products-category',
-  imports: [NgClass],
+  imports: [CommonModule, FilterSection],
   templateUrl: './products-category.html',
 })
 export class ProductsCategory {
   categories = input.required<CategoryItem[]>();
   selectedId = input<string | null>(null);
 
-  categorySelect = output<string>();
+  categorySelect = output<string | null>();
 
-  /** Flattens the tree, expanding only the children of the selected node. */
   visibleItems = computed(() => {
     const rows: { item: CategoryItem; depth: number }[] = [];
 
