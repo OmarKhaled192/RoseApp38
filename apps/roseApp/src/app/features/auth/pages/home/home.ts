@@ -7,6 +7,7 @@ import { BestSeller } from './components/best-seller/best-seller';
 import { Component } from '@angular/core';
 import { Testimonials } from '../../../sections/components/testimonials/testimonials';
 import { ServicesHightlights } from '../../../services-highlights/component/servicesHightlights';
+import { SpecialGifts } from "../../../SpecialGifts/component/special-gifts/special-gifts";
 @Component({
   selector: 'app-home',
   imports: [
@@ -18,7 +19,8 @@ import { ServicesHightlights } from '../../../services-highlights/component/serv
     BestSeller,
     Testimonials,
     ServicesHightlights,
-  ],
+    SpecialGifts
+],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
