@@ -1,11 +1,26 @@
-<section class="title-section">
-  <span class="subtitle">
-    {{ subtitle }}
+<section class="flex flex-col gap-[14px]" [ngClass]="{
+    'items-start text-left': align() === 'left',
+    'items-center text-center': align() === 'center',
+    'items-end text-right': align() === 'right'
+  }">
+  <span class="uppercase font-bold tracking-[0.25em] leading-none text-[#FF668B] font-['Sarabun']"
+    [style.font-size.px]="subtitleSize()">
+    {{ subtitle() }}
   </span>
 
-  <h2 class="title">
-    <span>
-      {{ title }}
+  <h2 class="relative inline-block m-0 font-bold leading-[1.2] text-[#741C21]" [style.font-size.px]="titleSize()">
+    <span class="relative z-10">
+      {{ title() }}
+    </span>
+
+    <!-- Highlight -->
+    <span class="absolute bottom-0 rounded-r-[20px] bg-[rgba(255,102,139,0.18)]" [style.width]="highlightWidth()"
+      [style.height]="highlightHeight()" style="inset-inline-start:0;">
+    </span>
+
+    <!-- Underline -->
+    <span class="absolute bottom-0 bg-[#E65073]" [style.width]="underlineWidth()" [style.height]="underlineHeight()"
+      style="inset-inline-start:0;">
     </span>
   </h2>
 </section>
