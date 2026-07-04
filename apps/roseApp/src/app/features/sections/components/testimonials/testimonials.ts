@@ -1,42 +1,42 @@
 import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Review, TitleSection } from '@org/ui';
 import { CardReview } from '@org/ui';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-testimonials',
-  imports: [TitleSection, CarouselModule, CardReview],
+  standalone: true,
+  imports: [TitleSection, CarouselModule, CardReview, TranslatePipe],
   templateUrl: './testimonials.html',
   styleUrl: './testimonials.css',
+
 })
 export class Testimonials {
   reviews: Review[] = [
     {
       id: 1,
-      name: 'Jake Miller',
+      name: 'testimonials.reviews.jake.name',
       avatar: './images/testimonials/jake-miller.jpg',
       rating: 1.2,
-      review:
-        "I've been ordering from this flower shop for years and they never disappoint. The quality and service are exceptional!",
-      date: 'January 12, 2025',
+      review: 'testimonials.reviews.jake.review',
+      date: 'testimonials.reviews.jake.date',
     },
     {
       id: 2,
-      name: 'Tyler Brooks',
+      name: 'testimonials.reviews.tyler.name',
       avatar: './images/testimonials/tyler-brooks.jpg',
       rating: 3,
-      review:
-        "Customer service is top-notch and the flowers last longer than any others I've bought. Highly recommend!",
-      date: 'January 12, 2025',
+      review: 'testimonials.reviews.tyler.review',
+      date: 'testimonials.reviews.tyler.date',
     },
     {
       id: 3,
-      name: 'Max Turner',
+      name: 'testimonials.reviews.max.name',
       avatar: './images/testimonials/max-turner.jpg',
       rating: 4.5,
-      review:
-        'The team truly cares about every order. I always feel confident when I buy flowers from here. The checkout process was superb.',
-      date: 'January 12, 2025',
+      review: 'testimonials.reviews.max.review',
+      date: 'testimonials.reviews.max.date',
     },
   ];
 
