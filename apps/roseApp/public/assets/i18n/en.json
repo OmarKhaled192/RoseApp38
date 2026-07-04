@@ -152,5 +152,26 @@
         "title": "Mark Every Year of Love with a Meaningful Surprise"
       }
     }
+  },
+  "testimonials": {
+    "subtitle": "Testimonials",
+    "title": "Real Words from Happy Customers",
+    "reviews": {
+      "jake": {
+        "name": "Jake Miller",
+        "review": "I've been ordering from this flower shop for years and they never disappoint. The quality and service are exceptional!",
+        "date": "January 12, 2025"
+      },
+      "tyler": {
+        "name": "Tyler Brooks",
+        "review": "Customer service is top-notch and the flowers last longer than any others I've bought. Highly recommend!",
+        "date": "January 12, 2025"
+      },
+      "max": {
+        "name": "Max Turner",
+        "review": "The team truly cares about every order. I always feel confident when I buy flowers from here. The checkout process was superb.",
+        "date": "January 12, 2025"
+      }
+    }
   }
 }
