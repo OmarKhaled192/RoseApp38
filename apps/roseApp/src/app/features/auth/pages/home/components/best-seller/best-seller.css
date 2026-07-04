@@ -1,0 +1,29 @@
+ :host ::ng-deep {
+  .p-carousel {
+    .p-carousel-prev-button,
+    .p-button-text.p-button-secondary,
+    .p-carousel-next-button {
+      background-color: #8B1538;
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #6d0f2b;
+        color: white;
+      }
+
+      &:disabled {
+        background-color: #d1a3ae;
+        opacity: 0.6;
+      }
+    }
+
+    .p-carousel-prev-icon,
+    .p-carousel-next-icon {
+      font-size: 1rem;
+    }
+  }
+}

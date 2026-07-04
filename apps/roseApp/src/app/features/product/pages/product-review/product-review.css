@@ -1,5 +1,5 @@
 :host ::ng-deep .custom-scrollbar::-webkit-scrollbar {
-  width: 1px;
+  width: .2px;
 }
 
 :host ::ng-deep .custom-scrollbar::-webkit-scrollbar-track {
