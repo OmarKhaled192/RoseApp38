@@ -14,6 +14,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class Testimonials {
   private translateService = inject(TranslateService)
+  isArabic = this.translateService.currentLang() === 'ar';
   reviews: Review[] = [
     {
       id: 1,
@@ -50,7 +51,7 @@ export class Testimonials {
     autoplayTimeout: 4000,
     autoplayHoverPause: true,
     navSpeed: 700,
-    rtl: document.documentElement.dir === 'ar',
+    rtl: this.translateService.currentLang() === 'ar',
     responsive: {
       0: { items: 1 },
       576: { items: 2 },

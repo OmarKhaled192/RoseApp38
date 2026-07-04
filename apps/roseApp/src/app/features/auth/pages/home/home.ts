@@ -5,7 +5,6 @@ import { MostPopular } from './components/most-popular/most-popular';
 import { CommonModule } from '@angular/common';
 import { BestSeller } from './components/best-seller/best-seller';
 import { SpecialGifts } from "../../../SpecialGifts/component/special-gifts/special-gifts";
-import { RelatedProduct } from '../../../product/pages/related-product/related-product';
 import { Component } from '@angular/core';
 import { Testimonials } from '../../../sections/components/testimonials/testimonials';
 import { ServicesHightlights } from '../../../services-highlights/component/servicesHightlights';
@@ -20,7 +19,6 @@ import { ServicesHightlights } from '../../../services-highlights/component/serv
     BestSeller,
     SpecialGifts,
     Testimonials,
-    RelatedProduct,
     ServicesHightlights,
     SpecialGifts
   ],
