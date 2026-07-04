@@ -1,15 +1,15 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Card, Button, DarkModeService } from "@org/ui";
+import { Card, Button, DarkModeService } from '@org/ui';
 import { CardAction, CardData } from 'libs/shared/ui/src/models/card-type';
-import { Carousel } from "primeng/carousel";
+import { Carousel } from 'primeng/carousel';
 import { ProductStore } from '../../../product/state/product.store';
 import { mapProductToCardData } from '../../../product/services/product-to-card.mapper';
 
 @Component({
   selector: 'app-best-seller',
   imports: [Card, Button, TranslatePipe, Carousel],
-  templateUrl: './best-seller.html'
+  templateUrl: './best-seller.html',
 })
 export class BestSeller {
   private readonly darkModeService = inject(DarkModeService);
@@ -30,9 +30,8 @@ export class BestSeller {
   readonly isDark = this.darkModeService.isDark;
 
   toggleWishlist(id: string) {
-    console.log('Wishlist ',id);
-
-   }
+    console.log('Wishlist ', id);
+  }
 
   quickView(product: CardData) {
     console.log('quick view', product.title);
@@ -69,5 +68,4 @@ export class BestSeller {
       },
     ];
   }
-
 }

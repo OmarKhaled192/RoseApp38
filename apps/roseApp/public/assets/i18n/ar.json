@@ -2,13 +2,62 @@
   "app": {
     "title": "تطبيق روز",
     "welcome": "مرحبًا بك في التطبيق",
-    "featureName": {
-
-    }
+    "featureName": {}
   },
   "common": {
     "save": "حفظ",
     "cancel": "إلغاء"
+  },
+  "trustedBy": {
+    "trustedCompanies": "موثوق به من قبل أكثر من",
+    "number": "4.5 ألف+",
+    "companies": "شركة"
+  },
+  "ServicesHighlits": {
+    "freeDelivery": {
+      "title": "توصيل مجاني",
+      "description": "للطلبات التي تزيد عن 120 جنيه"
+    },
+    "getRefund": {
+      "title": "استرداد الأموال",
+      "description": "استرداد خلال 30 يومًا"
+    },
+    "safePayment": {
+      "title": "دفع آمن",
+      "description": "دفع آمن بنسبة 100%"
+    },
+    "support": {
+      "title": "دعم 24/7",
+      "description": "تواصل معنا في أي وقت"
+    },
+    "productDetail": {
+      "loading": "جاري تحميل المنتج…",
+      "imageAlt": "صورة",
+      "thumbnailAlt": "صورة مصغرة",
+      "currency": "ج.م",
+      "stockCount": "متبقي {{count}} فقط في المخزن",
+      "ratingLabel": "التقييم",
+      "ratingsCount": "{{count}} تقييم",
+      "ariaWishlist": "إضافة إلى قائمة الأمنيات",
+      "outOfStock": "نفد من المخزن",
+      "addToCart": "إضافة إلى العربة"
+    },
+    "productReview": {
+      "heading": "تقييمات المنتج",
+      "generalRating": "التقييم العام:",
+      "ratingsCount": "تقييمات",
+      "noReviews": "لا توجد تقييمات بعد.",
+      "yourRating": "تقييمك:",
+      "titleLabel": "العنوان",
+      "contentLabel": "التعليق",
+      "submitButton": "إرسال التقييم"
+    },
+    "bestSeller": {
+      "eyebrow": "الأكثر مبيعاً",
+      "heading": "<span class=\"text-[#E65073]\">اكتشف</span> ما يشتريه <span class=\"text-[#E65073]\">الجميع</span> الآن",
+      "description": "لست متأكداً مما تختار؟ ابدأ بالمنتجات الأكثر مبيعاً لدينا، فهذه هي الهدايا التي يستمر عملاؤنا في العودة لأجلها. سواء كنت تحتفل بعيد ميلاد، أو ذكرى سنوية، أو حفل زفاف، نضمن لك أن خياراتنا المميزة ستترك انطباعاً يدوم طويلاً.",
+      "exploreGifts": "استكشف الهدايا"
+    }
   },
   "productDetail": {
     "loading": "جاري تحميل المنتج…",
@@ -37,5 +86,24 @@
     "heading": "<span class=\"text-[#E65073]\">اكتشف</span> ما يشتريه <span class=\"text-[#E65073]\">الجميع</span> الآن",
     "description": "لست متأكداً مما تختار؟ ابدأ بالمنتجات الأكثر مبيعاً لدينا، فهذه هي الهدايا التي يستمر عملاؤنا في العودة لأجلها. سواء كنت تحتفل بعيد ميلاد، أو ذكرى سنوية، أو حفل زفاف، نضمن لك أن خياراتنا المميزة ستترك انطباعاً يدوم طويلاً.",
     "exploreGifts": "استكشف الهدايا"
+  },
+
+  "aboutUs": {
+    "about": "من نحن",
+    "titlePart1": "نقدم ",
+    "titlePart2": "أرقى",
+    "titlePart3": " صناديق الهدايا من أجل ",
+    "titlePart4": "أجمل",
+    "titlePart5": " لحظاتكم",
+    "description": "اجعل كل مناسبة أكثر تميزًا مع صناديق الهدايا الفاخرة لدينا. يتم اختيار كل صندوق بعناية وتغليفه بأناقة ليضم منتجات مختارة بعناية تترك انطباعًا لا يُنسى. سواء كانت هدية عيد ميلاد أو زفاف أو رسالة شكر بسيطة، فإننا نساعدك على تقديم هدية تعبر عن اهتمامك بأفضل صورة.",
+    "discover": "اكتشف",
+    "features": {
+      "competitivePrices": "أسعار تنافسية وتسوق سهل",
+      "premiumQuality": "جودة فائقة وتغليف أنيق",
+      "perfectOccasion": "مثالية لجميع المناسبات",
+      "fastDelivery": "توصيل سريع وموثوق"
+    },
+  "product": {
+    "relatedProducts": "منتجات ذات صلة"
   }
 }

@@ -1,0 +1,15 @@
+<div class="review-card">
+  <div class="avatar-wrapper">
+    <img [src]="avatar()" [alt]="name()" class="avatar" />
+  </div>
+
+  <h4 class="name">{{ name() }}</h4>
+
+  <div class="rating-wrapper">
+    <lib-star-rating [rating]="rating()" />
+  </div>
+
+  <p class="review-text">{{ review() }}</p>
+
+  <span class="review-date">{{ date() }}</span>
+</div>
