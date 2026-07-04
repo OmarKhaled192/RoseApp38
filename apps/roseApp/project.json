@@ -23,6 +23,11 @@
           {
             "glob": "**/*",
             "input": "apps/roseApp/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/shared/ui/public/assets",
+            "output": "assets"
           }
         ],
         "styles": [
