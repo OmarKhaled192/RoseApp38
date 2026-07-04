@@ -1,13 +1,13 @@
 export interface BannerSlide {
   image: string;
-  title: string;
-  subtitle: string;
-  ctaLabel: string;
+  titleKey: string;
+  subtitleKey: string;
+  ctaLabelKey: string;
   ctaLink: string;
 }
 
 export interface FeaturedCard {
   image: string;
-  badge: string;
-  title: string;
+  badgeKey: string;
+  titleKey: string;
 }

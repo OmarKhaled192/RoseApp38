@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
-import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { BannerSlide, FeaturedCard } from '../../models/specialgift.interface';
 
 @Component({
   selector: 'app-special-gifts',
@@ -9,9 +10,7 @@ import { TranslateService, TranslatePipe } from '@ngx-translate/core';
   templateUrl: './special-gifts.html',
 })
 export class SpecialGifts {
-  private readonly translate = inject(TranslateService);
-
-  slides = [
+  slides = signal<BannerSlide[]>([
     {
       image: '/images/SpecialGifts/carousel.png',
       titleKey: 'specialGifts.slides.flowers.title',
@@ -33,9 +32,9 @@ export class SpecialGifts {
       ctaLabelKey: 'specialGifts.slides.flowers.ctaLabel',
       ctaLink: '/category/flowers',
     },
-  ];
+  ]);
 
-  cards = [
+  cards = signal<FeaturedCard[]>([
     {
       image: '/images/SpecialGifts/wedding.png',
       badgeKey: 'specialGifts.cards.wedding.badge',
@@ -51,5 +50,5 @@ export class SpecialGifts {
       badgeKey: 'specialGifts.cards.anniversary.badge',
       titleKey: 'specialGifts.cards.anniversary.title',
     },
-  ];
+  ]);
 }
