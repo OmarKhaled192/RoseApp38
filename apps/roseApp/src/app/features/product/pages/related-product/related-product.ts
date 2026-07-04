@@ -1,14 +1,16 @@
 import { Component, computed, inject, signal } from '@angular/core';
 
-import { Card, CardAction, CardData, DarkModeService, TitleSection } from '@org/ui';
-import { mapProductToCardData } from '../../../../../../../roseApp/src/app/features/product/services/product-to-card.mapper';
-import { ProductStore } from '../../../../../../../roseApp/src/app/features/product/state/product-details.store';
+import { Card, DarkModeService, TitleSection } from '@org/ui';
+import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
+import { CardAction, CardData } from 'libs/shared/ui/src/models/card-type';
 import { Carousel } from 'primeng/carousel';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ProductStore } from '../../state/product.store';
 @Component({
   selector: 'app-related-product',
   imports: [Card, Carousel, TitleSection, TranslatePipe],
   templateUrl: './related-product.html',
+  styleUrl: '../../../auth/pages/home/components/best-seller/best-seller.css'
 })
 export class RelatedProduct {
   private readonly darkModeService = inject(DarkModeService);

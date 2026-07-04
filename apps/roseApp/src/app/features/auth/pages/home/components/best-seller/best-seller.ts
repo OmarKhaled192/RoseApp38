@@ -1,16 +1,17 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Card, Button, DarkModeService } from "@org/ui";
-import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
-import { ProductStore } from 'apps/roseApp/src/app/features/product/state/product-details.store';
+import { Card, Button, DarkModeService } from '@org/ui';
 import { CardAction, CardData } from 'libs/shared/ui/src/models/card-type';
-import { Carousel } from "primeng/carousel";
+import { Carousel } from 'primeng/carousel';
+
+
+import { ProductStore } from 'apps/roseApp/src/app/features/product/state/product.store';
+import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
 
 @Component({
   selector: 'app-best-seller',
   imports: [Card, Button, TranslatePipe, Carousel],
   templateUrl: './best-seller.html',
-  styleUrl: './best-seller.css'
 })
 export class BestSeller {
   private readonly darkModeService = inject(DarkModeService);
@@ -48,9 +49,8 @@ responsiveOptions = [
   readonly isDark = this.darkModeService.isDark;
 
   toggleWishlist(id: string) {
-    console.log('Wishlist ',id);
-
-   }
+    console.log('Wishlist ', id);
+  }
 
   quickView(product: CardData) {
     console.log('quick view', product.title);
@@ -87,5 +87,4 @@ responsiveOptions = [
       },
     ];
   }
-
 }
