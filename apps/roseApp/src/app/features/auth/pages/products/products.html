@@ -17,8 +17,7 @@
       }
     </div>
 
-    <lib-pagination [totalRecords]="filteredProducts().length" [rowsPerPageOptions]="[9, 18, 27]"
-      (pageChange)="onPageChange($event)" />
+    <lib-pagination [totalRecords]="filteredProducts().length" (pageChange)="onPageChange($event)" />
     } @else {
     <div class="flex flex-col items-center justify-center py-20 text-center gap-2">
       <i class="pi pi-inbox text-3xl text-gray-300"></i>

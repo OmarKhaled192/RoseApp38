@@ -50,6 +50,8 @@ export class Products {
       currency: 'EGP',
       badges: ['new'],
       inStock: true,
+      wishlist: 24,
+      create: '2026-07-01',
     },
     {
       id: '2',
@@ -62,6 +64,8 @@ export class Products {
       currency: 'EGP',
       badges: ['out-of-stock'],
       inStock: false,
+      wishlist: 12,
+      create: '2026-06-28',
     },
     {
       id: '3',
@@ -74,8 +78,11 @@ export class Products {
       currency: 'EGP',
       badges: ['hot', 'out-of-stock'],
       inStock: false,
+      wishlist: 31,
+      create: '2026-06-25',
     },
   ]);
+
   // ---- State ----
   selectedCategoryId = signal<string | null>('flowers');
 
