@@ -1,0 +1,15 @@
+<section class="testimonials-section">
+  <lib-title-section subtitle="Testimonials" title="Real Words from Happy Customers">
+  </lib-title-section>
+
+  <div class="testimonials-section-slider">
+    <owl-carousel-o [options]="customOptions" class="testimonials-carousel">
+      @for (item of reviews; track item.id) {
+      <ng-template carouselSlide [id]="item.id.toString()">
+        <lib-card-review [name]="item.name" [avatar]="item.avatar" [rating]="item.rating" [review]="item.review"
+          [date]="item.date" />
+      </ng-template>
+      }
+    </owl-carousel-o>
+  </div>
+</section>

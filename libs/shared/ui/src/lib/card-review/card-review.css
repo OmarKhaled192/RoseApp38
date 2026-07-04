@@ -1,0 +1,57 @@
+.review-card {
+  position: relative;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem 1rem 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  margin-top: 32px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.avatar-wrapper {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.rating-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.review-text {
+  color: #6b7280;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0.75rem 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.review-date {
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
