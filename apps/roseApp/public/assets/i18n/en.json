@@ -9,7 +9,7 @@
     "cancel": "Cancel"
   },
   "trustedBy": {
-    "trustedCompanies": "Trusted by over companies",
+    "trustedCompanies": "Trusted by over",
     "number": "4.5k+",
     "companies": "companies"
   },
@@ -29,40 +29,25 @@
     "support": {
       "title": "24/7 Support",
       "description": "Contact us at any time"
-    },
-    "productDetail": {
-      "loading": "Loading product…",
-      "imageAlt": "image",
-      "thumbnailAlt": "thumbnail",
-      "currency": "EGP",
-      "stockCount": "{{count}} left in stock",
-      "ratingLabel": "Rating",
-      "ratingsCount": "{{count}} ratings",
-      "ariaWishlist": "Add to wishlist",
-      "outOfStock": "Out of stock",
-      "addToCart": "Add to Cart"
-    },
-    "productReview": {
-      "heading": "Product Reviews",
-      "generalRating": "General rating:",
-      "ratingsCount": "ratings",
-      "noReviews": "No reviews yet.",
-      "yourRating": "Your rating:",
-      "titleLabel": "Title",
-      "contentLabel": "Review",
-      "submitButton": "Submit Review"
-    },
-    "bestSeller": {
-      "eyebrow": "BEST SELLING",
-      "heading": "<span class=\"text-[#E65073]\">Check Out</span> What Everyone's <span class=\"text-[#E65073]\">Buying</span> Right Now",
-      "description": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
-      "exploreGifts": "Explore gifts"
+    }
+  },
+  "products": {
+    "category": "Category",
+    "noProducts": "No products match these filters.",
+    "filters": {
+      "occasion": "Occasion",
+      "rating": "Rating",
+      "price": "Price",
+      "from": "From",
+      "to": "To",
+      "reset": "Reset",
+      "resetAll": "Reset All"
     }
   },
   "productDetail": {
     "loading": "Loading product…",
-    "imageAlt": "image",
-    "thumbnailAlt": "thumbnail",
+    "imageAlt": "Image",
+    "thumbnailAlt": "Thumbnail",
     "currency": "EGP",
     "stockCount": "{{count}} left in stock",
     "ratingLabel": "Rating",
@@ -73,10 +58,10 @@
   },
   "productReview": {
     "heading": "Product Reviews",
-    "generalRating": "General rating:",
+    "generalRating": "Overall Rating:",
     "ratingsCount": "ratings",
     "noReviews": "No reviews yet.",
-    "yourRating": "Your rating:",
+    "yourRating": "Your Rating:",
     "titleLabel": "Title",
     "contentLabel": "Review",
     "submitButton": "Submit Review"
@@ -84,39 +69,8 @@
   "bestSeller": {
     "eyebrow": "BEST SELLING",
     "heading": "<span class=\"text-[#E65073]\">Check Out</span> What Everyone's <span class=\"text-[#E65073]\">Buying</span> Right Now",
-    "description": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
-    "exploreGifts": "Explore gifts"
-    }
-  },
-  "specialGifts": {
-  "startingFrom": "Starting from 10.99 EGP",
-  "sectionTitle": "Special Gifts For The People You Love",
-  "shopNow": "Shop Now ",
-  "slides": {
-    "flowers": {
-      "title": "Say It with Flowers",
-      "subtitle": "Elegant gifts for every special moment.",
-      "ctaLabel": "I'm buying!"
-    },
-    "chocolates": {
-      "title": "Sweeten Every Moment",
-      "subtitle": "Handpicked chocolates for your loved ones.",
-      "ctaLabel": "Shop Now"
-    }
-  },
-  "cards": {
-    "wedding": {
-      "badge": "Wedding",
-      "title": "Celebrate Her Forever with a Gift She'll Always Remember"
-    },
-    "engagement": {
-      "badge": "Engagement",
-      "title": "Honor the Beginning of a Beautiful Journey Together"
-    },
-    "anniversary": {
-      "badge": "Anniversary",
-      "title": "Mark Every Year of Love with a Meaningful Surprise"
-    }
+    "description": "Not sure what to choose? Start with our best sellers. These are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary, or wedding, our top picks are guaranteed to leave a lasting impression.",
+    "exploreGifts": "Explore Gifts"
   },
   "aboutUs": {
     "about": "ABOUT",
@@ -125,17 +79,47 @@
     "titlePart3": " Gift Boxes for Your ",
     "titlePart4": "Special",
     "titlePart5": " Moments",
-    "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress. Whether it's for a birthday, wedding, or a simple \"thank you,\" our gift boxes are crafted to leave a lasting impression—because thoughtful gifting starts here.",
+    "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress. Whether it's for a birthday, wedding, or a simple \"thank you,\" our gift boxes are crafted to leave a lasting impression because thoughtful gifting starts here.",
     "discover": "Discover",
     "features": {
       "competitivePrices": "Competitive Prices & Easy Shopping",
       "premiumQuality": "Premium Quality & Elegant Packaging",
       "perfectOccasion": "Perfect for Every Occasion",
       "fastDelivery": "Fast & Reliable Delivery"
-    },
-
+    }
+  },
   "product": {
     "relatedProducts": "Related Products"
+  },
+  "specialGifts": {
+    "startingFrom": "Starting from 10.99 EGP",
+    "sectionTitle": "Special Gifts for the People You Love",
+    "shopNow": "Shop Now",
+    "slides": {
+      "flowers": {
+        "title": "Say It with Flowers",
+        "subtitle": "Elegant gifts for every special moment.",
+        "ctaLabel": "I'm Buying!"
+      },
+      "chocolates": {
+        "title": "Sweeten Every Moment",
+        "subtitle": "Handpicked chocolates for your loved ones.",
+        "ctaLabel": "Shop Now"
+      }
+    },
+    "cards": {
+      "wedding": {
+        "badge": "Wedding",
+        "title": "Celebrate Her Forever with a Gift She'll Always Remember"
+      },
+      "engagement": {
+        "badge": "Engagement",
+        "title": "Honor the Beginning of a Beautiful Journey Together"
+      },
+      "anniversary": {
+        "badge": "Anniversary",
+        "title": "Mark Every Year of Love with a Meaningful Surprise"
+      }
+    }
   }
- }
 }

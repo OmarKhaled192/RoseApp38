@@ -1,10 +1,12 @@
 import { Component, effect, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FilterSection } from '../filter-section/filter-section';
+import { TranslatePipe } from '@ngx-translate/core';
 import { OccasionItem, ProductFilters } from '../../models/products.models';
 
 @Component({
   selector: 'app-filters',
-  imports: [CommonModule],
+  imports: [CommonModule, FilterSection, TranslatePipe],
   templateUrl: './filters.html',
 })
 export class Filters {
