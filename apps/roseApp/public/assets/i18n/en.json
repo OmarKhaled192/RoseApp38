@@ -72,37 +72,6 @@
     "description": "Not sure what to choose? Start with our best sellers. These are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary, or wedding, ou...",
     "exploreGifts": "Explore Gifts"
   },
-  "specialGifts": {
-    "startingFrom": "Starting from 10.99 EGP",
-    "sectionTitle": "Special Gifts For The People You Love",
-    "shopNow": "Shop Now ",
-    "slides": {
-      "flowers": {
-        "title": "Say It with Flowers",
-        "subtitle": "Elegant gifts for every special moment.",
-        "ctaLabel": "I'm buying!"
-      },
-      "chocolates": {
-        "title": "Sweeten Every Moment",
-        "subtitle": "Handpicked chocolates for your loved ones.",
-        "ctaLabel": "Shop Now"
-      }
-    },
-    "cards": {
-      "wedding": {
-        "badge": "Wedding",
-        "title": "Celebrate Her Forever with a Gift She'll Always Remember"
-      },
-      "engagement": {
-        "badge": "Engagement",
-        "title": "Honor the Beginning of a Beautiful Journey Together"
-      },
-      "anniversary": {
-        "badge": "Anniversary",
-        "title": "Mark Every Year of Love with a Meaningful Surprise"
-      }
-    }
-  },
   "aboutUs": {
     "about": "ABOUT",
     "titlePart1": "Delivering the ",
