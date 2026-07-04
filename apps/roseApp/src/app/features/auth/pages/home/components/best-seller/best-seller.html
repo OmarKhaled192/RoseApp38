@@ -1,7 +1,8 @@
 <section class="w-full bg-white pt-20">
-  <div class="flex flex-col lg:flex-row text-left gap-8">
+  <div class="flex flex-col lg:flex-row items-stretch text-left gap-8"
+    [class]="currentLang === 'ar' ? 'text-end' : 'text-start'">
 
-    <div class="w-full lg:w-1/4 shrink-0">
+    <div class="w-full lg:w-1/4 shrink-0 flex flex-col">
       <span class="text-[11px] font-semibold tracking-widest text-[#FF668B]">
         {{ 'bestSeller.eyebrow' | translate }}
       </span>
@@ -14,9 +15,12 @@
         {{ 'bestSeller.description' | translate }}
       </p>
 
-      <div class="mt-8 lg:mt-20">
-        <lib-button type="submit" [label]="'bestSeller.exploreGifts' | translate" [icon]="'pi pi-arrow-right'"
-          [iconPos]="'right'" [color]="isDark() ? '#FFA6B9' : '#8D1C24'" (click)="exploreGifts()"
+      <div class="mt-auto pt-8">
+        <lib-button type="submit" [label]="'bestSeller.exploreGifts' | translate"
+          [icon]="currentLang === 'ar' ? 'pi pi-arrow-left' : 'pi pi-arrow-right'"
+        [iconPos]="currentLang === 'ar' ? 'left' : 'right'"
+          [color]="isDark() ? '#FFA6B9' : '#8D1C24'"
+          (click)="exploreGifts()"
           styleClass="w-full py-2.5 sm:py-3 text-sm sm:text-base font-semibold" />
       </div>
     </div>

@@ -2,7 +2,7 @@
   <lib-title-section [subtitle]="'testimonials.subtitle' | translate" [title]="'testimonials.title' | translate">
   </lib-title-section>
 
-  <div class="testimonials-section-slider">
+  <div class="testimonials-section-slider" [attr.dir]="isArabic ? 'rtl' : 'ltr'">
     <owl-carousel-o [options]="customOptions" class="testimonials-carousel">
 
       @for (item of reviews; track item.id) {

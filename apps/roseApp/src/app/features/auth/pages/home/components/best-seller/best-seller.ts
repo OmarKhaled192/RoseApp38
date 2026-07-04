@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Card, Button, DarkModeService } from '@org/ui';
 import { CardAction, CardData } from 'libs/shared/ui/src/models/card-type';
 import { Carousel } from 'primeng/carousel';
@@ -15,6 +15,8 @@ import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/serv
   styleUrl: './best-seller.css',
 })
 export class BestSeller {
+  private translateService = inject(TranslateService)
+  currentLang = this.translateService.currentLang();
   private readonly darkModeService = inject(DarkModeService);
   readonly store = inject(ProductStore);
 
