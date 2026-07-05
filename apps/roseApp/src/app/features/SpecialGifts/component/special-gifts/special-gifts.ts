@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { BannerSlide, FeaturedCard } from '../../models/specialgift.interface';
 
 @Component({
@@ -11,6 +11,15 @@ import { BannerSlide, FeaturedCard } from '../../models/specialgift.interface';
 })
 export class SpecialGifts {
   isRtl = document.documentElement.dir === 'ltr';
+  private translateService = inject(TranslateService)
+  currentLang = this.translateService.currentLang();
+  constructor() {
+    this.translateService.onLangChange.subscribe(() => {
+      this.isRtl = this.translateService.currentLang() === 'ar';
+    });
+
+    this.isRtl = this.translateService.currentLang() === 'ar';
+  }
   slides = signal<BannerSlide[]>([
     {
       image: '/images/SpecialGifts/carousel.png',

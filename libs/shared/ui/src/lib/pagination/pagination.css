@@ -19,13 +19,13 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-.custom-paginator ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+.custom-paginator ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page[aria-current="page"] {
     background: #a62626 !important;
     color: #ffffff !important;
     border-color: #a62626 !important;
 }
 
-.custom-paginator ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover,
+.custom-paginator ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page:not([aria-current="page"]):hover,
 .custom-paginator ::ng-deep .p-paginator button:not(.p-disabled):hover {
     background: #f9f9f9;
     border-color: #dcdcdc;
