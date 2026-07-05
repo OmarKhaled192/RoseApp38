@@ -14,7 +14,7 @@ import { ProductStore } from 'apps/roseApp/src/app/features/product/state/produc
 
 import { CategoryStore } from 'apps/roseApp/src/app/features/product/state/cateory.store';
 import { ICategory } from '../../model/category';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-most-popular',
@@ -25,7 +25,10 @@ export class MostPopular {
   private readonly darkModeService = inject(DarkModeService);
   readonly store = inject(ProductStore);
   private categoryStore = inject(CategoryStore);
-
+  private translateService = inject(TranslateService)
+  
+  isRtl = document.documentElement.dir === 'ltr';
+  currentLang = this.translateService.currentLang();
   wishlist = signal<Set<string>>(new Set());
 
   tabs = signal<{ label: string; value: string }[]>([
@@ -62,10 +65,16 @@ export class MostPopular {
   });
 
   constructor() {
+    this.translateService.onLangChange.subscribe(() => {
+      this.isRtl = this.translateService.currentLang() === 'ar';
+    });
+
+    this.isRtl = this.translateService.currentLang() === 'ar';
     effect(() => {
       this.tabs.set(this.categories());
     });
   }
+
 
   readonly isLoading = computed(() => this.productResource.isLoading());
 
