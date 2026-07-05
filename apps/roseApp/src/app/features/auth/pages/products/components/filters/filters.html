@@ -34,14 +34,14 @@
         <label for="price-from" class="text-[11px] text-gray-400">{{ 'products.filters.from' | translate }}</label>
         <input id="price-from" type="number" min="0" [value]="priceFrom()"
           (input)="onPriceFromChange($any($event.target).value)"
-          class="w-full mt-1 rounded-md border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-[#A6252A]" />
+          class="text-gray-400 w-full mt-1 rounded-md border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-[#A6252A]" />
       </div>
       <span class="text-gray-300 pb-2">-</span>
       <div class="flex-1">
         <label for="price-to" class="text-[11px] text-gray-400">{{ 'products.filters.to' | translate }}</label>
         <input id="price-to" type="number" min="0" [value]="priceTo()"
           (input)="onPriceToChange($any($event.target).value)"
-          class="w-full mt-1 rounded-md border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-[#A6252A]" />
+          class="text-gray-400 w-full mt-1 rounded-md border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-[#A6252A]" />
       </div>
     </div>
   </app-filter-section>
