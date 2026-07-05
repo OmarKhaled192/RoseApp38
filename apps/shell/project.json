@@ -48,6 +48,11 @@
             "glob": "*.json",
             "input": "apps/adminDashboard/public/assets/i18n",
             "output": "/assets/i18n/adminDashboard"
+          },
+          {
+            "glob": "*/",
+            "input": "libs/shared/ui/src/assets",
+            "output": "/assets"
           }
         ],
         "styles": [

@@ -10,6 +10,7 @@ import { BannerSlide, FeaturedCard } from '../../models/specialgift.interface';
   templateUrl: './special-gifts.html',
 })
 export class SpecialGifts {
+  isRtl = document.documentElement.dir === 'ltr';
   slides = signal<BannerSlide[]>([
     {
       image: '/images/SpecialGifts/carousel.png',

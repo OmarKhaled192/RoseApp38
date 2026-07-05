@@ -1,52 +1,60 @@
-<section
-  class="max-w-7xl w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 md:mt-8 px-4 md:px-0"
->
+<section class="max-w-7xl w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 md:mt-8 px-4 md:px-0">
   <div
     class="relative rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[420px] bg-cover bg-center flex flex-col justify-end items-start p-4 sm:p-5 md:p-6 text-left"
-    style="background-image: url('/images/SpecialGifts/SpecialGifts.png')"
-  >
-    <div
-      class="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"
-    ></div>
+    style="background-image: url('/images/SpecialGifts/SpecialGifts.png')">
+    <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"></div>
 
     <div class="relative z-10 flex flex-col items-start text-left w-full">
       <span
-        class="inline-flex items-center gap-1.5 bg-[#FBEAEA] text-[#A6252A] text-[10px] sm:text-[11px] px-2.5 sm:px-3 py-1 rounded-full mb-3 sm:mb-4 w-fit text-left"
-      >
+        class="inline-flex items-center gap-1.5 bg-[#FBEAEA] text-[#A6252A] text-[10px] sm:text-[11px] px-2.5 sm:px-3 py-1 rounded-full mb-3 sm:mb-4 w-fit text-left">
         {{ 'specialGifts.startingFrom' | translate }}
       </span>
 
       <h3
-        class="text-white font-semibold text-base sm:text-lg md:text-xl mb-3 sm:mb-4 md:mb-5 text-left w-full leading-snug"
-      >
+        class="text-white font-semibold text-base sm:text-lg md:text-xl mb-3 sm:mb-4 md:mb-5 text-left w-full leading-snug">
         {{ 'specialGifts.sectionTitle' | translate }}
       </h3>
 
       <button
-        class="bg-[#FBEAEA] text-[#741C21] text-xs sm:text-sm font-medium tracking-wide px-4 sm:px-5 py-1.5 sm:py-2 rounded-[10px] hover:bg-[#741C21] hover:text-white transition w-fit text-left"
-      >
+        class="bg-[#FBEAEA] text-[#741C21] text-xs sm:text-sm font-medium tracking-wide px-4 sm:px-5 py-1.5 sm:py-2 rounded-[10px] hover:bg-[#741C21] hover:text-white transition w-fit text-left">
         {{ 'specialGifts.shopNow' | translate }} →
       </button>
     </div>
   </div>
 
   <div class="md:col-span-2 relative rounded-2xl overflow-hidden">
-    <p-carousel
-      [value]="slides()"
-      [numVisible]="1"
-      [numScroll]="1"
-      [circular]="true"
-      [autoplayInterval]="5000"
-      [showIndicators]="true"
-      [showNavigators]="true"
-      [prevButtonProps]="{
-        styleClass:
-          'absolute! bottom-3! sm:bottom-4! right-[44px]! sm:right-[52px]! top-auto! left-auto! translate-y-0! z-20! w-8! h-8! sm:w-9! sm:h-9! rounded-l-full! rounded-r-none! bg-[#FBEAEA]! text-[#741C21]! border-none! backdrop-blur-sm! hover:bg-[#f5d9d9]! flex! items-center! justify-center! border-r! border-[#741C21]/20!'
-      }"
-      [nextButtonProps]="{
-        styleClass:
-          'absolute! bottom-3! sm:bottom-4! right-3! sm:right-4! top-auto! left-auto! translate-y-0! z-20! w-8! h-8! sm:w-9! sm:h-9! rounded-r-full! rounded-l-none! bg-[#FBEAEA]! text-[#741C21]! border-none! backdrop-blur-sm! hover:bg-[#f5d9d9]! flex! items-center! justify-center!'
-      }"
+    <p-carousel [value]="slides()" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="5000"
+      [showIndicators]="true" [showNavigators]="true" [prevButtonProps]="{
+            styleClass: `
+              absolute! bottom-3! sm:bottom-4!
+              ${this.isRtl
+                ? 'left-3! sm:left-4!'
+                : 'right-[44px]! sm:right-[52px]!'}
+              top-auto!
+              z-20!
+              w-8! h-8! sm:w-9! sm:h-9!
+              rounded-l-full! rounded-r-none!
+              bg-[#FBEAEA]! text-[#741C21]!
+              border-none! backdrop-blur-sm!
+              hover:bg-[#f5d9d9]!
+              flex! items-center! justify-center!
+            `
+          }" [nextButtonProps]=" {
+            styleClass: `
+              absolute! bottom-3! sm:bottom-4!
+              ${this.isRtl
+                ? 'left-[44px]! sm:left-[52px]!'
+                : 'right-3! sm:right-4!'}
+              top-auto!
+              z-20!
+              w-8! h-8! sm:w-9! sm:h-9!
+              rounded-r-full! rounded-l-none!
+              bg-[#FBEAEA]! text-[#741C21]!
+              border-none! backdrop-blur-sm!
+              hover:bg-[#f5d9d9]!
+              flex! items-center! justify-center!
+            `
+          }"
       indicatorsContentClass="absolute! top-3! sm:top-4! right-3! sm:right-4! bottom-auto! left-auto! translate-x-0! z-20! flex! gap-1.5!"
       [dt]="{
         indicator: {
@@ -56,32 +64,23 @@
           height: '6px',
           borderRadius: '9999px'
         }
-      }"
-    >
+      }">
       <ng-template let-slide pTemplate="item">
         <div
           class="relative min-h-[260px] sm:min-h-[320px] md:min-h-[420px] bg-cover bg-center flex flex-col items-start justify-end px-5 sm:px-8 md:px-10 pb-6 sm:pb-7 md:pb-8 text-left"
-          [style.background-image]="'url(' + slide.image + ')'"
-        >
+          [style.background-image]="'url(' + slide.image + ')'">
           <div class="absolute inset-0 bg-black/25"></div>
-          <div
-            class="absolute inset-0 bg-linear-to-t from-black/55 via-black/15 to-transparent"
-          ></div>
+          <div class="absolute inset-0 bg-linear-to-t from-black/55 via-black/15 to-transparent"></div>
 
           <div class="relative z-10 max-w-[85%] sm:max-w-xs text-left">
-            <h3
-              class="text-white text-xl sm:text-2xl md:text-3xl leading-tight mb-1.5 sm:mb-2 font-semibold text-left"
-            >
+            <h3 class="text-white text-xl sm:text-2xl md:text-3xl leading-tight mb-1.5 sm:mb-2 font-semibold text-left">
               {{ slide.titleKey | translate }}
             </h3>
-            <p
-              class="text-white/90 text-xs sm:text-sm mb-4 sm:mb-5 md:mb-6 font-normal text-left"
-            >
+            <p class="text-white/90 text-xs sm:text-sm mb-4 sm:mb-5 md:mb-6 font-normal text-left">
               {{ slide.subtitleKey | translate }}
             </p>
             <button
-              class="bg-[#FBEAEA] text-[#741C21] text-xs sm:text-sm font-medium tracking-wide px-4 sm:px-5 py-1.5 sm:py-2 rounded-[10px] hover:bg-[#741C21] hover:text-white transition w-fit text-left"
-            >
+              class="bg-[#FBEAEA] text-[#741C21] text-xs sm:text-sm font-medium tracking-wide px-4 sm:px-5 py-1.5 sm:py-2 rounded-[10px] hover:bg-[#741C21] hover:text-white transition w-fit text-left">
               {{ slide.ctaLabelKey | translate }}
             </button>
           </div>
@@ -91,27 +90,19 @@
   </div>
 </section>
 
-<section
-  class="max-w-7xl w-full mx-auto grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-4 px-4 md:px-0"
->
+<section class="max-w-7xl w-full mx-auto grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-4 px-4 md:px-0">
   @for (card of cards(); track card.titleKey) {
   <div
     class="relative rounded-2xl overflow-hidden min-h-[160px] sm:min-h-[180px] md:min-h-[200px] bg-cover bg-center flex flex-col items-start justify-end p-3 sm:p-4 text-left"
-    [style.background-image]="'url(' + card.image + ')'"
-  >
-    <div
-      class="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent"
-    ></div>
+    [style.background-image]="'url(' + card.image + ')'">
+    <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent"></div>
 
     <div class="relative z-10 text-left w-full">
       <span
-        class="inline-block bg-[#FBEAEA] text-[#741C21] text-[10px] sm:text-xs font-medium px-2.5 sm:px-3 py-1 rounded-full mb-1.5 sm:mb-2 text-left"
-      >
+        class="inline-block bg-[#FBEAEA] text-[#741C21] text-[10px] sm:text-xs font-medium px-2.5 sm:px-3 py-1 rounded-full mb-1.5 sm:mb-2 text-left">
         {{ card.badgeKey | translate }}
       </span>
-      <h3
-        class="text-white text-sm sm:text-base font-semibold leading-snug text-left"
-      >
+      <h3 class="text-white text-sm sm:text-base font-semibold leading-snug text-left">
         {{ card.titleKey | translate }}
       </h3>
     </div>
