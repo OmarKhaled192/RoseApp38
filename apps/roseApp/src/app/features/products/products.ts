@@ -5,9 +5,9 @@ import { ProductsCategory } from './components/products-category/products-catego
 import { Filters } from './components/filters/filters';
 import { CategoryItem, OccasionItem, ProductFilters } from './models/products.models';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ProductData } from '../../../product/models/product';
-import { mapProductToCardData } from '../../../product/services/product-to-card.mapper';
-import { ProductStore } from '../../../product/state/product.store';
+import { ProductData } from '../product/models/product';
+import { mapProductToCardData } from '../product/services/product-to-card.mapper';
+import { ProductStore } from '../product/state/product.store';
 
 @Component({
   selector: 'app-products',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Layout } from '../features/auth/pages/layout/layout';
+import { Layout } from '../features/layout/layout';
 
 @Component({
   selector: 'app-roseapp-entry',

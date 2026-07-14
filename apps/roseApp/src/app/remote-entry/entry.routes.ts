@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { HomeComponent } from '../features/auth/pages/home/home';
+import { HomeComponent } from '../features/home/home';
 import { RoseApp } from './entry';
 
 export const remoteRoutes: Route[] = [
@@ -11,7 +11,7 @@ export const remoteRoutes: Route[] = [
       {
         path: 'products',
         loadComponent: () =>
-          import('../features/auth/pages/products/products').then(
+          import('../features/products/products').then(
             (m) => m.Products
           ),
       },

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiService } from '@org/data-access';
-import { ICategory } from '../../auth/pages/home/model/category';
+import { ICategory } from '../../home/model/category';
 
 @Injectable({
   providedIn: 'root',

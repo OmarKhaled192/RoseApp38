@@ -1,13 +1,13 @@
 import { AboutUs } from './components/about-us/about-us';
-import { TrustedBy } from '../../../Trusted by Section/components/trusted-by/trusted-by';
-import { GallerySection } from '../../../sections/components/gallery-section/gallery-section';
 import { MostPopular } from './components/most-popular/most-popular';
 import { CommonModule } from '@angular/common';
 import { BestSeller } from './components/best-seller/best-seller';
-import { SpecialGifts } from "../../../SpecialGifts/component/special-gifts/special-gifts";
 import { Component } from '@angular/core';
-import { Testimonials } from '../../../sections/components/testimonials/testimonials';
-import { ServicesHightlights } from '../../../services-highlights/component/servicesHightlights';
+import { TrustedBy } from './components/Trusted by Section/components/trusted-by/trusted-by';
+import { GallerySection } from './components/sections/components/gallery-section/gallery-section';
+import { SpecialGifts } from './components/SpecialGifts/component/special-gifts/special-gifts';
+import { Testimonials } from './components/sections/components/testimonials/testimonials';
+import { ServicesHightlights } from './components/services-highlights/component/servicesHightlights';
 @Component({
   selector: 'app-home',
   imports: [
