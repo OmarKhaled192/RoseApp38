@@ -22,6 +22,13 @@ export const remoteRoutes: Route[] = [
             (m) => m.ProductDetails
           ),
       },
+      {
+        path: 'checkout-address',
+        loadComponent: () =>
+          import('../features/checkout/addresses/components/checkout-address/checkout-address.component').then(
+            (m) => m.CheckoutAddressComponent
+          ),
+      },
     ]
   },
 ];
