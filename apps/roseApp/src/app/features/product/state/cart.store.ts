@@ -3,8 +3,8 @@ import { tap, pipe, switchMap } from "rxjs";
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { LoadingState, Message, QueryParams } from "@org/data-access";
-import { CartService } from "../../cart/services/cart";
-import { Cart, CartItem } from "../../cart/models/cart.interface";
+import { CartService } from "../../checkout/services/cart";
+import { Cart, CartItem } from "../../checkout/models/cart.interface";
 
 export interface CartState extends LoadingState {
   cart: Cart;

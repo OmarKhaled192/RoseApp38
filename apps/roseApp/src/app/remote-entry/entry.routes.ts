@@ -25,21 +25,21 @@ export const remoteRoutes: Route[] = [
       {
         path: 'cart',
         loadComponent: () =>
-          import('../features/cart/pages/checkout/cart/cart').then(
+          import('../features/checkout/pages/checkout/cart/cart').then(
             (m) => m.CartComponent
           ),
       },
       {
         path: 'checkout',
         loadComponent: () =>
-          import('../features/cart/pages/checkout/checkout').then(
+          import('../features/checkout/pages/checkout/checkout').then(
             (m) => m.Checkout
           ),
         children: [
           {
             path: 'cart',
             loadComponent: () =>
-              import('../features/cart/pages/checkout/cart/cart').then(
+              import('../features/checkout/pages/checkout/cart/cart').then(
                 (m) => m.CartComponent
               ),
           },
