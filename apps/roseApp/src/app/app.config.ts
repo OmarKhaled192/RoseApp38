@@ -14,11 +14,13 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { appRoutes } from './app.routes';
 import { authenticationInterceptor } from '@org/auth';
+import { MessageService } from 'primeng/api';
 
 const DEFAULT_LANG: string = 'en';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    MessageService,
     provideBrowserGlobalErrorListeners(),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([authenticationInterceptor])),

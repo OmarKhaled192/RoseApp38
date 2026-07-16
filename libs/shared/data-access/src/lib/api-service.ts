@@ -50,7 +50,16 @@ export abstract class ApiService<T> {
       })
     );
   }
-  
+
+  getListResourceData<R = T>(params?: () => QueryParams): HttpResourceRef<DataResponse<R>  | undefined> {
+    return runInInjectionContext(this.injector, () =>
+      httpResource<DataResponse<R>  | undefined>(() => {
+        const queryString = this.buildParams(params?.()).toString();
+        return queryString ? `${this.fullUrl}?${queryString}` : this.fullUrl;
+      })
+    );
+  }
+
   getResourceById<R = T>(id: string): HttpResourceRef<DataResponse<R> | undefined> {
   return httpResource<DataResponse<R>>(() => {
      return `${this.fullUrl}/${id}`;
@@ -62,13 +71,21 @@ export abstract class ApiService<T> {
     return this.http.post<DataResponse<R>>(url, body);
   }
 
-  put<B, R = T>(body: B): Observable<R> {
-    return this.http.put<R>(this.fullUrl, body);
+  put<B, R = T>(id: number | string, body: B): Observable<R> {
+    return this.http.put<R>(`${this.fullUrl}/${id}`, body);
   }
 
+  
+  patch<B, R = T>(id: number | string, body: B): Observable<R> {
+    return this.http.patch<R>(`${this.fullUrl}/${id}`, body);
+  }
 
-  delete<R = T>(): Observable<R> {
+  deleteAll<R = T>(): Observable<R> {
     return this.http.delete<R>(this.fullUrl);
+  }
+
+  delete<R = T>(id: number | string): Observable<R> {
+    return this.http.delete<R>(`${this.fullUrl}/${id}`);
   }
 
   private buildParams(params?: QueryParams): HttpParams {
