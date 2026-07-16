@@ -1,6 +1,6 @@
 <section class="w-full">
   <lib-title-section
-    title="{{'product.relatedProducts' | translate}}"
+    [title]="title() ?  title() : ('product.relatedProducts' | translate)"
     subtitle=" "
     align="left"
     [highlightWidth]="'60%'"

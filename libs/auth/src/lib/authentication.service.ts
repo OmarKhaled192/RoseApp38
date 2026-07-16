@@ -1,11 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  private readonly loggedInState = signal<boolean>(this.hasToken());
+
+  readonly isLoggedIn = this.loggedInState.asReadonly();
   setToken(token: string): void {
     this.setCookie('token', token, 7);
+    this.loggedInState.set(true);
   }
 
   getToken(): string | null {
@@ -14,6 +18,7 @@ export class AuthenticationService {
 
   removeToken(): void {
     this.deleteCookie('token');
+    this.loggedInState.set(false);
   }
 
   private setCookie(name: string, value: string, days?: number): void {
@@ -42,5 +47,9 @@ export class AuthenticationService {
   private deleteCookie(name: string): void {
     if (typeof document === 'undefined') return;
     document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+
+  private hasToken(): boolean {
+    return !!this.getToken();
   }
 }

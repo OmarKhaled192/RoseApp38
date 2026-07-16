@@ -1,0 +1,11 @@
+<div class="bg-white p-10">
+  <div class="mx-auto sm:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <section class="lg:col-span-2">
+      <router-outlet />
+    </section>
+    <aside class="lg:col-span-1">
+      <app-summary-checkout />
+    </aside>
+  </div>
+  <app-related-product class="ps-6" title="{{'cart.youMayLike' | translate}}" />
+  </div>

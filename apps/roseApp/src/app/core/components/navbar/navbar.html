@@ -59,10 +59,11 @@
       <img src="images/navIcon/heart.svg" alt="Love Icon" class="w-5 h-5" />
     </button>
 
-    <!-- Cart -->
-    <button (click)="onCart()" class="text-gray-600 hover:text-[#e07090] transition-colors duration-200 cursor-pointer">
+  @if (isLoggedIn()) {
+    <button routerLink="/roseApp/checkout/cart" class="text-gray-600 hover:text-[#e07090] transition-colors duration-200 cursor-pointer">
       <img src="images/navIcon/shopping-cart.svg" alt="Cart Icon" class="w-5 h-5" />
     </button>
+  }
 
     <!-- Bell (hidden on xs, visible sm+) -->
     <button (click)="onNotifications()"

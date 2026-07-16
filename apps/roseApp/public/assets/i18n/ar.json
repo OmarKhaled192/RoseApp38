@@ -161,5 +161,27 @@
   "gallery": {
     "subtitle": "المعرض",
     "title": "اكتشف معرضنا الرائع"
+  },
+    "cart": {
+    "title": "السلة",
+    "products": "منتجات",
+    "clearCart": "إفراغ السلة",
+    "remove": "إزالة",
+    "rating": "التقييم",
+    "ratings": "تقييم",
+    "qtyShort": "الكمية ",
+    "currency": "جنيه",
+    "empty": "سلتك فارغة.",
+    "continueShopping": "متابعة التسوق",
+    "youMayLike": "منتجات قد تعجبك",
+    "summary": {
+      "title": "ملخص الطلب",
+      "couponPlaceholder": "كود الخصم",
+      "applyCoupon": "تطبيق الكود",
+      "noCoupons": "لا يوجد كود مطبق",
+      "subtotal": "الإجمالي الفرعي",
+      "total": "الإجمالي",
+      "checkout": "إتمام الشراء"
+    }
   }
 }

@@ -161,5 +161,27 @@
   "gallery": {
     "subtitle": "Gallery",
     "title": "Check Out our Wonderful Gallery"
+  },
+   "cart": {
+    "title": "Cart",
+    "products": "products",
+    "clearCart": "Clear Cart",
+    "remove": "Remove",
+    "rating": "Rating",
+    "ratings": "ratings",
+    "qtyShort": "x",
+    "currency": "EGP",
+    "empty": "Your cart is empty.",
+    "continueShopping": "Continue Shopping",
+    "youMayLike": "Products You May Like",
+    "summary": {
+      "title": "Summary",
+      "couponPlaceholder": "Coupon Code",
+      "applyCoupon": "Apply Coupon",
+      "noCoupons": "No coupons applied",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "checkout": "Checkout"
+    }
   }
 }
