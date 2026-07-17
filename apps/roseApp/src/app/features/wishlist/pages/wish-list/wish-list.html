@@ -9,7 +9,7 @@
       </h2>
 
       <span class="text-xs mt-8 text-gray-400">
-        {{ itemCount }} {{ itemCount === 1 ? ('wishlist.item' | translate) :
+        {{ itemCount() }} {{ itemCount() === 1 ? ('wishlist.item' | translate) :
         ('wishlist.items' | translate) }}
       </span>
     </div>

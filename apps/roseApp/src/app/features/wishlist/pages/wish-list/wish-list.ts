@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardList } from '../../components/card-list/card-list';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -12,8 +12,8 @@ import { EmptyWishlist } from '../../components/empty-wishlist/empty-wishlist';
   templateUrl: './wish-list.html',
 })
 export class WishList {
-  itemCount = 6;
-  showDeleteDialog = false;
+  itemCount = signal<number>(6);
+  showDeleteDialog = signal<boolean>(false);
   translate = inject(TranslateService);
 
   products: any[] = [
@@ -30,29 +30,23 @@ export class WishList {
 
   onRemove(productId: string): void {
     this.products = this.products.filter((p) => p.id !== productId);
-    this.itemCount = this.products.length;
+    this.itemCount.set(this.products.length);
   }
 
   removeAllProducts(): void {
-    console.log('Removing all products from wishlist');
     this.products = [];
-    this.itemCount = 0;
+    this.itemCount.set(0);
   }
 
   openDeleteDialog() {
-    this.showDeleteDialog = true;
+    this.showDeleteDialog.set(true);
   }
 
   onAddToCart(productId: string): void {
-    const product = this.products.find((p) => p.id === productId);
-    if (!product) return;
-
     // Replace with a real cart service call, e.g. this.cartService.add(product);
-    console.log('Added to cart:', product);
   }
 
   onContinueShopping(): void {
     // Navigate back to the shop/home page, e.g. this.router.navigate(['/shop']);
-    console.log('Continue shopping clicked');
   }
 }
