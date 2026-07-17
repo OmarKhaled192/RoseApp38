@@ -1,12 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DarkModeComponent, LanguageSwitcherComponent } from '@org/ui';
 
 @Component({
   selector: 'app-navbar',
-  imports: [FormsModule, CommonModule, DarkModeComponent, LanguageSwitcherComponent],
+  imports: [
+    FormsModule,
+    CommonModule,
+    DarkModeComponent,
+    LanguageSwitcherComponent,
+    RouterLink,
+  ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
@@ -38,7 +44,8 @@ export class Navbar {
 
   onSignout(): void {
     if (typeof document !== 'undefined') {
-      document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      document.cookie =
+        'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
     this.router.navigateByUrl('/auth/login');
   }

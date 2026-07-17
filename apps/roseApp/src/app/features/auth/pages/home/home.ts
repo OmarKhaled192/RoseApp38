@@ -8,6 +8,7 @@ import { SpecialGifts } from "../../../SpecialGifts/component/special-gifts/spec
 import { Component } from '@angular/core';
 import { Testimonials } from '../../../sections/components/testimonials/testimonials';
 import { ServicesHightlights } from '../../../services-highlights/component/servicesHightlights';
+import { WishList } from '../../../wishlist/pages/wish-list/wish-list';
 @Component({
   selector: 'app-home',
   imports: [
@@ -20,7 +21,8 @@ import { ServicesHightlights } from '../../../services-highlights/component/serv
     SpecialGifts,
     Testimonials,
     ServicesHightlights,
-    SpecialGifts
+    SpecialGifts,
+    WishList
   ],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
