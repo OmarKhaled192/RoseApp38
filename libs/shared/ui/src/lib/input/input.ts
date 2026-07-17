@@ -65,6 +65,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   isReadonly = input<boolean>(false);
 
   readonly value = signal<InputValue>(null);
+  readonly currentValue = input<InputValue>('');
   readonly disabled = signal(false);
   private readonly parentControl = signal<FormControl | null>(null);
 

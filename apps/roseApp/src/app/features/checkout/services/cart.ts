@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '@org/data-access';
+import { ApiService, DataResponse } from '@org/data-access';
 import { HttpClient } from '@angular/common/http';
-import { Cart } from '../models/cart';
+import { Observable } from 'rxjs';
+import { PromoCode } from '../models/promo-code.interface';
+import { Cart } from '../models/cart.interface';
 
 @Injectable({
   providedIn: 'root',
