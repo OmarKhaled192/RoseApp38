@@ -183,5 +183,24 @@
       "total": "الإجمالي",
       "checkout": "إتمام الشراء"
     }
+  },
+  "wishlist": {
+    "title": "المفضلة",
+    "item": "منتج",
+    "items": "منتجات",
+    "clearWishlist": "مسح المفضلة",
+    "continueShopping": "متابعة التسوق",
+    "inStock": "متوفر",
+    "outOfStock": "غير متوفر",
+    "ratings": "تقييم",
+    "currency": "ج.م",
+    "removeItem": "إزالة المنتج",
+    "addToCart": "أضف إلى السلة",
+    "exploreSimilarProducts": "استكشف منتجات مشابهة",
+    "clearWishlistConfirmation": "هل أنت متأكد أنك تريد مسح قائمة المفضلة؟",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "emptyTitle": "قائمة المفضلة فارغة",
+    "emptyDescription": "احفظ المنتجات التي تعجبك بالضغط على أيقونة القلب، وستظهر هنا لتتمكن من الوصول إليها في أي وقت."
   }
 }
