@@ -2,18 +2,20 @@ export interface CategoryItem {
   id: string;
   label: string;
   badge?: string;
-  icon?: string; // PrimeIcons class, e.g. 'pi pi-id-card'
+  icon?: string; 
+  image?: string;
   children?: CategoryItem[];
 }
 
-export interface OccasionItem {
-  id: string;
-  label: string;
+export interface IOccasion {
+ id: string;
+  title: string;
   image: string;
 }
 
+
 export interface ProductFilters {
-  categoryId: string | null;
+  categoryIds: string[];
   occasionIds: string[];
   rating: number | null;
   priceFrom: number | null;
@@ -21,7 +23,7 @@ export interface ProductFilters {
 }
 
 export const EMPTY_FILTERS: ProductFilters = {
-  categoryId: null,
+  categoryIds: [],
   occasionIds: [],
   rating: null,
   priceFrom: null,

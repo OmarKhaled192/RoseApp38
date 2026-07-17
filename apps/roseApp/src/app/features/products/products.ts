@@ -3,11 +3,15 @@ import { Card, Pagination } from '@org/ui';
 import { CardAction, CardData } from '@org/ui';
 import { ProductsCategory } from './components/products-category/products-category';
 import { Filters } from './components/filters/filters';
-import { CategoryItem, OccasionItem, ProductFilters } from './models/products.models';
+import { CategoryItem, IOccasion ,ProductFilters } from './models/products.models';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ProductData } from '../product/models/product';
 import { mapProductToCardData } from '../product/services/product-to-card.mapper';
 import { ProductStore } from '../product/state/product.store';
+import { CategoryStore } from '../product/state/cateory.store';
+import { ICategory } from '../home/model/category';
+import { OccasionStore } from '../product/state/occasion.store';
+
 
 @Component({
   selector: 'app-products',
@@ -16,90 +20,46 @@ import { ProductStore } from '../product/state/product.store';
   styleUrl: './products.css',
 })
 export class Products {
-  // ---- Static sidebar data (replace with API calls) ----
-  categories: CategoryItem[] = [
-    { id: 'cards', label: 'Cards', icon: 'pi-id-card' },
-    { id: 'chocolate', label: 'Chocolate', icon: 'pi-gift' },
-    {
-      id: 'flowers',
-      label: 'Flowers',
-      icon: 'pi-heart',
-    },
-    { id: 'cards-1', label: 'Cards', icon: 'pi-id-card' },
-    { id: 'chocolate-1', label: 'Chocolate', icon: 'pi-gift' },
-    { id: 'cards-2', label: 'Cards', icon: 'pi-id-card' },
-  ];
 
-  occasions: OccasionItem[] = [
-    { id: 'wedding', label: 'Wedding', image: '/images/filters/occasions/wedding.jpg' },
-    { id: 'anniversary', label: 'Anniversary', image: '/images/filters/occasions/wedding.jpg' },
-    { id: 'graduation', label: 'Graduation', image: '/images/filters/occasions/graduation.jpg' },
-    { id: 'wedding', label: 'Wedding', image: '/images/filters/occasions/wedding.jpg' },
-    { id: 'fathers-day', label: "Father's Day", image: '/images/filters/occasions/fathers-day.png' },
-    { id: 'graduation', label: 'Graduation', image: '/images/filters/occasions/graduation.jpg' },
-  ];
+
+  readonly categoryStore = inject(CategoryStore);
+private readonly categoryResource = this.categoryStore.getAllCategory();
+
+readonly isCategoriesLoading = computed(() => this.categoryResource.isLoading());
+
+readonly categories = computed<CategoryItem[]>(() => {
+  const data: ICategory[] = this.categoryResource.value()?.payload.data ?? [];
+  return data.map((cat) => ({
+    id: cat.id,
+    label: cat.title,
+    image: cat.image,
+  }));
+});
+
+
+  readonly occasionStore = inject(OccasionStore);
+private readonly occasionResource = this.occasionStore.getAllOccasion();
+
+readonly isOccasionsLoading = computed(() => this.occasionResource.isLoading());
+
+readonly occasions = computed<IOccasion[]>(() => {
+  return this.occasionResource.value()?.payload.data ?? [];
+});
+
   readonly store = inject(ProductStore);
 
   private productResource = this.store.getAllProduct();
 
-  readonly products = computed<CardData[]>(() => {
-    const data: ProductData[] =
-      this.productResource.value()?.payload.data ?? [];
-    return data.map(mapProductToCardData);
-  });
 
-
-  // ---- Product source (replace with API call) ----
-  private allProducts = signal<CardData[]>([
-    {
-      id: '1',
-      // image: 'assets/products/dreamy-white-roses.jpg',
-      title: 'Dreamy White Roses Bouquet',
-      subtitle: 'Fresh white roses bouquet',
-      rating: 3,
-      price: 250,
-      oldPrice: 350,
-      currency: 'EGP',
-      badges: ['new'],
-      inStock: true,
-      wishlist: 24,
-      create: '2026-07-01',
-    },
-    {
-      id: '2',
-      // image: 'assets/products/fuchsia-brilliance-vase.jpg',
-      title: 'Fuchsia Brilliance Vase',
-      subtitle: 'Elegant floral vase arrangement',
-      rating: 3,
-      price: 250,
-      oldPrice: 350,
-      currency: 'EGP',
-      badges: ['out-of-stock'],
-      inStock: false,
-      wishlist: 12,
-      create: '2026-06-28',
-    },
-    {
-      id: '3',
-      // image: 'assets/products/moko-chocolate-set.jpg',
-      title: 'Moko Chocolate Set | Esperance',
-      subtitle: 'Premium chocolate gift set',
-      rating: 3,
-      price: 250,
-      oldPrice: 350,
-      currency: 'EGP',
-      badges: ['hot', 'out-of-stock'],
-      inStock: false,
-      wishlist: 31,
-      create: '2026-06-25',
-    },
-  ]);
+  private readonly rawProducts = computed<ProductData[]>(
+    () => this.productResource.value()?.payload.data ?? []
+  );
 
   // ---- State ----
-  selectedCategoryId = signal<string | null>('flowers');
+  selectedCategoryIds = signal<string[]>([]);
 
   filters = signal<ProductFilters>({
-    categoryId: 'flowers',
+    categoryIds: [],
     occasionIds: [],
     rating: null,
     priceFrom: null,
@@ -112,26 +72,53 @@ export class Products {
   wishlist = signal<Set<string>>(new Set());
 
   // ---- Derived data ----
-  filteredProducts = computed(() => {
+  readonly filteredProducts = computed<ProductData[]>(() => {
     const f = this.filters();
 
-    return this.allProducts().filter((p) => {
-      if (f.rating && (p.rating ?? 0) < f.rating) return false;
-      if (f.priceFrom != null && (p.price ?? 0) < f.priceFrom) return false;
-      if (f.priceTo != null && (p.price ?? 0) > f.priceTo) return false;
+    return this.rawProducts().filter((p) => {
+      if (f.categoryIds.length && !f.categoryIds.includes(p.categoryId)) return false;
+
+      if (f.occasionIds.length) {
+        const productOccasionIds = (p.occasions as unknown as { id: string }[] | undefined ?? [])
+          .map((o) => o.id);
+        const hasMatch = f.occasionIds.some((id) => productOccasionIds.includes(id));
+        if (!hasMatch) return false;
+      }
+
+      if (f.rating && Math.round(p.rating ?? 0) !== f.rating) return false;
+
+      const price = Number(p.price);
+      const validPriceRange =
+        f.priceFrom == null || f.priceTo == null || f.priceFrom <= f.priceTo;
+
+      if (validPriceRange) {
+        if (f.priceFrom != null && price < f.priceFrom) return false;
+        if (f.priceTo != null && price > f.priceTo) return false;
+      }
+
       return true;
     });
   });
 
-  pagedProducts = computed(() => {
+  readonly pagedProducts = computed<CardData[]>(() => {
     const start = this.page() * this.pageSize();
-    return this.filteredProducts().slice(start, start + this.pageSize());
+    return this.filteredProducts()
+      .slice(start, start + this.pageSize())
+      .map(mapProductToCardData);
   });
 
   // ---- Handlers ----
-  onCategorySelect(id: string | null) {
-    this.selectedCategoryId.set(id);
-    this.filters.update((f) => ({ ...f, categoryId: id }));
+  onCategorySelect(id: string) {
+    this.selectedCategoryIds.update((ids) =>
+      ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id]
+    );
+    this.filters.update((f) => ({ ...f, categoryIds: this.selectedCategoryIds() }));
+    this.page.set(0);
+  }
+
+  onResetCategories() {
+    this.selectedCategoryIds.set([]);
+    this.filters.update((f) => ({ ...f, categoryIds: [] }));
     this.page.set(0);
   }
 
@@ -141,9 +128,9 @@ export class Products {
   }
 
   onResetAll() {
-    this.selectedCategoryId.set(null);
+    this.selectedCategoryIds.set([]);
     this.filters.set({
-      categoryId: null,
+      categoryIds: [],
       occasionIds: [],
       rating: null,
       priceFrom: null,

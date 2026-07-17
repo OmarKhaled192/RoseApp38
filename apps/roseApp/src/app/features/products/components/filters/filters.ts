@@ -2,7 +2,7 @@ import { Component, effect, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FilterSection } from '../filter-section/filter-section';
 import { TranslatePipe } from '@ngx-translate/core';
-import { OccasionItem, ProductFilters } from '../../models/products.models';
+import { IOccasion, ProductFilters } from '../../models/products.models';
 
 @Component({
   selector: 'app-filters',
@@ -10,11 +10,11 @@ import { OccasionItem, ProductFilters } from '../../models/products.models';
   templateUrl: './filters.html',
 })
 export class Filters {
-  occasions = input.required<OccasionItem[]>();
+  occasions = input.required<IOccasion[]>();
 
   /** Current filter state, owned by the parent (Products). */
   value = input<ProductFilters>({
-    categoryId: null,
+    categoryIds: [],
     occasionIds: [],
     rating: null,
     priceFrom: null,
@@ -30,6 +30,7 @@ export class Filters {
   selectedRating = signal<number | null>(null);
   priceFrom = signal<number | null>(null);
   priceTo = signal<number | null>(null);
+  priceError = signal<string | null>(null);
 
   constructor() {
     // keep local editable state in sync whenever the parent resets/changes the value input
@@ -57,12 +58,24 @@ export class Filters {
 
   onPriceFromChange(raw: string) {
     this.priceFrom.set(raw === '' ? null : Number(raw));
+    this.validatePriceRange();
     this.emitChange();
   }
 
   onPriceToChange(raw: string) {
     this.priceTo.set(raw === '' ? null : Number(raw));
+    this.validatePriceRange();
     this.emitChange();
+  }
+
+  private validatePriceRange() {
+    const from = this.priceFrom();
+    const to = this.priceTo();
+    if (from != null && to != null && from > to) {
+      this.priceError.set('products.filters.priceRangeError');
+    } else {
+      this.priceError.set(null);
+    }
   }
 
   resetOccasions() {
@@ -78,6 +91,7 @@ export class Filters {
   resetPrice() {
     this.priceFrom.set(null);
     this.priceTo.set(null);
+    this.priceError.set(null);
     this.emitChange();
   }
 
@@ -86,13 +100,13 @@ export class Filters {
     this.selectedRating.set(null);
     this.priceFrom.set(null);
     this.priceTo.set(null);
+    this.priceError.set(null);
     this.resetAll.emit();
-    this.emitChange();
   }
 
   private emitChange() {
     this.filtersChange.emit({
-      categoryId: this.value().categoryId,
+      categoryIds: this.value().categoryIds,
       occasionIds: this.selectedOccasions(),
       rating: this.selectedRating(),
       priceFrom: this.priceFrom(),

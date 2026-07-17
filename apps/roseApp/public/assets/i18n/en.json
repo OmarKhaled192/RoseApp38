@@ -41,7 +41,8 @@
       "from": "From",
       "to": "To",
       "reset": "Reset",
-      "resetAll": "Reset All"
+      "resetAll": "Reset All",
+  "priceRangeError": "The minimum price must be less than or equal to the maximum price"
     }
   },
   "productDetail": {
