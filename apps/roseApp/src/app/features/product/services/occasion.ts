@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class Occasion  extends ApiService<IOccasion> {
-  
+
   protected override endpoint = 'occasions';
 
   constructor(http: HttpClient) {

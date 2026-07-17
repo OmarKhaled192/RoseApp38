@@ -1,5 +1,4 @@
 import { LoadingState, QueryParams } from '@org/data-access';
-import { Product } from '../models/product';
 import { signalStore, withMethods, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { ProductService } from '../services/product';

@@ -48,7 +48,7 @@ readonly occasions = computed<IOccasion[]>(() => {
 
   readonly store = inject(ProductStore);
 
-  private productResource = this.store.getAllProduct();
+  private readonly productResource = this.store.getAllProduct();
 
 
   private readonly rawProducts = computed<ProductData[]>(
@@ -71,7 +71,7 @@ readonly occasions = computed<IOccasion[]>(() => {
 
   wishlist = signal<Set<string>>(new Set());
 
-  // ---- Derived data ----
+
   readonly filteredProducts = computed<ProductData[]>(() => {
     const f = this.filters();
 
@@ -100,7 +100,7 @@ readonly occasions = computed<IOccasion[]>(() => {
     });
   });
 
-  readonly pagedProducts = computed<CardData[]>(() => {
+  readonly Products = computed<CardData[]>(() => {
     const start = this.page() * this.pageSize();
     return this.filteredProducts()
       .slice(start, start + this.pageSize())

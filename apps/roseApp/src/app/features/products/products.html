@@ -8,9 +8,9 @@
   </aside>
 
   <section class="flex-1 flex flex-col">
-    @if (pagedProducts().length) {
+    @if (Products().length) {
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-      @for (product of pagedProducts(); track product.id) {
+      @for (product of Products(); track product.id) {
       <lib-card [card]="product" [showWishlist]="true" [footerActions]="[actionsFor(product)[2]]" />
       }
     </div>

@@ -1,4 +1,4 @@
-import { Component, effect, input, output, signal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FilterSection } from '../filter-section/filter-section';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -32,16 +32,6 @@ export class Filters {
   priceTo = signal<number | null>(null);
   priceError = signal<string | null>(null);
 
-  constructor() {
-    // keep local editable state in sync whenever the parent resets/changes the value input
-    effect(() => {
-      const v = this.value();
-      this.selectedOccasions.set(v.occasionIds ?? []);
-      this.selectedRating.set(v.rating ?? null);
-      this.priceFrom.set(v.priceFrom ?? null);
-      this.priceTo.set(v.priceTo ?? null);
-    });
-  }
 
   toggleOccasion(id: string) {
     const current = this.selectedOccasions();
@@ -95,7 +85,7 @@ export class Filters {
     this.emitChange();
   }
 
-  resetEverything() {
+  resetAllFilters() {
     this.selectedOccasions.set([]);
     this.selectedRating.set(null);
     this.priceFrom.set(null);
