@@ -1,10 +1,10 @@
-import { inject } from "@angular/core";
-import { tap, pipe, switchMap } from "rxjs";
+import { inject } from '@angular/core';
+import { tap, pipe, switchMap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { LoadingState, Message } from "@org/data-access";
-import { WishlistService } from "../services/wishlist.service";
-import { Wishlist } from "../models/wishlist";
+import { LoadingState, Message } from '@org/data-access';
+import { WishlistService } from '../services/wishlist.service';
+import { Wishlist } from '../models/wishlist';
 
 export interface WishlistState extends LoadingState {
   items: Wishlist[];
@@ -13,39 +13,49 @@ export interface WishlistState extends LoadingState {
 
 const initialState: WishlistState = {
   items: [],
-  isLoading: false
+  isLoading: false,
 };
 
 export const WishlistStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
-  withMethods((store, wishlistService = inject(WishlistService), messageService = inject(Message)) => ({
+  withMethods(
+    (
+      store,
+      wishlistService = inject(WishlistService),
+      messageService = inject(Message),
+    ) => ({
+      addToWishlist: rxMethod<Wishlist>(
+        pipe(
+          tap(() => patchState(store, { isLoading: true })),
+          switchMap((itemData) =>
+            wishlistService.post(itemData).pipe(
+              tap({
+                next: (res) => {
+                  messageService.show(
+                    'success',
+                    res.message || 'تمت الإضافة للمفضلة بنجاح',
+                  );
+                  console.log('3️⃣ next - response:', res);
+                  patchState(store, (state) => ({
+                    items: [...state.items, itemData],
+                    isLoading: false,
+                  }));
 
-    addToWishlist: rxMethod<Wishlist>(
-      pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap((itemData) =>
-          wishlistService.post(itemData).pipe(
-            tap({
-              next: (res) => {
-                messageService.show('success', res.message || 'تمت الإضافة للمفضلة بنجاح');
-                 console.log('3️⃣ next - response:', res);
-                patchState(store, (state) => ({
-                  items: [...state.items, itemData],
-                  isLoading: false
-                }));
-
-  console.log('5️⃣ after show call'); // وضيفي دي كمان
-              },
-              error: (err) => {
-                patchState(store, { isLoading: false });
-                messageService.show('error', err.error?.message || 'فشلت الإضافة للمفضلة');
-              }
-            })
-          )
-        )
-      )
-    ),
-
-  }))
+                  console.log('5️⃣ after show call'); // وضيفي دي كمان
+                },
+                error: (err) => {
+                  patchState(store, { isLoading: false });
+                  messageService.show(
+                    'error',
+                    err.error?.message || 'فشلت الإضافة للمفضلة',
+                  );
+                },
+              }),
+            ),
+          ),
+        ),
+      ),
+    }),
+  ),
 );

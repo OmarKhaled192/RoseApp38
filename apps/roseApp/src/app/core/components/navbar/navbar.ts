@@ -1,17 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { DarkModeComponent, LanguageSwitcherComponent } from '@org/ui';
-
+import { AuthenticationService } from '@org/auth';
 @Component({
   selector: 'app-navbar',
-  imports: [FormsModule, CommonModule, DarkModeComponent, LanguageSwitcherComponent],
+  imports: [
+    FormsModule,
+    CommonModule,
+    DarkModeComponent,
+    LanguageSwitcherComponent,
+    RouterLink,
+    RouterModule,
+  ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar {
   private readonly router = inject(Router);
+  readonly authService = inject(AuthenticationService);
 
   searchQuery = '';
   isArabic = true;
@@ -32,14 +40,11 @@ export class Navbar {
   }
 
   isLoggedIn(): boolean {
-    if (typeof document === 'undefined') return false;
-    return document.cookie.includes('token=');
+    return this.authService.isLoggedIn();
   }
 
   onSignout(): void {
-    if (typeof document !== 'undefined') {
-      document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
+    this.authService.removeToken();
     this.router.navigateByUrl('/auth/login');
   }
 
