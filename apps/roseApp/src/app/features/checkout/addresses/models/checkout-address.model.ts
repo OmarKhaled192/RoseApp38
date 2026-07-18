@@ -5,8 +5,20 @@ export interface CheckoutAddressGeo {
   lng: number
 }
 
-export interface CheckoutAddress {
+export type CheckoutAddressView = 'list' | 'add' | 'edit';
+
+export type CheckoutAddressWizardValue = {
   id?: string;
+  title: string;
+  isPrimary?: boolean;
+  city: string;
+  street: string;
+  phone: string;
+  latitude: number;
+  longitude: number;
+};
+export interface CheckoutAddress {
+  id?: string | undefined;
   title: CheckoutAddressLabel;
   isPrimary: boolean;
   city: string;
@@ -14,4 +26,8 @@ export interface CheckoutAddress {
   phone: string;
   latitude: number,
   longitude: number
+}
+
+export interface CheckoutAddressListPayload {
+  addresses: CheckoutAddress[];
 }
