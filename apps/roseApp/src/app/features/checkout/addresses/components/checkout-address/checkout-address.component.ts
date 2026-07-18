@@ -2,9 +2,19 @@ import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/c
 import { CheckoutAddressItemComponent } from '../checkout-address-item/checkout-address-item.component';
 import { CheckoutAddAddressComponent } from '../checkout-add-address/checkout-add-address.component';
 import { CheckoutDeleteModalComponent } from '../checkout-delete-modal/checkout-delete-modal.component';
-import { CheckoutAddress, CheckoutAddressFormValue } from '../../models/checkout-address.model';
+import { CheckoutAddress } from '../../models/checkout-address.model';
 
 type CheckoutAddressView = 'list' | 'add' | 'edit';
+type CheckoutAddressWizardValue = {
+  id?: string;
+  title: string;
+  isPrimary?: boolean;
+  city: string;
+  street: string;
+  phone: string;
+  latitude: number;
+  longitude: number;
+};
 
 @Component({
   selector: 'app-checkout-address',
@@ -16,46 +26,21 @@ export class CheckoutAddressComponent {
   // --- state -----------------------------------------------------------
   view = signal<CheckoutAddressView>('list');
 
-  addresses = signal<CheckoutAddress[]>([
-    {
-      id: 'addr-1',
-      label: 'Home',
-      city: 'Giza',
-      addressLine: '21 Ahmed Mohamed St., King Faisal St., Giza',
-      phoneCountryCode: '+20',
-      phone: '1012345678',
-    },
-    {
-      id: 'addr-2',
-      label: 'Work',
-      city: 'Cairo',
-      addressLine: '14 Omar Ibn Akhatab St., Ramsis St., Cairo',
-      phoneCountryCode: '+20',
-      phone: '1112345678',
-    },
-    {
-      id: 'addr-3',
-      label: 'Family',
-      city: 'Alexandria',
-      addressLine: '16 El-Gaish Rd, San Stefano, El-Raml 2, Alexandria',
-      phoneCountryCode: '+20',
-      phone: '1512345678',
-    },
-  ]);
+  addresses = signal<CheckoutAddress[]>([]);
 
   editingAddress = signal<CheckoutAddress | null>(null);
   deletingAddress = signal<CheckoutAddress | null>(null);
 
   // --- derived -----------------------------------------------------------
-  /** Groups addresses by their label (Home / Work / Family / ...) preserving insertion order */
+  /** Groups addresses by their title (Home / Work / Family / ...) preserving insertion order */
   groupedAddresses = computed(() => {
     const groups = new Map<string, CheckoutAddress[]>();
     for (const address of this.addresses()) {
-      const bucket = groups.get(address.label) ?? [];
+      const bucket = groups.get(address.title) ?? [];
       bucket.push(address);
-      groups.set(address.label, bucket);
+      groups.set(address.title, bucket);
     }
-    return Array.from(groups.entries()).map(([label, items]) => ({ label, items }));
+    return Array.from(groups.entries()).map(([title, items]) => ({ title, items }));
   });
 
   isDeleteModalOpen = computed(() => this.deletingAddress() !== null);
@@ -94,13 +79,24 @@ export class CheckoutAddressComponent {
     this.view.set('list');
   }
 
-  onWizardSaved(value: CheckoutAddressFormValue): void {
+  onWizardSaved(value: CheckoutAddressWizardValue): void {
+    const nextAddress: CheckoutAddress = {
+      id: value.id ?? crypto.randomUUID(),
+      title: value.title,
+      isPrimary: value.isPrimary ?? false,
+      city: value.city,
+      street: value.street,
+      phone: value.phone,
+      latitude: value.latitude,
+      longitude: value.longitude,
+    };
+
     if (value.id) {
       this.addresses.update((current) =>
-        current.map((address) => (address.id === value.id ? { ...address, ...value, id: value.id! } : address)),
+        current.map((address) => (address.id === value.id ? nextAddress : address)),
       );
     } else {
-      this.addresses.update((current) => [...current, { ...value, id: crypto.randomUUID() }]);
+      this.addresses.update((current) => [...current, nextAddress]);
     }
     this.editingAddress.set(null);
     this.view.set('list');

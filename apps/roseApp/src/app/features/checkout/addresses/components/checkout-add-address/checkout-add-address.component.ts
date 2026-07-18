@@ -1,9 +1,20 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckoutFindLocationComponent } from '../checkout-find-location/checkout-find-location.component';
-import { CheckoutAddress, CheckoutAddressFormValue, CheckoutAddressGeo } from '../../models/checkout-address.model';
+import { CheckoutAddress, CheckoutAddressLabel } from '../../models/checkout-address.model';
 
 type WizardStep = 1 | 2;
+type CheckoutAddressLocation = { lat: number; lng: number };
+type CheckoutAddressWizardValue = {
+  id?: string;
+  title: string;
+  isPrimary?: boolean;
+  city: string;
+  street: string;
+  phone: string;
+  latitude: number;
+  longitude: number;
+};
 
 @Component({
   selector: 'app-checkout-add-address',
@@ -17,22 +28,21 @@ export class CheckoutAddAddressComponent {
   /** Pass the existing address when mode = 'edit' to pre-fill the form */
   initialAddress = input<CheckoutAddress | null>(null);
 
-  saved = output<CheckoutAddressFormValue>();
+  saved = output<CheckoutAddressWizardValue>();
   cancelled = output<void>();
 
   step = signal<WizardStep>(1);
 
   city = signal<string>('');
-  addressLine = signal<string>('');
-  phoneCountryCode = signal<string>('EG(+20)');
+  street = signal<string>('');
   phone = signal<string>('');
-  label = signal<string>('Home');
+  title = signal<CheckoutAddressLabel>('Home');
 
   heading = computed(() => (this.mode() === 'edit' ? 'Update Address Info' : 'Add a New Address'));
   submitLabel = computed(() => (this.mode() === 'edit' ? 'Save Changes' : 'Add Address'));
 
   isStep1Valid = computed(
-    () => this.city().trim().length > 0 && this.addressLine().trim().length > 0 && this.phone().trim().length > 0,
+    () => this.city().trim().length > 0 && this.street().trim().length > 0 && this.phone().trim().length > 0,
   );
 
   constructor() {
@@ -40,10 +50,9 @@ export class CheckoutAddAddressComponent {
       const existing = this.initialAddress();
       if (existing) {
         this.city.set(existing.city);
-        this.addressLine.set(existing.addressLine);
-        this.phoneCountryCode.set(existing.phoneCountryCode);
+        this.street.set(existing.street);
         this.phone.set(existing.phone);
-        this.label.set(existing.label);
+        this.title.set(existing.title);
       }
     });
   }
@@ -62,15 +71,16 @@ export class CheckoutAddAddressComponent {
     this.cancelled.emit();
   }
 
-  onLocationSubmitted(geo: CheckoutAddressGeo): void {
+  onLocationSubmitted(geo: CheckoutAddressLocation): void {
     this.saved.emit({
       id: this.initialAddress()?.id,
-      label: this.label(),
+      title: this.title(),
+      isPrimary: this.initialAddress()?.isPrimary ?? false,
       city: this.city().trim(),
-      addressLine: this.addressLine().trim(),
-      phoneCountryCode: this.phoneCountryCode(),
+      street: this.street().trim(),
       phone: this.phone().trim(),
-      geo,
+      latitude: geo.lat,
+      longitude: geo.lng,
     });
   }
 }
