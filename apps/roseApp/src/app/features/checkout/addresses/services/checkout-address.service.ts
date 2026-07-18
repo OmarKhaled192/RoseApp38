@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '@org/data-access';
 import { CheckoutAddress } from '../models/checkout-address.model';
@@ -6,12 +6,10 @@ import { CheckoutAddress } from '../models/checkout-address.model';
 @Injectable({
   providedIn: 'root',
 })
-export class checkoutAddressService extends ApiService<CheckoutAddress> {
+export class CheckoutAddressService extends ApiService<CheckoutAddress> {
   protected override endpoint = 'addresses';
 
-  constructor(http: HttpClient) {
-    super(http);
+  constructor() {
+    super(inject(HttpClient));
   }
-
-
 }

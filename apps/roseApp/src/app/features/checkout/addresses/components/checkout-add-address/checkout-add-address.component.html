@@ -61,7 +61,6 @@
   </form>
 </div>
 } @else {
-<app-checkout-find-location [heading]="heading()" [submitLabel]="submitLabel()"
-  [initialGeo]="initialAddress()?.latitude !== undefined && initialAddress()?.longitude !== undefined ? { lat: initialAddress()!.latitude, lng: initialAddress()!.longitude } : null"
+<app-checkout-find-location [heading]="heading()" [submitLabel]="submitLabel()" [initialGeo]="initialLocation()"
   (back)="backToDetailsStep()" (submitted)="onLocationSubmitted($event)" />
 }

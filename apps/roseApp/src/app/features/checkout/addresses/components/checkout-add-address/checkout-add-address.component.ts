@@ -41,6 +41,16 @@ export class CheckoutAddAddressComponent {
   heading = computed(() => (this.mode() === 'edit' ? 'Update Address Info' : 'Add a New Address'));
   submitLabel = computed(() => (this.mode() === 'edit' ? 'Save Changes' : 'Add Address'));
 
+  initialLocation = computed(() => {
+    const existing = this.initialAddress();
+
+    if (!existing || existing.latitude === undefined || existing.longitude === undefined) {
+      return null;
+    }
+
+    return { lat: existing.latitude, lng: existing.longitude };
+  });
+
   isStep1Valid = computed(
     () => this.city().trim().length > 0 && this.street().trim().length > 0 && this.phone().trim().length > 0,
   );

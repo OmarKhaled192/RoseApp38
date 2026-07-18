@@ -40,7 +40,7 @@ export class CheckoutFindLocationComponent {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.selectedGeo.set({ lat: position.coords.latitude, lng: position.coords.longitude });
+        this.selectedGeo.set({ lat: position?.coords?.latitude, lng: position?.coords?.longitude });
         this.locating.set(false);
       },
       () => {
@@ -54,6 +54,13 @@ export class CheckoutFindLocationComponent {
   onMapClick(): void {
     if (!this.selectedGeo()) {
       this.selectedGeo.set(this.cairoFallback);
+    }
+  }
+
+  onMapKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.onMapClick();
     }
   }
 

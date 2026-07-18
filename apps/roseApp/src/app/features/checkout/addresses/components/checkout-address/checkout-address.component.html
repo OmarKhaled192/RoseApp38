@@ -1,45 +1,61 @@
 <div class="mx-auto w-full max-w-2xl rounded-xl bg-white p-6 sm:p-8">
   @switch (view()) {
-  @case ('list') {
-  <div class="mb-2 flex items-center justify-between">
-    <h1 class="text-2xl font-bold text-gray-900">My Addresses</h1>
-    <button type="button"
-      class="rounded-lg bg-red-50 px-4 py-2.5 text-sm font-semibold text-[#8B1E28] transition hover:bg-red-100"
-      (click)="openAddAddress()">
-      Add a New Address
-    </button>
-  </div>
+    @case ('list') {
+      <div class="mb-2 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-900">My Addresses</h1>
+        <button
+          type="button"
+          class="rounded-lg bg-red-50 px-4 py-2.5 text-sm font-semibold text-[#8B1E28] transition hover:bg-red-100"
+          (click)="openAddAddress()"
+        >
+          Add a New Address
+        </button>
+      </div>
 
-  @if (groupedAddresses().length === 0) {
-  <p class="border-t border-gray-200 py-10 text-center text-sm text-gray-500">
-    You haven't saved any addresses yet.
-  </p>
-  } @else {
-  @for (group of groupedAddresses(); track group.title) {
-  <div class="border-t border-gray-200 pt-4">
-    <h2 class="mb-1 text-sm font-semibold uppercase tracking-wide text-[#8B1E28]">{{ group.title }}</h2>
+      @if (groupedAddresses().length === 0) {
+        <p class="border-t border-gray-200 py-10 text-center text-sm text-gray-500">
+          You haven't saved any addresses yet.
+        </p>
+      } @else {
+        @for (group of groupedAddresses(); track group.title) {
+          <div class="border-t border-gray-200 pt-4">
+            <h2 class="mb-1 text-sm font-semibold uppercase tracking-wide text-[#8B1E28]">{{ group.title }}</h2>
 
-    <div class="divide-y divide-gray-100">
-      @for (address of group.items; track address.id) {
-      <app-checkout-address-item [address]="address" [highlighted]="deletingAddress()?.id === address.id"
-        (editRequested)="openEditAddress($event)" (deleteRequested)="requestDelete($event)" />
+            <div class="divide-y divide-gray-100">
+              @for (address of group.items; track address.id) {
+                <app-checkout-address-item
+                  [address]="address"
+                  [highlighted]="deletingAddress()?.id === address.id"
+                  (editRequested)="openEditAddress($event)"
+                  (deleteRequested)="requestDelete($event)"
+                />
+              }
+            </div>
+          </div>
+        }
       }
-    </div>
-  </div>
-  }
-  }
-  }
+    }
 
-  @case ('add') {
-  <app-checkout-add-address mode="add" (saved)="onWizardSaved($event)" (cancelled)="onWizardCancelled()" />
-  }
+    @case ('add') {
+      <app-checkout-add-address mode="add" (saved)="onWizardSaved($event)" (cancelled)="onWizardCancelled()" />
+    }
 
-  @case ('edit') {
-  <app-checkout-add-address mode="edit" [initialAddress]="editingAddress()" (saved)="onWizardSaved($event)"
-    (cancelled)="onWizardCancelled()" />
-  }
+    @case ('edit') {
+      <app-checkout-add-address
+        mode="edit"
+        [initialAddress]="editingAddress()"
+        (saved)="onWizardSaved($event)"
+        (cancelled)="onWizardCancelled()"
+      />
+    }
   }
 </div>
 
-<app-checkout-delete-modal [open]="isDeleteModalOpen()" title="Are you sure you want to delete this address?"
-  confirmLabel="Confirm" cancelLabel="Cancel" (confirmed)="confirmDelete()" (cancelled)="cancelDelete()" />
+<app-checkout-delete-modal
+  [open]="isDeleteModalOpen()"
+  title="Are you sure you want to delete this address?"
+  confirmLabel="Confirm"
+  cancelLabel="Cancel"
+  (confirmed)="confirmDelete()"
+  (cancelled)="cancelDelete()"
+/>

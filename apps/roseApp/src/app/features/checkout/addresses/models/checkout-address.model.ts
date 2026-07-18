@@ -6,7 +6,7 @@ export interface CheckoutAddressGeo {
 }
 
 export interface CheckoutAddress {
-  id: string;
+  id?: string;
   title: CheckoutAddressLabel;
   isPrimary: boolean;
   city: string;
