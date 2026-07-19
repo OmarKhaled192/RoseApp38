@@ -1,5 +1,5 @@
-import { CardData } from "@org/ui";
-import { ProductData } from "../models/product";
+import { CardData } from '@org/ui';
+import { ProductData } from '../models/product';
 
 export function mapProductToCardData(product: ProductData): CardData {
   const price = Number(product.price);
@@ -20,7 +20,8 @@ export function mapProductToCardData(product: ProductData): CardData {
     if (product.createdAt) {
       const createdDate = new Date(product.createdAt);
       const today = new Date();
-      const diffInDays = (today.getTime() - createdDate.getTime()) / (1000 * 3600 * 24);
+      const diffInDays =
+        (today.getTime() - createdDate.getTime()) / (1000 * 3600 * 24);
       if (diffInDays <= 6) badges.push('new');
     }
   }

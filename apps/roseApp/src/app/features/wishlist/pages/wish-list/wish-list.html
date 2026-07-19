@@ -1,55 +1,65 @@
 <section class="m-10">
+  @if (products$ | async; as products) {
+
   <div class="relative flex items-center justify-between px-4 py-3 bg-white">
     @if (products.length > 0) {
+
     <div class="flex items-center gap-2">
-      <img src="images/wishList/folder-heart.svg" alt="" />
+      <img src="images/wishList/folder-heart.svg" alt="Wishlist" />
 
       <h2 class="text-5xl font-bold text-gray-900">
         {{ 'wishlist.title' | translate }}
       </h2>
 
-      <span class="text-xs mt-8 text-gray-400">
-        {{ itemCount() }} {{ itemCount() === 1 ? ('wishlist.item' | translate) :
-        ('wishlist.items' | translate) }}
+      <span class="mt-8 text-xs text-gray-400">
+        {{ products.length }} {{ products.length === 1 ? ('wishlist.item' |
+        translate) : ('wishlist.items' | translate) }}
       </span>
     </div>
 
     <button
       type="button"
-      class="flex items-center gap-1.5 rounded-xl bg-red-500 px-7 py-3 text-sm font-medium text-white hover:bg-red-700 active:bg-red-800 transition-colors"
+      class="flex items-center gap-1.5 rounded-xl bg-red-500 px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-red-700 active:bg-red-800"
       (click)="openDeleteDialog()"
     >
       <img src="images/wishList/brush-cleaning.svg" alt="" />
       {{ 'wishlist.clearWishlist' | translate }}
     </button>
+
     }
   </div>
 
-  @if (products.length > 0) { @for (product of products; track product.id) {
-  <hr class="text-gray-300" />
+  @if (products.length > 0) { @for (item of products; track item.id) {
+
+  <hr class="my-4 border-gray-200" />
+
   <app-card-list
-    [imageUrl]="product.image"
-    [title]="product.name"
-    [rating]="product.rating"
-    [ratingsCount]="product.reviewCount"
-    [price]="product.price"
-    [originalPrice]="product.originalPrice"
-    (remove)="onRemove(product.id)"
-    (addToCart)="onAddToCart(product.id)"
+    [imageUrl]="item.product.cover"
+    [title]="item.product.title"
+    [rating]="item.product.rating"
+    [ratingsCount]="item.product.ratings"
+    [price]="item.product.price"
+    (remove)="onRemove(item.id)"
+    (addToCart)="onAddToCart(item.product.id)"
   />
+
   }
 
   <button
     type="button"
-    class="flex mt-4 items-center justify-center p-2 px-5 rounded-lg bg-[#501419] text-[#FFFFFF] hover:bg-red-900 transition-colors"
+    class="mt-4 flex items-center justify-center rounded-lg bg-[#501419] px-5 py-2 text-white transition-colors hover:bg-red-900"
+    (click)="onContinueShopping()"
   >
     <img src="images/wishList/move-left.svg" class="mx-1" alt="" />
     {{ 'wishlist.continueShopping' | translate }}
   </button>
-  } @else {
+
+  } } @else {
   <app-empty-wishlist (continueShopping)="onContinueShopping()" />
+
   }
 </section>
+
 <app-delete-dialog
   [(visible)]="showDeleteDialog"
   (confirm)="removeAllProducts()"

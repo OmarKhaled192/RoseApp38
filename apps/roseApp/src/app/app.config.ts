@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { isDevMode } from '@angular/core';
 import {
   ApplicationConfig,
   APP_INITIALIZER,
@@ -15,6 +16,11 @@ import Aura from '@primeuix/themes/aura';
 import { appRoutes } from './app.routes';
 import { authenticationInterceptor } from '@org/auth';
 import { MessageService } from 'primeng/api';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { wishlistReducer } from './features/wishlist/store/wishlist.reducer';
+import { WishlistEffect } from './features/wishlist/store/wishlist.effects';
 
 const DEFAULT_LANG: string = 'en';
 
@@ -47,6 +53,14 @@ export const appConfig: ApplicationConfig = {
         return Promise.resolve();
       },
     },
+    provideStore({
+      wishList: wishlistReducer,
+    }),
+    provideEffects(WishlistEffect),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+    }),
     provideRouter(appRoutes),
   ],
 };

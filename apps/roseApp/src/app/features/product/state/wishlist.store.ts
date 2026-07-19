@@ -36,7 +36,7 @@ export const WishlistStore = signalStore(
                     'success',
                     res.message || 'تمت الإضافة للمفضلة بنجاح',
                   );
-                  console.log('3️⃣ next - response:', res);
+                  console.log('3️⃣ next - response: ', res);
                   patchState(store, (state) => ({
                     items: [...state.items, itemData],
                     isLoading: false,
