@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { BadgeType, CardAction, CardData } from '../../models/card-type';
 import { DecimalPipe, NgClass } from '@angular/common';
 import { StarRating } from '../star-rating/star-rating';
@@ -12,10 +12,22 @@ import { RouterLink } from '@angular/router';
 })
 export class Card {
   card = input.required<CardData>();
+  // private readonly cart = inject(CART_PORT); 
   showWishlist = input<boolean>(false);
   wishlistToggle = input<(() => void) | undefined>(undefined);
   hoverActions = input<CardAction[]>([]);
-  footerActions = input<CardAction[]>([]);
+
+  footerActions(): CardAction[] {
+    return [
+      {
+        label: 'Add to cart',
+        icon: 'pi-shopping-cart',
+        action: () => this.addToCart(this.card()),
+        isDisabled: this.card().badges?.includes('out-of-stock'),
+      },
+    ];
+  }
+
 
   readonly placeholderImage = 'https://placehold.co/600x400';
 
@@ -51,5 +63,11 @@ export class Card {
       default:
         return badge.toUpperCase();
     }
+  }
+
+  addToCart(product: CardData) {
+    const productId = product.id;
+    if (!productId) return;
+    // this.cart.addToCart({ productId, quantity: 1 });
   }
 }

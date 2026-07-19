@@ -1,7 +1,7 @@
-import { inject } from "@angular/core";
+import { computed, inject } from "@angular/core";
 import { tap, pipe, switchMap } from "rxjs";
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { LoadingState, Message, QueryParams } from "@org/data-access";
 import { CartService } from "../../checkout/services/cart";
 import { Cart, CartItem } from "../../checkout/models/cart.interface";
@@ -27,6 +27,13 @@ const initialState: CartState = {
 export const CartStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
+  withProps((store, cartService = inject(CartService)) => ({
+    _cartResource: cartService.getListResourceData(),
+  })),
+  withComputed(({ _cartResource }) => ({
+    cartItems: computed(() => _cartResource.value()?.payload.cartItems || []),
+    cartLoading: computed(() => _cartResource.isLoading()),
+  })),
   withMethods((store, cartService = inject(CartService), messageService = inject(Message)) => ({
 
     addToCart: rxMethod<CartItem>(
@@ -39,7 +46,7 @@ export const CartStore = signalStore(
                 patchState(store, () => ({
                   isLoading: false
                 }));
-
+                 store._cartResource.reload();
                 messageService.show('success', res.message || 'تم إضافة المنتج للسلة بنجاح');
               },
               error: (err) => {
@@ -54,15 +61,15 @@ export const CartStore = signalStore(
     updateQuantity: rxMethod<{ id: string; quantity: number; onSuccess?: () => void }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ id, quantity, onSuccess }) =>
+        switchMap(({ id, quantity }) =>
           cartService.patch(id, { quantity }).pipe(
             tap({
               next: () => {
                 patchState(store, () => ({
                   isLoading: false
                 }));
+                store._cartResource.reload();
                 messageService.show('success', 'تم تحديث كمية المنتج بنجاح');
-                onSuccess?.();
               },
               error: (err) => {
                 patchState(store, { isLoading: false });
@@ -83,7 +90,7 @@ export const CartStore = signalStore(
                 patchState(store, () => ({
                   isLoading: false
                 }));
-
+                 store._cartResource.reload();
                 messageService.show('success', 'تم حذف المنتج من السلة بنجاح');
               },
               error: (err) => {
@@ -105,7 +112,7 @@ export const CartStore = signalStore(
                 patchState(store, () => ({
                   isLoading: false
                 }));
-
+                  store._cartResource.reload();
                 messageService.show('success', 'تم حذف  كل المنتجات من السلة بنجاح');
               },
               error: (err) => {
@@ -117,8 +124,5 @@ export const CartStore = signalStore(
         )
       )
     ),
-    getAllCart(params?: () => QueryParams) {
-      return cartService.getListResourceData(params);
-    },
   }))
 );

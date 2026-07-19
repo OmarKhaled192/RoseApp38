@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, forwardRef, inject, Injector, input, OnInit, signal } from '@angular/core';
+import { Component, computed, forwardRef, inject, Injector, input, OnInit, output, signal } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -63,9 +63,10 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   helperText = input<string>('');
   isDisabled = input<boolean>(false);
   isReadonly = input<boolean>(false);
+  valueChange = output<InputValue>();
 
   readonly value = signal<InputValue>(null);
-  readonly currentValue = input<InputValue>('');
+  readonly currentValue = input<InputValue>(null);
   readonly disabled = signal(false);
   private readonly parentControl = signal<FormControl | null>(null);
 
@@ -123,6 +124,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   updateValue(value: InputValue): void {
     this.value.set(value);
+    this.valueChange.emit(value);
     this.onChange(value);
   }
 }
