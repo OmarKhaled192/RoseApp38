@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { DarkModeComponent, LanguageSwitcherComponent } from '@org/ui';
 import { AuthenticationService } from '@org/auth';
@@ -19,6 +20,7 @@ import { AuthenticationService } from '@org/auth';
 })
 export class Navbar {
   private readonly router = inject(Router);
+  private translate = inject(TranslateService)
   readonly authService = inject(AuthenticationService);
 
   searchQuery = '';
@@ -47,7 +49,9 @@ export class Navbar {
     this.authService.removeToken();
     this.router.navigateByUrl('/auth/login');
   }
-
+  onLanguageChanged(lang: string): void {
+    this.translate.use(lang);
+  }
   onLove(): void {
     console.log('Wishlist clicked');
   }

@@ -1,0 +1,66 @@
+@if (step() === 1) {
+<div>
+  <h2 class="text-2xl font-bold text-gray-900">{{ heading() }}</h2>
+
+  <div class="my-5 flex items-center gap-0">
+    <span class="h-1 flex-1 rounded-l-full bg-[#8B1E28]"></span>
+    <span
+      class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#8B1E28] text-xs font-semibold text-white">1</span>
+    <span class="h-1 flex-1 bg-gray-200"></span>
+    <span
+      class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gray-200 text-xs font-semibold text-gray-500">2</span>
+    <span class="h-1 flex-1 rounded-r-full bg-gray-200"></span>
+  </div>
+
+  <h3 class="border-b border-gray-200 pb-3 text-lg font-semibold text-[#8B1E28]">Enter address details</h3>
+
+  <form class="mt-4 space-y-5" (ngSubmit)="goToLocationStep()">
+    <div>
+      <label for="checkout-city" class="mb-1.5 block text-sm font-medium text-gray-800">City</label>
+      <input id="checkout-city" type="text"
+        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-[#8B1E28] focus:ring-1 focus:ring-[#8B1E28]"
+        placeholder="Enter city name" [ngModel]="city()" (ngModelChange)="city.set($event)" name="city" />
+    </div>
+
+    <div>
+      <label for="checkout-title" class="mb-1.5 block text-sm font-medium text-gray-800">Address Type</label>
+      <select id="checkout-title"
+        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 outline-none focus:border-[#8B1E28] focus:ring-1 focus:ring-[#8B1E28]"
+        [ngModel]="title()" (ngModelChange)="title.set($event)" name="title">
+        <option value="Home">Home</option>
+        <option value="Work">Work</option>
+        <option value="Family">Family</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="checkout-address" class="mb-1.5 block text-sm font-medium text-gray-800">Address</label>
+      <textarea id="checkout-address" rows="4"
+        class="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-[#8B1E28] focus:ring-1 focus:ring-[#8B1E28]"
+        placeholder="Enter your full address" [ngModel]="street()" (ngModelChange)="street.set($event)"
+        name="street"></textarea>
+    </div>
+
+    <div>
+      <label for="checkout-phone" class="mb-1.5 block text-sm font-medium text-gray-800">Phone</label>
+      <input id="checkout-phone" type="tel"
+        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-[#8B1E28] focus:ring-1 focus:ring-[#8B1E28]"
+        placeholder="Phone number" [ngModel]="phone()" (ngModelChange)="phone.set($event)" name="phone" />
+    </div>
+
+    <button type="submit"
+      class="w-full rounded-lg bg-[#8B1E28] py-3.5 text-base font-semibold text-white transition hover:bg-[#731820] disabled:cursor-not-allowed disabled:opacity-50"
+      [disabled]="!isStep1Valid()">
+      Next
+    </button>
+
+    <button type="button" class="w-full text-center text-sm font-medium text-gray-500 hover:text-gray-700"
+      (click)="onCancel()">
+      Cancel
+    </button>
+  </form>
+</div>
+} @else {
+<app-checkout-find-location [heading]="heading()" [submitLabel]="submitLabel()" [initialGeo]="initialLocation()"
+  (back)="backToDetailsStep()" (submitted)="onLocationSubmitted($event)" />
+}
