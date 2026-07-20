@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AuthApiService } from '../services/auth-api.service';
 import { LoginRequest } from '../models/login';
 import { catchError, of, pipe, switchMap, tap } from 'rxjs';
+import { AuthenticationService } from '@org/auth';
 
 
 const initialState: RegisterResponse = {
@@ -22,7 +23,7 @@ export const authStore = signalStore(
   withMethods((
     store,
     authApiService = inject(AuthApiService),
-    authService = inject(AuthService),
+    authService = inject(AuthenticationService),
     messageService = inject(Message),
     router = inject(Router)
   ) => ({

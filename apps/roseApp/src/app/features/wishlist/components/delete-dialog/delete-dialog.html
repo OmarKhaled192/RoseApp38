@@ -1,0 +1,37 @@
+<div class="flex justify-center">
+  <p-dialog
+    [visible]="visible"
+    (visibleChange)="onVisibleChange($event)"
+    [modal]="true"
+  >
+    <div class="flex flex-col gap-4">
+      <img src="images/wishList/Icon.svg" class="mx-auto" alt="" />
+
+      <p class="text-center text-sm font-semibold">
+        {{ 'wishlist.clearWishlistConfirmation' | translate }}
+      </p>
+
+      <div class="mt-5 flex gap-3">
+        <button
+          type="button"
+          pButton
+          severity="secondary"
+          class="flex-1"
+          (click)="close()"
+        >
+          {{ 'wishlist.cancel' | translate }}
+        </button>
+
+        <button
+          type="button"
+          pButton
+          severity="danger"
+          class="flex-1"
+          (click)="delete()"
+        >
+          {{ 'wishlist.confirm' | translate }}
+        </button>
+      </div>
+    </div>
+  </p-dialog>
+</div>

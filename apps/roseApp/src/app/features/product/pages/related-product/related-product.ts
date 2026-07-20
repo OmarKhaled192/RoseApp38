@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 
 import { Card, DarkModeService, TitleSection } from '@org/ui';
 import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
@@ -15,6 +15,7 @@ import { ProductStore } from '../../state/product.store';
 export class RelatedProduct {
   private readonly darkModeService = inject(DarkModeService);
   readonly store = inject(ProductStore);
+  readonly title = input<string>('');
 
   readonly productResource = this.store.getAllProduct();
   wishlist = signal<Set<string>>(new Set());
