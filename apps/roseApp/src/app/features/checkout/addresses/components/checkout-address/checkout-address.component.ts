@@ -8,12 +8,12 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 import { CheckoutAddressItemComponent } from '../checkout-address-item/checkout-address-item.component';
 import { CheckoutAddAddressComponent } from '../checkout-add-address/checkout-add-address.component';
 import { CheckoutDeleteModalComponent } from '../checkout-delete-modal/checkout-delete-modal.component';
 import { CheckoutAddress, CheckoutAddressListPayload, CheckoutAddressView, CheckoutAddressWizardValue } from '../../models/checkout-address.model';
 import { CheckoutAddressService } from '../../services/checkout-address.service';
+import { CheckoutAddressFacade } from '../../services/checkout-address-facade.service';
 
 
 @Component({
@@ -25,6 +25,7 @@ import { CheckoutAddressService } from '../../services/checkout-address.service'
 export class CheckoutAddressComponent {
   private readonly checkoutAddressService = inject(CheckoutAddressService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly checkoutAddressFacade = inject(CheckoutAddressFacade);
 
   // --- resource -----------------------------------------------------------
   // Created once as a field initializer so it's in a valid injection context.
@@ -73,6 +74,10 @@ export class CheckoutAddressComponent {
       return;
     }
 
+    this.confirmDeleteTarget(target);
+  }
+
+  confirmDeleteTarget(target: CheckoutAddress): void {
     this.checkoutAddressService
       .delete<unknown>(target.id ?? "")
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -97,25 +102,10 @@ export class CheckoutAddressComponent {
     this.view.set('list');
   }
 
+
   onWizardSaved(value: CheckoutAddressWizardValue): void {
-    const nextAddress: CheckoutAddress = {
-      // ...(value.id ? { id: value.id } : {}),
-      title: value.title,
-      isPrimary: value.isPrimary ?? false,
-      city: value.city,
-      street: value.street,
-      phone: value.phone,
-      latitude: value.latitude,
-      longitude: value.longitude,
-    };
-
-    const request$ = value.id
-      ? this.checkoutAddressService.patch<CheckoutAddress, CheckoutAddress>(value.id ?? "", nextAddress)
-      : this.checkoutAddressService.post<CheckoutAddress, CheckoutAddress>(nextAddress).pipe(
-        map((response) => response.payload),
-      );
-
-    request$
+    this.checkoutAddressFacade
+      .saveAddress(value)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {

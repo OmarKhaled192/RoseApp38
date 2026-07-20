@@ -84,7 +84,7 @@
 
 
     <div>
-      <lib-language-switcher
+      <lib-language-switcher (languageChanged)="onLanguageChanged($event)"
         classList="text-gray-700 hover:text-[#e07090] font-medium transition-colors duration-200 cursor-pointer"></lib-language-switcher>
       <lib-dark-mode></lib-dark-mode>
     </div>

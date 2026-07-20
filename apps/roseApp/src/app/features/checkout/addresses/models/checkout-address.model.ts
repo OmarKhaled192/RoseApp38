@@ -1,4 +1,6 @@
 export type CheckoutAddressLabel = 'Home' | 'Work' | 'Family' | string;
+export type WizardStep = 1 | 2;
+export type CheckoutAddressLocation = { lat: number; lng: number };
 
 export interface CheckoutAddressGeo {
   lat: number,

@@ -1,21 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
-/**
- * Generic, reusable confirmation modal.
- * Kept intentionally dumb / presentational so it can be reused
- * anywhere a "confirm this destructive action" prompt is needed,
- * not just for deleting addresses.
- */
 @Component({
   selector: 'app-checkout-delete-modal',
   templateUrl: './checkout-delete-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, TranslatePipe]
 })
 export class CheckoutDeleteModalComponent {
   open = input<boolean>(false);
-  title = input<string>('Are you sure you want to delete this address?');
-  confirmLabel = input<string>('Confirm');
-  cancelLabel = input<string>('Cancel');
+
+  title = input<string>('common.deleteModal.title');
+  confirmLabel = input<string>('common.deleteModal.confirm');
+  cancelLabel = input<string>('common.deleteModal.cancel');
 
   confirmed = output<void>();
   cancelled = output<void>();

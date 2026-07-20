@@ -1,20 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckoutFindLocationComponent } from '../checkout-find-location/checkout-find-location.component';
-import { CheckoutAddress, CheckoutAddressLabel } from '../../models/checkout-address.model';
+import { CheckoutAddress, CheckoutAddressLabel, CheckoutAddressLocation, CheckoutAddressWizardValue, WizardStep } from '../../models/checkout-address.model';
 
-type WizardStep = 1 | 2;
-type CheckoutAddressLocation = { lat: number; lng: number };
-type CheckoutAddressWizardValue = {
-  id?: string;
-  title: string;
-  isPrimary?: boolean;
-  city: string;
-  street: string;
-  phone: string;
-  latitude: number;
-  longitude: number;
-};
 
 @Component({
   selector: 'app-checkout-add-address',
@@ -23,9 +11,7 @@ type CheckoutAddressWizardValue = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutAddAddressComponent {
-  /** 'add' shows "Add a New Address" copy, 'edit' shows "Update Address Info" copy */
   mode = input<'add' | 'edit'>('add');
-  /** Pass the existing address when mode = 'edit' to pre-fill the form */
   initialAddress = input<CheckoutAddress | null>(null);
 
   saved = output<CheckoutAddressWizardValue>();

@@ -7,11 +7,8 @@ import { CheckoutAddressGeo } from '../../models/checkout-address.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutFindLocationComponent {
-  /** Heading shown above the map, e.g. "Add a New Address" / "Update Address Info" */
   heading = input<string>('Add a New Address');
-  /** Label for the primary CTA at the bottom, e.g. "Add Address" / "Save Changes" */
   submitLabel = input<string>('Add Address');
-  /** Pre-fill the marker when editing an existing address */
   initialGeo = input<CheckoutAddressGeo | null>(null);
 
   back = output<void>();

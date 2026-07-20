@@ -8,8 +8,6 @@ import { CheckoutAddress } from '../../models/checkout-address.model';
 })
 export class CheckoutAddressItemComponent {
   address = input.required<CheckoutAddress>();
-
-  /** Highlights the card border, e.g. while it's the one targeted by a modal */
   highlighted = input<boolean>(false);
 
   editRequested = output<CheckoutAddress>();

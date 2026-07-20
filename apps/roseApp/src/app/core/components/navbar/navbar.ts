@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { DarkModeComponent, LanguageSwitcherComponent } from '@org/ui';
 
 @Component({
@@ -12,7 +13,7 @@ import { DarkModeComponent, LanguageSwitcherComponent } from '@org/ui';
 })
 export class Navbar {
   private readonly router = inject(Router);
-
+  private translate = inject(TranslateService)
   searchQuery = '';
   isArabic = true;
 
@@ -42,7 +43,9 @@ export class Navbar {
     }
     this.router.navigateByUrl('/auth/login');
   }
-
+  onLanguageChanged(lang: string): void {
+    this.translate.use(lang);
+  }
   onLove(): void {
     console.log('Wishlist clicked');
   }

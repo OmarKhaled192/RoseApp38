@@ -6,7 +6,14 @@
   },
   "common": {
     "save": "حفظ",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "Confirm": "تأكيد",
+    "Delete": "حذف",
+    "deleteModal": {
+      "title": "هل أنت متأكد من حذف هذا العنوان؟",
+      "confirm": "تأكيد",
+      "cancel": "إلغاء"
+    }
   },
   "trustedBy": {
     "trustedCompanies": "موثوق به من قبل أكثر من",
