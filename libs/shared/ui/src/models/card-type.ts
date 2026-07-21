@@ -21,4 +21,5 @@ export interface CardData {
   inStock?: boolean;
   wishlist: number;
   create: string;
+  stock?: number;
 }

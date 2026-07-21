@@ -32,12 +32,12 @@
       <div class="flex justify-between text-gray-500">
         <dt>{{ 'cart.summary.subtotal' | translate }}</dt>
         <dd class="font-medium text-gray-900">
-          <!-- {{ subtotal | number: '1.0-2' }} {{ 'cart.currency' | translate }} -->
+          {{ subtotal() | number: '1.0-2' }} {{ 'cart.currency' | translate }}
         </dd>
       </div>
       <div class="flex justify-between   pt-2 font-semibold text-[#A6252A]  border-t-3 border-gray-200">
         <dt>{{ 'cart.summary.total' | translate }}</dt>
-        <!-- <dd>{{ total | number: '1.0-2' }} {{ 'cart.currency' | translate }}</dd> -->
+        <dd>{{ total() | number: '1.0-2' }} {{ 'cart.currency' | translate }}</dd>
       </div>
     </dl>
 

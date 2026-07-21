@@ -12,7 +12,7 @@
       <button
         type="button"
         (click)="onClearCart()"
-        [disabled]="cartItems().length === 0"
+        [disabled]="!cartItems().length"
         class="flex items-center cursor-pointer gap-1.5 rounded-lg bg-[#FBEAEA] px-3 sm:px-4 py-2 text-sm font-medium text-[#A6252A] hover:bg-red-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
       >
         <svg
@@ -42,7 +42,7 @@
       <div class="h-28 rounded-xl bg-gray-100 animate-pulse"></div>
       }
     </div>
-    } @if (!loading() && cartItems().length === 0) {
+    } @if (!loading() && !cartItems().length) {
     <div
       class="rounded-xl border border-dashed border-gray-200 p-10 text-center text-gray-400"
     >
@@ -70,7 +70,7 @@
               <div class="mt-1 flex flex-wrap items-center gap-1 text-sm">
                 <span class="text-amber-400 text-xl">★</span>
                 <span
-                  >{{ 'cart.rating' | translate }} {{ item.product?.rating
+                  >{{ 'cart.rating' | translate }} {{ item.product?.rating | number: '1.0-1'
                   }}/5</span
                 >
                 <span class="text-blue-500 hover:underline font-bold">
@@ -119,6 +119,7 @@
               <button
                 type="button"
                 (click)="onDecrease(item)"
+                [disabled]="(item?.product?.stock ?? 0) <= 1"
                 class="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md bg-[#FBEAEA] text-red-500 hover:bg-red-200 transition-colors"
               >
                 <svg
@@ -142,7 +143,7 @@
                 type="number"
                 min="1"
                 formControlName="quantity"
-                onInputChange="onQuantityInput(item, $event)"
+                (valueChange)="onQuantityInput(item, $event)"
                 [currentValue]="item.quantity"
                 placeholder="Adrian"
                 class="flex h-10 w-20 shrink-0 items-center rounded-md border border-gray-200 text-center text-sm [&_input]:h-full [&_input]:w-full [&_input]:text-center [&_input]:border-0 [&_input]:outline-none"
@@ -150,6 +151,7 @@
 
               <button
                 type="button"
+                [disabled]="(item?.product?.stock ?? 0) <= 1"
                 (click)="onIncrease(item)"
                 class="flex h-10 w-10 shrink-0 items-center cursor-pointer justify-center rounded-md bg-[#FBEAEA] text-red-500 hover:bg-red-200 transition-colors"
               >
