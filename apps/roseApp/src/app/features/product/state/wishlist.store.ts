@@ -41,8 +41,7 @@ export const WishlistStore = signalStore(
                     items: [...state.items, itemData],
                     isLoading: false,
                   }));
-
-                  console.log('5️⃣ after show call'); // وضيفي دي كمان
+                  console.log('5️⃣ after show call');
                 },
                 error: (err) => {
                   patchState(store, { isLoading: false });
@@ -56,6 +55,7 @@ export const WishlistStore = signalStore(
           ),
         ),
       ),
+      
     }),
   ),
 );

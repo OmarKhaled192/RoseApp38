@@ -1,22 +1,25 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
 
+import { TranslatePipe } from '@ngx-translate/core';
 import { Card, DarkModeService, TitleSection } from '@org/ui';
 import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
 import { CardAction, CardData } from 'libs/shared/ui/src/models/card-type';
 import { Carousel } from 'primeng/carousel';
-import { TranslatePipe } from '@ngx-translate/core';
+import { WishlistStore } from '../../../wishlist/store/wishlistStore';
 import { ProductStore } from '../../state/product.store';
+
 @Component({
   selector: 'app-related-product',
   imports: [Card, Carousel, TitleSection, TranslatePipe],
   templateUrl: './related-product.html',
-  styleUrl: '../../../home/components/best-seller/best-seller.css'
+  styleUrl: '../../../home/components/best-seller/best-seller.css',
+  providers: [WishlistStore],
 })
 export class RelatedProduct {
   private readonly darkModeService = inject(DarkModeService);
   readonly store = inject(ProductStore);
   readonly title = input<string>('');
-
+  withListstore = inject(WishlistStore);
   readonly productResource = this.store.getAllProduct();
   wishlist = signal<Set<string>>(new Set());
   readonly products = computed(() => {
@@ -48,8 +51,16 @@ export class RelatedProduct {
   ];
   readonly isDark = this.darkModeService.isDark;
 
-  toggleWishlist(id: string) {
-    console.log('Wishlist ', id);
+  toggleWishlist(product: CardData) {
+    const wishlistItem = product.wishlist;
+
+    if (wishlistItem > 0) {
+      this.withListstore.removeProductFromWishlist(product.id);
+      product.wishlist = 0;
+    } else {
+      this.withListstore.addProductToWishlist(product.id);
+      product.wishlist = 1;
+    }
   }
 
   quickView(product: CardData) {
@@ -71,7 +82,7 @@ export class RelatedProduct {
         label: 'Favorite',
         icon: this.wishlist().has(product.id) ? 'pi-heart-fill' : 'pi-heart',
         variant: 'ghost',
-        action: () => this.toggleWishlist(product.id),
+        action: () => this.toggleWishlist(product),
       },
       {
         label: 'Quick view',

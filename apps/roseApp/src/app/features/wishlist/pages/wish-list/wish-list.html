@@ -1,9 +1,6 @@
 <section class="m-10">
-  @if (products$ | async; as products) {
-
+  @if (store.products().length > 0) {
   <div class="relative flex items-center justify-between px-4 py-3 bg-white">
-    @if (products.length > 0) {
-
     <div class="flex items-center gap-2">
       <img src="images/wishList/folder-heart.svg" alt="Wishlist" />
 
@@ -12,8 +9,8 @@
       </h2>
 
       <span class="mt-8 text-xs text-gray-400">
-        {{ products.length }} {{ products.length === 1 ? ('wishlist.item' |
-        translate) : ('wishlist.items' | translate) }}
+        {{ store.products().length }} {{store.products().length === 1 ?
+        ('wishlist.item' | translate) : ('wishlist.items' | translate) }}
       </span>
     </div>
 
@@ -25,13 +22,11 @@
       <img src="images/wishList/brush-cleaning.svg" alt="" />
       {{ 'wishlist.clearWishlist' | translate }}
     </button>
-
-    }
   </div>
 
-  @if (products.length > 0) { @for (item of products; track item.id) {
-
   <hr class="my-4 border-gray-200" />
+
+  @for(item of store.filterProducts(); track item.id) {
 
   <app-card-list
     [imageUrl]="item.product.cover"
@@ -39,7 +34,10 @@
     [rating]="item.product.rating"
     [ratingsCount]="item.product.ratings"
     [price]="item.product.price"
-    (remove)="onRemove(item.id)"
+    [discountType]="item.product.discountType"
+    [discountValue]="item.product.discountValue"
+    [stock]="item.product.stock"
+    (remove)="store.removeProductFromWishlist(item.id)"
     (addToCart)="onAddToCart(item.product.id)"
   />
 
@@ -47,20 +45,18 @@
 
   <button
     type="button"
+    routerLink="/products"
     class="mt-4 flex items-center justify-center rounded-lg bg-[#501419] px-5 py-2 text-white transition-colors hover:bg-red-900"
-    (click)="onContinueShopping()"
   >
     <img src="images/wishList/move-left.svg" class="mx-1" alt="" />
     {{ 'wishlist.continueShopping' | translate }}
   </button>
-
-  } } @else {
-  <app-empty-wishlist (continueShopping)="onContinueShopping()" />
-
+  } @else {
+  <app-empty-wishlist />
   }
 </section>
 
 <app-delete-dialog
   [(visible)]="showDeleteDialog"
   (confirm)="removeAllProducts()"
-></app-delete-dialog>
+/>

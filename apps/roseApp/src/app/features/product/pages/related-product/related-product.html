@@ -24,6 +24,7 @@
         <ng-template #item let-product>
           <div class="px-1.5">
             <lib-card
+             (wishlistToggle)="toggleWishlist(product)"
               [card]="product"
               [hoverActions]="[actionsFor(product)[0], actionsFor(product)[1]]"
               [footerActions]="[actionsFor(product)[2]]"

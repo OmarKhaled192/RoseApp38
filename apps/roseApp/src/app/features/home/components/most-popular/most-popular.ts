@@ -15,18 +15,20 @@ import { ProductStore } from 'apps/roseApp/src/app/features/product/state/produc
 import { CategoryStore } from 'apps/roseApp/src/app/features/product/state/cateory.store';
 import { ICategory } from '../../model/category';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { WishlistStore } from '../../../wishlist/store/wishlistStore';
 
 @Component({
   selector: 'app-most-popular',
   imports: [Card, CommonModule, TitleSection, TranslatePipe],
   templateUrl: './most-popular.html',
+  providers: [WishlistStore],
 })
 export class MostPopular {
   private readonly darkModeService = inject(DarkModeService);
   readonly store = inject(ProductStore);
   private categoryStore = inject(CategoryStore);
-  private translateService = inject(TranslateService)
-  
+  private translateService = inject(TranslateService);
+  withListstore = inject(WishlistStore);
   isRtl = document.documentElement.dir === 'ltr';
   currentLang = this.translateService.currentLang();
   wishlist = signal<Set<string>>(new Set());
@@ -75,7 +77,6 @@ export class MostPopular {
     });
   }
 
-
   readonly isLoading = computed(() => this.productResource.isLoading());
 
   responsiveOptions = [
@@ -89,8 +90,16 @@ export class MostPopular {
     this.activeTab.set(value);
   }
 
-  toggleWishlist(id: string) {
-    console.log('Wishlist ', id);
+  toggleWishlist(product: CardData) {
+    const wishlistItem = product.wishlist;
+
+    if (wishlistItem > 0) {
+      this.withListstore.removeProductFromWishlist(product.id);
+      product.wishlist = 0;
+    } else {
+      this.withListstore.addProductToWishlist(product.id);
+      product.wishlist = 1;
+    }
   }
 
   quickView(product: CardData) {
@@ -112,7 +121,7 @@ export class MostPopular {
         label: 'Favorite',
         icon: this.wishlist().has(product.id) ? 'pi-heart-fill' : 'pi-heart',
         variant: 'ghost',
-        action: () => this.toggleWishlist(product.id),
+        action: () => this.toggleWishlist(product),
       },
       {
         label: 'Quick view',
@@ -129,4 +138,3 @@ export class MostPopular {
     ];
   }
 }
-

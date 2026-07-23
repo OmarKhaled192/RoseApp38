@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { BadgeType, CardAction, CardData } from '../../models/card-type';
 import { DecimalPipe, NgClass } from '@angular/common';
 import { StarRating } from '../star-rating/star-rating';
@@ -13,10 +13,11 @@ import { RouterLink } from '@angular/router';
 export class Card {
   card = input.required<CardData>();
   showWishlist = input<boolean>(false);
-  wishlistToggle = input<(() => void) | undefined>(undefined);
+  // wishlistToggle = input<(() => void) | undefined>(undefined);
   hoverActions = input<CardAction[]>([]);
   footerActions = input<CardAction[]>([]);
-
+  wishlistClicked = output<string>();
+  wishlistToggle = output<void>();
   readonly placeholderImage = 'https://placehold.co/600x400';
 
   onImageError(event: Event): void {
