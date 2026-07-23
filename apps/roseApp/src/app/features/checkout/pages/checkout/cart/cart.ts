@@ -1,9 +1,7 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { CartStore } from '../../../../product/state/cart.store';
+import { Component, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { CartItem } from '../../../models/cart.interface';
 import { CommonModule } from '@angular/common';
-import { InputComponent, InputValue } from "@org/ui";
+import { CartItem, CartStore, InputComponent, InputValue } from "@org/ui";
 import { FormControl } from '@angular/forms';
 import { RouterLink } from "@angular/router";
 

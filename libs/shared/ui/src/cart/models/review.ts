@@ -1,6 +1,7 @@
-import { User } from '../../../../../../authApp/src/app/features/auth/models/register';
+import { User } from "./register"
+
 export interface Review {
-  id: string
+  id: string | number;
   userId: string
   productId: string
   headline: string
@@ -8,6 +9,7 @@ export interface Review {
   rating: number
   createdAt: string
   updatedAt: string
+  name: string
   user: User
 }
 

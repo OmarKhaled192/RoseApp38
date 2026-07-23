@@ -2,9 +2,8 @@ import { Component, effect, inject, input, signal } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DecimalPipe } from '@angular/common';
-import { ProductData } from '../../models/product';
-import { CartStore } from '../../state/cart.store';
 import { WishlistStore } from '../../state/wishlist.store';
+import { CartStore, ProductData } from '@org/ui';
 
 @Component({
   selector: 'app-product-info',
