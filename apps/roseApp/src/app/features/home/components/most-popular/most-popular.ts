@@ -6,9 +6,9 @@ import {
   CardAction,
   CardData,
   DarkModeService,
+  ProductData,
   TitleSection,
 } from '@org/ui';
-import { ProductData } from 'apps/roseApp/src/app/features/product/models/product';
 import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
 import { ProductStore } from 'apps/roseApp/src/app/features/product/state/product.store';
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@org/data-access';
-import { Product, ProductData } from '../models/product';
 import { HttpClient } from '@angular/common/http';
+import { Product, ProductData } from '@org/ui';
 
 @Injectable({
   providedIn: 'root',

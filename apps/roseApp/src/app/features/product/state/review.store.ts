@@ -1,10 +1,10 @@
 import { LoadingState, Message } from '@org/data-access';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { ReviewRequest } from '../models/review';
 import { ReviewService } from '../services/review';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
+import { ReviewRequest } from '@org/ui';
 
 export interface ReviewState extends LoadingState {
   review: ReviewRequest[];
