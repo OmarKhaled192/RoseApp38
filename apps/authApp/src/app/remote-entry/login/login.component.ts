@@ -10,7 +10,7 @@ import {
   Checkbox,
   TitleFormComponent,
   QuestionRepeatComponent,
-  DarkModeService
+  DarkModeService,
 } from '@org/ui';
 import { LoginRequest } from '../../features/auth/models/login';
 import { authStore } from '../../features/auth/state/auth.store';
@@ -27,7 +27,7 @@ import { authStore } from '../../features/auth/state/auth.store';
     Button,
     Checkbox,
     TitleFormComponent,
-    QuestionRepeatComponent
+    QuestionRepeatComponent,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],

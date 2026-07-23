@@ -1,18 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router , RouterModule} from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { DarkModeComponent, LanguageSwitcherComponent } from '@org/ui';
 import { AuthenticationService } from '@org/auth';
 @Component({
   selector: 'app-navbar',
-  imports: [FormsModule, CommonModule, DarkModeComponent, LanguageSwitcherComponent , RouterModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    DarkModeComponent,
+    LanguageSwitcherComponent,
+    RouterLink,
+    RouterModule,
+  ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar {
   private readonly router = inject(Router);
-  readonly  authService = inject(AuthenticationService);
+  private translate = inject(TranslateService)
+  readonly authService = inject(AuthenticationService);
 
   searchQuery = '';
   isArabic = true;
@@ -33,14 +42,16 @@ export class Navbar {
   }
 
   isLoggedIn(): boolean {
-   return  this.authService.isLoggedIn();
+    return this.authService.isLoggedIn();
   }
 
   onSignout(): void {
     this.authService.removeToken();
     this.router.navigateByUrl('/auth/login');
   }
-
+  onLanguageChanged(lang: string): void {
+    this.translate.use(lang);
+  }
   onLove(): void {
     console.log('Wishlist clicked');
   }

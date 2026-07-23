@@ -6,7 +6,14 @@
   },
   "common": {
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "Confirm": "Confirm",
+    "Delete": "Delete",
+    "deleteModal": {
+      "title": "Are you sure you want to delete this address?",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    }
   },
   "trustedBy": {
     "trustedCompanies": "Trusted by over",
@@ -183,5 +190,25 @@
       "total": "Total",
       "checkout": "Checkout"
     }
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "item": "item",
+    "items": "items",
+    "clearWishlist": "Clear Wishlist",
+    "continueShopping": "Continue Shopping",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "ratings": "ratings",
+    "currency": "EGP",
+    "removeItem": "Remove item",
+    "addToCart": "Add to Cart",
+    "exploreSimilarProducts": "Explore Similar Products",
+    "clearWishlistConfirmation": "Are you sure you want to clear your Wishlist?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "emptyTitle": "Your wishlist is empty",
+    "emptyDescription": "Save the items you love by tapping the heart icon — they'll show up here so you can find them anytime.",
+    "continueShopping": "Continue Shopping"
   }
 }
