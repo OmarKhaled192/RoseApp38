@@ -20,3 +20,4 @@ export * from './lib/card/card';
 export * from './lib/card-review/card-review';
 export * from './models/card-type';
 export * from './models/card-review';
+export * from './services/cart.token';

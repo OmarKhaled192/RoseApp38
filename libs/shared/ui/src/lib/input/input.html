@@ -39,11 +39,10 @@
   <input pInputText
     [id]="controlId"
     [type]="type()"
-     [formControl]="control()"
     [placeholder]="placeholder()"
     [disabled]="isControlDisabled"
     [readOnly]="isReadonly()"
-    [value]="value() ?? currentValue()"
+    [value]="currentValue() ? currentValue() : value()"
     (input)="onInput($event)"
     (blur)="onBlur()"
     class="w-full block" />

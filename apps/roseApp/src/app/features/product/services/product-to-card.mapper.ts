@@ -38,5 +38,6 @@ export function mapProductToCardData(product: ProductData): CardData {
     currency: 'EGP',
     rating: product.rating,
     badges: badges,
+    stock: product.stock,
   };
 }

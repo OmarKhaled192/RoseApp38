@@ -10,15 +10,9 @@
   <section class="flex-1 flex flex-col">
     @if (pagedProducts().length) {
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-      <!-- @for (product of pagedProducts(); track product.title) {
-      <div>
-        <lib-card [showWishlist]="true" [card]="product" [hoverActions]="hoverActions(product)"
-          [footerActions]="footerActions(product)" />
-      </div>
-      } -->
 
       @for (product of products(); track product.id) {
-      <lib-card (wishlistToggle)="toggleWishlist(product)" [card]="product" [showWishlist]="true" [footerActions]="[actionsFor(product)[2]]" />
+      <lib-card (wishlistToggle)="toggleWishlist(product)" [card]="product" [showWishlist]="true" />
       }
     </div>
 
