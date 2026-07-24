@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormControl } from '@angular/forms';
 import { CouponStore } from '../../../state/coupon.store';
-import { InputComponent } from "@org/ui";
-import { CartStore } from '../../../../product/state/cart.store';
-import { CartItem } from '../../../models/cart.interface';
+import { CartStore, InputComponent , CartItem  } from "@org/ui";
 
 @Component({
   selector: 'app-summary-checkout',
