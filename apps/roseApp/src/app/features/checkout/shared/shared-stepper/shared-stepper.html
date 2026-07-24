@@ -1,0 +1,28 @@
+<div class="my-5 flex items-center gap-0">
+  <!-- leading line -->
+  <span
+    class="h-1 flex-1 rounded-l-full"
+    [ngClass]="isSegmentActive(0) ? 'bg-[#8B1E28]' : 'bg-gray-200'"
+  ></span>
+  @for (step of steps; track $index;let last = $last) {
+  <ng-container>
+    <!-- circle -->
+    <span
+      class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold"
+      [ngClass]="isStepActive(step) ? 'bg-[#8B1E28] text-white' : 'bg-gray-200 text-gray-500'"
+    >
+      {{ step }}
+    </span>
+
+    <!-- trailing line (rounded on the very last one) -->
+    <span
+      class="h-1 flex-1"
+      [ngClass]="[
+    (isSegmentActive(step) || last) ? 'bg-[#8B1E28]' : 'bg-gray-200',
+    last ? 'rounded-r-full' : ''
+  ]"
+    ></span>
+  </ng-container>
+
+  }
+</div>
