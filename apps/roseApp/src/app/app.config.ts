@@ -8,9 +8,7 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { authenticationInterceptor } from '@org/auth';
 import Aura from '@primeuix/themes/aura';
 import { MessageService } from 'primeng/api';
-import { providePrimeNG } from 'primeng/config';
-import { appRoutes } from './app.routes';
-
+// import { CART_PORT, CartStore } from '@org/ui';
 
 const DEFAULT_LANG: string = 'en';
 
@@ -33,6 +31,10 @@ export const appConfig: ApplicationConfig = {
       fallbackLang: DEFAULT_LANG,
     }),
     provideTranslateHttpLoader({ prefix: '/assets/i18n/', suffix: '.json' }),
+     {
+      provide: CART_PORT,
+      useExisting: CartStore,
+    },
     {
       provide: APP_INITIALIZER,
       multi: true,

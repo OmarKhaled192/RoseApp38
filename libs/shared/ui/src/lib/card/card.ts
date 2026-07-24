@@ -4,6 +4,7 @@ import { DecimalPipe, NgClass } from '@angular/common';
 import { StarRating } from '../star-rating/star-rating';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
+import { CART_PORT } from '../../cart/services/cart.token';
 
 @Component({
   selector: 'lib-card',
@@ -12,7 +13,7 @@ import { RouterLink } from '@angular/router';
 })
 export class Card {
   card = input.required<CardData>();
-  // private readonly cart = inject(CART_PORT); 
+  private readonly cart = inject(CART_PORT); 
   showWishlist = input<boolean>(false);
   // wishlistToggle = input<(() => void) | undefined>(undefined);
   hoverActions = input<CardAction[]>([]);
@@ -69,6 +70,6 @@ export class Card {
   addToCart(product: CardData) {
     const productId = product.id;
     if (!productId) return;
-    // this.cart.addToCart({ productId, quantity: 1 });
+    this.cart.addToCart({ productId, quantity: 1 });
   }
 }

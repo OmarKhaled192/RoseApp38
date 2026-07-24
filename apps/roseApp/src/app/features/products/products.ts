@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { Card, Pagination } from '@org/ui';
+import { Card, Pagination, ProductData } from '@org/ui';
 import { CardAction, CardData } from '@org/ui';
 import { ProductsCategory } from './components/products-category/products-category';
 import { Filters } from './components/filters/filters';
@@ -9,7 +9,6 @@ import {
   ProductFilters,
 } from './models/products.models';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ProductData } from '../product/models/product';
 import { mapProductToCardData } from '../product/services/product-to-card.mapper';
 import { ProductStore } from '../product/state/product.store';
 import { WishlistStore } from '../wishlist/store/wishlistStore';

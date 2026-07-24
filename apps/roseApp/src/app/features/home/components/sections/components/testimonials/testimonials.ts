@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { Review, TitleSection } from '@org/ui';
+import { Review, ReviewCard, TitleSection } from '@org/ui';
 import { CardReview } from '@org/ui';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
@@ -15,7 +15,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 export class Testimonials {
   private translateService = inject(TranslateService)
   isArabic = this.translateService.currentLang() === 'ar';
-  reviews: Review[] = [
+  reviews: ReviewCard[] = [
     {
       id: 1,
       name: 'testimonials.reviews.jake.name',

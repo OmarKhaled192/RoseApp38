@@ -2,9 +2,9 @@ import { computed, inject } from "@angular/core";
 import { tap, pipe, switchMap } from "rxjs";
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
-import { LoadingState, Message, QueryParams } from "@org/data-access";
-import { CartService } from "../../checkout/services/cart";
-import { Cart, CartItem } from "../../checkout/models/cart.interface";
+import { LoadingState, Message } from "@org/data-access";
+import { CartService } from "./cart";
+import { Cart, CartItem } from "../models/cart.interface";
 
 export interface CartState extends LoadingState {
   cart: Cart;
