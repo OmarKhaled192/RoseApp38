@@ -15,7 +15,7 @@
 
   <div class="grid grid-cols-2 gap-2 justify-center">
     <button type="button" (click)="select('cash')"
-      class="relative flex h-[299px] w-100 flex-col items-center justify-center rounded-2xl border border-gray-200 p-6 text-center transition-colors"
+      class="relative flex h-[299px] flex-col items-center justify-center rounded-2xl border border-gray-200 p-6 text-center transition-colors"
       [class.border-gray-10]="selected() !== 'cash'" [class.bg-white]="selected() !== 'cash'"
       [class.bg-gray-50]="selected() === 'cash'">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 mb-4 text-gray-800" viewBox="0 0 64 64" fill="none"
@@ -37,7 +37,7 @@
     </button>
 
     <button type="button" disabled (click)="select('card')"
-      class="relative border-gray flex h-[299px] w-100 flex-col items-center justify-center text-center rounded-2xl border p-6 transition-colors"
+      class="relative border-gray flex h-[299px] flex-col items-center justify-center text-center rounded-2xl border p-6 transition-colors"
       [class.border-gray-200]="selected() !== 'card'" [class.ring-1]="selected() === 'card'">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 mb-4 text-gray-800" viewBox="0 0 64 64" fill="none"
         class="w-36 h-36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -59,7 +59,8 @@
 
   <div class="flex justify-end mt-8">
     <button type="button" (click)="checkout()"
-      class="flex items-center gap-3 bg-[#A6252A] hover:bg-red-950 text-white px-5 font-medium text-sm px-6 py-3 rounded-xl transition-colors">
+      [disabled]="!addressId() || !selected()"
+      class="flex items-center gap-3 bg-[#A6252A] hover:bg-red-950 text-white px-5 font-medium text-sm px-6 py-3 rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
       {{ isLoading() ? 'Placing order...' : 'Checkout' }}
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
