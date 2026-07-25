@@ -5,11 +5,15 @@ import { StarRating } from '../star-rating/star-rating';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 import { CART_PORT } from '../../cart/services/cart.token';
+import { CartStore } from '../../cart/services/cart.store';
 
 @Component({
   selector: 'lib-card',
   imports: [NgClass, StarRating, DecimalPipe, TranslatePipe, RouterLink],
   templateUrl: './card.html',
+    providers: [
+    { provide: CART_PORT, useExisting: CartStore }
+  ]
 })
 export class Card {
   card = input.required<CardData>();
