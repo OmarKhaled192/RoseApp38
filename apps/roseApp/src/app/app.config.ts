@@ -1,21 +1,14 @@
 import { DOCUMENT } from '@angular/common';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import {
-  ApplicationConfig,
-  APP_INITIALIZER,
-  inject,
-  provideBrowserGlobalErrorListeners,
-} from '@angular/core';
+import { APP_INITIALIZER, ApplicationConfig, inject, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeuix/themes/aura';
-import { appRoutes } from './app.routes';
 import { authenticationInterceptor } from '@org/auth';
+import Aura from '@primeuix/themes/aura';
 import { MessageService } from 'primeng/api';
-import { CART_PORT, CartStore } from '@org/ui';
+// import { CART_PORT, CartStore } from '@org/ui';
 
 const DEFAULT_LANG: string = 'en';
 
@@ -52,6 +45,8 @@ export const appConfig: ApplicationConfig = {
         return Promise.resolve();
       },
     },
+ 
+
     provideRouter(appRoutes),
   ],
 };

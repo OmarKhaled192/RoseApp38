@@ -3,18 +3,25 @@ import { Card, Pagination, ProductData } from '@org/ui';
 import { CardAction, CardData } from '@org/ui';
 import { ProductsCategory } from './components/products-category/products-category';
 import { Filters } from './components/filters/filters';
-import { CategoryItem, OccasionItem, ProductFilters } from './models/products.models';
+import {
+  CategoryItem,
+  OccasionItem,
+  ProductFilters,
+} from './models/products.models';
 import { TranslatePipe } from '@ngx-translate/core';
 import { mapProductToCardData } from '../product/services/product-to-card.mapper';
 import { ProductStore } from '../product/state/product.store';
+import { WishlistStore } from '../wishlist/store/wishlistStore';
 
 @Component({
   selector: 'app-products',
   imports: [Card, TranslatePipe, Pagination, ProductsCategory, Filters],
   templateUrl: './products.html',
   styleUrl: './products.css',
+  providers: [WishlistStore],
 })
 export class Products {
+  withListstore = inject(WishlistStore);
   // ---- Static sidebar data (replace with API calls) ----
   categories: CategoryItem[] = [
     { id: 'cards', label: 'Cards', icon: 'pi-id-card' },
@@ -30,12 +37,36 @@ export class Products {
   ];
 
   occasions: OccasionItem[] = [
-    { id: 'wedding', label: 'Wedding', image: '/images/filters/occasions/wedding.jpg' },
-    { id: 'anniversary', label: 'Anniversary', image: '/images/filters/occasions/wedding.jpg' },
-    { id: 'graduation', label: 'Graduation', image: '/images/filters/occasions/graduation.jpg' },
-    { id: 'wedding', label: 'Wedding', image: '/images/filters/occasions/wedding.jpg' },
-    { id: 'fathers-day', label: "Father's Day", image: '/images/filters/occasions/fathers-day.png' },
-    { id: 'graduation', label: 'Graduation', image: '/images/filters/occasions/graduation.jpg' },
+    {
+      id: 'wedding',
+      label: 'Wedding',
+      image: '/images/filters/occasions/wedding.jpg',
+    },
+    {
+      id: 'anniversary',
+      label: 'Anniversary',
+      image: '/images/filters/occasions/wedding.jpg',
+    },
+    {
+      id: 'graduation',
+      label: 'Graduation',
+      image: '/images/filters/occasions/graduation.jpg',
+    },
+    {
+      id: 'wedding',
+      label: 'Wedding',
+      image: '/images/filters/occasions/wedding.jpg',
+    },
+    {
+      id: 'fathers-day',
+      label: "Father's Day",
+      image: '/images/filters/occasions/fathers-day.png',
+    },
+    {
+      id: 'graduation',
+      label: 'Graduation',
+      image: '/images/filters/occasions/graduation.jpg',
+    },
   ];
   readonly store = inject(ProductStore);
 
@@ -46,7 +77,6 @@ export class Products {
       this.productResource.value()?.payload.data ?? [];
     return data.map(mapProductToCardData);
   });
-
 
   // ---- Product source (replace with API call) ----
   private allProducts = signal<CardData[]>([
@@ -156,7 +186,6 @@ export class Products {
     this.pageSize.set(event.size);
   }
 
-
   footerActions(product: CardData): CardAction[] {
     return [
       {
@@ -168,9 +197,16 @@ export class Products {
     ];
   }
 
+  toggleWishlist(product: CardData) {
+    const wishlistItem = product.wishlist;
 
-  toggleWishlist(id: string) {
-    console.log('Wishlist ', id);
+    if (wishlistItem > 0) {
+      this.withListstore.removeProductFromWishlist(product.id);
+      product.wishlist = 0;
+    } else {
+      this.withListstore.addProductToWishlist(product.id);
+      product.wishlist = 1;
+    }
   }
 
   private addToCart(product: CardData) {
@@ -189,7 +225,7 @@ export class Products {
         label: 'Favorite',
         icon: this.wishlist().has(product.id) ? 'pi-heart-fill' : 'pi-heart',
         variant: 'ghost',
-        action: () => this.toggleWishlist(product.id),
+        action: () => this.toggleWishlist(product),
       },
       {
         label: 'Quick view',

@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { BadgeType, CardAction, CardData } from '../../models/card-type';
 import { DecimalPipe, NgClass } from '@angular/common';
 import { StarRating } from '../star-rating/star-rating';
@@ -15,7 +15,7 @@ export class Card {
   card = input.required<CardData>();
   private readonly cart = inject(CART_PORT); 
   showWishlist = input<boolean>(false);
-  wishlistToggle = input<(() => void) | undefined>(undefined);
+  // wishlistToggle = input<(() => void) | undefined>(undefined);
   hoverActions = input<CardAction[]>([]);
 
   footerActions(): CardAction[] {
@@ -29,7 +29,8 @@ export class Card {
     ];
   }
 
-
+  wishlistClicked = output<string>();
+  wishlistToggle = output<void>();
   readonly placeholderImage = 'https://placehold.co/600x400';
 
   onImageError(event: Event): void {

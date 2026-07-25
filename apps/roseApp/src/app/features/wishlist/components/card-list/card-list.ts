@@ -1,21 +1,38 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-card-list',
-  imports: [CommonModule, TranslatePipe],
+  imports: [CommonModule, TranslatePipe, RouterLink],
   templateUrl: './card-list.html',
 })
 export class CardList {
-  @Input() imageUrl = 'https://placehold.co/200x200';
-  @Input() title = 'Dreamy White Roses Bouquet';
-  @Input() rating = 4.5;
-  @Input() ratingsCount = 8;
-  @Input() price = 199.5;
-  @Input() originalPrice = 299.5;
+  imageUrl = input<string>();
+  title = input('');
+  rating = input(0);
+  ratingsCount = input(0);
+  price = input('');
+  stock = input(0);
+  originalPrice = input(0);
+  remove = output<void>();
+  addToCart = output<void>();
+  discountType = input('');
+  discountValue = input('');
 
-  @Output() remove = new EventEmitter<void>();
-  @Output() addToCart = new EventEmitter<void>();
+  finalPrice = computed(() => {
+    const price = Number(this.price());
+    const discount = Number(this.discountValue());
+
+    if (this.discountType() === 'PERCENT') {
+      return price - (price * discount) / 100;
+    }
+
+    if (this.discountType() === 'FIXED') {
+      return price - discount;
+    }
+
+    return price;
+  });
 }
-

@@ -12,7 +12,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
 
       @for (product of products(); track product.id) {
-      <lib-card [card]="product" [showWishlist]="true" />
+      <lib-card (wishlistToggle)="toggleWishlist(product)" [card]="product" [showWishlist]="true" />
       }
     </div>
 
