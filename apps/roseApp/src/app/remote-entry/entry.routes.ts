@@ -51,13 +51,13 @@ export const remoteRoutes: Route[] = [
                 (m) => m.CartComponent
               ),
           },
-             {
-                path: 'address',
-                loadComponent: () =>
-                  import('../features/checkout/addresses/components/checkout-address/checkout-address.component').then(
-                    (m) => m.CheckoutAddressComponent
-                  ),
-              },
+          {
+            path: 'address',
+            loadComponent: () =>
+              import('../features/checkout/pages/checkout/addresses/components/checkout-address/checkout-address.component').then(
+                (m) => m.CheckoutAddressComponent
+              ),
+          },
         ],
       },
     ],
