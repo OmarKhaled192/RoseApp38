@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@org/data-access';
+import { Order } from '../models/order';
 import { HttpClient } from '@angular/common/http';
-import { Wishlist } from "../models/wishlist";
 
 @Injectable({
   providedIn: 'root',
 })
-export class WishlistService extends ApiService<Wishlist> {
-  protected override endpoint = 'wishlist';
-
-  constructor( http: HttpClient) {
+export class OrderService extends ApiService<Order>  {
+  protected override endpoint = 'order';
+  constructor(http: HttpClient) {
     super(http);
   }
-
-  
-
 }

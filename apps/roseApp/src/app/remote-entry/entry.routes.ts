@@ -19,9 +19,7 @@ export const remoteRoutes: Route[] = [
       {
         path: 'products',
         loadComponent: () =>
-          import('../features/products/products').then(
-            (m) => m.Products,
-          ),
+          import('../features/products/products').then((m) => m.Products),
       },
       {
         path: 'product/:id',
@@ -30,26 +28,32 @@ export const remoteRoutes: Route[] = [
             (m) => m.ProductDetails,
           ),
       },
-
       {
         path: 'checkout',
         loadComponent: () =>
           import('../features/checkout/pages/checkout/checkout').then(
-            (m) => m.Checkout
+            (m) => m.Checkout,
           ),
         children: [
           {
             path: 'cart',
             loadComponent: () =>
               import('../features/checkout/pages/checkout/cart/cart').then(
-                (m) => m.CartComponent
+                (m) => m.CartComponent,
+              ),
+          },
+          {
+            path: 'payment',
+            loadComponent: () =>
+              import('../features/checkout/pages/checkout/payment-method/payment-method').then(
+                (m) => m.PymentMethod,
               ),
           },
           {
             path: 'address',
             loadComponent: () =>
               import('../features/checkout/addresses/components/checkout-address/checkout-address.component').then(
-                (m) => m.CheckoutAddressComponent
+                (m) => m.CheckoutAddressComponent,
               ),
           },
         ],

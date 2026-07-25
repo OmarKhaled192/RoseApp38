@@ -3,51 +3,51 @@ import { tap, pipe, switchMap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { LoadingState, Message } from '@org/data-access';
-import { WishlistService } from '../services/wishlist.service';
-import { Wishlist } from '../models/wishlist';
+import { Order } from '../models/order';
+import { OrderService } from '../services/order';
+import { CreateOrderRequest } from '../models/create-order-request';
 
-export interface WishlistState extends LoadingState {
-  items: Wishlist[];
+export interface OrderState extends LoadingState {
+  order: Order | null;
   isLoading: boolean;
 }
 
-const initialState: WishlistState = {
-  items: [],
+const initialState: OrderState = {
+  order: null,
   isLoading: false,
 };
 
-export const WishlistStore = signalStore(
+export const OrderStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
   withMethods(
     (
       store,
-      wishlistService = inject(WishlistService),
+      orderService = inject(OrderService),
       messageService = inject(Message),
     ) => ({
-      addToWishlist: rxMethod<Wishlist>(
+      createOrder: rxMethod<CreateOrderRequest>(
         pipe(
           tap(() => patchState(store, { isLoading: true })),
-          switchMap((itemData) =>
-            wishlistService.post(itemData).pipe(
+          switchMap((body) =>
+            orderService.post(body).pipe(
               tap({
                 next: (res) => {
+                  patchState(store, () => ({
+                    isLoading: false,
+                    order: res.payload, // <-- unwrap here
+                  }));
+
                   messageService.show(
                     'success',
-                    res.message || 'تمت الإضافة للمفضلة بنجاح',
+                    res.message || 'تم إنشاء الطلب بنجاح',
                   );
-                  console.log('3️⃣ next - response: ', res);
-                  patchState(store, (state) => ({
-                    items: [...state.items, itemData],
-                    isLoading: false,
-                  }));
-                  console.log('5️⃣ after show call');
                 },
                 error: (err) => {
                   patchState(store, { isLoading: false });
                   messageService.show(
                     'error',
-                    err.error?.message || 'فشلت الإضافة للمفضلة',
+                    err.error?.message || 'فشل إنشاء الطلب',
                   );
                 },
               }),
@@ -55,7 +55,6 @@ export const WishlistStore = signalStore(
           ),
         ),
       ),
-      
     }),
   ),
 );
