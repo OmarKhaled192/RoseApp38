@@ -17,8 +17,11 @@ import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { authenticationInterceptor } from '@org/auth';
 
+
+const DEFAULT_LANG: string = 'en';
+
 export class MultiTranslateHttpLoader implements TranslateLoader {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getTranslation(lang: string): Observable<any> {
     const urls = [
@@ -63,13 +66,12 @@ export class MultiTranslateHttpLoader implements TranslateLoader {
   }
 }
 
-const DEFAULT_LANG: string = 'en';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideAnimationsAsync(),
-  provideHttpClient(withInterceptors([authenticationInterceptor])),
+    provideHttpClient(withInterceptors([authenticationInterceptor])),
     MessageService,
     providePrimeNG({
       theme: {

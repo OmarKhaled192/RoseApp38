@@ -1,4 +1,3 @@
-import { Wishlist } from './../features/product/models/wishlist';
 import { Route } from '@angular/router';
 import { HomeComponent } from '../features/home/home';
 import { RoseApp } from './entry';
@@ -8,7 +7,7 @@ export const remoteRoutes: Route[] = [
     path: '',
     component: RoseApp,
     children: [
-      { path: '', component: HomeComponent },
+      { path: '', component: HomeComponent, pathMatch: 'full' },
       {
         path: 'wishlist',
         loadComponent: () =>

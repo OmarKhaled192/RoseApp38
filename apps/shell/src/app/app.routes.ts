@@ -1,8 +1,12 @@
-import { NxWelcome } from './nx-welcome';
 import { Route } from '@angular/router';
 import { loadRemote } from '@module-federation/enhanced/runtime';
 
 export const appRoutes: Route[] = [
+  {
+    path: '',
+    redirectTo: 'roseApp',
+    pathMatch: 'full',
+  },
   {
     path: 'roseApp',
     loadChildren: () =>
@@ -24,9 +28,5 @@ export const appRoutes: Route[] = [
         'adminDashboard/Routes',
       ).then((m) => (m ? m.remoteRoutes : [])),
   },
-  {
-    path: '',
-    redirectTo: 'roseApp',
-    pathMatch: 'full',
-  },
+
 ];
