@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { CART_PORT, CartStore } from '@org/ui';
 import { appRoutes } from './app.routes';
+import { authenticationInterceptor } from '@org/auth';
 
 
 const DEFAULT_LANG: string = 'en';
