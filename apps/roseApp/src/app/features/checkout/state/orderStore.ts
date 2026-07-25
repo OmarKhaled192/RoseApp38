@@ -6,6 +6,8 @@ import { LoadingState, Message } from '@org/data-access';
 import { Order } from '../models/order';
 import { OrderService } from '../services/order';
 import { CreateOrderRequest } from '../models/create-order-request';
+import { CartStore } from '@org/ui';
+import { Router } from '@angular/router';
 
 export interface OrderState extends LoadingState {
   order: Order | null;
@@ -24,6 +26,8 @@ export const OrderStore = signalStore(
     (
       store,
       orderService = inject(OrderService),
+      cartStore = inject(CartStore),
+      router = inject(Router),
       messageService = inject(Message),
     ) => ({
       createOrder: rxMethod<CreateOrderRequest>(
@@ -37,11 +41,12 @@ export const OrderStore = signalStore(
                     isLoading: false,
                     order: res.payload, // <-- unwrap here
                   }));
-
+                  cartStore.clearCart();
                   messageService.show(
                     'success',
                     res.message || 'تم إنشاء الطلب بنجاح',
                   );
+                  router.navigate(['/roseApp']);
                 },
                 error: (err) => {
                   patchState(store, { isLoading: false });
@@ -60,7 +65,7 @@ export const OrderStore = signalStore(
           addressId: '',
           paymentMethod: '',
           couponCode: '',
-          notes: ''
+          notes: '',
         };
         patchState(store, { order: { ...currentOrder, addressId } });
       },
