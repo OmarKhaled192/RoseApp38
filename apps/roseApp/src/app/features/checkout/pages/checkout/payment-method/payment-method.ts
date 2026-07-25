@@ -1,3 +1,4 @@
+import { CouponStore } from './../../../state/coupon.store';
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SharedStepper } from '../../../shared/shared-stepper/shared-stepper';
@@ -12,6 +13,7 @@ type PaymentMethod = 'cash' | 'card';
 export class PymentMethod {
   selected = signal<PaymentMethod>('cash');
   private readonly orderStore = inject(OrderStore);
+  private readonly couponStore = inject(CouponStore);
   isLoading = this.orderStore.isLoading;
   addressId = computed(() => this.orderStore.order()?.addressId ?? '');
 
@@ -25,6 +27,7 @@ export class PymentMethod {
 
     this.orderStore.createOrder({
       addressId,
+      couponCode:this.couponStore.couponItems()[0].code,
       paymentMethod:
         this.selected() === 'card'
           ? PaymentMethodEnum.CreditCard

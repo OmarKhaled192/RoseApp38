@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class OrderService extends ApiService<Order> {
-  protected override endpoint = 'order';
+  protected override endpoint = 'orders';
 
   constructor() {
     super(inject(HttpClient));

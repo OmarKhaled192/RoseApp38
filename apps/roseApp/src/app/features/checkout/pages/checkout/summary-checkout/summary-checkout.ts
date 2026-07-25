@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormControl } from '@angular/forms';
 import { CouponStore } from '../../../state/coupon.store';
 import { CartStore, InputComponent, CartItem } from '@org/ui';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-summary-checkout',
@@ -21,8 +23,16 @@ export class SummaryCheckout {
   readonly loading = this.couponStore.couponLoading;
   private readonly router = inject(Router);
 
+  private currentUrl = toSignal(
+    this.router.events.pipe(
+      filter((e) => e instanceof NavigationEnd),
+      map((e: NavigationEnd) => e.url),
+    ),
+    { initialValue: this.router.url },
+  );
+
   isPaymentPage = computed(
-    () => this.router.url === '/roseApp/checkout/payment',
+    () => this.currentUrl() !== '/roseApp/checkout/payment',
   );
 
   protected onApplyCoupon(): void {

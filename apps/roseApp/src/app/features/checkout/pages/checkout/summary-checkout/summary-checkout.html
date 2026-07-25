@@ -63,7 +63,7 @@
       </div>
     </dl>
   </div>
-  @if (!isPaymentPage()) {
+  @if (isPaymentPage()) {
   <button
     type="button"
     (click)="goToAddress()"
