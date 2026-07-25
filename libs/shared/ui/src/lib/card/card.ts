@@ -12,9 +12,9 @@ import { RouterLink } from '@angular/router';
 })
 export class Card {
   card = input.required<CardData>();
-  // private readonly cart = inject(CART_PORT); 
+
   showWishlist = input<boolean>(false);
-  // wishlistToggle = input<(() => void) | undefined>(undefined);
+
   hoverActions = input<CardAction[]>([]);
 
   footerActions(): CardAction[] {
@@ -71,4 +71,5 @@ export class Card {
     if (!productId) return;
     // this.cart.addToCart({ productId, quantity: 1 });
   }
+  
 }

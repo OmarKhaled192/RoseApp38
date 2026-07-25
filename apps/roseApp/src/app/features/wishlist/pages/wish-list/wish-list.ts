@@ -14,7 +14,7 @@ import { WishlistStore } from '../../store/wishlistStore';
   templateUrl: './wish-list.html',
   providers: [WishlistStore],
 })
-export class WishList implements OnInit {
+export class WishList  {
   showDeleteDialog = signal<boolean>(false);
 
   store = inject(WishlistStore);
@@ -33,7 +33,5 @@ export class WishList implements OnInit {
 
 
 
-  ngOnInit(): void {
-    this.store.loadWishListProducts();
-  }
+
 }
