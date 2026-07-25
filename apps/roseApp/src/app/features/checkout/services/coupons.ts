@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ApiService } from '@org/data-access';
 import { HttpClient } from '@angular/common/http';
 import { PromoCode } from '../models/promo-code.interface';
@@ -9,8 +9,8 @@ import { PromoCode } from '../models/promo-code.interface';
 export class CouponService extends ApiService<PromoCode> {
   protected override endpoint = 'coupons';
 
-  constructor( http: HttpClient) {
-    super(http);
+  constructor() {
+    super(inject(HttpClient));
   }
 
 }

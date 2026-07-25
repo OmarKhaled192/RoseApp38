@@ -30,13 +30,7 @@ export const remoteRoutes: Route[] = [
             (m) => m.ProductDetails,
           ),
       },
-      {
-        path: 'cart',
-        loadComponent: () =>
-          import('../features/checkout/pages/checkout/cart/cart').then(
-            (m) => m.CartComponent
-          ),
-      },
+
       {
         path: 'checkout',
         loadComponent: () =>
@@ -51,13 +45,13 @@ export const remoteRoutes: Route[] = [
                 (m) => m.CartComponent
               ),
           },
-             {
-                path: 'address',
-                loadComponent: () =>
-                  import('../features/checkout/addresses/components/checkout-address/checkout-address.component').then(
-                    (m) => m.CheckoutAddressComponent
-                  ),
-              },
+          {
+            path: 'address',
+            loadComponent: () =>
+              import('../features/checkout/addresses/components/checkout-address/checkout-address.component').then(
+                (m) => m.CheckoutAddressComponent
+              ),
+          },
         ],
       },
     ],
