@@ -19,6 +19,8 @@ import {
 } from '../../models/checkout-address.model';
 import { CheckoutAddressService } from '../../services/checkout-address.service';
 import { CheckoutAddressFacade } from '../../services/checkout-address-facade.service';
+import { Router } from '@angular/router';
+import { OrderStore } from '../../../../../state/orderStore';
 
 /**
  * NOTE: `CheckoutAddress` (from the model file) is assumed to already carry
@@ -44,12 +46,15 @@ export class CheckoutAddressComponent {
   private readonly checkoutAddressService = inject(CheckoutAddressService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly checkoutAddressFacade = inject(CheckoutAddressFacade);
+  private readonly router = inject(Router);
+  readonly orderStore = inject(OrderStore);
 
   private readonly addressResources = this.checkoutAddressService
     .getListResourceData<CheckoutAddressListPayload>();
 
   view = signal<CheckoutAddressView>('list');
   addresses = signal<CheckoutAddress[]>([]);
+  selectedAddressId = signal<string | null>(null);
 
   editingAddress = signal<CheckoutAddress | null>(null);
   deletingAddress = signal<CheckoutAddress | null>(null);
@@ -82,6 +87,10 @@ export class CheckoutAddressComponent {
     effect(() => {
       const addresses = this.addressResources.value()?.payload.addresses ?? [];
       this.addresses.set(addresses);
+      if (!this.selectedAddressId() && addresses.length > 0) {
+        const defaultAddress = addresses.find(a => a.isPrimary) || addresses[0];
+        this.selectedAddressId.set(defaultAddress.id ?? null);
+      }
     });
   }
 
@@ -91,6 +100,18 @@ export class CheckoutAddressComponent {
 
   isDefaultAddress(address: CheckoutAddress): boolean {
     return !!address?.isPrimary;
+  }
+
+  selectAddress(address: CheckoutAddress): void {
+    this.selectedAddressId.set(address.id ?? null);
+  }
+
+  onNext(): void {
+    const addressId = this.selectedAddressId();
+    if (addressId) {
+      this.orderStore.updateAddressId(addressId);
+      this.router.navigate(['/roseApp/checkout/payment']);
+    }
   }
 
   openAddAddress(): void {

@@ -55,6 +55,15 @@ export const OrderStore = signalStore(
           ),
         ),
       ),
+      updateAddressId: (addressId: string) => {
+        const currentOrder = store.order() || {
+          addressId: '',
+          paymentMethod: '',
+          couponCode: '',
+          notes: ''
+        };
+        patchState(store, { order: { ...currentOrder, addressId } });
+      },
     }),
   ),
 );

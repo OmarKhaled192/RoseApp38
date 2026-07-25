@@ -13,11 +13,13 @@ export class CheckoutAddressItemComponent {
   editRequested = output<CheckoutAddress>();
   deleteRequested = output<CheckoutAddress>();
 
-  onEdit(): void {
+  onEdit(event: Event): void {
+    event.stopPropagation();
     this.editRequested.emit(this.address());
   }
 
-  onDelete(): void {
+  onDelete(event: Event): void {
+    event.stopPropagation();
     this.deleteRequested.emit(this.address());
   }
 }
