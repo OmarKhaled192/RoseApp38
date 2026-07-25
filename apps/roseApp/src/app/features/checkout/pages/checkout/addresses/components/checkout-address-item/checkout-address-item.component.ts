@@ -9,7 +9,7 @@ import { CheckoutAddress } from '../../models/checkout-address.model';
 export class CheckoutAddressItemComponent {
   address = input.required<CheckoutAddress>();
   highlighted = input<boolean>(false);
-
+  groupLabel = input.required<string>();
   editRequested = output<CheckoutAddress>();
   deleteRequested = output<CheckoutAddress>();
 
