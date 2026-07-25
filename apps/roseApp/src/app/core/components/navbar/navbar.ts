@@ -20,7 +20,7 @@ import { AuthenticationService } from '@org/auth';
 })
 export class Navbar {
   private readonly router = inject(Router);
-  private translate = inject(TranslateService)
+  private translate = inject(TranslateService);
   readonly authService = inject(AuthenticationService);
 
   searchQuery = '';
