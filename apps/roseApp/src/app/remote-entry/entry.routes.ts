@@ -48,11 +48,12 @@ export const remoteRoutes: Route[] = [
                 (m) => m.PymentMethod,
               ),
           },
+
           {
             path: 'address',
             loadComponent: () =>
-              import('../features/checkout/addresses/components/checkout-address/checkout-address.component').then(
-                (m) => m.CheckoutAddressComponent,
+              import('../features/checkout/pages/checkout/addresses/components/checkout-address/checkout-address.component').then(
+                (m) => m.CheckoutAddressComponent
               ),
           },
         ],
