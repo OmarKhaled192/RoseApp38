@@ -7,10 +7,10 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import Aura from '@primeuix/themes/aura';
 import { MessageService } from 'primeng/api';
-import { appRoutes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
-import { authenticationInterceptor } from '@org/auth';
 import { CART_PORT, CartStore } from '@org/ui';
+import { appRoutes } from './app.routes';
+
 
 const DEFAULT_LANG: string = 'en';
 
