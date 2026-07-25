@@ -10,9 +10,10 @@ import { CategoryItem } from '../../models/products.models';
 })
 export class ProductsCategory {
   categories = input.required<CategoryItem[]>();
-  selectedId = input<string | null>(null);
+  selectedIds = input<string[]>([]);
 
-  categorySelect = output<string | null>();
+  categorySelect = output<string>();
+  resetCategories = output<void>();
 
   visibleItems = computed(() => {
     const rows: { item: CategoryItem; depth: number }[] = [];
@@ -20,7 +21,7 @@ export class ProductsCategory {
     const walk = (list: CategoryItem[], depth: number) => {
       for (const item of list) {
         rows.push({ item, depth });
-        if (item.id === this.selectedId() && item.children?.length) {
+        if (this.selectedIds().includes(item.id) && item.children?.length) {
           walk(item.children, depth + 1);
         }
       }

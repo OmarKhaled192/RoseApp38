@@ -1,18 +1,19 @@
 <div class="max-w-[1200px] mx-auto px-4 py-6 flex flex-col lg:flex-row gap-2">
   <aside class="w-full lg:w-[260px] shrink-0 flex flex-col">
-    <app-products-category [categories]="categories" [selectedId]="selectedCategoryId()"
-      (categorySelect)="onCategorySelect($event)" />
+    <app-products-category [categories]="categories()" [selectedIds]="selectedCategoryIds()"
+      (categorySelect)="onCategorySelect($event)" (resetCategories)="onResetCategories()" />
 
-    <app-filters [occasions]="occasions" [value]="filters()" (filtersChange)="onFiltersChange($event)"
+    <app-filters [occasions]="occasions()" [value]="filters()" (filtersChange)="onFiltersChange($event)"
       (resetAll)="onResetAll()" />
   </aside>
 
   <section class="flex-1 flex flex-col">
-    @if (pagedProducts().length) {
+    @if (Products().length) {
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
 
       @for (product of products(); track product.id) {
-      <lib-card (wishlistToggle)="toggleWishlist(product)" [card]="product" [showWishlist]="true" />
+      <lib-card (wishlistToggle)="toggleWishlist(product)" [card]="product" [showWishlist]="true"
+        [footerActions]="[actionsFor(product)[2]]" />
       }
     </div>
 
