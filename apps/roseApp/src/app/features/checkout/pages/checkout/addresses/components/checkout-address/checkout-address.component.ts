@@ -11,10 +11,28 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CheckoutAddressItemComponent } from '../checkout-address-item/checkout-address-item.component';
 import { CheckoutAddAddressComponent } from '../checkout-add-address/checkout-add-address.component';
 import { CheckoutDeleteModalComponent } from '../checkout-delete-modal/checkout-delete-modal.component';
-import { CheckoutAddress, CheckoutAddressListPayload, CheckoutAddressView, CheckoutAddressWizardValue } from '../../models/checkout-address.model';
+import {
+  CheckoutAddress,
+  CheckoutAddressListPayload,
+  CheckoutAddressView,
+  CheckoutAddressWizardValue,
+} from '../../models/checkout-address.model';
 import { CheckoutAddressService } from '../../services/checkout-address.service';
 import { CheckoutAddressFacade } from '../../services/checkout-address-facade.service';
 
+/**
+ * NOTE: `CheckoutAddress` (from the model file) is assumed to already carry
+ * `label: string` (e.g. "Home" / "Work" / "Family") and `isDefault: boolean`.
+ * If those fields don't exist on the model yet, add them there instead of
+ * widening the type here — that keeps the whole feature strongly typed.
+ */
+
+interface CheckoutAddressGroup {
+  label: string;
+  addresses: CheckoutAddress[];
+}
+
+const UNLABELED_GROUP = 'Other';
 
 @Component({
   selector: 'app-checkout-address',
@@ -27,33 +45,54 @@ export class CheckoutAddressComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly checkoutAddressFacade = inject(CheckoutAddressFacade);
 
-  // --- resource -----------------------------------------------------------
-  // Created once as a field initializer so it's in a valid injection context.
   private readonly addressResources = this.checkoutAddressService
     .getListResourceData<CheckoutAddressListPayload>();
 
-  // --- state -----------------------------------------------------------
   view = signal<CheckoutAddressView>('list');
-
   addresses = signal<CheckoutAddress[]>([]);
 
   editingAddress = signal<CheckoutAddress | null>(null);
   deletingAddress = signal<CheckoutAddress | null>(null);
 
-  // --- derived -----------------------------------------------------------
   isDeleteModalOpen = computed(() => this.deletingAddress() !== null);
 
+  // Groups addresses by their `label` (Home / Work / Family / ...), preserving
+  // first-seen order so the UI order matches whatever order the API returns.
+  groupedAddresses = computed<CheckoutAddressGroup[]>(() => {
+    const groups: CheckoutAddressGroup[] = [];
+    const indexByLabel = new Map<string, number>();
+
+    for (const address of this.addresses()) {
+      const label = address.title ?? UNLABELED_GROUP;
+      let idx = indexByLabel.get(label);
+
+      if (idx === undefined) {
+        idx = groups.length;
+        indexByLabel.set(label, idx);
+        groups.push({ label, addresses: [] });
+      }
+
+      groups[idx].addresses.push(address);
+    }
+
+    return groups;
+  });
+
   constructor() {
-    // Keeps `addresses` in sync with the resource's current value.
-    // Reruns automatically whenever addressResources.value() changes,
-    // including after addressResources.reload().
     effect(() => {
       const addresses = this.addressResources.value()?.payload.addresses ?? [];
       this.addresses.set(addresses);
     });
   }
 
-  // --- list actions -----------------------------------------------------------
+  hasDefault(group: CheckoutAddressGroup): boolean {
+    return group.addresses.some((a) => a.isPrimary);
+  }
+
+  isDefaultAddress(address: CheckoutAddress): boolean {
+    return !!address?.isPrimary;
+  }
+
   openAddAddress(): void {
     this.editingAddress.set(null);
     this.view.set('add');
@@ -73,13 +112,12 @@ export class CheckoutAddressComponent {
     if (!target) {
       return;
     }
-
     this.confirmDeleteTarget(target);
   }
 
   confirmDeleteTarget(target: CheckoutAddress): void {
     this.checkoutAddressService
-      .delete<unknown>(target.id ?? "")
+      .delete<unknown>(target.id ?? '')
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
@@ -96,12 +134,10 @@ export class CheckoutAddressComponent {
     this.deletingAddress.set(null);
   }
 
-  // --- wizard actions -----------------------------------------------------------
   onWizardCancelled(): void {
     this.editingAddress.set(null);
     this.view.set('list');
   }
-
 
   onWizardSaved(value: CheckoutAddressWizardValue): void {
     this.checkoutAddressFacade

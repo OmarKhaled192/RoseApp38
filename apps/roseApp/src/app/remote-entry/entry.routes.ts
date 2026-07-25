@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { HomeComponent } from '../features/home/home';
 import { RoseApp } from './entry';
+import { CartComponent } from '../features/checkout/pages/checkout/cart/cart';
 
 export const remoteRoutes: Route[] = [
   {
@@ -34,6 +35,8 @@ export const remoteRoutes: Route[] = [
             (m) => m.Checkout,
           ),
         children: [
+          { path: '', redirectTo: 'cart', pathMatch: 'full' },
+
           {
             path: 'cart',
             loadComponent: () =>

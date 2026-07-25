@@ -41,14 +41,14 @@
       </div>
     </dl>
 
-   
+
   </div>
-   <button type="button"
-      class="mt-5 flex w-full items-center justify-center cursor-pointer gap-2 rounded-lg bg-[#A6252A] py-3 text-sm font-semibold text-white hover:bg-red-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
-      {{ 'cart.summary.checkout' | translate }}<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-        xmlns="http://www.w3.org/2000/svg">
-        <path d="M18 16L22 12L18 8M22 12L2 12" stroke="white" stroke-width="1.75" stroke-linecap="round"
-          stroke-linejoin="round" />
-      </svg>
-    </button>
+  <button type="button" (click)="goToAddress()"
+    class="mt-5 flex w-full items-center justify-center cursor-pointer gap-2 rounded-lg bg-[#A6252A] py-3 text-sm font-semibold text-white hover:bg-red-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+    {{ 'cart.summary.checkout' | translate }}<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 16L22 12L18 8M22 12L2 12" stroke="white" stroke-width="1.75" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+  </button>
 </aside>

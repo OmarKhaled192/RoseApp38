@@ -3,7 +3,8 @@ import { Component, computed, inject } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormControl } from '@angular/forms';
 import { CouponStore } from '../../../state/coupon.store';
-import { CartStore, InputComponent , CartItem  } from "@org/ui";
+import { CartStore, InputComponent, CartItem } from "@org/ui";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary-checkout',
@@ -18,6 +19,7 @@ export class SummaryCheckout {
   readonly couponResource = this.couponStore.getAllCoupons();
   readonly couponList = computed(() => this.couponResource.value()?.payload.data || []);
   readonly loading = computed(() => this.couponResource.isLoading());
+  private readonly router = inject(Router);
 
   protected onApplyCoupon(): void {
     this.couponStore.applyCoupon(this.couponCode.value || '');
@@ -25,6 +27,9 @@ export class SummaryCheckout {
 
   private getBasePrice(item: CartItem): number {
     return Number(item?.product?.price ?? 0);
+  }
+  goToAddress(): void {
+    this.router.navigateByUrl('/roseApp/checkout/address');
   }
 
   getItemPrice(item: CartItem): number {
