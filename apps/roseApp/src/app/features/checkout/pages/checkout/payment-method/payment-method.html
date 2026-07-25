@@ -27,7 +27,7 @@
     <button
       type="button"
       (click)="select('cash')"
-      class="relative flex h-[299px] w-[373px] flex-col items-center justify-center rounded-2xl border border-gray-200 p-6 text-center transition-colors"
+      class="relative flex h-[299px] w-100 flex-col items-center justify-center rounded-2xl border border-gray-200 p-6 text-center transition-colors"
       [class.border-gray-10]="selected() !== 'cash'"
       [class.bg-white]="selected() !== 'cash'"
       [class.bg-gray-50]="selected() === 'cash'"
@@ -73,7 +73,7 @@
       type="button"
       disabled
       (click)="select('card')"
-      class="relative border-gray flex h-[299px] w-[373px] flex-col items-center justify-center text-center rounded-2xl border p-6 transition-colors"
+      class="relative border-gray flex h-[299px] w-100 flex-col items-center justify-center text-center rounded-2xl border p-6 transition-colors"
       [class.border-gray-200]="selected() !== 'card'"
       [class.ring-1]="selected() === 'card'"
     >
