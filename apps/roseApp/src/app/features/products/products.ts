@@ -100,7 +100,7 @@ export class Products {
     });
   });
 
-  readonly Products = computed<CardData[]>(() => {
+  readonly products = computed<CardData[]>(() => {
     const start = this.page() * this.pageSize();
     return this.filteredProducts()
       .slice(start, start + this.pageSize())
