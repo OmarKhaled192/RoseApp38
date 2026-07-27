@@ -2,7 +2,7 @@
   <app-shared-stepper [totalSteps]="2" [currentStep]="2"></app-shared-stepper>
 
   <div class="flex items-center gap-1 mb-6">
-    <button routerLink="/checkout/address"
+    <button routerLink="/roseApp/checkout/address"
       class="flex items-center gap-1 px-3 py-2 rounded-lg bg-[#F4F4F5] hover:text-gray-700 text-sm font-medium transition-colors">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -58,8 +58,7 @@
   </div>
 
   <div class="flex justify-end mt-8">
-    <button type="button" (click)="checkout()"
-      [disabled]="!addressId() || !selected()"
+    <button type="button" (click)="checkout()" [disabled]="!addressId() || !selected()"
       class="flex items-center gap-3 bg-[#A6252A] hover:bg-red-950 text-white px-5 font-medium text-sm px-6 py-3 rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
       {{ isLoading() ? 'Placing order...' : 'Checkout' }}
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
