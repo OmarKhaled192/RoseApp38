@@ -1,0 +1,252 @@
+<div class="rounded-xl  bg-white overflow-hidden shadow-sm">
+
+    <!-- Header -->
+    <div
+        class=" bg-[#A6252A] text-white flex justify-between align-center px-5 py-3">
+        <div class="font">
+            Order #12345
+        </div>
+
+        <div class="text-xs text-gray-100">
+            Created in: 14 July, 2025 at 10:05 AM
+        </div>
+    </div>
+
+    <!-- Details -->
+    <div class="p-5">
+
+        <div class="flex justify-between  items-center">
+
+            <div class="flex items-center gap-3">
+                <span class="text-2xl text-gray-600">
+                    Total Price:
+                </span>
+
+                <span class="text-2xl font-bold">
+                    {{ 1820 | currency:'EGP':'symbol':'1.0-0' }}
+                </span>
+
+                <span
+                    class="inline-flex items-center gap-2 bg-[#00BC7D] text-white text-sm font-medium px-4 py-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
+                        class="w-4 h-4 shrink-0" fill="none">
+                        <path d="M14 34L27 47L50 20" stroke="currentColor"
+                            stroke-width="5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+
+                    <span>Paid</span>
+                </span>
+            </div>
+
+            <div class="flex items-center gap-2">
+
+                <span class="text-gray-500">
+                    Status:
+                </span>
+
+                <span
+                    class="bg-blue-500 text-white text-xs px-3 py-1 rounded-full">
+                    In Progress
+                </span>
+                <span
+                    class="bg-red-500 text-white text-xs px-3 py-1 rounded-full">
+                    Canceled
+                </span>
+                <span
+                    class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
+                    Done
+                </span>
+
+            </div>
+
+        </div>
+        <hr class="my-4 border-gray-200" />
+        <!-- info -->
+
+        <div class="mt-5  text-start text-sm">
+            <div class="flex items-center">
+                <span class="font-semibold">Payment Method:</span>
+
+                <span
+                    class="ml-2 inline-flex items-center gap-1 font-medium text-gray-500">
+                    <svg
+                        class="w-4 h-4 shrink-0"
+                        viewBox="0 0 64 64"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g
+                            stroke="currentColor"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <rect x="8" y="14" width="48" height="28" rx="4" />
+                            <circle cx="18" cy="28" r="1.5" fill="currentColor"
+                                stroke="none" />
+                            <circle cx="46" cy="28" r="1.5" fill="currentColor"
+                                stroke="none" />
+                            <circle cx="32" cy="28" r="6" />
+                        </g>
+                    </svg>
+
+                    <span>Cash</span>
+                </span>
+            </div>
+
+            <div class="flex items-center gap-2 whitespace-nowrap">
+                <span class="font-semibold">Delivery Status:</span>
+
+                <span
+                    class="inline-flex items-center gap-1 text-yellow-500 font-semibold whitespace-nowrap">
+                    <svg
+                        class="w-5 h-5 shrink-0"
+                        viewBox="0 0 64 64"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g
+                            stroke="currentColor"
+                            stroke-width="3.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <rect x="8" y="16" width="28" height="24" rx="3" />
+                            <path d="M36 24H46L54 32V40H36V24Z" />
+                            <path d="M46 24V32H54" />
+                            <path d="M8 40H54" />
+                            <circle cx="18" cy="42" r="3.5" />
+                            <circle cx="46" cy="42" r="3.5" />
+                        </g>
+                    </svg>
+
+                    <span>Pending</span>
+                </span>
+
+                <span
+                    class="inline-flex items-center gap-1 text-red-600 font-semibold whitespace-nowrap">
+                    <svg
+                        class="w-5 h-5 shrink-0"
+                        viewBox="0 0 64 64"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g
+                            stroke="currentColor"
+                            stroke-width="3.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+
+                            <!-- Triangle -->
+                            <path
+                                d="M32 10L56 50C57 52 55.5 54 53 54H11C8.5 54 7 52 8 50L32 10Z" />
+
+                            <!-- Exclamation mark -->
+                            <path d="M32 22V36" />
+                            <circle cx="32" cy="45" r="2" fill="currentColor"
+                                stroke="none" />
+                        </g>
+                    </svg>
+
+                    <span>Canceled</span>
+                </span>
+
+                <span
+                    class="inline-flex items-center gap-1 text-emerald-600 font-semibold whitespace-nowrap">
+                    <svg
+                        class="w-5 h-5 shrink-0"
+                        viewBox="0 0 64 64"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g
+                            stroke="currentColor"
+                            stroke-width="3.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M8 34L18 44L30 24" />
+                            <path d="M24 34L34 44L56 18" />
+                        </g>
+                    </svg>
+
+                    <span>Delivered</span>
+                </span>
+            </div>
+
+        </div>
+
+        <!-- products -->
+
+        <div class="mt-6">
+
+            <h3 class="font-bold text-start text-xl mb-3">
+                Order Items:
+            </h3>
+
+            <div class="relative">
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    @for ( item of visibleItems; track item.id) {
+                    <div class="flex gap-4 bg-white rounded-xl border p-3">
+
+                        <img [src]="item.image" alt="{{item.name}}"
+                            class="w-20 h-20 rounded-lg object-cover" />
+
+                        <div class="flex-1">
+
+                            <h4 class="font-semibold text-red-800 text-sm">
+                                {{item.name}}
+                            </h4>
+
+                            <div class="text-yellow-500 text-xs mt-1">
+                                ★★★★★
+                                <span class="text-gray-500">
+                                    Rating: {{item.rating}}/5
+                                </span>
+                            </div>
+
+                            <div class="mt-4 flex items-center gap-2">
+
+                                <span class="text-red-600 text-sm">
+                                    (x{{item.qty}})
+                                </span>
+
+                                <span class="font-bold text-lg">
+                                    {{item.price}} EGP
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    }
+
+                </div>
+
+                <!-- Blur Overlay -->
+                @if(!showAll && items.length > 2) {
+                <div class="absolute bottom-0 left-0 right-0 h-40">
+
+                    <div
+                        class="absolute inset-0 backdrop-blur-sm bg-gradient-to-t from-white via-white/80 to-transparent">
+                    </div>
+
+                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2">
+
+                        <button (click)="showAll=true"
+                            class="bg-white rounded-full shadow-lg px-5 py-2 text-red-700 font-semibold hover:shadow-xl">
+
+                            Show All
+
+                            <div class="text-center text-lg">
+                                ▼
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>
