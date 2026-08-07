@@ -7,6 +7,21 @@
     "save": "حفظ",
     "cancel": "إلغاء"
   },
+  "SEARCH": {
+    "LOADING": "جارٍ البحث...",
+    "NO_RESULTS": "لا توجد منتجات"
+  },
+  "PRODUCT": {
+    "RATINGS": "تقييم"
+  },
+  "CURRENCY": {
+    "EGP": "جنيه"
+  },
+  "NAVBAR": {
+    "SEARCH_PLACEHOLDER": "عن أي هدية رائعة تبحث؟",
+    "LOGIN": "تسجيل الدخول",
+    "SIGNOUT": "تسجيل الخروج"
+  },
   "error": {
     "not-confirmed-password": "كلمة المرور وتاكيد كلمة المرور غير متطابقين",
     "enter-plz": " يرجي إدخال ",
