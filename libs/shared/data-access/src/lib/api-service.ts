@@ -51,11 +51,12 @@ export abstract class ApiService<T> {
     );
   }
 
-  getListResourceData<R = T>(params?: () => QueryParams): HttpResourceRef<DataResponse<R>  | undefined> {
+  getListResourceData<R = T>( path?: string ,params?: () => QueryParams): HttpResourceRef<DataResponse<R>  | undefined> {
+    const url = path ? `${this.fullUrl}${path}` : this.fullUrl;
     return runInInjectionContext(this.injector, () =>
       httpResource<DataResponse<R>  | undefined>(() => {
         const queryString = this.buildParams(params?.()).toString();
-        return queryString ? `${this.fullUrl}?${queryString}` : this.fullUrl;
+        return queryString ? `${url}?${queryString}` : url;
       })
     );
   }
@@ -80,8 +81,14 @@ export abstract class ApiService<T> {
     return this.http.patch<R>(`${this.fullUrl}/${id}`, body);
   }
 
-  deleteAll<R = T>(): Observable<R> {
-    return this.http.delete<R>(this.fullUrl);
+  patchAllItem<B, R = T>(body: B): Observable<R> {
+    return this.http.patch<R>(`${this.fullUrl}`, body);
+  }
+
+
+  deleteAll<R = T>(path?: string): Observable<R> {
+    const url = path ? `${this.fullUrl}${path}` : this.fullUrl;
+    return this.http.delete<R>(url);
   }
 
   delete<R = T>(id: number | string): Observable<R> {
