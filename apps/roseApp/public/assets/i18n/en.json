@@ -49,7 +49,7 @@
       "to": "To",
       "reset": "Reset",
       "resetAll": "Reset All",
-  "priceRangeError": "The minimum price must be less than or equal to the maximum price"
+      "priceRangeError": "The minimum price must be less than or equal to the maximum price"
     }
   },
   "productDetail": {
@@ -170,7 +170,7 @@
     "subtitle": "Gallery",
     "title": "Check Out our Wonderful Gallery"
   },
-   "cart": {
+  "cart": {
     "title": "Cart",
     "products": "products",
     "clearCart": "Clear Cart",
@@ -211,5 +211,35 @@
     "emptyTitle": "Your wishlist is empty",
     "emptyDescription": "Save the items you love by tapping the heart icon — they'll show up here so you can find them anytime.",
     "continueShopping": "Continue Shopping"
+  },
+  "ORDERS": {
+    "TITLE": "Orders",
+    "ORDER": "Order",
+    "CREATED_IN": "Created in",
+    "TOTAL_PRICE": "Total Price",
+    "PAID": "Paid",
+    "STATUS": "Status",
+    "PAYMENT_METHOD": "Payment Method",
+    "CASH": "Cash",
+    "CREDIT_CARD": "Credit Card",
+    "DELIVERY_STATUS": "Delivery Status",
+    "PENDING": "Pending",
+    "ORDER_ITEMS": "Order Items",
+    "RATING": "Rating",
+    "RATINGS": "ratings",
+    "SHOW_ALL": "Show All",
+    "SHOW_LESS": "Show Less",
+
+    "STATUS_VALUES": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled",
+      "completed": "Completed",
+      "paid": "Paid",
+      "refunded": "Refunded"
+    }
   }
 }

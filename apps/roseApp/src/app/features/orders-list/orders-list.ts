@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { OrderService } from '../checkout/services/order';
 import { Order, OrderMetadata } from './interfaces/order-items';
 
 @Component({
   selector: 'app-orders-list',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './orders-list.html',
 })
 export class OrdersList implements OnInit {
@@ -17,18 +18,15 @@ export class OrdersList implements OnInit {
   readonly visibleItemCount = 4;
   private readonly expandedOrderIds = signal<Set<string>>(new Set());
 
+
   ngOnInit(): void {
     this.orderService.getAllOrders().subscribe({
       next: (res) => {
-        this.orderitems.set(res.payload.data);
-        this.metadata.set(res.payload.metadata);
-      },
-      error: (err) => {
-        console.error('Failed to load orders:', err);
-      },
+        this.orderitems.set(res.data);
+        this.metadata.set(res.metadata);
+      }
     });
   }
-
 
   statusBadgeClass(status: string): string {
     switch (status) {
