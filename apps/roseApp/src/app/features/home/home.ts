@@ -8,7 +8,6 @@ import { MostPopular } from './components/most-popular/most-popular';
 import { GallerySection } from './components/sections/components/gallery-section/gallery-section';
 import { Testimonials } from './components/sections/components/testimonials/testimonials';
 import { ServicesHightlights } from './components/services-highlights/component/servicesHightlights';
-import { OrdersList } from "../orders-list/orders-list";
 @Component({
   selector: 'app-home',
   imports: [
@@ -22,7 +21,6 @@ import { OrdersList } from "../orders-list/orders-list";
     Testimonials,
     ServicesHightlights,
     SpecialGifts,
-    OrdersList
 ],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
