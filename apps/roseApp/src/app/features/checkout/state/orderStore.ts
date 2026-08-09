@@ -39,7 +39,7 @@ export const OrderStore = signalStore(
                 next: (res) => {
                   patchState(store, () => ({
                     isLoading: false,
-                    order: res.payload, // <-- unwrap here
+                    order: res.payload, 
                   }));
                   cartStore.clearCart();
                   messageService.show(
@@ -60,6 +60,9 @@ export const OrderStore = signalStore(
           ),
         ),
       ),
+      
+
+
       updateAddressId: (addressId: string) => {
         const currentOrder = store.order() || {
           addressId: '',
@@ -69,6 +72,7 @@ export const OrderStore = signalStore(
         };
         patchState(store, { order: { ...currentOrder, addressId } });
       },
+
     }),
   ),
 );

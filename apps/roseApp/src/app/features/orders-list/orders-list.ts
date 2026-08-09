@@ -1,62 +1,59 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { OrderService } from '../checkout/services/order';
+import { Order, OrderMetadata } from './interfaces/order-items';
 
-interface OrderItem {
-  id: number;
-  name: string;
-  price: number;
-  qty: number;
-  image: string;
-  rating: number;
-}
 @Component({
   selector: 'app-orders-list',
   imports: [CommonModule],
   templateUrl: './orders-list.html',
 })
-export class OrdersList {
-  showAll = false;
+export class OrdersList implements OnInit {
+  private readonly orderService = inject(OrderService);
 
-  items: OrderItem[] = [
-    {
-      id: 1,
-      name: 'Moko Chocolate Set | Esperance Rose',
-      price: 1800,
-      qty: 2,
-      rating: 5,
-      image:
-        'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300',
-    },
-    {
-      id: 2,
-      name: 'Moko Chocolate Set | Esperance Rose',
-      price: 1800,
-      qty: 2,
-      rating: 5,
-      image:
-        'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300',
-    },
-    {
-      id: 3,
-      name: 'Moko Chocolate Set | Esperance Rose',
-      price: 1800,
-      qty: 1,
-      rating: 5,
-      image:
-        'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300',
-    },
-    {
-      id: 4,
-      name: 'Moko Chocolate Set | Esperance Rose',
-      price: 1800,
-      qty: 1,
-      rating: 5,
-      image:
-        'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300',
-    },
-  ];
+  orderitems = signal<Order[]>([]);
+  metadata = signal<OrderMetadata | null>(null);
 
-  get visibleItems() {
-    return this.showAll ? this.items : this.items.slice(0, 2);
+  readonly visibleItemCount = 4;
+  private readonly expandedOrderIds = signal<Set<string>>(new Set());
+
+  ngOnInit(): void {
+    this.orderService.getAllOrders().subscribe({
+      next: (res) => {
+        this.orderitems.set(res.payload.data);
+        this.metadata.set(res.payload.metadata);
+      },
+      error: (err) => {
+        console.error('Failed to load orders:', err);
+      },
+    });
+  }
+
+
+  statusBadgeClass(status: string): string {
+    switch (status) {
+      case 'in_progress':
+        return 'bg-blue-500';
+      case 'canceled':
+        return 'bg-red-500';
+      case 'done':
+        return 'bg-green-500';
+      default:
+        return 'bg-gray-400';
+    }
+  }
+
+  isOrderExpanded(orderId: string): boolean {
+    return this.expandedOrderIds().has(orderId);
+  }
+
+  toggleOrderExpanded(orderId: string): void {
+    const next = new Set(this.expandedOrderIds());
+    if (next.has(orderId)) {
+      next.delete(orderId);
+    } else {
+      next.add(orderId);
+    }
+    this.expandedOrderIds.set(next);
   }
 }
