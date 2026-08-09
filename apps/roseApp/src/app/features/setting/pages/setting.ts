@@ -9,7 +9,7 @@ import { AuthenticationService } from '@org/auth';
   templateUrl: './setting.html'
 })
 export class Setting {
-  activeTab = signal<'profile' | 'password'>('profile');
+  activeTab = signal<'profile' | 'change-password'>('profile');
   private readonly router = inject(Router);
   readonly authService = inject(AuthenticationService);
   logout(): void {

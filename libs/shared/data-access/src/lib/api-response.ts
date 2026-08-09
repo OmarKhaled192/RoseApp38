@@ -1,6 +1,6 @@
 import { PaginationMetadata } from "./models/pagination";
 
-interface BaseResponse<P> {
+export interface BaseResponse<P> {
   status: boolean;
   code: number;
   message?: string;
@@ -12,7 +12,7 @@ export type PaginatedResponse<T> = BaseResponse<{
   metadata: PaginationMetadata;
 }>;
 
-export interface ApiResponse<T, P extends Record<string, unknown> = { data: T;  metadata: PaginationMetadata }> {
+export interface ApiResponse<T, P extends Record<string, unknown> = { data: T; metadata: PaginationMetadata }> {
   status: boolean;
   code: number;
   payload: P;
