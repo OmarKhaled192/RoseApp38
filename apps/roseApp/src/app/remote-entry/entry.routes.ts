@@ -61,6 +61,24 @@ export const remoteRoutes: Route[] = [
           },
         ],
       },
+       {
+        path: 'setting',
+        loadComponent: () =>
+          import('../features/setting/pages/setting').then(
+            (m) => m.Setting,
+          ),
+        children: [
+          { path: '', redirectTo: 'profile', pathMatch: 'full' },
+
+          {
+            path: 'profile',
+            loadComponent: () =>
+              import('../features/setting/pages/profile/profile').then(
+                (m) => m.Profile,
+              ),
+          },
+        ],
+      },
     ],
   },
 ];

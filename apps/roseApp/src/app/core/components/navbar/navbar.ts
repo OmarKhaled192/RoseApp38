@@ -1,19 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
-import { DarkModeComponent, LanguageSwitcherComponent } from '@org/ui';
+import { DarkModeComponent, LanguageSwitcherComponent, ProductData } from '@org/ui';
 import { AuthenticationService } from '@org/auth';
+import { SearchProducts } from '../search-products/search-products';
 @Component({
   selector: 'app-navbar',
+  standalone: true,
   imports: [
     FormsModule,
     CommonModule,
+    TranslatePipe,
     DarkModeComponent,
     LanguageSwitcherComponent,
     RouterLink,
     RouterModule,
+    SearchProducts,
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
@@ -24,7 +28,10 @@ export class Navbar {
   readonly authService = inject(AuthenticationService);
 
   searchQuery = '';
+  searchResults: ProductData[] = [];
+  searchLoading = false;
   isArabic = true;
+  showSearchDropdown = false;
 
   mobileSearchOpen = false;
   toggleMobileSearch(): void {
@@ -33,8 +40,38 @@ export class Navbar {
 
   onSearch(): void {
     if (this.searchQuery.trim()) {
-      console.log('Searching for:', this.searchQuery);
+      this.router.navigate(['/roseApp/search'], {
+        queryParams: { q: this.searchQuery },
+      });
+      this.closeSearchDropdown();
       this.mobileSearchOpen = false;
+    }
+  }
+
+  onSearchInputChange(value: string): void {
+    this.searchQuery = value;
+    this.showSearchDropdown = this.searchQuery.trim().length > 0;
+  }
+
+  onSearchFocus(): void {
+    this.showSearchDropdown = this.searchQuery.trim().length > 0;
+  }
+
+  closeSearchDropdown(): void {
+    this.showSearchDropdown = false;
+  }
+
+  onSearchResultSelected(): void {
+    this.searchQuery = '';
+    this.closeSearchDropdown();
+  }
+
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.nav-search-container')) {
+      this.closeSearchDropdown();
     }
   }
   onLogin(): void {

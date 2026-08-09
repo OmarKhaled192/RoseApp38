@@ -211,5 +211,22 @@
     "emptyTitle": "Your wishlist is empty",
     "emptyDescription": "Save the items you love by tapping the heart icon — they'll show up here so you can find them anytime.",
     "continueShopping": "Continue Shopping"
+  },
+  "profile": {
+    "title": "Account Settings",
+    "uploadPhoto": "Upload Photo",
+    "uploadHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "deleteAccount": "Delete My Account",
+    "saveChanges": "Save Changes",
+    "changePassword": "Change Password",
+    "logout": "Logout"
   }
+
 }
