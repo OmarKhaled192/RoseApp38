@@ -6,6 +6,7 @@ import { LoadingState, Message } from "@org/data-access";
 import { ProfileModel, ProfilePesponse } from "../models/profile";
 import { ProfileService } from "../service/profile";
 import { UploadService } from "../service/upload";
+import { Router } from "@angular/router";
 
 export interface ProfileState extends LoadingState {
   profile: ProfilePesponse | null;
@@ -28,96 +29,99 @@ export const ProfileStore = signalStore(
     profileLoading: computed(() => _profileResource.isLoading()),
   })),
 
-  withMethods((store, profileService = inject(ProfileService) , uploadService = inject(UploadService), messageService = inject(Message)) => ({
+  withMethods((store, profileService = inject(ProfileService), uploadService = inject(UploadService), messageService = inject(Message),
+    router = inject(Router),) => ({
 
-    getProfile: rxMethod<void>(
-      pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap(() =>
-          profileService.get().pipe(
-            tap({
-              next: (res) => {
-                patchState(store, {
-                  profile:  res,
-                  isLoading: false
-                });
-                store._profileResource.reload();
-              },
-              error: (err) => {
-                patchState(store, { isLoading: false });
-                messageService.show('error', err.error?.message || 'فشل تحميل البيانات الشخصية');
-              }
-            })
+      getProfile: rxMethod<void>(
+        pipe(
+          tap(() => patchState(store, { isLoading: true })),
+          switchMap(() =>
+            profileService.get().pipe(
+              tap({
+                next: (res) => {
+                  patchState(store, {
+                    profile: res,
+                    isLoading: false
+                  });
+                  store._profileResource.reload();
+                },
+                error: (err) => {
+                  patchState(store, { isLoading: false });
+                  messageService.show('error', err.error?.message || 'فشل تحميل البيانات الشخصية');
+                }
+              })
+            )
           )
         )
-      )
-    ),
+      ),
 
-    updateProfile: rxMethod<ProfileModel>(
-      pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap((profileData) =>
-          profileService.updateProfile(profileData).pipe(
-            tap({
-              next: () => {
-                patchState(store, { isLoading: false });
-                store._profileResource.reload();
-                messageService.show('success',  'تم تحديث البيانات الشخصية بنجاح');
-              },
-              error: (err) => {
-                patchState(store, { isLoading: false });
-                messageService.show('error', err.error?.message || 'فشل تحديث البيانات الشخصية');
-              }
-            })
+      updateProfile: rxMethod<ProfileModel>(
+        pipe(
+          tap(() => patchState(store, { isLoading: true })),
+          switchMap((profileData) =>
+            profileService.updateProfile(profileData).pipe(
+              tap({
+                next: () => {
+                  patchState(store, { isLoading: false });
+                  store._profileResource.reload();
+                  messageService.show('success', 'تم تحديث البيانات الشخصية بنجاح');
+                  router.navigateByUrl('/');
+                },
+                error: (err) => {
+                  patchState(store, { isLoading: false });
+                  messageService.show('error', err.error?.message || 'فشل تحديث البيانات الشخصية');
+                  router.navigateByUrl('/');
+                }
+              })
+            )
           )
         )
-      )
-    ),
+      ),
 
-    uploadPhoto: rxMethod<FormData>(
-      pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap((formData) =>
-          uploadService.post(formData).pipe(
-            tap({
-              next: () => {
-                patchState(store, { isLoading: false });
-                store._profileResource.reload();
-                messageService.show('success',  'تم تحديث الصورة الشخصية بنجاح');
-              },
-              error: (err) => {
-                patchState(store, { isLoading: false });
-                messageService.show('error', err.error?.message || 'فشل تحديث الصورة الشخصية');
-              }
-            })
+      uploadPhoto: rxMethod<FormData>(
+        pipe(
+          tap(() => patchState(store, { isLoading: true })),
+          switchMap((formData) =>
+            uploadService.post(formData).pipe(
+              tap({
+                next: () => {
+                  patchState(store, { isLoading: false });
+                  store._profileResource.reload();
+                  messageService.show('success', 'تم تحديث الصورة الشخصية بنجاح');
+                },
+                error: (err) => {
+                  patchState(store, { isLoading: false });
+                  messageService.show('error', err.error?.message || 'فشل تحديث الصورة الشخصية');
+                }
+              })
+            )
           )
         )
-      )
-    ),
+      ),
 
-    deleteProfile: rxMethod<void>(
-      pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap(() =>
-          profileService.deleteProfile().pipe(
-            tap({
-              next: () => {
-                patchState(store, {
-                  profile: null,
-                  isLoading: false
-                });
-                store._profileResource.reload();
-                messageService.show('success',  'تم حذف الحساب بنجاح');
-              },
-              error: (err) => {
-                patchState(store, { isLoading: false });
-                messageService.show('error', err.error?.message || 'فشل حذف الحساب');
-              }
-            })
+      deleteProfile: rxMethod<void>(
+        pipe(
+          tap(() => patchState(store, { isLoading: true })),
+          switchMap(() =>
+            profileService.deleteProfile().pipe(
+              tap({
+                next: () => {
+                  patchState(store, {
+                    profile: null,
+                    isLoading: false
+                  });
+                  store._profileResource.reload();
+                  messageService.show('success', 'تم حذف الحساب بنجاح');
+                },
+                error: (err) => {
+                  patchState(store, { isLoading: false });
+                  messageService.show('error', err.error?.message || 'فشل حذف الحساب');
+                }
+              })
+            )
           )
         )
-      )
-    ),
+      ),
 
-  }))
+    }))
 );

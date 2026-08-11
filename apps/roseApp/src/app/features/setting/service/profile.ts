@@ -9,14 +9,14 @@ import { PasswordModel, PasswordResponse, } from '../models/password';
   providedIn: 'root',
 })
 export class ProfileService extends ApiService<ProfilePesponse> {
-  protected override endpoint = 'users/';
+  protected override endpoint = 'users';
 
   constructor() {
     super(inject(HttpClient));
   }
 
   getProfile(): HttpResourceRef<DataResponse<ProfilePesponse> | undefined> {
-    return this.getListResourceData('profile');
+    return this.getListResourceData('/profile');
   }
 
 
@@ -25,11 +25,11 @@ export class ProfileService extends ApiService<ProfilePesponse> {
   }
 
   changePassword(payload: PasswordModel): Observable<PasswordResponse<unknown>> {
-    return this.post(payload, 'change-password',);
+    return this.post(payload, '/change-password',);
   }
 
   deleteProfile(): Observable<void> {
-    return this.deleteAll(`accounts`);
+    return this.deleteAll(`/account`);
   }
 
 }

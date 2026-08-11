@@ -21,9 +21,9 @@ export class OrdersList implements OnInit {
 
   ngOnInit(): void {
     this.orderService.getAllOrders().subscribe({
-      next: (res) => {
-        this.orderitems.set(res.data);
-        this.metadata.set(res.metadata);
+      next: (res: any) => {
+        this.orderitems.set(res.payload.data);
+        this.metadata.set(res.payload.metadata);
       }
     });
   }
