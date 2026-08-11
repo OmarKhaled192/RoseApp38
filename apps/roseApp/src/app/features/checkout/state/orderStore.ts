@@ -1,21 +1,29 @@
 import { inject } from '@angular/core';
-import { tap, pipe, switchMap } from 'rxjs';
-import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { LoadingState, Message } from '@org/data-access';
+import { CartStore } from '@org/ui';
+import { pipe, switchMap, tap } from 'rxjs';
+import { CreateOrderRequest } from '../models/create-order-request';
 import { Order } from '../models/order';
 import { OrderService } from '../services/order';
-import { CreateOrderRequest } from '../models/create-order-request';
-import { CartStore } from '@org/ui';
-import { Router } from '@angular/router';
 
 export interface OrderState extends LoadingState {
   order: Order | null;
-  isLoading: boolean;
+  paymentOrderId: string | null;
+  paymentOrderError: string | null;
+}
+
+interface CreateOrderPayload {
+  order: Order;
 }
 
 const initialState: OrderState = {
   order: null,
+  paymentOrderId: null,
+  paymentOrderError: null,
   isLoading: false,
 };
 
@@ -29,31 +37,53 @@ export const OrderStore = signalStore(
       cartStore = inject(CartStore),
       router = inject(Router),
       messageService = inject(Message),
+      translate = inject(TranslateService),
     ) => ({
       createOrder: rxMethod<CreateOrderRequest>(
         pipe(
           tap(() => patchState(store, { isLoading: true })),
           switchMap((body) =>
-            orderService.post(body).pipe(
+            orderService.post<CreateOrderRequest, CreateOrderPayload>(body).pipe(
               tap({
                 next: (res) => {
-                  patchState(store, () => ({
-                    isLoading: false,
-                    order: res.payload, // <-- unwrap here
-                  }));
+                  patchState(store, { isLoading: false, order: res.payload.order });
                   cartStore.clearCart();
-                  messageService.show(
-                    'success',
-                    res.message || 'تم إنشاء الطلب بنجاح',
-                  );
+                  messageService.show('success', res.message || 'Order created successfully.');
                   router.navigate(['/roseApp']);
                 },
                 error: (err) => {
                   patchState(store, { isLoading: false });
-                  messageService.show(
-                    'error',
-                    err.error?.message || 'فشل إنشاء الطلب',
-                  );
+                  messageService.show('error', err.error?.message || 'Unable to create the order.');
+                },
+              }),
+            ),
+          ),
+        ),
+      ),
+      createOrderForPayment: rxMethod<CreateOrderRequest>(
+        pipe(
+          tap(() => patchState(store, { isLoading: true, paymentOrderId: null, paymentOrderError: null })),
+          switchMap((body) =>
+            orderService.post<CreateOrderRequest, CreateOrderPayload>(body).pipe(
+              tap({
+                next: (res) => {
+                  const createdOrder = res.payload.order;
+                  const paymentOrderId = createdOrder.id ?? createdOrder.orderId;
+                  patchState(store, {
+                    isLoading: false,
+                    order: createdOrder,
+                    paymentOrderId: paymentOrderId ?? null,
+                  });
+                  if (!paymentOrderId) {
+                    const errorMessage = res.message || translate.instant('checkoutPayment.errors.orderId');
+                    patchState(store, { paymentOrderError: errorMessage });
+                    messageService.show('error', errorMessage);
+                  }
+                },
+                error: (err) => {
+                  const errorMessage = err.error?.message || translate.instant('checkoutPayment.errors.order');
+                  patchState(store, { isLoading: false, paymentOrderError: errorMessage });
+                  messageService.show('error', errorMessage);
                 },
               }),
             ),
