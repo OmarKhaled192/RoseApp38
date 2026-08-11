@@ -21,8 +21,7 @@ import { ServicesHightlights } from './components/services-highlights/component/
     Testimonials,
     ServicesHightlights,
     SpecialGifts,
-  
-  ],
+],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })

@@ -46,7 +46,10 @@ export const OrderStore = signalStore(
             orderService.post<CreateOrderRequest, CreateOrderPayload>(body).pipe(
               tap({
                 next: (res) => {
-                  patchState(store, { isLoading: false, order: res.payload.order });
+                  patchState(store, () => ({
+                    isLoading: false,
+                    order: res.payload, 
+                  }));
                   cartStore.clearCart();
                   messageService.show('success', res.message || 'Order created successfully.');
                   router.navigate(['/roseApp']);
@@ -90,6 +93,9 @@ export const OrderStore = signalStore(
           ),
         ),
       ),
+      
+
+
       updateAddressId: (addressId: string) => {
         const currentOrder = store.order() || {
           addressId: '',
@@ -99,6 +105,7 @@ export const OrderStore = signalStore(
         };
         patchState(store, { order: { ...currentOrder, addressId } });
       },
+
     }),
   ),
 );

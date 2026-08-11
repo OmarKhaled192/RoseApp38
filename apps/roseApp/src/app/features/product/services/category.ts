@@ -12,7 +12,4 @@ export class CategoryService extends ApiService<ICategory> {
   constructor(http: HttpClient) {
     super(http);
   }
-
-
-
 }

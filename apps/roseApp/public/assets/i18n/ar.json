@@ -49,8 +49,7 @@
       "to": "إلى",
       "reset": "إعادة تعيين",
       "resetAll": "إعادة تعيين الكل",
-  "priceRangeError": "الحد الأدنى للسعر يجب أن يكون أقل من أو يساوي الحد الأقصى للسعر"
-
+      "priceRangeError": "الحد الأدنى للسعر يجب أن يكون أقل من أو يساوي الحد الأقصى للسعر"
     }
   },
   "productDetail": {
@@ -171,7 +170,7 @@
     "subtitle": "المعرض",
     "title": "اكتشف معرضنا الرائع"
   },
-    "cart": {
+  "cart": {
     "title": "السلة",
     "products": "منتجات",
     "clearCart": "إفراغ السلة",
@@ -212,6 +211,35 @@
     "emptyTitle": "قائمة المفضلة فارغة",
     "emptyDescription": "احفظ المنتجات التي تعجبك بالضغط على أيقونة القلب، وستظهر هنا لتتمكن من الوصول إليها في أي وقت."
   },
+  "ORDERS": {
+    "TITLE": "الطلبات",
+    "ORDER": "طلب",
+    "CREATED_IN": "تم الإنشاء في",
+    "TOTAL_PRICE": "إجمالي السعر",
+    "PAID": "مدفوع",
+    "STATUS": "الحالة",
+    "PAYMENT_METHOD": "طريقة الدفع",
+    "CASH": "الدفع نقدًا",
+    "CREDIT_CARD": "بطاقة ائتمانية",
+    "DELIVERY_STATUS": "حالة التوصيل",
+    "PENDING": "قيد الانتظار",
+    "ORDER_ITEMS": "عناصر الطلب",
+    "RATING": "التقييم",
+    "RATINGS": "تقييمات",
+    "SHOW_ALL": "عرض الكل",
+    "SHOW_LESS": "عرض أقل",
+
+    "STATUS_VALUES": {
+      "pending": "قيد الانتظار",
+      "confirmed": "تم التأكيد",
+      "processing": "جاري التجهيز",
+      "shipped": "تم الشحن",
+      "delivered": "تم التوصيل",
+      "cancelled": "ملغي",
+      "completed": "مكتمل",
+      "paid": "مدفوع",
+      "refunded": "تم رد المبلغ"
+    }
   "checkoutPayment": {
     "testDescription": "سيتم تأكيد الدفع تلقائيًا.",
     "testTitle": "جارٍ تأكيد الدفع",

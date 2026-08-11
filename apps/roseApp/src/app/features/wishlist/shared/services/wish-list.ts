@@ -30,4 +30,7 @@ export class WishListServices {
   removeAllWishlist(): Observable<any> {
     return this.http.delete(`${this.baseUrl}/wishlist`);
   }
+
+  
+
 }

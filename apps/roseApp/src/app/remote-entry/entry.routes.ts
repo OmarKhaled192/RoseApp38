@@ -18,6 +18,13 @@ export const remoteRoutes: Route[] = [
       },
   
       {
+        path: 'orders',
+        loadComponent: () =>
+          import('../features/orders-list/orders-list').then(
+            (m) => m.OrdersList,
+          ),
+      },
+      {
         path: 'products',
         loadComponent: () =>
           import('../features/products/products').then((m) => m.Products),
@@ -57,7 +64,7 @@ export const remoteRoutes: Route[] = [
             path: 'address',
             loadComponent: () =>
               import('../features/checkout/pages/checkout/addresses/components/checkout-address/checkout-address.component').then(
-                (m) => m.CheckoutAddressComponent
+                (m) => m.CheckoutAddressComponent,
               ),
           },
         ],
