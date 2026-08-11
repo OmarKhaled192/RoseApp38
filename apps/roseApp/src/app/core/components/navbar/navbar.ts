@@ -8,6 +8,7 @@ import {
   DarkModeComponent,
   LanguageSwitcherComponent
 } from '@org/ui';
+import { SearchProducts } from '../search-products/search-products';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -18,6 +19,7 @@ import {
     LanguageSwitcherComponent,
     RouterLink,
     RouterModule,
+    SearchProducts,
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
@@ -28,16 +30,29 @@ export class Navbar {
   readonly authService = inject(AuthenticationService);
   firstName = this.authService.firstName;
   searchQuery = '';
+  searchOpen = false;
   isArabic = true;
 
   mobileSearchOpen = false;
   toggleMobileSearch(): void {
     this.mobileSearchOpen = !this.mobileSearchOpen;
+    if (!this.mobileSearchOpen) {
+      this.closeSearch();
+    }
+  }
+
+  openSearch(): void {
+    this.searchOpen = true;
+  }
+
+  closeSearch(): void {
+    this.searchOpen = false;
   }
 
   onSearch(): void {
     if (this.searchQuery.trim()) {
       console.log('Searching for:', this.searchQuery);
+      this.searchOpen = true;
       this.mobileSearchOpen = false;
     }
   }
@@ -78,10 +93,14 @@ export class Navbar {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
-    if (!this.userMenuOpen) return;
     const target = event.target as HTMLElement;
-    if (!target.closest('.user-menu-trigger')) {
+
+    if (this.userMenuOpen && !target.closest('.user-menu-trigger')) {
       this.userMenuOpen = false;
+    }
+
+    if (this.searchOpen && !target.closest('.search-container')) {
+      this.closeSearch();
     }
   }
 

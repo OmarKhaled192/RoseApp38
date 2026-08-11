@@ -13,9 +13,9 @@ export class ProductService extends ApiService<ProductData> {
     super(http);
   }
 
-  getProductDetail(id: string) {
+  getProductDetail(id: () => string) {
     return this.getResourceById<Product>(id);
   }
 
-  
+
 }

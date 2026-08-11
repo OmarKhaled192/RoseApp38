@@ -18,7 +18,7 @@ export const ProductStore = signalStore(
   withState(initialState),
   withMethods((state, productService = inject(ProductService)) => ({
     getProductResource(id: () => string) {
-      return productService.getProductDetail(id());
+      return productService.getProductDetail(id);
     },
     getAllProduct(params?: () => QueryParams) {
       return productService.getListResource(params);

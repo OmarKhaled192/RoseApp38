@@ -51,19 +51,20 @@ export abstract class ApiService<T> {
     );
   }
 
-  getListResourceData<R = T>( path?: string ,params?: () => QueryParams): HttpResourceRef<DataResponse<R>  | undefined> {
+  getListResourceData<R = T>(path?: string, params?: () => QueryParams): HttpResourceRef<DataResponse<R> | undefined> {
     const url = path ? `${this.fullUrl}${path}` : this.fullUrl;
     return runInInjectionContext(this.injector, () =>
-      httpResource<DataResponse<R>  | undefined>(() => {
+      httpResource<DataResponse<R> | undefined>(() => {
         const queryString = this.buildParams(params?.()).toString();
         return queryString ? `${url}?${queryString}` : url;
       })
     );
   }
 
-  getResourceById<R = T>(id: string): HttpResourceRef<DataResponse<R> | undefined> {
-  return httpResource<DataResponse<R>>(() => {
-     return `${this.fullUrl}/${id}`;
+  getResourceById<R = T>(id: string | (() => string)): HttpResourceRef<DataResponse<R> | undefined> {
+    return httpResource<DataResponse<R>>(() => {
+      const resourceId = typeof id === 'function' ? id() : id;
+      return `${this.fullUrl}/${resourceId}`;
     });
   }
 
@@ -76,7 +77,7 @@ export abstract class ApiService<T> {
     return this.http.put<R>(`${this.fullUrl}/${id}`, body);
   }
 
-  
+
   patch<B, R = T>(id: number | string, body: B): Observable<R> {
     return this.http.patch<R>(`${this.fullUrl}/${id}`, body);
   }
