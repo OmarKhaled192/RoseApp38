@@ -26,3 +26,4 @@ export * from './cart/models/product';
 export * from './cart/models/category';
 export * from './cart/models/cart.interface';
 export * from './cart/models/review';
+export * from './cart/models/register';

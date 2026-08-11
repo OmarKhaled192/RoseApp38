@@ -26,4 +26,5 @@ export interface User {
   emailVerified: boolean
   phoneVerified: boolean
   role: string
+  photo:string;
 }

@@ -16,6 +16,7 @@ export const remoteRoutes: Route[] = [
             (m) => m.WishList,
           ),
       },
+  
       {
         path: 'orders',
         loadComponent: () =>
@@ -64,6 +65,24 @@ export const remoteRoutes: Route[] = [
             loadComponent: () =>
               import('../features/checkout/pages/checkout/addresses/components/checkout-address/checkout-address.component').then(
                 (m) => m.CheckoutAddressComponent,
+              ),
+          },
+        ],
+      },
+       {
+        path: 'setting',
+        loadComponent: () =>
+          import('../features/setting/pages/setting').then(
+            (m) => m.Setting,
+          ),
+        children: [
+          { path: '', redirectTo: 'profile', pathMatch: 'full' },
+
+          {
+            path: 'profile',
+            loadComponent: () =>
+              import('../features/setting/pages/profile/profile').then(
+                (m) => m.Profile,
               ),
           },
         ],

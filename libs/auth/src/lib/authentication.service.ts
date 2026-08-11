@@ -1,12 +1,23 @@
-import { Injectable, signal } from '@angular/core';
-
+import { computed, Injectable, signal, } from '@angular/core';
+interface DecodedToken {
+  sub?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  [key: string]: unknown;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private readonly loggedInState = signal<boolean>(this.hasToken());
+ private readonly loggedInState = signal<boolean>(this.hasToken());
+  private readonly userState = signal<DecodedToken | null>(this.decodeToken(this.getToken()));
 
   readonly isLoggedIn = this.loggedInState.asReadonly();
+  readonly user = this.userState.asReadonly();
+   firstName = computed(() => this.userState()?.firstName ?? null);
+
+
   setToken(token: string): void {
     this.setCookie('token', token, 7);
     this.loggedInState.set(true);
@@ -51,5 +62,23 @@ export class AuthenticationService {
 
   private hasToken(): boolean {
     return !!this.getToken();
+  }
+
+   private decodeToken(token: string | null): DecodedToken | null {
+    if (!token) return null;
+    try {
+      const payload = token.split('.')[1];
+      if (!payload) return null;
+      const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+      const json = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map(c => '%' + c.charCodeAt(0).toString(16).padStart(2, '0'))
+          .join('')
+      );
+      return JSON.parse(json) as DecodedToken;
+    } catch {
+      return null;
+    }
   }
 }

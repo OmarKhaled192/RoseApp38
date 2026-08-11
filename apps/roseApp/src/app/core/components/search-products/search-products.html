@@ -1,0 +1,14 @@
+<div
+  class="absolute top-full left-0 mt-2 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-96 overflow-y-auto z-50">
+  @if (loading()) {
+  <div class="px-4 py-6 text-center text-sm text-gray-400">
+    {{ 'SEARCH.LOADING' | translate }}
+  </div>
+  } @else if (searchResults().length === 0) {
+  <div class="px-4 py-6 text-center text-sm text-gray-400">
+    {{ 'SEARCH.NO_RESULTS' | translate }}
+  </div>
+  } @else { @for (item of searchResults(); track item.id) {
+  <app-search-product-card [card]="item" (selected)="cardSelected.emit()"></app-search-product-card>
+  } }
+</div>
