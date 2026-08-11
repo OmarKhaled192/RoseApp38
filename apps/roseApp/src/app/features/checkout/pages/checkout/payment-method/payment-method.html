@@ -36,7 +36,7 @@
       </span>
     </button>
 
-    <button type="button" disabled (click)="select('card')"
+    <button type="button" (click)="select('card')"
       class="relative border-gray flex h-[299px] flex-col items-center justify-center text-center rounded-2xl border p-6 transition-colors"
       [class.border-gray-200]="selected() !== 'card'" [class.ring-1]="selected() === 'card'">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 mb-4 text-gray-800" viewBox="0 0 64 64" fill="none"
@@ -52,19 +52,41 @@
         Credit Card
       </span>
       <span class="text-xs text-gray-400 mt-1 leading-snug">
-        You'll be securely redirected to Stripe to complete your payment.
+        {{ 'checkoutPayment.testDescription' | translate }}
       </span>
     </button>
   </div>
 
+  @if (selected() === 'card') {
+    <section class="mt-6 rounded-2xl border border-gray-200 bg-white p-6">
+      <h2 class="text-lg font-semibold text-gray-900">{{ 'checkoutPayment.testTitle' | translate }}</h2>
+      @if (paymentOrderError()) {
+        <p class="mt-2 text-sm text-red-600">{{ paymentOrderError() }}</p>
+      } @else if (paymentError()) {
+        <p class="mt-2 text-sm text-red-600">{{ paymentError() }}</p>
+      } @else {
+        <p class="mt-2 text-sm text-gray-500">{{ 'checkoutPayment.processing' | translate }}</p>
+      }
+    </section>
+  }
+
+  @if (selected() !== 'card' || !paymentOrderId()) {
   <div class="flex justify-end mt-8">
-    <button type="button" (click)="checkout()" [disabled]="!addressId() || !selected()"
+    <button type="button" (click)="checkout()" [disabled]="!addressId() || !selected() || isProcessingPayment()"
       class="flex items-center gap-3 bg-[#A6252A] hover:bg-red-950 text-white px-5 font-medium text-sm px-6 py-3 rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
-      {{ isLoading() ? 'Placing order...' : 'Checkout' }}
+      {{ isProcessingPayment() ? ('checkoutPayment.processing' | translate) : 'Checkout' }}
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M5 12h14M13 5l7 7-7 7" />
       </svg>
     </button>
   </div>
+  } @else if (paymentError()) {
+  <div class="flex justify-end mt-8">
+    <button type="button" (click)="retryPaymentIntent()" [disabled]="isProcessingPayment()"
+      class="flex items-center gap-3 bg-[#A6252A] hover:bg-red-950 text-white px-6 py-3 rounded-xl text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40">
+      {{ 'checkoutPayment.retry' | translate }}
+    </button>
+  </div>
+  }
 </aside>
