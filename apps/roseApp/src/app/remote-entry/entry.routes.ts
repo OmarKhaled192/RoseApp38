@@ -16,6 +16,7 @@ export const remoteRoutes: Route[] = [
             (m) => m.WishList,
           ),
       },
+  
       {
         path: 'products',
         loadComponent: () =>
