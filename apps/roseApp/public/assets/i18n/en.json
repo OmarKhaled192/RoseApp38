@@ -276,7 +276,10 @@
     "deleteAccount": "Delete My Account",
     "saveChanges": "Save Changes",
     "changePassword": "Change Password",
-    "logout": "Logout"
-  }
-
-}
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "passwordMismatch": "Passwords do not match.",
+    "changingPassword": "Changing Password...",
+    "passwordChangedSuccess": "Password changed successfully",
+    "passwordChangeFailed": "Change password failed. Please try again.",

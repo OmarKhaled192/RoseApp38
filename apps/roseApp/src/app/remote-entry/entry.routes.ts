@@ -69,7 +69,7 @@ export const remoteRoutes: Route[] = [
           },
         ],
       },
-       {
+      {
         path: 'setting',
         loadComponent: () =>
           import('../features/setting/pages/setting').then(
@@ -83,6 +83,13 @@ export const remoteRoutes: Route[] = [
             loadComponent: () =>
               import('../features/setting/pages/profile/profile').then(
                 (m) => m.Profile,
+              ),
+          },
+          {
+            path: 'change-password',
+            loadComponent: () =>
+              import('../features/setting/pages/change-password/change-password').then(
+                (m) => m.ChangePassword,
               ),
           },
         ],

@@ -275,6 +275,10 @@
     "deleteAccount": "حذف حسابي",
     "saveChanges": "حفظ التغييرات",
     "changePassword": "تغيير كلمة المرور",
-    "logout": "تسجيل الخروج"
-  }
-}
+    "oldPassword": "كلمة المرور القديمة",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+    "passwordMismatch": "كلمتا المرور غير متطابقتين.",
+    "changingPassword": "جاري تغيير كلمة المرور...",
+    "passwordChangedSuccess": "تم تغيير كلمة المرور بنجاح",
+    "passwordChangeFailed": "فشل تغيير كلمة المرور. حاول مرة أخرى.",
