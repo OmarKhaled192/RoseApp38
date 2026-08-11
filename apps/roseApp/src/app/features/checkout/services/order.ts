@@ -3,7 +3,10 @@ import { ApiService } from '@org/data-access';
 import { Order } from '../models/order';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { OrderMetadata, OrdersPayload } from '../../orders-list/interfaces/order-items';
+import {
+  OrderMetadata,
+  OrdersPayload,
+} from '../../orders-list/interfaces/order-items';
 import { environment } from '@org/environments';
 
 @Injectable({
@@ -12,12 +15,11 @@ import { environment } from '@org/environments';
 export class OrderService extends ApiService<Order> {
   protected override endpoint = 'orders';
 
-  getAllOrders(): Observable<OrdersPayload> {
-    return this.http.get<OrdersPayload>(`${this.baseUrl}/orders`);
+  getAllOrders(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/orders`);
   }
 
   constructor() {
     super(inject(HttpClient));
   }
-
 }
