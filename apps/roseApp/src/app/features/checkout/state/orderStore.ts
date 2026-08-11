@@ -48,7 +48,7 @@ export const OrderStore = signalStore(
                 next: (res) => {
                   patchState(store, () => ({
                     isLoading: false,
-                    order: res.payload, 
+                    order: res.payload.order,
                   }));
                   cartStore.clearCart();
                   messageService.show('success', res.message || 'Order created successfully.');
@@ -93,7 +93,7 @@ export const OrderStore = signalStore(
           ),
         ),
       ),
-      
+
 
 
       updateAddressId: (addressId: string) => {

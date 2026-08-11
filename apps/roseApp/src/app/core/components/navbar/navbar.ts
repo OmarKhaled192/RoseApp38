@@ -2,25 +2,22 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterModule } from '@angular/router';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from '@org/auth';
 import {
   DarkModeComponent,
   LanguageSwitcherComponent
 } from '@org/ui';
-import { SearchProducts } from '../search-products/search-products';
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
     FormsModule,
     CommonModule,
-    TranslatePipe,
     DarkModeComponent,
     LanguageSwitcherComponent,
     RouterLink,
     RouterModule,
-    SearchProducts,
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
@@ -29,7 +26,7 @@ export class Navbar {
   private readonly router = inject(Router);
   private translate = inject(TranslateService);
   readonly authService = inject(AuthenticationService);
-   firstName = this.authService.firstName;
+  firstName = this.authService.firstName;
   searchQuery = '';
   isArabic = true;
 
@@ -78,7 +75,7 @@ export class Navbar {
     this.userMenuOpen = false;
   }
 
- 
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     if (!this.userMenuOpen) return;
@@ -93,7 +90,7 @@ export class Navbar {
 
   onChangeLocation(): void {
     console.log('Change delivery location clicked');
-   
+
   }
 
 
