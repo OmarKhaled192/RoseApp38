@@ -229,15 +229,15 @@
     "SHOW_ALL": "عرض الكل",
     "SHOW_LESS": "عرض أقل",
     "STATUS_VALUES": {
-      "pending": "قيد الانتظار",
-      "confirmed": "تم التأكيد",
-      "processing": "جاري التجهيز",
-      "shipped": "تم الشحن",
-      "delivered": "تم التوصيل",
-      "cancelled": "ملغي",
-      "completed": "مكتمل",
-      "paid": "مدفوع",
-      "refunded": "تم رد المبلغ"
+      "PENDING": "قيد الانتظار",
+      "CONFIRMED": "تم التأكيد",
+      "PROCESSING": "جاري التجهيز",
+      "SHIPPED": "تم الشحن",
+      "DELIVERED": "تم التوصيل",
+      "CANCELLED": "ملغي",
+      "COMPLETED": "مكتمل",
+      "PAID": "مدفوع",
+      "REFUNDED": "تم رد المبلغ"
     }
   },
   "checkoutPayment": {

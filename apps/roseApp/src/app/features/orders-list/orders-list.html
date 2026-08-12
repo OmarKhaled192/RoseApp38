@@ -1,5 +1,8 @@
 <div class="m-10">
-    <h5 class="text-4xl font-bold text-gray-800 mx-4"   >Orders</h5>
+    <h5 class="text-4xl font-bold text-gray-800 mx-4">
+        {{ 'ORDERS.TITLE' | translate }}
+    </h5>
+
     @for (order of orderitems(); track order.id) {
     <div class="rounded-xl bg-white overflow-hidden shadow-sm m-4">
 
@@ -40,10 +43,14 @@
 
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 64 64"
-                            class="w-4 h-4 shrink-0" fill="none">
+                            class="w-4 h-4 shrink-0"
+                            fill="none">
 
-                            <path d="M14 34L27 47L50 20" stroke="currentColor"
-                                stroke-width="5" stroke-linecap="round"
+                            <path
+                                d="M14 34L27 47L50 20"
+                                stroke="currentColor"
+                                stroke-width="5"
+                                stroke-linecap="round"
                                 stroke-linejoin="round" />
 
                         </svg>
@@ -53,7 +60,6 @@
                         </span>
 
                     </span>
-
                     }
 
                 </div>
@@ -93,28 +99,7 @@
                     <span
                         class="ml-2 inline-flex items-center gap-1 font-medium text-gray-500">
 
-                        <svg class="w-4 h-4 shrink-0" viewBox="0 0 64 64"
-                            fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                            <g stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round">
-
-                                <rect x="8" y="14" width="48" height="28"
-                                    rx="4" />
-
-                                <circle cx="18" cy="28" r="1.5"
-                                    fill="currentColor"
-                                    stroke="none" />
-
-                                <circle cx="46" cy="28" r="1.5"
-                                    fill="currentColor"
-                                    stroke="none" />
-
-                                <circle cx="32" cy="28" r="6" />
-
-                            </g>
-
-                        </svg>
+                        <!-- Cash SVG -->
 
                         <span>
                             {{ 'ORDERS.CASH' | translate }}
@@ -127,18 +112,7 @@
                     <span
                         class="ml-2 inline-flex items-center gap-1 font-medium text-gray-500">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                            height="14" viewBox="0 0 16 16" fill="none">
-
-                            <rect x="2" y="3" width="12" height="10" rx="1.5"
-                                stroke="currentColor" stroke-width="1.2" />
-
-                            <line x1="2" y1="6" x2="14" y2="6"
-                                stroke="currentColor"
-                                stroke-width="1.2"
-                                stroke-linecap="round" />
-
-                        </svg>
+                        <!-- Credit Card SVG -->
 
                         <span>
                             {{ 'ORDERS.CREDIT_CARD' | translate }}
@@ -160,23 +134,23 @@
                     <span
                         class="inline-flex items-center gap-1 text-yellow-500 font-semibold whitespace-nowrap">
 
-                        <svg class="w-5 h-5 shrink-0" viewBox="0 0 64 64"
-                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-5 h-5 shrink-0"
+                            viewBox="0 0 64 64"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
 
-                            <g stroke="currentColor" stroke-width="3.5"
-                                stroke-linecap="round" stroke-linejoin="round">
+                            <g
+                                stroke="currentColor"
+                                stroke-width="3.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
 
                                 <rect x="8" y="16" width="28" height="24"
                                     rx="3" />
-
                                 <path d="M36 24H46L54 32V40H36V24Z" />
-
                                 <path d="M46 24V32H54" />
-
                                 <path d="M8 40H54" />
-
                                 <circle cx="18" cy="42" r="3.5" />
-
                                 <circle cx="46" cy="42" r="3.5" />
 
                             </g>
@@ -212,7 +186,8 @@
                         <div
                             class="text-start flex gap-5 bg-gray-50 rounded-xl">
 
-                            <img [src]="item.product.cover"
+                            <img
+                                [src]="item.product.cover"
                                 [alt]="item.product.title"
                                 class="w-30 h-40 object-cover rounded-tl-lg rounded-bl-lg" />
 
@@ -274,13 +249,16 @@
                     </div>
 
                     <!-- Show All -->
-                    @if (!isOrderExpanded(order.id) &&
-                    order.orderItems.length > visibleItemCount) {
+                    @if (
+                    !isOrderExpanded(order.id) &&
+                    order.orderItems.length > visibleItemCount
+                    ) {
 
                     <div
                         class="absolute inset-x-0 bottom-0 h-24 rounded-b-xl bg-gradient-to-t from-white via-white/90 to-transparent flex items-end justify-center pb-2 pointer-events-none">
 
-                        <button type="button"
+                        <button
+                            type="button"
                             (click)="toggleOrderExpanded(order.id)"
                             class="pointer-events-auto flex flex-col items-center text-[#A6252A] font-semibold text-sm hover:opacity-80">
 
@@ -288,11 +266,15 @@
                                 {{ 'ORDERS.SHOW_ALL' | translate }}
                             </span>
 
-                            <svg xmlns="http://www.w3.org/2000/svg"
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
                                 class="w-4 h-4"
-                                viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
 
                                 <polyline points="6 9 12 15 18 9" />
 
@@ -305,20 +287,27 @@
                     }
 
                     <!-- Show Less -->
-                    @if (isOrderExpanded(order.id) &&
-                    order.orderItems.length > visibleItemCount) {
+                    @if (
+                    isOrderExpanded(order.id) &&
+                    order.orderItems.length > visibleItemCount
+                    ) {
 
                     <div class="flex justify-center pt-3">
 
-                        <button type="button"
+                        <button
+                            type="button"
                             (click)="toggleOrderExpanded(order.id)"
                             class="flex flex-col items-center text-[#A6252A] font-semibold text-sm hover:opacity-80">
 
-                            <svg xmlns="http://www.w3.org/2000/svg"
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
                                 class="w-4 h-4"
-                                viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
 
                                 <polyline points="18 15 12 9 6 15" />
 
@@ -341,6 +330,5 @@
         </div>
 
     </div>
-
     }
 </div>

@@ -37,7 +37,7 @@ export class OrdersList implements OnInit {
       case 'done':
         return 'bg-green-500';
       default:
-        return 'bg-gray-400';
+        return 'bg-blue-400';
     }
   }
 
