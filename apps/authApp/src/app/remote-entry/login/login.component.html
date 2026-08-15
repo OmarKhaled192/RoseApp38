@@ -1,0 +1,47 @@
+<div class="login-wrapper w-full flex flex-col gap-6">
+
+  <div class="header-container text-center">
+    <lib-title-form [title]="'auth.welcomeBack' | translate" />
+  </div>
+
+  <div class="divider border-b border-gray-200 w-full"></div>
+
+  <form [formGroup]="loginForm()" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full">
+
+    <div class="form-field">
+      <lib-input formControlName="username" [label]="'auth.username' | translate" placeholder="user@example.com" />
+    </div>
+
+    <div class="form-field">
+      <lib-input type="password" formControlName="password" [label]="'auth.password' | translate"
+        placeholder="********" />
+    </div>
+
+    <div class="flex justify-end">
+      <a [routerLink]="['../forget-password']"
+        class="forget-password-link text-[#8D1C24] font-semibold text-sm hover:underline transition-colors duration-200">
+        {{ 'auth.forgetPassword' | translate }}
+      </a>
+    </div>
+
+    <div class="flex items-center my-2">
+      <lib-checkbox [checked]="rememberMe()" (changed)="rememberMe.set($event)"
+        [label]="'auth.rememberMe' | translate" />
+    </div>
+
+    <div class="w-full mt-2">
+      <lib-button type="submit" [label]="'auth.login' | translate" [loading]="isLoading()"
+        [disabled]="loginForm().invalid || isLoading()" [color]="isDark() ? '#FFA6B9' : '#8D1C24'"
+        styleClass="w-full py-3 text-base font-semibold" />
+    </div>
+
+  </form>
+
+  <div class="divider border-b border-gray-200 w-full"></div>
+
+  <div class="footer-container">
+    <lib-question-repeat [question]="'auth.noAccount' | translate" [answer]="'auth.createOne' | translate"
+      [routerLink]="['/auth/register']" />
+  </div>
+
+</div>

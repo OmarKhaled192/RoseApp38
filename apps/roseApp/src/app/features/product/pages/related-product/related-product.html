@@ -1,0 +1,37 @@
+<section class="w-full">
+  <lib-title-section
+    [title]="title() ?  title() : ('product.relatedProducts' | translate)"
+    subtitle=" "
+    align="left"
+    [highlightWidth]="'60%'"
+    [highlightHeight]="'45%'"
+    [underlineWidth]="'60px'"
+    [underlineHeight]="'2px'"
+  />
+
+  <div class="flex flex-col lg:flex-row lg:items-center gap-8 my-4">
+    <div class="flex-1 min-w-0">
+      @if(products() && products().length){
+      <p-carousel
+        [value]="products()"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="false"
+        [responsiveOptions]="responsiveOptions"
+        [showIndicators]="false"
+        contentClass="gap-4"
+      >
+        <ng-template #item let-product>
+          <div class="px-1.5">
+            <lib-card
+             (wishlistToggle)="toggleWishlist(product)"
+              [card]="product"
+              [hoverActions]="[actionsFor(product)[0], actionsFor(product)[1]]"
+            />
+          </div>
+        </ng-template>
+      </p-carousel>
+      }
+    </div>
+  </div>
+</section>

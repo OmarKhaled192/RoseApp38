@@ -1,0 +1,86 @@
+  <div class="register-wrapper w-full flex flex-col gap-6">
+
+    <div class="header-container text-center">
+      <lib-title-form [title]="'auth.createAccount' | translate" />
+    </div>
+
+    <div class="divider border-b border-gray-200 w-full"></div>
+
+    <form [formGroup]="registerForm()" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full">
+
+      <div class="flex gap-4">
+        <div class="form-field flex-1">
+          <lib-input
+            formControlName="firstName"
+            [label]="'auth.firstName' | translate"
+            placeholder="Jonathan"
+          />
+        </div>
+        <div class="form-field flex-1">
+          <lib-input
+            formControlName="lastName"
+            [label]="'auth.lastName' | translate"
+            placeholder="Adrian"
+          />
+        </div>
+      </div>
+
+      <div class="form-field">
+    <lib-input
+      formControlName="email"
+      [label]="'auth.email' | translate"
+      placeholder="jonathan.adrian@example.com"
+      [isReadonly]="true"
+    />
+  </div>
+
+      <div class="form-field">
+        <lib-input
+          formControlName="username"
+          [label]="'auth.username' | translate"
+          placeholder="jonathan_adrian"
+        />
+      </div>
+
+      <div class="form-field">
+        <lib-input
+          type="password"
+          formControlName="password"
+          [label]="'auth.password' | translate"
+          placeholder="********"
+        />
+      </div>
+
+      <div class="form-field">
+        <lib-input
+          type="password"
+          formControlName="confirmPassword"
+          [label]="'auth.confirmPassword' | translate"
+          placeholder="********"
+        />
+      </div>
+
+      <div class="w-full mt-2">
+        <lib-button
+          type="submit"
+          [label]="'auth.createAccount' | translate"
+          [loading]="isLoading()"
+          [disabled]="registerForm().invalid || isLoading()"
+          [color]="isDark() ? '#FFA6B9' : '#8D1C24'"
+          styleClass="w-full py-3 text-base font-semibold"
+        />
+      </div>
+
+    </form>
+
+    <div class="divider border-b border-gray-200 w-full"></div>
+
+    <div class="footer-container">
+      <lib-question-repeat
+        [question]="'auth.haveAccount' | translate"
+        [answer]="'auth.login' | translate"
+        [routerLink]="['/auth/login']"
+      />
+    </div>
+
+  </div>

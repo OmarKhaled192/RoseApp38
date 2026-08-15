@@ -1,0 +1,52 @@
+<div class="otp-wrapper w-full flex flex-col gap-6">
+
+  <div class="header-container text-center">
+    <lib-title-form [title]="'auth.verifyOtp' | translate" />
+  </div>
+
+  <div class="divider border-b border-gray-200 w-full"></div>
+
+  <div class="flex flex-col gap-4 w-full">
+    <div>
+      <lib-paragraph [header]="'auth.verifyOtp' | translate"
+        [descriptionBeforeLink]="('auth.otpSentTo' | translate) + ' ' + registrationState.email()"
+        [linkText]="'auth.edit' | translate" [linkRoute]="['/auth/register']" />
+    </div>
+
+    <div class="flex justify-center">
+      <p-inputotp [(ngModel)]="otpValue" [length]="6" [integerOnly]="true" />
+    </div>
+
+    <div class="flex justify-end">
+      @if (cooldown() > 0) {
+      <span class="text-sm text-gray-500">
+        {{ 'auth.resendIn' | translate }} {{ cooldown() }}s
+      </span>
+      } @else {
+
+      <button type="button"
+        class="text-sm text-[#8D1C24] font-semibold hover:underline cursor-pointer bg-transparent border-0 p-0"
+        (click)="onResend()">
+        {{ isResending() ? ('auth.resending' | translate) : ('auth.resendOtp' | translate) }}
+      </button>
+      }
+    </div>
+
+    <div class="w-full mt-2">
+      <lib-button [label]="'auth.verify' | translate" [loading]="isLoading()" [disabled]="!isOtpComplete || isLoading()"
+        [color]="isDark() ? '#FFA6B9' : '#8D1C24'" styleClass="w-full py-3 text-base font-semibold"
+        (click)="onSubmit()" />
+    </div>
+
+  </div>
+
+  <div class="divider border-b border-gray-200 w-full"></div>
+
+  <div class="text-center text-sm text-gray-500">
+    {{ 'auth.needhelp' | translate }}
+    <a href="mailto:support@example.com" class="text-[#8D1C24] font-semibold hover:underline">
+      {{ 'auth.contact' | translate }}
+    </a>
+  </div>
+
+</div>

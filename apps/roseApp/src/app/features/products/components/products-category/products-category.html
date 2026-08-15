@@ -1,0 +1,42 @@
+<app-filter-section title="products.category" [showReset]="selectedIds().length > 0" (resetData)="resetCategories.emit()">
+  <ul class="flex flex-col gap-1 max-h-[280px] overflow-y-auto pr-1">
+    @for (row of visibleItems(); track row.item.id) {
+    <li [style.marginLeft.px]="row.depth * 16">
+      <button type="button" (click)="onSelect(row.item.id)"
+        class="relative cursor-pointer w-full flex items-center gap-3 rounded-l-lg text-sm text-left transition-colors"
+        [ngClass]="
+    selectedIds().includes(row.item.id)
+      ? 'bg-[#FBEAEA]'
+      : 'bg-gray-100 hover:bg-gray-200'
+  ">
+        <!-- icon / image -->
+        <span class="flex items-center justify-center w-8 h-8 rounded-lg shrink-0 overflow-hidden" [ngClass]="
+      !row.item.image ? (selectedIds().includes(row.item.id)
+        ? 'bg-[#A6252A]'
+        : 'bg-[#71717A]') : ''
+    ">
+          @if (row.item.image) {
+          <img [src]="row.item.image" [alt]="row.item.label" class="w-full h-full object-cover" />
+          } @else {
+          <i class="pi text-base text-white" [ngClass]="[
+        row.item.icon ?? 'pi-th-large',
+      ]">
+          </i>
+          }
+        </span>
+
+        <span class="truncate font-medium text-gray-600">
+          {{ row.item.label }}
+        </span>
+
+        @if (row.item.badge) {
+        <span
+          class="absolute -top-2 -right-2 flex items-center justify-center w-6 h-6 rounded-full bg-[#F5C21A] text-[11px] font-bold text-gray-900 ring-2 ring-white">
+          {{ row.item.badge }}
+        </span>
+        }
+      </button>
+    </li>
+    }
+  </ul>
+</app-filter-section>

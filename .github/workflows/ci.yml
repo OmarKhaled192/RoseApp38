@@ -1,41 +1,119 @@
-name: CI
+name: CI and Deploy
 
 on:
   push:
     branches:
       - main
+
   pull_request:
 
 permissions:
-  actions: read
   contents: read
+  pages: write
+  id-token: write
+  actions: read
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   main:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           filter: tree:0
           fetch-depth: 0
 
-      # This enables task distribution via Nx Cloud
-      # Run this command as early as possible, before dependencies are installed
-      # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun
-      - run: npx nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
 
-      # Cache node_modules
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: pnpm
 
-      - run: npm ci
-      - run: npx playwright install --only-shell
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      # Prepend any command with "nx record --" to record its logs to Nx Cloud
-      - run: npx nx record -- echo Hello World
-      - run: npx nx run-many -t lint test build typecheck e2e
-      # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/ci/features/self-healing-ci
-      - run: npx nx fix-ci
-        if: always()
+      - name: Set Nx SHAs
+        uses: nrwl/nx-set-shas@v5
+
+      - name: Start Nx Cloud CI
+        run: pnpm exec nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="test"
+
+      - name: Run Nx tasks
+        run: pnpm exec nx affected -t lint test build
+
+  build-pages:
+    needs: main
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build shell app
+        run: pnpm exec nx build shell --configuration=production --base-href=/${{ github.event.repository.name }}/
+
+      - name: Build authApp
+        run: pnpm exec nx build authApp --configuration=production --base-href=/${{ github.event.repository.name }}/authApp/
+
+      - name: Build adminDashboard
+        run: pnpm exec nx build adminDashboard --configuration=production --base-href=/${{ github.event.repository.name }}/adminDashboard/
+
+      - name: Build roseApp
+        run: pnpm exec nx build roseApp --configuration=production --base-href=/${{ github.event.repository.name }}/roseApp/
+
+      - name: Assemble deploy folder
+        run: |
+          mkdir -p deploy-output
+          cp -r dist/apps/shell/* deploy-output/ || cp -r dist/shell/* deploy-output/
+          mkdir -p deploy-output/authApp
+          cp -r dist/apps/authApp/* deploy-output/authApp/ || cp -r dist/authApp/* deploy-output/authApp/
+          mkdir -p deploy-output/adminDashboard
+          cp -r dist/apps/adminDashboard/* deploy-output/adminDashboard/ || cp -r dist/adminDashboard/* deploy-output/adminDashboard/
+          mkdir -p deploy-output/roseApp
+          cp -r dist/apps/roseApp/* deploy-output/roseApp/ || cp -r dist/roseApp/* deploy-output/roseApp/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: deploy-output
+
+  deploy:
+    needs: build-pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

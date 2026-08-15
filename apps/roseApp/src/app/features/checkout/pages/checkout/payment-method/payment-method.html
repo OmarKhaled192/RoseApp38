@@ -1,0 +1,92 @@
+<aside>
+  <app-shared-stepper [totalSteps]="2" [currentStep]="2"></app-shared-stepper>
+
+  <div class="flex items-center gap-1 mb-6">
+    <button routerLink="/roseApp/checkout/address"
+      class="flex items-center gap-1 px-3 py-2 rounded-lg bg-[#F4F4F5] hover:text-gray-700 text-sm font-medium transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      Back
+    </button>
+    <h1 class="text-2xl font-bold text-gray-900">Payment Method</h1>
+  </div>
+
+  <div class="grid grid-cols-2 gap-2 justify-center">
+    <button type="button" (click)="select('cash')"
+      class="relative flex h-[299px] flex-col items-center justify-center rounded-2xl border border-gray-200 p-6 text-center transition-colors"
+      [class.border-gray-10]="selected() !== 'cash'" [class.bg-white]="selected() !== 'cash'"
+      [class.bg-gray-50]="selected() === 'cash'">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 mb-4 text-gray-800" viewBox="0 0 64 64" fill="none"
+        class="w-36 h-36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="10" y="18" width="34" height="20" rx="2" transform="rotate(-8 27 28)" />
+        <rect x="14" y="22" width="34" height="20" rx="2" />
+        <circle cx="31" cy="32" r="6" />
+        <circle cx="18" cy="44" r="5" />
+        <circle cx="28" cy="46" r="5" />
+        <path d="M18 44l3 3M28 46l3 3" />
+      </svg>
+      <span class="font-semibold text-xl" [class.text-red-600]="selected() === 'cash'"
+        [class.text-gray-900]="selected() !== 'cash'">
+        Cash on Delivery
+      </span>
+      <span class="text-xs text-gray-400 mt-1 leading-snug">
+        You'll pay in cash when your order is delivered.
+      </span>
+    </button>
+
+    <button type="button" (click)="select('card')"
+      class="relative border-gray flex h-[299px] flex-col items-center justify-center text-center rounded-2xl border p-6 transition-colors"
+      [class.border-gray-200]="selected() !== 'card'" [class.ring-1]="selected() === 'card'">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 mb-4 text-gray-800" viewBox="0 0 64 64" fill="none"
+        class="w-36 h-36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="14" y="12" width="30" height="20" rx="2" transform="rotate(-10 29 22)" />
+        <rect x="8" y="26" width="40" height="24" rx="3" />
+        <line x1="8" y1="34" x2="48" y2="34" />
+        <line x1="14" y1="42" x2="26" y2="42" />
+        <rect x="34" y="40" width="8" height="6" rx="1" />
+      </svg>
+      <span class="font-semibold text-xl" [class.text-red-600]="selected() === 'card'"
+        [class.text-gray-900]="selected() !== 'card'">
+        Credit Card
+      </span>
+      <span class="text-xs text-gray-400 mt-1 leading-snug">
+        {{ 'checkoutPayment.testDescription' | translate }}
+      </span>
+    </button>
+  </div>
+
+  @if (selected() === 'card') {
+    <section class="mt-6 rounded-2xl border border-gray-200 bg-white p-6">
+      <h2 class="text-lg font-semibold text-gray-900">{{ 'checkoutPayment.testTitle' | translate }}</h2>
+      @if (paymentOrderError()) {
+        <p class="mt-2 text-sm text-red-600">{{ paymentOrderError() }}</p>
+      } @else if (paymentError()) {
+        <p class="mt-2 text-sm text-red-600">{{ paymentError() }}</p>
+      } @else {
+        <p class="mt-2 text-sm text-gray-500">{{ 'checkoutPayment.processing' | translate }}</p>
+      }
+    </section>
+  }
+
+  @if (selected() !== 'card' || !paymentOrderId()) {
+  <div class="flex justify-end mt-8">
+    <button type="button" (click)="checkout()" [disabled]="!addressId() || !selected() || isProcessingPayment()"
+      class="flex items-center gap-3 bg-[#A6252A] hover:bg-red-950 text-white px-5 font-medium text-sm px-6 py-3 rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+      {{ isProcessingPayment() ? ('checkoutPayment.processing' | translate) : 'Checkout' }}
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M13 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+  } @else if (paymentError()) {
+  <div class="flex justify-end mt-8">
+    <button type="button" (click)="retryPaymentIntent()" [disabled]="isProcessingPayment()"
+      class="flex items-center gap-3 bg-[#A6252A] hover:bg-red-950 text-white px-6 py-3 rounded-xl text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40">
+      {{ 'checkoutPayment.retry' | translate }}
+    </button>
+  </div>
+  }
+</aside>

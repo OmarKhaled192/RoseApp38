@@ -1,0 +1,24 @@
+@use 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --color-burgundy-50: #fbf5f5;
+  --color-burgundy-100: #f5e6e6;
+  --color-burgundy-200: #edd1d2;
+  --color-burgundy-300: #ddb2b4;
+  --color-burgundy-400: #c9888c;
+  --color-burgundy-500: #b15e63;
+  --color-burgundy-600: #984348;
+  --color-burgundy-700: #8d1c24;
+  --color-burgundy-800: #6b2a2d;
+  --color-burgundy-900: #592528;
+  --color-burgundy-950: #311113;
+}
+
+body {
+  margin: 0;
+  background-color: #ffffff;
+}

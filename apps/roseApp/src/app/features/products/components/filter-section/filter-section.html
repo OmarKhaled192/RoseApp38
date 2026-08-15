@@ -1,0 +1,16 @@
+<div class="py-2 bg-white border border-gray-100">
+  <div class="flex items-center justify-between px-2 pb-2">
+    <h3 class="text-lg font-semibold text-gray-700">{{ title | translate }}</h3>
+    @if (showReset) {
+    <button type="button" (click)="resetData.emit()"
+      class="text-xs text-[#DC2626] px-2 py-0.5 rounded hover:brightness-90 flex items-center gap-1">
+      <i class="pi pi-times text-[10px] align-middle"></i>
+      <span>{{ 'products.filters.reset' | translate }}</span>
+    </button>
+    }
+  </div>
+
+  <div class="px-2 pb-2">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+:host ::ng-deep .custom-scrollbar::-webkit-scrollbar {
+  width: .2px;
+}
+
+:host ::ng-deep .custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:host ::ng-deep .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 9999px;
+}

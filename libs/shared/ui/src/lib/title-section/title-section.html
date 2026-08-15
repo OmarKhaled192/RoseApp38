@@ -1,0 +1,23 @@
+<section class="flex flex-col gap-3.5" [ngClass]="{
+    'items-start text-left': align() === 'left',
+    'items-center text-center': align() === 'center',
+    'items-end text-right': align() === 'right'
+  }">
+  <span class="font-['Sarabun'] uppercase font-bold tracking-[0.25em] leading-none text-[#FF668B]"
+    [style.font-size.px]="subtitleSize()">
+    {{ subtitle() }}
+  </span>
+
+  <h2 class="font-bold leading-[1.2] text-[#741C21]" [style.font-size.px]="titleSize()">
+    <span class="relative inline-block">
+      <span class="hidden md:block absolute inset-x-0 bottom-[0.1em] h-[0.45em] w-[85%] rounded-e-full bg-[#FF668B]/20"
+        aria-hidden="true"></span>
+
+      <span class="hidden md:block absolute bottom-0 start-0 h-[0.12em] w-[55%] bg-[#E65073]" aria-hidden="true"></span>
+
+      <span class="relative z-10">
+        {{ title() }}
+      </span>
+    </span>
+  </h2>
+</section>

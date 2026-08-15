@@ -1,0 +1,3138 @@
+{
+  "graph": {
+    "nodes": {
+      "environments": {
+        "name": "environments",
+        "type": "lib",
+        "data": {
+          "root": "libs/shared/environments",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*"
+              ]
+            },
+            "test": {
+              "options": {
+                "cwd": "libs/shared/environments",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/libs/shared/environments"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vite"
+                ],
+                "description": "Run Vite tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "typecheck": {
+              "cache": true,
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "typescript"
+                  ]
+                }
+              ],
+              "options": {
+                "cwd": "libs/shared/environments",
+                "command": "tsc --noEmit -p tsconfig.lib.json"
+              },
+              "metadata": {
+                "description": "Runs type-checking for the project.",
+                "technologies": [
+                  "typescript"
+                ],
+                "help": {
+                  "command": "npx tsc -p tsconfig.lib.json --help",
+                  "example": {
+                    "options": {
+                      "noEmit": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects environments --includeDependentProjects -- npx nx build-deps environments"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "vite:test": {
+              "options": {
+                "cwd": "libs/shared/environments",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/libs/shared/environments"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vitest"
+                ],
+                "description": "Run Vitest tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "nx-release-publish": {
+              "executor": "@nx/js:release-publish",
+              "dependsOn": [
+                "^nx-release-publish"
+              ],
+              "options": {
+                "packageRoot": "dist/libs/shared/environments"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:package",
+              "outputs": [
+                "{workspaceRoot}/dist/{projectRoot}"
+              ],
+              "options": {
+                "project": "libs/shared/environments/ng-package.json",
+                "tsConfig": "libs/shared/environments/tsconfig.lib.json"
+              },
+              "configurations": {
+                "production": {
+                  "tsConfig": "libs/shared/environments/tsconfig.lib.prod.json"
+                },
+                "development": {}
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production"
+              ]
+            }
+          },
+          "metadata": {
+            "targetGroups": {},
+            "js": {
+              "packageName": "@org/environments",
+              "packageVersion": "0.0.1",
+              "isInPackageManagerWorkspaces": false
+            }
+          },
+          "projectType": "library",
+          "name": "environments",
+          "tags": [
+            "npm:public",
+            "type:lib",
+            "scope:shared"
+          ],
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/shared/environments/src",
+          "prefix": "lib",
+          "release": {
+            "version": {
+              "manifestRootsToUpdate": [
+                "dist/{projectRoot}"
+              ],
+              "currentVersionResolver": "git-tag",
+              "fallbackCurrentVersionResolver": "disk"
+            }
+          },
+          "implicitDependencies": []
+        }
+      },
+      "adminDashboard-e2e": {
+        "name": "adminDashboard-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "apps/adminDashboard-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "apps/adminDashboard-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/apps/adminDashboard-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "options": {
+                "cwd": "apps/adminDashboard-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress run"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist/cypress/apps/adminDashboard-e2e/videos",
+                "{workspaceRoot}/dist/cypress/apps/adminDashboard-e2e/screenshots"
+              ],
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "dependsOn": [
+                {
+                  "projects": [
+                    "adminDashboard"
+                  ],
+                  "target": "serve"
+                }
+              ],
+              "configurations": {
+                "production": {
+                  "command": "cypress run --env webServerCommand=\"npx nx run adminDashboard:serve-static\""
+                }
+              },
+              "executor": "nx:run-commands",
+              "parallelism": true
+            },
+            "e2e-ci--src/e2e/app.cy.ts": {
+              "outputs": [
+                "{workspaceRoot}\\dist\\cypress\\apps\\adminDashboard-e2e\\videos\\src-e2e-app-cy-ts",
+                "{workspaceRoot}\\dist\\cypress\\apps\\adminDashboard-e2e\\screenshots\\src-e2e-app-cy-ts"
+              ],
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "cache": true,
+              "options": {
+                "cwd": "apps/adminDashboard-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress run --env webServerCommand=\"npx nx run adminDashboard:serve-static\" --spec src/e2e/app.cy.ts --config=\"{\\\"baseUrl\\\":\\\"http://localhost:4200\\\",\\\"e2e\\\":{\\\"videosFolder\\\":\\\"../../dist/cypress/apps/adminDashboard-e2e/videos/src-e2e-app-cy-ts\\\",\\\"screenshotsFolder\\\":\\\"../../dist/cypress/apps/adminDashboard-e2e/screenshots/src-e2e-app-cy-ts\\\"}}\""
+              },
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests in src/e2e/app.cy.ts in CI",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "dependsOn": [
+                {
+                  "target": "serve-static",
+                  "projects": [
+                    "adminDashboard"
+                  ]
+                }
+              ],
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e-ci": {
+              "executor": "nx:noop",
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist/cypress/apps/adminDashboard-e2e/videos",
+                "{workspaceRoot}/dist/cypress/apps/adminDashboard-e2e/screenshots"
+              ],
+              "dependsOn": [
+                {
+                  "target": "e2e-ci--src/e2e/app.cy.ts",
+                  "params": "forward",
+                  "options": "forward"
+                }
+              ],
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests in CI",
+                "nonAtomizedTarget": "e2e",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            },
+            "open-cypress": {
+              "options": {
+                "cwd": "apps/adminDashboard-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress open"
+              },
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Opens Cypress",
+                "help": {
+                  "command": "npx cypress open --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--e2e"
+                    ]
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "projectType": "application",
+          "metadata": {
+            "targetGroups": {
+              "E2E (CI)": [
+                "e2e-ci--src/e2e/app.cy.ts",
+                "e2e-ci"
+              ]
+            }
+          },
+          "name": "adminDashboard-e2e",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "apps/adminDashboard-e2e/src",
+          "tags": [],
+          "implicitDependencies": [
+            "adminDashboard"
+          ]
+        }
+      },
+      "data-access": {
+        "name": "data-access",
+        "type": "lib",
+        "data": {
+          "root": "libs/shared/data-access",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*"
+              ]
+            },
+            "test": {
+              "options": {
+                "cwd": "libs/shared/data-access",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/libs/shared/data-access"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vite"
+                ],
+                "description": "Run Vite tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "typecheck": {
+              "cache": true,
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "typescript"
+                  ]
+                }
+              ],
+              "options": {
+                "cwd": "libs/shared/data-access",
+                "command": "tsc --noEmit -p tsconfig.lib.json"
+              },
+              "metadata": {
+                "description": "Runs type-checking for the project.",
+                "technologies": [
+                  "typescript"
+                ],
+                "help": {
+                  "command": "npx tsc -p tsconfig.lib.json --help",
+                  "example": {
+                    "options": {
+                      "noEmit": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects data-access --includeDependentProjects -- npx nx build-deps data-access"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "vite:test": {
+              "options": {
+                "cwd": "libs/shared/data-access",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/libs/shared/data-access"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vitest"
+                ],
+                "description": "Run Vitest tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "nx-release-publish": {
+              "executor": "@nx/js:release-publish",
+              "dependsOn": [
+                "^nx-release-publish"
+              ],
+              "options": {
+                "packageRoot": "dist/libs/shared/data-access"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:package",
+              "outputs": [
+                "{workspaceRoot}/dist/{projectRoot}"
+              ],
+              "options": {
+                "project": "libs/shared/data-access/ng-package.json",
+                "tsConfig": "libs/shared/data-access/tsconfig.lib.json"
+              },
+              "configurations": {
+                "production": {
+                  "tsConfig": "libs/shared/data-access/tsconfig.lib.prod.json"
+                },
+                "development": {}
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production"
+              ]
+            }
+          },
+          "metadata": {
+            "targetGroups": {},
+            "js": {
+              "packageName": "@org/data-access",
+              "packageVersion": "0.0.1",
+              "isInPackageManagerWorkspaces": false
+            }
+          },
+          "projectType": "library",
+          "name": "data-access",
+          "tags": [
+            "npm:public",
+            "type:lib",
+            "scope:shared"
+          ],
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/shared/data-access/src",
+          "prefix": "lib",
+          "release": {
+            "version": {
+              "manifestRootsToUpdate": [
+                "dist/{projectRoot}"
+              ],
+              "currentVersionResolver": "git-tag",
+              "fallbackCurrentVersionResolver": "disk"
+            }
+          },
+          "implicitDependencies": []
+        }
+      },
+      "adminDashboard": {
+        "name": "adminDashboard",
+        "type": "app",
+        "data": {
+          "root": "apps/adminDashboard",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*"
+              ]
+            },
+            "test": {
+              "options": {
+                "cwd": "apps/adminDashboard",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/apps/adminDashboard"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vite"
+                ],
+                "description": "Run Vite tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "typecheck": {
+              "cache": true,
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "typescript"
+                  ]
+                }
+              ],
+              "options": {
+                "cwd": "apps/adminDashboard",
+                "command": "tsc --noEmit -p tsconfig.app.json"
+              },
+              "metadata": {
+                "description": "Runs type-checking for the project.",
+                "technologies": [
+                  "typescript"
+                ],
+                "help": {
+                  "command": "npx tsc -p tsconfig.app.json --help",
+                  "example": {
+                    "options": {
+                      "noEmit": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects adminDashboard --includeDependentProjects -- npx nx build-deps adminDashboard"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "vite:test": {
+              "options": {
+                "cwd": "apps/adminDashboard",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/apps/adminDashboard"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vitest"
+                ],
+                "description": "Run Vitest tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:webpack-browser",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/apps/adminDashboard",
+                "index": "apps/adminDashboard/src/index.html",
+                "main": "apps/adminDashboard/src/main.ts",
+                "tsConfig": "apps/adminDashboard/tsconfig.app.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                  {
+                    "glob": "**/*",
+                    "input": "apps/adminDashboard/public"
+                  }
+                ],
+                "styles": [
+                  "apps/adminDashboard/src/styles.scss"
+                ],
+                "customWebpackConfig": {
+                  "path": "apps/adminDashboard/webpack.config.ts"
+                }
+              },
+              "configurations": {
+                "production": {
+                  "budgets": [
+                    {
+                      "type": "initial",
+                      "maximumWarning": "500kb",
+                      "maximumError": "1mb"
+                    },
+                    {
+                      "type": "anyComponentStyle",
+                      "maximumWarning": "4kb",
+                      "maximumError": "8kb"
+                    }
+                  ],
+                  "fileReplacements": [
+                    {
+                      "replace": "src/environments/environment.ts",
+                      "with": "src/environments/environment.prod.ts"
+                    }
+                  ],
+                  "outputHashing": "all",
+                  "customWebpackConfig": {
+                    "path": "apps/adminDashboard/webpack.prod.config.ts"
+                  }
+                },
+                "development": {
+                  "buildOptimizer": false,
+                  "optimization": false,
+                  "vendorChunk": true,
+                  "extractLicenses": false,
+                  "sourceMap": true,
+                  "namedChunks": true
+                }
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "env": "NX_MF_DEV_REMOTES"
+                }
+              ]
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@nx/angular:dev-server",
+              "options": {
+                "port": 4201,
+                "publicHost": "http://localhost:4201"
+              },
+              "configurations": {
+                "production": {
+                  "buildTarget": "adminDashboard:build:production"
+                },
+                "development": {
+                  "buildTarget": "adminDashboard:build:development"
+                }
+              },
+              "defaultConfiguration": "development",
+              "dependsOn": [
+                "shell:serve"
+              ],
+              "parallelism": true
+            },
+            "extract-i18n": {
+              "executor": "@angular-devkit/build-angular:extract-i18n",
+              "options": {
+                "buildTarget": "adminDashboard:build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve-static": {
+              "continuous": true,
+              "executor": "@nx/web:file-server",
+              "defaultConfiguration": "production",
+              "options": {
+                "buildTarget": "adminDashboard:build",
+                "port": 4201,
+                "watch": false
+              },
+              "configurations": {
+                "development": {
+                  "buildTarget": "adminDashboard:build:development"
+                },
+                "production": {
+                  "buildTarget": "adminDashboard:build:production"
+                }
+              },
+              "parallelism": true
+            }
+          },
+          "metadata": {},
+          "projectType": "application",
+          "name": "adminDashboard",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "prefix": "app",
+          "sourceRoot": "apps/adminDashboard/src",
+          "tags": [
+            "scope:admin"
+          ],
+          "implicitDependencies": []
+        }
+      },
+      "authApp-e2e": {
+        "name": "authApp-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "apps/authApp-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "apps/authApp-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/apps/authApp-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "options": {
+                "cwd": "apps/authApp-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress run"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist/cypress/apps/authApp-e2e/videos",
+                "{workspaceRoot}/dist/cypress/apps/authApp-e2e/screenshots"
+              ],
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "dependsOn": [
+                {
+                  "projects": [
+                    "authApp"
+                  ],
+                  "target": "serve"
+                }
+              ],
+              "configurations": {
+                "production": {
+                  "command": "cypress run --env webServerCommand=\"npx nx run authApp:serve-static\""
+                }
+              },
+              "executor": "nx:run-commands",
+              "parallelism": true
+            },
+            "e2e-ci--src/e2e/app.cy.ts": {
+              "outputs": [
+                "{workspaceRoot}\\dist\\cypress\\apps\\authApp-e2e\\videos\\src-e2e-app-cy-ts",
+                "{workspaceRoot}\\dist\\cypress\\apps\\authApp-e2e\\screenshots\\src-e2e-app-cy-ts"
+              ],
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "cache": true,
+              "options": {
+                "cwd": "apps/authApp-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress run --env webServerCommand=\"npx nx run authApp:serve-static\" --spec src/e2e/app.cy.ts --config=\"{\\\"baseUrl\\\":\\\"http://localhost:4200\\\",\\\"e2e\\\":{\\\"videosFolder\\\":\\\"../../dist/cypress/apps/authApp-e2e/videos/src-e2e-app-cy-ts\\\",\\\"screenshotsFolder\\\":\\\"../../dist/cypress/apps/authApp-e2e/screenshots/src-e2e-app-cy-ts\\\"}}\""
+              },
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests in src/e2e/app.cy.ts in CI",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "dependsOn": [
+                {
+                  "target": "serve-static",
+                  "projects": [
+                    "authApp"
+                  ]
+                }
+              ],
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e-ci": {
+              "executor": "nx:noop",
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist/cypress/apps/authApp-e2e/videos",
+                "{workspaceRoot}/dist/cypress/apps/authApp-e2e/screenshots"
+              ],
+              "dependsOn": [
+                {
+                  "target": "e2e-ci--src/e2e/app.cy.ts",
+                  "params": "forward",
+                  "options": "forward"
+                }
+              ],
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests in CI",
+                "nonAtomizedTarget": "e2e",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            },
+            "open-cypress": {
+              "options": {
+                "cwd": "apps/authApp-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress open"
+              },
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Opens Cypress",
+                "help": {
+                  "command": "npx cypress open --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--e2e"
+                    ]
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "projectType": "application",
+          "metadata": {
+            "targetGroups": {
+              "E2E (CI)": [
+                "e2e-ci--src/e2e/app.cy.ts",
+                "e2e-ci"
+              ]
+            }
+          },
+          "name": "authApp-e2e",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "apps/authApp-e2e/src",
+          "tags": [],
+          "implicitDependencies": [
+            "authApp"
+          ]
+        }
+      },
+      "roseApp-e2e": {
+        "name": "roseApp-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "apps/roseApp-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "apps/roseApp-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/apps/roseApp-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "options": {
+                "cwd": "apps/roseApp-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress run"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist/cypress/apps/roseApp-e2e/videos",
+                "{workspaceRoot}/dist/cypress/apps/roseApp-e2e/screenshots"
+              ],
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "dependsOn": [
+                {
+                  "projects": [
+                    "roseApp"
+                  ],
+                  "target": "serve"
+                }
+              ],
+              "configurations": {
+                "production": {
+                  "command": "cypress run --env webServerCommand=\"npx nx run roseApp:serve-static\""
+                }
+              },
+              "executor": "nx:run-commands",
+              "parallelism": true
+            },
+            "e2e-ci--src/e2e/app.cy.ts": {
+              "outputs": [
+                "{workspaceRoot}\\dist\\cypress\\apps\\roseApp-e2e\\videos\\src-e2e-app-cy-ts",
+                "{workspaceRoot}\\dist\\cypress\\apps\\roseApp-e2e\\screenshots\\src-e2e-app-cy-ts"
+              ],
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "cache": true,
+              "options": {
+                "cwd": "apps/roseApp-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress run --env webServerCommand=\"npx nx run roseApp:serve-static\" --spec src/e2e/app.cy.ts --config=\"{\\\"baseUrl\\\":\\\"http://localhost:4200\\\",\\\"e2e\\\":{\\\"videosFolder\\\":\\\"../../dist/cypress/apps/roseApp-e2e/videos/src-e2e-app-cy-ts\\\",\\\"screenshotsFolder\\\":\\\"../../dist/cypress/apps/roseApp-e2e/screenshots/src-e2e-app-cy-ts\\\"}}\""
+              },
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests in src/e2e/app.cy.ts in CI",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "dependsOn": [
+                {
+                  "target": "serve-static",
+                  "projects": [
+                    "roseApp"
+                  ]
+                }
+              ],
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e-ci": {
+              "executor": "nx:noop",
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist/cypress/apps/roseApp-e2e/videos",
+                "{workspaceRoot}/dist/cypress/apps/roseApp-e2e/screenshots"
+              ],
+              "dependsOn": [
+                {
+                  "target": "e2e-ci--src/e2e/app.cy.ts",
+                  "params": "forward",
+                  "options": "forward"
+                }
+              ],
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests in CI",
+                "nonAtomizedTarget": "e2e",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            },
+            "open-cypress": {
+              "options": {
+                "cwd": "apps/roseApp-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress open"
+              },
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Opens Cypress",
+                "help": {
+                  "command": "npx cypress open --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--e2e"
+                    ]
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "projectType": "application",
+          "metadata": {
+            "targetGroups": {
+              "E2E (CI)": [
+                "e2e-ci--src/e2e/app.cy.ts",
+                "e2e-ci"
+              ]
+            }
+          },
+          "name": "roseApp-e2e",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "apps/roseApp-e2e/src",
+          "tags": [],
+          "implicitDependencies": [
+            "roseApp"
+          ]
+        }
+      },
+      "shell-e2e": {
+        "name": "shell-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "apps/shell-e2e",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "apps/shell-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/apps/shell-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e": {
+              "options": {
+                "cwd": "apps/shell-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress run"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist/cypress/apps/shell-e2e/videos",
+                "{workspaceRoot}/dist/cypress/apps/shell-e2e/screenshots"
+              ],
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "dependsOn": [
+                {
+                  "projects": [
+                    "shell"
+                  ],
+                  "target": "serve"
+                }
+              ],
+              "configurations": {
+                "production": {
+                  "command": "cypress run --env webServerCommand=\"npx nx run shell:serve-static\""
+                }
+              },
+              "executor": "nx:run-commands",
+              "parallelism": true
+            },
+            "e2e-ci--src/e2e/app.cy.ts": {
+              "outputs": [
+                "{workspaceRoot}\\dist\\cypress\\apps\\shell-e2e\\videos\\src-e2e-app-cy-ts",
+                "{workspaceRoot}\\dist\\cypress\\apps\\shell-e2e\\screenshots\\src-e2e-app-cy-ts"
+              ],
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "cache": true,
+              "options": {
+                "cwd": "apps/shell-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress run --env webServerCommand=\"npx nx run shell:serve-static\" --spec src/e2e/app.cy.ts --config=\"{\\\"baseUrl\\\":\\\"http://localhost:4200\\\",\\\"e2e\\\":{\\\"videosFolder\\\":\\\"../../dist/cypress/apps/shell-e2e/videos/src-e2e-app-cy-ts\\\",\\\"screenshotsFolder\\\":\\\"../../dist/cypress/apps/shell-e2e/screenshots/src-e2e-app-cy-ts\\\"}}\""
+              },
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests in src/e2e/app.cy.ts in CI",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "dependsOn": [
+                {
+                  "target": "serve-static",
+                  "projects": [
+                    "shell"
+                  ]
+                }
+              ],
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e-ci": {
+              "executor": "nx:noop",
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "cypress"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist/cypress/apps/shell-e2e/videos",
+                "{workspaceRoot}/dist/cypress/apps/shell-e2e/screenshots"
+              ],
+              "dependsOn": [
+                {
+                  "target": "e2e-ci--src/e2e/app.cy.ts",
+                  "params": "forward",
+                  "options": "forward"
+                }
+              ],
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Runs Cypress Tests in CI",
+                "nonAtomizedTarget": "e2e",
+                "help": {
+                  "command": "npx cypress run --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--headed"
+                    ]
+                  }
+                }
+              },
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            },
+            "open-cypress": {
+              "options": {
+                "cwd": "apps/shell-e2e",
+                "env": {
+                  "TS_NODE_COMPILER_OPTIONS": "{\"customConditions\":null}"
+                },
+                "command": "cypress open"
+              },
+              "metadata": {
+                "technologies": [
+                  "cypress"
+                ],
+                "description": "Opens Cypress",
+                "help": {
+                  "command": "npx cypress open --help",
+                  "example": {
+                    "args": [
+                      "--dev",
+                      "--e2e"
+                    ]
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "projectType": "application",
+          "metadata": {
+            "targetGroups": {
+              "E2E (CI)": [
+                "e2e-ci--src/e2e/app.cy.ts",
+                "e2e-ci"
+              ]
+            }
+          },
+          "name": "shell-e2e",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "apps/shell-e2e/src",
+          "tags": [],
+          "implicitDependencies": [
+            "shell"
+          ]
+        }
+      },
+      "ui": {
+        "name": "ui",
+        "type": "lib",
+        "data": {
+          "root": "libs/shared/ui",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*"
+              ]
+            },
+            "test": {
+              "options": {
+                "cwd": "libs/shared/ui",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/libs/shared/ui"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vite"
+                ],
+                "description": "Run Vite tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "typecheck": {
+              "cache": true,
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "typescript"
+                  ]
+                }
+              ],
+              "options": {
+                "cwd": "libs/shared/ui",
+                "command": "tsc --noEmit -p tsconfig.lib.json"
+              },
+              "metadata": {
+                "description": "Runs type-checking for the project.",
+                "technologies": [
+                  "typescript"
+                ],
+                "help": {
+                  "command": "npx tsc -p tsconfig.lib.json --help",
+                  "example": {
+                    "options": {
+                      "noEmit": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects ui --includeDependentProjects -- npx nx build-deps ui"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "vite:test": {
+              "options": {
+                "cwd": "libs/shared/ui",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/libs/shared/ui"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vitest"
+                ],
+                "description": "Run Vitest tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "nx-release-publish": {
+              "executor": "@nx/js:release-publish",
+              "dependsOn": [
+                "^nx-release-publish"
+              ],
+              "options": {
+                "packageRoot": "dist/libs/shared/ui"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:package",
+              "outputs": [
+                "{workspaceRoot}/dist/{projectRoot}"
+              ],
+              "options": {
+                "project": "libs/shared/ui/ng-package.json",
+                "tsConfig": "libs/shared/ui/tsconfig.lib.json"
+              },
+              "configurations": {
+                "production": {
+                  "tsConfig": "libs/shared/ui/tsconfig.lib.prod.json"
+                },
+                "development": {}
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production"
+              ]
+            }
+          },
+          "metadata": {
+            "targetGroups": {},
+            "js": {
+              "packageName": "@org/ui",
+              "packageVersion": "0.0.1",
+              "isInPackageManagerWorkspaces": false
+            }
+          },
+          "projectType": "library",
+          "name": "ui",
+          "tags": [
+            "npm:public"
+          ],
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/shared/ui/src",
+          "prefix": "lib",
+          "release": {
+            "version": {
+              "manifestRootsToUpdate": [
+                "dist/{projectRoot}"
+              ],
+              "currentVersionResolver": "git-tag",
+              "fallbackCurrentVersionResolver": "disk"
+            }
+          },
+          "implicitDependencies": []
+        }
+      },
+      "authApp": {
+        "name": "authApp",
+        "type": "app",
+        "data": {
+          "root": "apps/authApp",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*"
+              ]
+            },
+            "test": {
+              "options": {
+                "cwd": "apps/authApp",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/apps/authApp"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vite"
+                ],
+                "description": "Run Vite tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "typecheck": {
+              "cache": true,
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "typescript"
+                  ]
+                }
+              ],
+              "options": {
+                "cwd": "apps/authApp",
+                "command": "tsc --noEmit -p tsconfig.app.json"
+              },
+              "metadata": {
+                "description": "Runs type-checking for the project.",
+                "technologies": [
+                  "typescript"
+                ],
+                "help": {
+                  "command": "npx tsc -p tsconfig.app.json --help",
+                  "example": {
+                    "options": {
+                      "noEmit": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects authApp --includeDependentProjects -- npx nx build-deps authApp"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "vite:test": {
+              "options": {
+                "cwd": "apps/authApp",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/apps/authApp"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vitest"
+                ],
+                "description": "Run Vitest tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:webpack-browser",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/apps/authApp",
+                "index": "apps/authApp/src/index.html",
+                "main": "apps/authApp/src/main.ts",
+                "tsConfig": "apps/authApp/tsconfig.app.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                  {
+                    "glob": "**/*",
+                    "input": "apps/authApp/public"
+                  }
+                ],
+                "styles": [
+                  "apps/authApp/src/styles.scss"
+                ],
+                "customWebpackConfig": {
+                  "path": "apps/authApp/webpack.config.ts"
+                }
+              },
+              "configurations": {
+                "production": {
+                  "budgets": [
+                    {
+                      "type": "initial",
+                      "maximumWarning": "500kb",
+                      "maximumError": "1mb"
+                    },
+                    {
+                      "type": "anyComponentStyle",
+                      "maximumWarning": "4kb",
+                      "maximumError": "8kb"
+                    }
+                  ],
+                  "outputHashing": "all",
+                  "customWebpackConfig": {
+                    "path": "apps/authApp/webpack.prod.config.ts"
+                  }
+                },
+                "development": {
+                  "buildOptimizer": false,
+                  "optimization": false,
+                  "vendorChunk": true,
+                  "extractLicenses": false,
+                  "sourceMap": true,
+                  "namedChunks": true
+                }
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "env": "NX_MF_DEV_REMOTES"
+                }
+              ]
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@nx/angular:dev-server",
+              "options": {
+                "port": 4202,
+                "publicHost": "http://localhost:4202"
+              },
+              "configurations": {
+                "production": {
+                  "buildTarget": "authApp:build:production"
+                },
+                "development": {
+                  "buildTarget": "authApp:build:development"
+                }
+              },
+              "defaultConfiguration": "development",
+              "dependsOn": [
+                "shell:serve"
+              ],
+              "parallelism": true
+            },
+            "extract-i18n": {
+              "executor": "@angular-devkit/build-angular:extract-i18n",
+              "options": {
+                "buildTarget": "authApp:build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve-static": {
+              "continuous": true,
+              "executor": "@nx/web:file-server",
+              "defaultConfiguration": "production",
+              "options": {
+                "buildTarget": "authApp:build",
+                "port": 4202,
+                "watch": false
+              },
+              "configurations": {
+                "development": {
+                  "buildTarget": "authApp:build:development"
+                },
+                "production": {
+                  "buildTarget": "authApp:build:production"
+                }
+              },
+              "parallelism": true
+            }
+          },
+          "metadata": {},
+          "projectType": "application",
+          "name": "authApp",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "prefix": "app",
+          "sourceRoot": "apps/authApp/src",
+          "tags": [
+            "scope:auth"
+          ],
+          "implicitDependencies": []
+        }
+      },
+      "roseApp": {
+        "name": "roseApp",
+        "type": "app",
+        "data": {
+          "root": "apps/roseApp",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*"
+              ]
+            },
+            "test": {
+              "options": {
+                "cwd": "apps/roseApp",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/apps/roseApp"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vite"
+                ],
+                "description": "Run Vite tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "typecheck": {
+              "cache": true,
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "typescript"
+                  ]
+                }
+              ],
+              "options": {
+                "cwd": "apps/roseApp",
+                "command": "tsc --noEmit -p tsconfig.app.json"
+              },
+              "metadata": {
+                "description": "Runs type-checking for the project.",
+                "technologies": [
+                  "typescript"
+                ],
+                "help": {
+                  "command": "npx tsc -p tsconfig.app.json --help",
+                  "example": {
+                    "options": {
+                      "noEmit": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects roseApp --includeDependentProjects -- npx nx build-deps roseApp"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "vite:test": {
+              "options": {
+                "cwd": "apps/roseApp",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/apps/roseApp"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vitest"
+                ],
+                "description": "Run Vitest tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:webpack-browser",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/apps/roseApp",
+                "index": "apps/roseApp/src/index.html",
+                "main": "apps/roseApp/src/main.ts",
+                "tsConfig": "apps/roseApp/tsconfig.app.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                  {
+                    "glob": "**/*",
+                    "input": "apps/roseApp/public"
+                  }
+                ],
+                "styles": [
+                  "apps/roseApp/src/styles.scss"
+                ],
+                "customWebpackConfig": {
+                  "path": "apps/roseApp/webpack.config.ts"
+                }
+              },
+              "configurations": {
+                "production": {
+                  "budgets": [
+                    {
+                      "type": "initial",
+                      "maximumWarning": "500kb",
+                      "maximumError": "1mb"
+                    },
+                    {
+                      "type": "anyComponentStyle",
+                      "maximumWarning": "4kb",
+                      "maximumError": "8kb"
+                    }
+                  ],
+                  "fileReplacements": [
+                    {
+                      "replace": "src/environments/environment.ts",
+                      "with": "src/environments/environment.prod.ts"
+                    }
+                  ],
+                  "outputHashing": "all",
+                  "customWebpackConfig": {
+                    "path": "apps/roseApp/webpack.prod.config.ts"
+                  }
+                },
+                "development": {
+                  "buildOptimizer": false,
+                  "optimization": false,
+                  "vendorChunk": true,
+                  "extractLicenses": false,
+                  "sourceMap": true,
+                  "namedChunks": true
+                }
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "env": "NX_MF_DEV_REMOTES"
+                }
+              ]
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@nx/angular:dev-server",
+              "options": {
+                "port": 4203,
+                "publicHost": "http://localhost:4203"
+              },
+              "configurations": {
+                "production": {
+                  "buildTarget": "roseApp:build:production"
+                },
+                "development": {
+                  "buildTarget": "roseApp:build:development"
+                }
+              },
+              "defaultConfiguration": "development",
+              "dependsOn": [
+                "shell:serve"
+              ],
+              "parallelism": true
+            },
+            "extract-i18n": {
+              "executor": "@angular-devkit/build-angular:extract-i18n",
+              "options": {
+                "buildTarget": "roseApp:build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve-static": {
+              "continuous": true,
+              "executor": "@nx/web:file-server",
+              "defaultConfiguration": "production",
+              "options": {
+                "buildTarget": "roseApp:build",
+                "port": 4203,
+                "watch": false
+              },
+              "configurations": {
+                "development": {
+                  "buildTarget": "roseApp:build:development"
+                },
+                "production": {
+                  "buildTarget": "roseApp:build:production"
+                }
+              },
+              "parallelism": true
+            }
+          },
+          "metadata": {},
+          "projectType": "application",
+          "name": "roseApp",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "prefix": "app",
+          "sourceRoot": "apps/roseApp/src",
+          "tags": [
+            "scope:rose"
+          ],
+          "implicitDependencies": []
+        }
+      },
+      "shell": {
+        "name": "shell",
+        "type": "app",
+        "data": {
+          "root": "apps/shell",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*"
+              ]
+            },
+            "test": {
+              "options": {
+                "cwd": "apps/shell",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/apps/shell"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vite"
+                ],
+                "description": "Run Vite tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "typecheck": {
+              "cache": true,
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "typescript"
+                  ]
+                }
+              ],
+              "options": {
+                "cwd": "apps/shell",
+                "command": "tsc --noEmit -p tsconfig.app.json"
+              },
+              "metadata": {
+                "description": "Runs type-checking for the project.",
+                "technologies": [
+                  "typescript"
+                ],
+                "help": {
+                  "command": "npx tsc -p tsconfig.app.json --help",
+                  "example": {
+                    "options": {
+                      "noEmit": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects shell --includeDependentProjects -- npx nx build-deps shell"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "vite:test": {
+              "options": {
+                "cwd": "apps/shell",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/apps/shell"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vitest"
+                ],
+                "description": "Run Vitest tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:webpack-browser",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/apps/shell",
+                "index": "apps/shell/src/index.html",
+                "main": "apps/shell/src/main.ts",
+                "tsConfig": "apps/shell/tsconfig.app.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                  {
+                    "glob": "**/*",
+                    "input": "apps/shell/public"
+                  }
+                ],
+                "styles": [
+                  "apps/shell/src/styles.scss"
+                ],
+                "customWebpackConfig": {
+                  "path": "apps/shell/webpack.config.ts"
+                }
+              },
+              "configurations": {
+                "production": {
+                  "budgets": [
+                    {
+                      "type": "initial",
+                      "maximumWarning": "500kb",
+                      "maximumError": "1mb"
+                    },
+                    {
+                      "type": "anyComponentStyle",
+                      "maximumWarning": "4kb",
+                      "maximumError": "8kb"
+                    }
+                  ],
+                  "outputHashing": "all"
+                },
+                "development": {
+                  "buildOptimizer": false,
+                  "optimization": false,
+                  "vendorChunk": true,
+                  "extractLicenses": false,
+                  "sourceMap": true,
+                  "namedChunks": true
+                }
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "env": "NX_MF_DEV_REMOTES"
+                }
+              ]
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@nx/angular:module-federation-dev-server",
+              "options": {
+                "port": 4200,
+                "publicHost": "http://localhost:4200"
+              },
+              "configurations": {
+                "production": {
+                  "buildTarget": "shell:build:production"
+                },
+                "development": {
+                  "buildTarget": "shell:build:development"
+                }
+              },
+              "defaultConfiguration": "development",
+              "parallelism": true
+            },
+            "extract-i18n": {
+              "executor": "@angular-devkit/build-angular:extract-i18n",
+              "options": {
+                "buildTarget": "shell:build"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "serve-static": {
+              "continuous": true,
+              "executor": "@nx/web:file-server",
+              "options": {
+                "buildTarget": "shell:build",
+                "port": 4200,
+                "spa": true
+              },
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "metadata": {},
+          "projectType": "application",
+          "name": "shell",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "prefix": "app",
+          "sourceRoot": "apps/shell/src",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "auth": {
+        "name": "auth",
+        "type": "lib",
+        "data": {
+          "root": "libs/auth",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*"
+              ]
+            },
+            "test": {
+              "options": {
+                "cwd": "libs/auth",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/libs/auth"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vite"
+                ],
+                "description": "Run Vite tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "typecheck": {
+              "cache": true,
+              "inputs": [
+                "production",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "typescript"
+                  ]
+                }
+              ],
+              "options": {
+                "cwd": "libs/auth",
+                "command": "tsc --noEmit -p tsconfig.lib.json"
+              },
+              "metadata": {
+                "description": "Runs type-checking for the project.",
+                "technologies": [
+                  "typescript"
+                ],
+                "help": {
+                  "command": "npx tsc -p tsconfig.lib.json --help",
+                  "example": {
+                    "options": {
+                      "noEmit": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build-deps": {
+              "dependsOn": [
+                "^build"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true,
+              "executor": "nx:noop"
+            },
+            "watch-deps": {
+              "continuous": true,
+              "dependsOn": [
+                "build-deps"
+              ],
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npx nx watch --projects auth --includeDependentProjects -- npx nx build-deps auth"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "vite:test": {
+              "options": {
+                "cwd": "libs/auth",
+                "command": "vitest"
+              },
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": [
+                    "vitest"
+                  ]
+                },
+                {
+                  "env": "CI"
+                },
+                {
+                  "dependentTasksOutputFiles": "**/*.js",
+                  "transitive": true
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/coverage/libs/auth"
+              ],
+              "metadata": {
+                "technologies": [
+                  "vitest"
+                ],
+                "description": "Run Vitest tests",
+                "help": {
+                  "command": "npx vitest --help",
+                  "example": {
+                    "options": {
+                      "bail": 1,
+                      "coverage": true
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "nx-release-publish": {
+              "executor": "@nx/js:release-publish",
+              "dependsOn": [
+                "^nx-release-publish"
+              ],
+              "options": {
+                "packageRoot": "dist/libs/auth"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:package",
+              "outputs": [
+                "{workspaceRoot}/dist/{projectRoot}"
+              ],
+              "options": {
+                "project": "libs/auth/ng-package.json",
+                "tsConfig": "libs/auth/tsconfig.lib.json"
+              },
+              "configurations": {
+                "production": {
+                  "tsConfig": "libs/auth/tsconfig.lib.prod.json"
+                },
+                "development": {}
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production"
+              ]
+            }
+          },
+          "metadata": {
+            "targetGroups": {},
+            "js": {
+              "packageName": "@org/auth",
+              "packageVersion": "0.0.1",
+              "isInPackageManagerWorkspaces": false
+            }
+          },
+          "projectType": "library",
+          "name": "auth",
+          "tags": [
+            "npm:public"
+          ],
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/auth/src",
+          "prefix": "lib",
+          "release": {
+            "version": {
+              "manifestRootsToUpdate": [
+                "dist/{projectRoot}"
+              ],
+              "currentVersionResolver": "git-tag",
+              "fallbackCurrentVersionResolver": "disk"
+            }
+          },
+          "implicitDependencies": []
+        }
+      },
+      "@org/source": {
+        "name": "@org/source",
+        "type": "app",
+        "data": {
+          "root": ".",
+          "name": "@org/source",
+          "includedScripts": [],
+          "tags": [
+            "npm:private"
+          ],
+          "metadata": {
+            "targetGroups": {},
+            "js": {
+              "packageName": "@org/source",
+              "packageVersion": "0.0.0",
+              "isInPackageManagerWorkspaces": true
+            }
+          },
+          "targets": {
+            "local-registry": {
+              "executor": "@nx/js:verdaccio",
+              "options": {
+                "port": 4873,
+                "config": ".verdaccio/config.yml",
+                "storage": "tmp/local-registry/storage"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "continuous": true
+            }
+          },
+          "$schema": "node_modules/nx/schemas/project-schema.json",
+          "implicitDependencies": []
+        }
+      }
+    },
+    "dependencies": {
+      "environments": [],
+      "adminDashboard-e2e": [
+        {
+          "source": "adminDashboard-e2e",
+          "target": "adminDashboard",
+          "type": "implicit"
+        }
+      ],
+      "data-access": [
+        {
+          "source": "data-access",
+          "target": "environments",
+          "type": "static"
+        }
+      ],
+      "adminDashboard": [],
+      "authApp-e2e": [
+        {
+          "source": "authApp-e2e",
+          "target": "authApp",
+          "type": "implicit"
+        }
+      ],
+      "roseApp-e2e": [
+        {
+          "source": "roseApp-e2e",
+          "target": "roseApp",
+          "type": "implicit"
+        }
+      ],
+      "shell-e2e": [
+        {
+          "source": "shell-e2e",
+          "target": "shell",
+          "type": "implicit"
+        }
+      ],
+      "ui": [],
+      "authApp": [
+        {
+          "source": "authApp",
+          "target": "data-access",
+          "type": "static"
+        },
+        {
+          "source": "authApp",
+          "target": "environments",
+          "type": "static"
+        },
+        {
+          "source": "authApp",
+          "target": "ui",
+          "type": "static"
+        }
+      ],
+      "roseApp": [],
+      "shell": [
+        {
+          "source": "shell",
+          "target": "roseApp",
+          "type": "static"
+        },
+        {
+          "source": "shell",
+          "target": "authApp",
+          "type": "static"
+        },
+        {
+          "source": "shell",
+          "target": "adminDashboard",
+          "type": "static"
+        }
+      ],
+      "auth": [],
+      "@org/source": []
+    }
+  }
+}

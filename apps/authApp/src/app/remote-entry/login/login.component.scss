@@ -1,0 +1,100 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.login-wrapper {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.forget-password-link {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+lib-checkbox ::ng-deep {
+  .p-checkbox .p-checkbox-box {
+    border-width: 1.5px !important;
+  }
+}
+
+:host-context(.dark) {
+  lib-title-form ::ng-deep h1 {
+    color: #FFA6B9 !important;
+  }
+
+  .divider {
+    border-color: #27272A !important;
+  }
+
+  lib-input ::ng-deep {
+    label {
+      color: #FFFFFF !important;
+    }
+
+    .p-inputtext,
+    .p-password-input {
+      background-color: #18181B !important;
+      border-color: #3F3F46 !important;
+      color: #FFFFFF !important;
+
+      &:focus {
+        border-color: #FFA6B9 !important;
+        box-shadow: 0 0 0 1px #FFA6B9 !important;
+      }
+    }
+  }
+
+  .forget-password-link {
+    color: #FFA6B9 !important;
+
+    &:hover {
+      color: #FFCCD5 !important;
+    }
+  }
+
+  lib-checkbox ::ng-deep {
+    .cb-label {
+      color: #E4E4E7 !important;
+    }
+
+    .p-checkbox-box {
+      border-color: #FFA6B9 !important;
+      background-color: #18181B !important;
+
+      &.p-highlight {
+        background-color: #FFA6B9 !important;
+        border-color: #FFA6B9 !important;
+
+        .p-checkbox-icon {
+          color: #000000 !important;
+        }
+      }
+    }
+  }
+
+  lib-button ::ng-deep .p-button {
+    background-color: #FFA6B9 !important;
+    border-color: #FFA6B9 !important;
+    color: #000000 !important;
+
+    &:hover {
+      background-color: #FFB3C1 !important;
+      border-color: #FFB3C1 !important;
+    }
+  }
+
+  lib-question-repeat ::ng-deep {
+    span {
+      color: #A1A1AA !important;
+    }
+
+    a {
+      color: #FFA6B9 !important;
+
+      &:hover {
+        color: #FFCCD5 !important;
+      }
+    }
+  }
+}

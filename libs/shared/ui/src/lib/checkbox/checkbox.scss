@@ -1,0 +1,67 @@
+:host {
+  display: inline-block;
+}
+
+::ng-deep {
+  .p-checkbox {
+    width: 20px;
+    height: 20px;
+
+    .p-checkbox-box {
+      width: 20px !important;
+      height: 20px !important;
+      border-radius: 5px !important;
+      border: 1.5px solid #741C21 !important;
+      background-color: transparent !important;
+      transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+
+      &:hover {
+        border-color: #8D1C24 !important;
+      }
+
+      &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 5px #ffffff, 0 0 0 4px #741C21 !important;
+      }
+    }
+
+    &.p-checkbox-checked {
+      .p-checkbox-box {
+        background-color: #741C21 !important;
+        border-color: #741C21 !important;
+      }
+
+      .p-checkbox-icon {
+        color: #ffffff !important;
+        font-size: 0.75rem !important;
+      }
+    }
+  }
+
+  .dark {
+    .p-checkbox {
+      .p-checkbox-box {
+        border-color: #FFA6B9 !important;
+
+        &:hover {
+          border-color: #FFCCD5 !important;
+        }
+
+        &:focus-visible {
+          box-shadow: 0 0 0 5px #000000, 0 0 0 4px #FFA6B9 !important;
+        }
+      }
+
+      &.p-checkbox-checked {
+        .p-checkbox-box {
+          background-color: #FFA6B9 !important;
+          border-color: #FFA6B9 !important;
+        }
+
+        .p-checkbox-icon {
+          color: #000000 !important;
+        }
+      }
+    }
+  }
+}

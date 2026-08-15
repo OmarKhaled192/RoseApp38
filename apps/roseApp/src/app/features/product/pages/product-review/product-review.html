@@ -1,0 +1,76 @@
+<div class="w-full grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-8 lg:gap-10">
+  <section>
+      <lib-title-section title="{{'productReview.heading' | translate}}" subtitle=" " align="left" [highlightWidth]="'60%'"
+        [highlightHeight]="'45%'" [underlineWidth]="'60px'" [underlineHeight]="'2px'" />
+
+    <div class="mb-6">
+      <p class="text-sm font-semibold text-gray-700 mt-2">{{ 'productReview.generalRating' | translate }}</p>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-2xl font-bold text-gray-900">{{ averageRating() }}</span>
+        <span class="text-sm text-gray-500">({{ reviews().length }} {{ 'productReview.ratingsCount' | translate
+          }})</span>
+      </div>
+      <div class="flex gap-0.5 mt-1">
+        <lib-star-rating [rating]="averageRating()" />
+      </div>
+    </div>
+
+<div class="max-h-[200px] flex flex-col min-h-0 overflow-hidden">
+    <div class="overflow-y-auto min-h-0 pr-1 h-full custom-scrollbar">
+      <div class="divide-y divide-gray-200 border-t border-gray-200">
+        @for (review of reviews(); track review.id) {
+        <article class="py-5 flex gap-3">
+          <div
+            class="shrink-0 w-10 h-10 rounded-full bg-rose-700 text-white flex items-center justify-center font-semibold">
+            {{ initial(review) }}
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <div class="flex items-baseline gap-2 flex-wrap">
+              <span class="font-semibold text-gray-900">{{ review.user.firstName }} {{ review.user.lastName }}</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-1">{{ review.createdAt | date:'mediumDate' }}</p>
+
+            <div class="flex items-center gap-1 mb-2 flex-wrap">
+              <lib-star-rating [rating]="review.rating" />
+              <span class="text-xs text-gray-500 ml-1">({{ review.rating }})</span>
+            </div>
+
+            @if (review.headline) {
+            <h3 class="font-semibold text-gray-900 mb-1 text-start wrap-break-word">{{ review.headline }}</h3>
+            }
+            <p class="text-sm text-gray-600 leading-relaxed wrap-break-word">{{ review.content }}</p>
+          </div>
+        </article>
+        } @empty {
+        <p class="py-8 text-center text-gray-400 text-sm">{{ 'productReview.noReviews' | translate }}</p>
+        }
+      </div>
+    </div>
+</div>
+  </section>
+
+  <aside class="lg:border-l lg:border-gray-200 lg:pl-8 pt-2 lg:pt-0">
+    <div class="mb-4">
+      <p class="text-sm font-semibold text-gray-700 mb-2">{{ 'productReview.yourRating' | translate }}</p>
+      <div class="flex gap-1">
+        <lib-star-rating [rating]="hoverRating() || reviewForm.rating().value()" [interactive]="true"
+          (hover)="setHover($event)" (rated)="selectRating($event)" />
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <lib-input type="text" [formField]="reviewForm.headline" [label]="'productReview.titleLabel' | translate"
+        placeholder="********" />
+    </div>
+
+    <div class="mb-5">
+      <lib-input type="textarea" [formField]="reviewForm.content" [label]="'productReview.contentLabel' | translate"
+        placeholder="********" />
+    </div>
+
+    <lib-button type="submit" [label]="'productReview.submitButton' | translate" [loading]="isLoading()"
+      [color]="isDark() ? '#FFA6B9' : '#8D1C24'" [disabled]="!reviewForm().valid() || isLoading()" (click)="addReview()"
+      styleClass="w-full py-2.5 sm:py-3 text-sm sm:text-base font-semibold" />
+  </aside>
+</div>

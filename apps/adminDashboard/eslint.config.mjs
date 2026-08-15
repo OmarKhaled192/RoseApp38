@@ -1,34 +1,67 @@
 import nx from '@nx/eslint-plugin';
-import baseConfig from '../../eslint.config.mjs';
 
 export default [
-  ...nx.configs['flat/angular'],
-  ...nx.configs['flat/angular-template'],
-  ...baseConfig,
+  ...nx.configs['flat/base'],
+  ...nx.configs['flat/typescript'],
+  ...nx.configs['flat/javascript'],
   {
-    files: ['**/*.ts'],
+    ignores: [
+      '**/dist',
+      '**/vite.config.*.timestamp*',
+      '**/vitest.config.*.timestamp*',
+    ],
+  },
+  {
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {
-      '@angular-eslint/directive-selector': [
+      '@nx/enforce-module-boundaries': [
         'error',
         {
-          type: 'attribute',
-          prefix: 'app',
-          style: 'camelCase',
-        },
-      ],
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'app',
-          style: 'kebab-case',
+          enforceBuildableLibDependency: true,
+          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
+          depConstraints: [
+            {
+              sourceTag: 'scope:shared',
+              onlyDependOnLibsWithTags: ['scope:shared'],
+            },
+
+            {
+              sourceTag: 'scope:auth',
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:auth'],
+            },
+
+            {
+              sourceTag: 'scope:rose',
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:rose', 'scope:auth'],
+            },
+
+            {
+              sourceTag: 'scope:admin',
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:admin', 'scope:auth'],
+            },
+
+            {
+              sourceTag: 'scope:shell',
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:auth'],
+            },
+
+
+          ]
         },
       ],
     },
   },
   {
-    files: ['**/*.html'],
-    // Override or add rules here
+    files: [
+      '**/*.ts',
+      '**/*.tsx',
+      '**/*.cts',
+      '**/*.mts',
+      '**/*.js',
+      '**/*.jsx',
+      '**/*.cjs',
+      '**/*.mjs',
+    ],
     rules: {},
   },
 ];

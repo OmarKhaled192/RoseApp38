@@ -1,0 +1,322 @@
+{
+  "app": {
+    "title": "تطبيق روز",
+    "welcome": "مرحبًا بك في التطبيق",
+    "featureName": {}
+  },
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "Confirm": "تأكيد",
+    "Delete": "حذف",
+    "deleteModal": {
+      "title": "هل أنت متأكد من حذف هذا العنوان؟",
+      "confirm": "تأكيد",
+      "cancel": "إلغاء"
+    }
+  },
+  "trustedBy": {
+    "trustedCompanies": "موثوق به من قبل أكثر من",
+    "number": "4.5 ألف+",
+    "companies": "شركة"
+  },
+  "ServicesHighlits": {
+    "freeDelivery": {
+      "title": "توصيل مجاني",
+      "description": "للطلبات التي تزيد عن 120 جنيه"
+    },
+    "getRefund": {
+      "title": "استرداد الأموال",
+      "description": "استرداد خلال 30 يومًا"
+    },
+    "safePayment": {
+      "title": "دفع آمن",
+      "description": "دفع آمن بنسبة 100%"
+    },
+    "support": {
+      "title": "دعم 24/7",
+      "description": "تواصل معنا في أي وقت"
+    }
+  },
+  "products": {
+    "category": "الفئة",
+    "noProducts": "لا توجد منتجات تطابق هذه الفلاتر.",
+    "filters": {
+      "occasion": "المناسبة",
+      "rating": "التقييم",
+      "price": "السعر",
+      "from": "من",
+      "to": "إلى",
+      "reset": "إعادة تعيين",
+      "resetAll": "إعادة تعيين الكل",
+      "priceRangeError": "الحد الأدنى للسعر يجب أن يكون أقل من أو يساوي الحد الأقصى للسعر"
+    }
+  },
+  "productDetail": {
+    "loading": "جاري تحميل المنتج…",
+    "imageAlt": "صورة",
+    "thumbnailAlt": "صورة مصغرة",
+    "currency": "ج.م",
+    "stockCount": "متبقي {{count}} فقط في المخزن",
+    "ratingLabel": "التقييم",
+    "ratingsCount": "{{count}} تقييم",
+    "ariaWishlist": "إضافة إلى قائمة الأمنيات",
+    "outOfStock": "نفد من المخزن",
+    "addToCart": "إضافة إلى العربة"
+  },
+  "productReview": {
+    "heading": "تقييمات المنتج",
+    "generalRating": "التقييم العام:",
+    "ratingsCount": "تقييمات",
+    "noReviews": "لا توجد تقييمات بعد.",
+    "yourRating": "تقييمك:",
+    "titleLabel": "العنوان",
+    "contentLabel": "التعليق",
+    "submitButton": "إرسال التقييم"
+  },
+  "bestSeller": {
+    "eyebrow": "الأكثر مبيعاً",
+    "heading": "<span class=\"text-[#E65073]\">اكتشف</span> ما يشتريه <span class=\"text-[#E65073]\">الجميع</span> الآن",
+    "description": "لست متأكدًا مما تختار؟ ابدأ بالمنتجات الأكثر مبيعًا لدينا، فهذه هي الهدايا التي يستمر عملاؤنا في اختيارها.",
+    "exploreGifts": "استكشف الهدايا"
+  },
+  "aboutUs": {
+    "about": "من نحن",
+    "titlePart1": "نقدم ",
+    "titlePart2": "أرقى",
+    "titlePart3": " صناديق الهدايا من أجل ",
+    "titlePart4": "أجمل",
+    "titlePart5": " لحظاتكم",
+    "description": "اجعل كل مناسبة أكثر تميزًا مع صناديق الهدايا الفاخرة لدينا. يتم اختيار كل صندوق بعناية وتغليفه بأفضل جودة ليمنح أحباءك تجربة لا تُنسى.",
+    "discover": "اكتشف",
+    "features": {
+      "competitivePrices": "أسعار تنافسية وتسوق سهل",
+      "premiumQuality": "جودة فائقة وتغليف أنيق",
+      "perfectOccasion": "مثالية لجميع المناسبات",
+      "fastDelivery": "توصيل سريع وموثوق"
+    },
+    "product": {
+      "relatedProducts": "منتجات ذات صلة"
+    }
+  },
+  "specialGifts": {
+    "startingFrom": "يبدأ من 10.99 ج.م",
+    "sectionTitle": "هدايا مميزة لمن تحب",
+    "shopNow": "تسوق الآن ",
+    "slides": {
+      "flowers": {
+        "title": "عبّر بالزهور",
+        "subtitle": "هدايا أنيقة لكل لحظة مميزة.",
+        "ctaLabel": "سأشتري!"
+      },
+      "chocolates": {
+        "title": "حلّي كل لحظة",
+        "subtitle": "شوكولاتة مختارة بعناية لأحبائك.",
+        "ctaLabel": "تسوق الآن"
+      }
+    },
+    "productCard": {
+      "addToWishlist": "أضف إلى المفضلة",
+      "removeFromWishlist": "إزالة من المفضلة"
+    },
+    "cards": {
+      "wedding": {
+        "badge": "زفاف",
+        "title": "احتفلي معها إلى الأبد بهدية لن تُنسى"
+      },
+      "engagement": {
+        "badge": "خطوبة",
+        "title": "كرّم بداية رحلة جميلة معًا"
+      },
+      "anniversary": {
+        "badge": "ذكرى سنوية",
+        "title": "احتفل بكل عام من الحب بمفاجأة معبّرة"
+      }
+    }
+  },
+  "testimonials": {
+    "subtitle": "آراء العملاء",
+    "title": "كلمات حقيقية من عملائنا السعداء",
+    "reviews": {
+      "jake": {
+        "name": "جيك ميلر",
+        "review": "أطلب من متجر الزهور هذا منذ سنوات، ولم أشعر بخيبة أمل أبدًا. جودة المنتجات والخدمة استثنائية.",
+        "date": "12 يناير 2025"
+      },
+      "tyler": {
+        "name": "تايلر بروكس",
+        "review": "خدمة العملاء رائعة، والزهور تدوم لفترة أطول من أي زهور اشتريتها من قبل. أنصح بهم بشدة.",
+        "date": "12 يناير 2025"
+      },
+      "max": {
+        "name": "ماكس تيرنر",
+        "review": "يهتم الفريق بكل طلبية بعناية كبيرة. أشعر دائمًا بالثقة عند شراء الزهور منهم، وكانت تجربة إتمام الطلب ممتازة.",
+        "date": "12 يناير 2025"
+      }
+    }
+  },
+  "mostPopular": {
+    "title": "الأكثر شعبية",
+    "viewMore": "عرض المزيد",
+    "tabs": {
+      "all": "الكل",
+      "newArrival": "وصل حديثًا",
+      "bestSeller": "الأكثر مبيعًا",
+      "featured": "مميز",
+      "sale": "التخفيضات"
+    }
+  },
+  "gallery": {
+    "subtitle": "المعرض",
+    "title": "اكتشف معرضنا الرائع"
+  },
+  "cart": {
+    "title": "السلة",
+    "products": "منتجات",
+    "clearCart": "إفراغ السلة",
+    "remove": "إزالة",
+    "rating": "التقييم",
+    "ratings": "تقييم",
+    "qtyShort": "الكمية ",
+    "currency": "جنيه",
+    "empty": "سلتك فارغة.",
+    "continueShopping": "متابعة التسوق",
+    "youMayLike": "منتجات قد تعجبك",
+    "summary": {
+      "title": "ملخص الطلب",
+      "couponPlaceholder": "كود الخصم",
+      "applyCoupon": "تطبيق الكود",
+      "noCoupons": "لا يوجد كود مطبق",
+      "subtotal": "الإجمالي الفرعي",
+      "total": "الإجمالي",
+      "checkout": "إتمام الشراء"
+    }
+  },
+  "wishlist": {
+    "title": "المفضلة",
+    "item": "منتج",
+    "items": "منتجات",
+    "clearWishlist": "مسح المفضلة",
+    "continueShopping": "متابعة التسوق",
+    "inStock": "متوفر",
+    "outOfStock": "غير متوفر",
+    "ratings": "تقييم",
+    "currency": "ج.م",
+    "removeItem": "إزالة المنتج",
+    "addToCart": "أضف إلى السلة",
+    "exploreSimilarProducts": "استكشف منتجات مشابهة",
+    "clearWishlistConfirmation": "هل أنت متأكد أنك تريد مسح قائمة المفضلة؟",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "emptyTitle": "قائمة المفضلة فارغة",
+    "emptyDescription": "احفظ المنتجات التي تعجبك بالضغط على أيقونة القلب، وستظهر هنا لتتمكن من الوصول إليها في أي وقت."
+  },
+  "ORDERS": {
+    "TITLE": "الطلبات",
+    "ORDER": "طلب",
+    "CREATED_IN": "تم الإنشاء في",
+    "TOTAL_PRICE": "إجمالي السعر",
+    "PAID": "مدفوع",
+    "STATUS": "الحالة",
+    "PAYMENT_METHOD": "طريقة الدفع",
+    "CASH": "الدفع نقدًا",
+    "CREDIT_CARD": "بطاقة ائتمانية",
+    "DELIVERY_STATUS": "حالة التوصيل",
+    "PENDING": "قيد الانتظار",
+    "ORDER_ITEMS": "عناصر الطلب",
+    "RATING": "التقييم",
+    "RATINGS": "تقييمات",
+    "SHOW_ALL": "عرض الكل",
+    "SHOW_LESS": "عرض أقل",
+    "STATUS_VALUES": {
+      "PENDING": "قيد الانتظار",
+      "CONFIRMED": "تم التأكيد",
+      "PROCESSING": "جاري التجهيز",
+      "SHIPPED": "تم الشحن",
+      "DELIVERED": "تم التوصيل",
+      "CANCELLED": "ملغي",
+      "COMPLETED": "مكتمل",
+      "PAID": "مدفوع",
+      "REFUNDED": "تم رد المبلغ"
+    }
+  },
+  "checkoutPayment": {
+    "testDescription": "سيتم تأكيد الدفع تلقائيًا.",
+    "testTitle": "جارٍ تأكيد الدفع",
+    "cardDescription": "ادفع بأمان باستخدام بطاقتك الائتمانية أو بطاقة الخصم.",
+    "cardDetails": "بيانات البطاقة",
+    "cardHint": "أدخل بيانات بطاقتك أدناه لإتمام الدفع.",
+    "pay": "ادفع الآن",
+    "retry": "إعادة محاولة الدفع",
+    "processing": "جارٍ معالجة الدفع...",
+    "preparing": "جارٍ تجهيز نموذج البطاقة الآمن...",
+    "success": "تم الدفع بنجاح.",
+    "errors": {
+      "intent": "تعذر بدء الدفع بالبطاقة. يرجى المحاولة مرة أخرى.",
+      "order": "تعذر إنشاء طلبك. يرجى المحاولة مرة أخرى.",
+      "orderId": "تعذر تجهيز طلبك للدفع بالبطاقة.",
+      "confirm": "تعذر تأكيد الدفع. يرجى المحاولة مرة أخرى.",
+      "card": "تعذر معالجة بيانات بطاقتك. يرجى مراجعتها والمحاولة مرة أخرى.",
+      "cardUnavailable": "نموذج البطاقة غير جاهز بعد. يرجى المحاولة مرة أخرى.",
+      "stripeConfiguration": "الدفع بالبطاقات غير مهيأ بعد. يرجى التواصل مع الدعم."
+    }
+  },
+  "profile": {
+    "title": "إعدادات الحساب",
+    "uploadPhoto": "رفع صورة",
+    "uploadHint": "يمكنك رفع صورة بصيغة jpg. أو png. أو gif. بحد أقصى 5 ميجابايت.",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "gender": "النوع",
+    "male": "ذكر",
+    "female": "أنثى",
+    "deleteAccount": "حذف حسابي",
+    "saveChanges": "حفظ التغييرات",
+    "changePassword": "تغيير كلمة المرور",
+    "oldPassword": "كلمة المرور القديمة",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+    "passwordMismatch": "كلمتا المرور غير متطابقتين.",
+    "changingPassword": "جاري تغيير كلمة المرور...",
+    "passwordChangedSuccess": "تم تغيير كلمة المرور بنجاح",
+    "passwordChangeFailed": "فشل تغيير كلمة المرور. حاول مرة أخرى.",
+    "logout":"تسجيل خروج"
+  }
+  ,
+  "notifications": {
+    "coupon": {
+      "appliedSuccess": "تم تطبيق الكوبون بنجاح",
+      "applyFailed": "فشلت تطبيق الكوبون"
+    },
+    "order": {
+      "createdSuccess": "تم إنشاء الطلب بنجاح",
+      "createFailed": "تعذر إنشاء الطلب"
+    },
+    "wishlist": {
+      "addSuccess": "تمت الإضافة للمفضلة بنجاح",
+      "addFailed": "فشلت الإضافة للمفضلة"
+    },
+    "profile": {
+      "loadFailed": "فشل تحميل البيانات الشخصية",
+      "updateSuccess": "تم تحديث البيانات الشخصية بنجاح",
+      "updateFailed": "فشل تحديث البيانات الشخصية",
+      "photoUpdateSuccess": "تم تحديث الصورة الشخصية بنجاح",
+      "photoUpdateFailed": "فشل تحديث الصورة الشخصية",
+      "deleteSuccess": "تم حذف الحساب بنجاح",
+      "deleteFailed": "فشل حذف الحساب"
+    }
+  }
+  ,
+  "cart": {
+    "addSuccess": "تم إضافة المنتج للسلة بنجاح",
+    "addFailed": "فشلت إضافة المنتج للسلة",
+    "updateQuantitySuccess": "تم تحديث كمية المنتج بنجاح",
+    "updateQuantityFailed": "فشلت تحديث كمية المنتج",
+    "removeSuccess": "تم حذف المنتج من السلة بنجاح",
+    "removeFailed": "فشلت حذف المنتج من السلة",
+    "clearSuccess": "تم حذف كل المنتجات من السلة بنجاح",
+    "clearFailed": "فشلت حذف المنتجات من السلة"
+  }
+}

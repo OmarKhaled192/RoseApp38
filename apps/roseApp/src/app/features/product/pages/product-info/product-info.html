@@ -1,0 +1,127 @@
+<div class="w-full" >
+
+  @if (isLoading()) {
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-20 text-center text-stone-500">{{ 'productDetail.loading' | translate }}
+  </div>
+  } @else if (product(); as p) {
+  <div class="w-full mx-auto grid max-w-6xl grid-cols-1 gap-6  md:grid-cols-2 md:gap-10 md:py-10">
+    @if (p.gallery.length > 1) {
+<div class="mt-4 mb-8 md:mt-8 md:mb-16">
+  <div class="max-w-2xl mx-auto">
+    <div class="overflow-hidden rounded-2xl bg-stone-100 h-64 sm:h-80 md:h-[420px]">
+      <img
+        [attr.draggable]="false"
+        [src]="selectedImage()"
+        [alt]="p.title + ('productDetail.imageAlt' | translate) + (selectedIndex() + 1)"
+        class="h-full w-full object-cover select-none" />
+    </div>
+
+    @if (p.gallery.length > 1) {
+    <div class="mt-3 flex gap-2 overflow-x-auto scrollbar-hide">
+      @for (image of parseImages(p.gallery); track image; let i = $index) {
+      <button
+        type="button"
+        class="shrink-0 h-16 w-16 sm:h-20 sm:w-20 cursor-pointer overflow-hidden rounded-lg border-2 transition-all p-0"
+        [style.border-color]="selectedImage() === image ? '#A6252A' : 'transparent'"
+        [class.opacity-60]="selectedImage() !== image"
+        [class.hover:opacity-80]="selectedImage() !== image"
+        (click)="selectImage(image, i)"
+        [attr.aria-label]="p.title + ('productDetail.thumbnailAlt' | translate) + (i + 1)"
+        [attr.aria-pressed]="selectedImage() === image">
+        <img
+          [attr.draggable]="false"
+          [src]="image"
+          [alt]="p.title + ('productDetail.thumbnailAlt' | translate) + (i + 1)"
+          class="h-full w-full object-cover select-none pointer-events-none" />
+      </button>
+      }
+    </div>
+    }
+  </div>
+</div>
+    }
+    <div class="flex flex-col">
+      <h1 class="text-2xl sm:text-3xl font-semibold text-stone-900 mt-4 md:mt-8">{{ p.title }}</h1>
+
+      <div class="mt-3 flex flex-wrap items-center gap-2 sm:gap-3">
+        @if (p.discountValue) {
+        <span class="text-base sm:text-lg text-stone-400 line-through">
+          {{ p.price }}
+        </span>
+        <span class="text-xl sm:text-2xl font-bold text-stone-900">
+          {{ (p.discountType === 'PERCENT' ? (+p.price * (+p.discountValue / 100)) : +p.price) | number: '1.2-2' }}
+          <span class="text-sm sm:text-base font-semibold">{{ 'productDetail.currency' | translate }}</span>
+        </span>
+        } @else {
+        <span class="text-xl sm:text-2xl font-bold text-stone-900">
+          {{ p.price }}
+          <span class="text-sm sm:text-base font-semibold">{{ 'productDetail.currency' | translate }}</span>
+        </span>
+        }
+
+        <span
+          class="ml-0 sm:ml-2 inline-flex items-center gap-1 rounded-full bg-stone-100 px-3 py-1 text-xs sm:text-sm text-stone-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.5">
+            <path
+              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+            <path d="m3.27 6.96 8.73 5.05 8.73-5.05" />
+            <path d="M12 22.08V12" />
+          </svg>
+          {{ 'productDetail.stockCount' | translate: { count: p.stock } }}
+        </span>
+      </div>
+
+      <hr class="mt-5 border-stone-200" />
+
+      <div class="mt-4 flex flex-wrap items-center gap-2 text-sm">
+        <span class="flex items-center gap-1 font-medium text-stone-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-amber-400 text-amber-400" viewBox="0 0 24 24">
+            <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+          </svg>
+          {{ 'productDetail.ratingLabel' | translate }}: {{ p.rating | number: '1.1-1' }}/5
+        </span>
+        <a class="text-blue-600 hover:underline">( {{ 'productDetail.ratingsCount' | translate:{count:
+          p.ratings } }})</a>
+      </div>
+
+      <p class="mt-4 max-w-prose text-sm leading-relaxed text-stone-600">
+        {{ p.description }}
+      </p>
+
+      <div class=" flex items-center gap-3 mt-[18rem]">
+        <button type="button" (click)="toggleWishlist()"
+          class="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-[#F4F4F5] border border-stone-200 transition hover:bg-stone-50"
+          [attr.aria-pressed]="isWishlist()" aria-label="'productDetail.ariaWishlist' | translate">
+          @if (p._count.wishlistItems !== 0) {
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+            [class.fill-red-700]="p._count.wishlistItems !== 0" [class.text-red-700]="p._count.wishlistItems !== 0">
+            <path
+              d="M11.157 14.2429L10.131 15.2351C9.99125 15.3957 9.81895 15.5246 9.62554 15.6134C9.43212 15.7022 9.22203 15.7488 9.00922 15.7501C8.7964 15.7515 8.58574 15.7075 8.39122 15.6212C8.19669 15.5349 8.02277 15.4081 7.881 15.2494L3.75 11.2504C2.625 10.1254 1.5 8.8504 1.5 7.1254C1.50002 6.2908 1.7532 5.47583 2.2261 4.78814C2.699 4.10045 3.36939 3.57239 4.14871 3.2737C4.92803 2.975 5.77962 2.91973 6.59101 3.11518C7.4024 3.31063 8.13542 3.74761 8.69325 4.3684C8.73254 4.41041 8.78004 4.4439 8.83281 4.4668C8.88557 4.48969 8.94248 4.50151 9 4.50151C9.05752 4.50151 9.11443 4.48969 9.16719 4.4668C9.21996 4.4439 9.26746 4.41041 9.30675 4.3684C9.86283 3.74357 10.596 3.30292 11.4087 3.1051C12.2214 2.90727 13.0751 2.96166 13.8562 3.26101C14.6372 3.56036 15.3085 4.09049 15.7808 4.78082C16.2531 5.47116 16.504 6.28897 16.5 7.1254C16.4998 7.52546 16.4381 7.92311 16.317 8.3044M11.25 11.2504H15.75"
+              stroke="#F4F4F5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          }@else {
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"
+            [class.text-stone-500]="p._count.wishlistItems === 0" class="h-5 w-5">
+            <path
+              d="M10.125 14.625L9 15.75L3.75 10.5C2.625 9.4125 1.5 8.1 1.5 6.375C1.5 5.28098 1.9346 4.23177 2.70818 3.45818C3.48177 2.6846 4.53098 2.25 5.625 2.25C6.945 2.25 7.875 2.625 9 3.75C10.125 2.625 11.055 2.25 12.375 2.25C12.9798 2.2507 13.5771 2.38439 14.1245 2.64162C14.6719 2.89884 15.1561 3.2733 15.5427 3.73846C15.9293 4.20363 16.2088 4.74811 16.3616 5.33335C16.5143 5.91858 16.5365 6.53024 16.4265 7.125M11.25 11.25H15.75M13.5 9V13.5"
+              stroke="#A6252A" stroke-width="1.45833" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          }
+        </button>
+
+        <button type="button" [disabled]="p.stock === 0" (click)="addToCart()"
+          class="flex h-12 flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#A6252A] px-2 text-sm sm:text-base font-medium text-white transition hover:bg-red-800 active:bg-red-800 disabled:cursor-not-allowed disabled:bg-stone-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.8">
+            <circle cx="9" cy="21" r="1" />
+            <circle cx="20" cy="21" r="1" />
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+          </svg>
+          {{ (p.stock === 0 ? 'productDetail.outOfStock' : 'productDetail.addToCart') | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+</div>

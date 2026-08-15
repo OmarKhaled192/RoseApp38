@@ -1,0 +1,10 @@
+<div class="flex items-center justify-center gap-1 text-base md:text-lg">
+  <span class="text-gray-700 font-medium">
+    {{ question() }}
+  </span>
+
+  <a [routerLink]="routerLink()"
+    class="font-bold text-[#8B1E24] no-underline transition-colors duration-200 hover:text-[#6D171C] hover:underline">
+    {{ answer() }}
+  </a>
+</div>

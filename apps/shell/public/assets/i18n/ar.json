@@ -1,0 +1,37 @@
+{
+  "app": {
+    "title": "القشرة",
+    "welcome": "مرحبًا بك في التطبيق"
+  },
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء"
+  },
+  "SEARCH": {
+    "LOADING": "جارٍ البحث...",
+    "NO_RESULTS": "لا توجد منتجات"
+  },
+  "PRODUCT": {
+    "RATINGS": "تقييم"
+  },
+  "CURRENCY": {
+    "EGP": "جنيه"
+  },
+  "NAVBAR": {
+    "SEARCH_PLACEHOLDER": "عن أي هدية رائعة تبحث؟",
+    "LOGIN": "تسجيل الدخول",
+    "SIGNOUT": "تسجيل الخروج"
+  },
+  "error": {
+    "not-confirmed-password": "كلمة المرور وتاكيد كلمة المرور غير متطابقين",
+    "enter-plz": " يرجي إدخال ",
+    "choose-plz": "يرجي إختيار",
+    "number": " رقم",
+    "numbers": " ارقام",
+    "valid-mail": "  الرجاء إدخال بريد إلكتروني صحيح مثل (xyz@xyz.xyz)",
+    "enter-more-plz": "يرجى إدخال اكثر من ",
+    "maximum": "كحد أقصى",
+    "at-least": "كحد أدني",
+    "pattern": "يرجي إدخال صيغه صحيحه"
+  }
+}

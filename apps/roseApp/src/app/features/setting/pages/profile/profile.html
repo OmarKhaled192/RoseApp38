@@ -1,0 +1,70 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="space-y-6">
+  <div class="flex items-center gap-4">
+    <div class="relative">
+      <img [src]="avatarUrl()" alt="Profile photo" class="w-20 h-20 rounded-full object-cover border" />
+      <label for="avatar-input"
+        class="absolute bottom-0 right-0 bg-white border border-gray-200 p-1 rounded-full shadow cursor-pointer hover:bg-gray-50  hover:text-black ">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"
+          class="w-4 h-4 text-gray-700">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+        </svg>
+      </label>
+      <input id="avatar-input" type="file" accept="image/jpeg,image/png,image/gif" (change)="onFileSelected($event)"
+        class="hidden" />
+    </div>
+
+    <div>
+      <h2 class="text-base font-semibold text-gray-900">{{ 'profile.uploadPhoto' | translate }}</h2>
+      <p class="text-xs text-gray-500">{{ 'profile.uploadHint' | translate }}</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="form-field w-full">
+      <lib-input type="text" formControlName="firstName"
+        [label]="'profile.firstName' | translate" placeholder="Jonathan" />
+    </div>
+
+    <div class="form-field w-full">
+      <lib-input type="text" formControlName="lastName"
+        [label]="'profile.lastName' | translate" placeholder="Adrian" />
+    </div>
+  </div>
+
+  <div class="form-field w-full">
+    <lib-input type="email" formControlName="email"
+    [disabled]="true"
+      [label]="'profile.email' | translate" placeholder="jonathan@gmail.com" />
+  </div>
+
+  <div class="form-field w-full">
+    <lib-input type="tel" formControlName="phone" [label]="'profile.phone' | translate" placeholder="1012345678" />
+  </div>
+
+  <div class="form-field w-full">
+    <label for="gender" class="block text-xs font-medium text-gray-600 mb-1">
+      {{ 'profile.gender' | translate }}
+    </label>
+
+    <p-select id="gender"  [options]="genderOptions" optionLabel="label" formControlName="gender" optionValue="value"
+      [placeholder]="'profile.gender' | translate" class="w-full" />
+  </div>
+
+  <div class="flex items-center justify-between pt-4">
+    <button type="button" (click)="onDeleteAccount()" class="text-xs font-medium text-red-700 hover:underline">
+      {{ 'profile.deleteAccount' | translate }}
+    </button>
+  <lib-button
+          type="submit"
+          [label]="'profile.saveChanges' | translate"
+          [loading]="isLoading()"
+          [disabled]="profileForm.invalid || isLoading()"
+          [color]="isDark() ? '#FFA6B9' : '#8D1C24'"
+          styleClass="px-6 py-2.5 bg-red-800 text-white rounded-xl hover:bg-red-900 transition-colors text-sm font-medium shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+        />
+  </div>
+</form>
+
+<app-checkout-delete-modal [open]="deletingAccount()" title="Are you sure you want to delete your account?"
+  confirmLabel="Yes, delete" cancelLabel="Nope, not doing it" (confirmed)="confirmDelete()" (cancelled)="cancelDelete()" />

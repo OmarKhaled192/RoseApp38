@@ -1,0 +1,37 @@
+.custom-paginator ::ng-deep .p-paginator {
+    background: transparent;
+    border: none;
+    padding: 0;
+    gap: 8px;
+}
+
+.custom-paginator ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page,
+.custom-paginator ::ng-deep .p-paginator button {
+    color: #333;
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    min-width: 40px;
+    height: 40px;
+    margin: 0;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.custom-paginator ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page[aria-current="page"] {
+    background: #a62626 !important;
+    color: #ffffff !important;
+    border-color: #a62626 !important;
+}
+
+.custom-paginator ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page:not([aria-current="page"]):hover,
+.custom-paginator ::ng-deep .p-paginator button:not(.p-disabled):hover {
+    background: #f9f9f9;
+    border-color: #dcdcdc;
+}
+
+.custom-paginator ::ng-deep .p-paginator-ellipsis {
+    color: #666;
+    padding: 0 4px;
+}

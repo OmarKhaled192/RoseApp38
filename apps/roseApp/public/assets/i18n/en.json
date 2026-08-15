@@ -1,0 +1,324 @@
+{
+  "app": {
+    "title": "Rose App",
+    "welcome": "Welcome to the application",
+    "featureName": {}
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "Confirm": "Confirm",
+    "Delete": "Delete",
+    "deleteModal": {
+      "title": "Are you sure you want to delete this address?",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    }
+  },
+  "ORDERS": {
+    "TITLE": "Orders",
+    "ORDER": "Order",
+    "CREATED_IN": "Created in",
+    "TOTAL_PRICE": "Total Price",
+    "PAID": "Paid",
+    "STATUS": "Status",
+    "PAYMENT_METHOD": "Payment Method",
+    "CASH": "Cash",
+    "CREDIT_CARD": "Credit Card",
+    "DELIVERY_STATUS": "Delivery Status",
+    "PENDING": "Pending",
+    "ORDER_ITEMS": "Order Items",
+    "RATING": "Rating",
+    "RATINGS": "ratings",
+    "SHOW_ALL": "Show All",
+    "SHOW_LESS": "Show Less",
+    "STATUS_VALUES": {
+      "PENDING": "Pending",
+      "CONFIRMED": "Confirmed",
+      "PROCESSING": "Processing",
+      "SHIPPED": "Shipped",
+      "DELIVERED": "Delivered",
+      "CANCELLED": "Cancelled",
+      "COMPLETED": "Completed",
+      "PAID": "Paid",
+      "REFUNDED": "Refunded"
+    }
+  },
+  "trustedBy": {
+    "trustedCompanies": "Trusted by over",
+    "number": "4.5k+",
+    "companies": "companies"
+  },
+  "ServicesHighlits": {
+    "freeDelivery": {
+      "title": "Free Delivery",
+      "description": "For orders above 120 EGP"
+    },
+    "getRefund": {
+      "title": "Get Refund",
+      "description": "Refunds within 30 days"
+    },
+    "safePayment": {
+      "title": "Safe Payment",
+      "description": "100% Secure Payment"
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Contact us at any time"
+    }
+  },
+  "products": {
+    "category": "Category",
+    "noProducts": "No products match these filters.",
+    "filters": {
+      "occasion": "Occasion",
+      "rating": "Rating",
+      "price": "Price",
+      "from": "From",
+      "to": "To",
+      "reset": "Reset",
+      "resetAll": "Reset All",
+      "priceRangeError": "The minimum price must be less than or equal to the maximum price"
+    }
+  },
+  "productDetail": {
+    "loading": "Loading product…",
+    "imageAlt": "Image",
+    "thumbnailAlt": "Thumbnail",
+    "currency": "EGP",
+    "stockCount": "{{count}} left in stock",
+    "ratingLabel": "Rating",
+    "ratingsCount": "{{count}} ratings",
+    "ariaWishlist": "Add to wishlist",
+    "outOfStock": "Out of stock",
+    "addToCart": "Add to Cart"
+  },
+  "productReview": {
+    "heading": "Product Reviews",
+    "generalRating": "Overall Rating:",
+    "ratingsCount": "ratings",
+    "noReviews": "No reviews yet.",
+    "yourRating": "Your Rating:",
+    "titleLabel": "Title",
+    "contentLabel": "Review",
+    "submitButton": "Submit Review"
+  },
+  "bestSeller": {
+    "eyebrow": "BEST SELLING",
+    "heading": "<span class=\"text-[#E65073]\">Check Out</span> What Everyone's <span class=\"text-[#E65073]\">Buying</span> Right Now",
+    "description": "Not sure what to choose? Start with our best sellers. These are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary, or wedding, ou...",
+    "exploreGifts": "Explore Gifts"
+  },
+  "aboutUs": {
+    "about": "ABOUT",
+    "titlePart1": "Delivering the ",
+    "titlePart2": "Finest",
+    "titlePart3": " Gift Boxes for Your ",
+    "titlePart4": "Special",
+    "titlePart5": " Moments",
+    "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress. Whether it's ...",
+    "discover": "Discover",
+    "features": {
+      "competitivePrices": "Competitive Prices & Easy Shopping",
+      "premiumQuality": "Premium Quality & Elegant Packaging",
+      "perfectOccasion": "Perfect for Every Occasion",
+      "fastDelivery": "Fast & Reliable Delivery"
+    }
+  },
+  "product": {
+    "relatedProducts": "Related Products"
+  },
+  "specialGifts": {
+    "startingFrom": "Starting from 10.99 EGP",
+    "sectionTitle": "Special Gifts for the People You Love",
+    "shopNow": "Shop Now",
+    "slides": {
+      "flowers": {
+        "title": "Say It with Flowers",
+        "subtitle": "Elegant gifts for every special moment.",
+        "ctaLabel": "I'm Buying!"
+      },
+      "chocolates": {
+        "title": "Sweeten Every Moment",
+        "subtitle": "Handpicked chocolates for your loved ones.",
+        "ctaLabel": "Shop Now"
+      }
+    },
+    "cards": {
+      "wedding": {
+        "badge": "Wedding",
+        "title": "Celebrate Her Forever with a Gift She'll Always Remember"
+      },
+      "engagement": {
+        "badge": "Engagement",
+        "title": "Honor the Beginning of a Beautiful Journey Together"
+      },
+      "anniversary": {
+        "badge": "Anniversary",
+        "title": "Mark Every Year of Love with a Meaningful Surprise"
+      }
+    }
+  },
+  "productCard": {
+    "addToWishlist": "Add to wishlist",
+    "removeFromWishlist": "Remove from wishlist"
+  },
+  "testimonials": {
+    "subtitle": "Testimonials",
+    "title": "Real Words from Happy Customers",
+    "reviews": {
+      "jake": {
+        "name": "Jake Miller",
+        "review": "I've been ordering from this flower shop for years and they never disappoint. The quality and service are exceptional!",
+        "date": "January 12, 2025"
+      },
+      "tyler": {
+        "name": "Tyler Brooks",
+        "review": "Customer service is top-notch and the flowers last longer than any others I've bought. Highly recommend!",
+        "date": "January 12, 2025"
+      },
+      "max": {
+        "name": "Max Turner",
+        "review": "The team truly cares about every order. I always feel confident when I buy flowers from here. The checkout process was superb.",
+        "date": "January 12, 2025"
+      }
+    }
+  },
+  "mostPopular": {
+    "title": "Most Popular",
+    "viewMore": "View More",
+    "tabs": {
+      "all": "All",
+      "newArrival": "New Arrival",
+      "bestSeller": "Best Seller",
+      "featured": "Featured",
+      "sale": "Sale"
+    }
+  },
+  "gallery": {
+    "subtitle": "Gallery",
+    "title": "Check Out our Wonderful Gallery"
+  },
+  "cart": {
+    "title": "Cart",
+    "products": "products",
+    "clearCart": "Clear Cart",
+    "remove": "Remove",
+    "rating": "Rating",
+    "ratings": "ratings",
+    "qtyShort": "x",
+    "currency": "EGP",
+    "empty": "Your cart is empty.",
+    "continueShopping": "Continue Shopping",
+    "youMayLike": "Products You May Like",
+    "summary": {
+      "title": "Summary",
+      "couponPlaceholder": "Coupon Code",
+      "applyCoupon": "Apply Coupon",
+      "noCoupons": "No coupons applied",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "checkout": "Checkout"
+    }
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "item": "item",
+    "items": "items",
+    "clearWishlist": "Clear Wishlist",
+    "continueShopping": "Continue Shopping",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "ratings": "ratings",
+    "currency": "EGP",
+    "removeItem": "Remove item",
+    "addToCart": "Add to Cart",
+    "exploreSimilarProducts": "Explore Similar Products",
+    "clearWishlistConfirmation": "Are you sure you want to clear your Wishlist?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "emptyTitle": "Your wishlist is empty",
+    "emptyDescription": "Save the items you love by tapping the heart icon — they'll show up here so you can find them anytime.",
+    "continueShopping": "Continue Shopping"
+  },
+
+  "checkoutPayment": {
+    "testDescription": "Your payment will be confirmed automatically.",
+    "testTitle": "Confirming payment",
+    "cardDescription": "Pay securely with your credit or debit card.",
+    "cardDetails": "Card details",
+    "cardHint": "Enter your card details below to complete payment.",
+    "pay": "Pay now",
+    "retry": "Try payment again",
+    "processing": "Processing payment...",
+    "preparing": "Preparing your secure card form...",
+    "success": "Payment completed successfully.",
+    "errors": {
+      "intent": "We could not start your card payment. Please try again.",
+      "order": "We could not create your order. Please try again.",
+      "orderId": "We could not prepare your order for card payment.",
+      "confirm": "We could not confirm your payment. Please try again.",
+      "card": "Your card details could not be processed. Please check them and try again.",
+      "cardUnavailable": "Your card form is not ready yet. Please try again.",
+      "stripeConfiguration": "Card payments are not configured yet. Please contact support."
+    }
+  },
+  "profile": {
+    "title": "Account Settings",
+    "uploadPhoto": "Upload Photo",
+    "uploadHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "deleteAccount": "Delete My Account",
+    "saveChanges": "Save Changes",
+    "changePassword": "Change Password",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "passwordMismatch": "Passwords do not match.",
+    "changingPassword": "Changing Password...",
+    "passwordChangedSuccess": "Password changed successfully",
+    "passwordChangeFailed": "Change password failed. Please try again.",
+    "logout":"Logout"
+  }
+  ,
+  "notifications": {
+    "coupon": {
+      "appliedSuccess": "Coupon applied successfully.",
+      "applyFailed": "Failed to apply coupon."
+    },
+    "order": {
+      "createdSuccess": "Order created successfully.",
+      "createFailed": "Unable to create the order."
+    },
+    "wishlist": {
+      "addSuccess": "Added to wishlist successfully.",
+      "addFailed": "Failed to add to wishlist."
+    },
+    "profile": {
+      "loadFailed": "Failed to load profile data.",
+      "updateSuccess": "Profile updated successfully.",
+      "updateFailed": "Failed to update profile.",
+      "photoUpdateSuccess": "Profile photo updated successfully.",
+      "photoUpdateFailed": "Failed to update profile photo.",
+      "deleteSuccess": "Account deleted successfully.",
+      "deleteFailed": "Failed to delete account."
+    }
+  }
+  ,
+  "cart": {
+    "addSuccess": "Product added to cart successfully.",
+    "addFailed": "Failed to add product to cart.",
+    "updateQuantitySuccess": "Product quantity updated successfully.",
+    "updateQuantityFailed": "Failed to update product quantity.",
+    "removeSuccess": "Product removed from cart successfully.",
+    "removeFailed": "Failed to remove product from cart.",
+    "clearSuccess": "All products removed from cart successfully.",
+    "clearFailed": "Failed to clear cart."
+  }
+}

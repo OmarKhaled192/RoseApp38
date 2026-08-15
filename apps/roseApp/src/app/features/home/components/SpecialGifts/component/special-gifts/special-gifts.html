@@ -1,0 +1,102 @@
+<section class="w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 md:mt-8">
+  <div
+    class="relative rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[420px] bg-cover bg-center flex flex-col justify-end items-start p-4 sm:p-5 md:p-6 text-start"
+    style="background-image: url('/images/SpecialGifts/SpecialGifts.png')">
+    <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"></div>
+
+    <div class="relative z-10 flex flex-col items-start text-start w-full">
+      <span
+        class="inline-flex items-center gap-1.5 bg-[#FBEAEA] text-[#A6252A] text-[10px] sm:text-[11px] px-2.5 sm:px-3 py-1 rounded-full mb-3 sm:mb-4 w-fit text-start">
+        {{ 'specialGifts.startingFrom' | translate }}
+      </span>
+
+      <h3
+        class="text-white font-semibold text-base sm:text-lg md:text-xl mb-3 sm:mb-4 md:mb-5 text-start w-full leading-snug">
+        {{ 'specialGifts.sectionTitle' | translate }}
+      </h3>
+
+      <button [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+        class="bg-[#FBEAEA] text-[#741C21] text-xs sm:text-sm font-medium tracking-wide px-4 sm:px-5 py-1.5 sm:py-2 rounded-[10px] hover:bg-[#741C21] hover:text-white transition w-fit flex items-center gap-2">
+        <span>{{ 'specialGifts.shopNow' | translate }}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-300"
+          [class.rotate-180]="currentLang === 'ar'" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="md:col-span-2 relative rounded-2xl overflow-hidden">
+    <p-carousel [value]="slides()" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="5000"
+      [showIndicators]="true" [showNavigators]="true" [prevButtonProps]="{
+        styleClass:
+          'absolute! bottom-3! sm:bottom-4! end-[44px]! sm:end-[52px]! top-auto! start-auto! translate-y-0! z-20! w-8! h-8! sm:w-9! sm:h-9! rounded-s-full! rounded-e-none! bg-[#FBEAEA]! text-[#741C21]! border-none! backdrop-blur-sm! hover:bg-[#f5d9d9]! flex! items-center! justify-center! border-e! border-[#741C21]/20!'
+      }" [nextButtonProps]="{
+        styleClass:
+          'absolute! bottom-3! sm:bottom-4! end-3! sm:end-4! top-auto! start-auto! translate-y-0! z-20! w-8! h-8! sm:w-9! sm:h-9! rounded-e-full! rounded-s-none! bg-[#FBEAEA]! text-[#741C21]! border-none! backdrop-blur-sm! hover:bg-[#f5d9d9]! flex! items-center! justify-center!'
+      }"
+      indicatorsContentClass="absolute! top-3! sm:top-4! end-3! sm:end-4! bottom-auto! start-auto! translate-x-0! z-20! flex! gap-1.5!"
+      [dt]="{
+        indicator: {
+          background: 'rgba(255,255,255,0.5)',
+          activeBackground: '#ffffff',
+          width: '6px',
+          height: '6px',
+          borderRadius: '9999px'
+        }
+      }">
+      <ng-template pTemplate="previousicon">
+        <i class="pi" [ngClass]="isRtl ? 'pi-chevron-right' : 'pi-chevron-left'">
+        </i>
+      </ng-template>
+
+      <ng-template pTemplate="nexticon">
+        <i class="pi" [ngClass]="isRtl ? 'pi-chevron-left' : 'pi-chevron-right'">
+        </i>
+      </ng-template>
+      <ng-template let-slide pTemplate="item">
+        <div
+          class="relative min-h-[260px] sm:min-h-[320px] md:min-h-[420px] bg-cover bg-center flex flex-col items-start justify-end px-5 sm:px-8 md:px-10 pb-6 sm:pb-7 md:pb-8 text-start"
+          [style.background-image]="'url(' + slide.image + ')'">
+          <div class="absolute inset-0 bg-black/25"></div>
+          <div class="absolute inset-0 bg-linear-to-t from-black/55 via-black/15 to-transparent"></div>
+
+          <div class="relative z-10 max-w-[85%] sm:max-w-xs text-start">
+            <h3
+              class="text-white text-xl sm:text-2xl md:text-3xl leading-tight mb-1.5 sm:mb-2 font-semibold text-start">
+              {{ slide.titleKey | translate }}
+            </h3>
+            <p class="text-white/90 text-xs sm:text-sm mb-4 sm:mb-5 md:mb-6 font-normal text-start">
+              {{ slide.subtitleKey | translate }}
+            </p>
+            <button
+              class="bg-[#FBEAEA] text-[#741C21] text-xs sm:text-sm font-medium tracking-wide px-4 sm:px-5 py-1.5 sm:py-2 rounded-[10px] hover:bg-[#741C21] hover:text-white transition w-fit text-start">
+              {{ slide.ctaLabelKey | translate }}
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</section>
+
+<section class="w-full mx-auto grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-4 px-0">
+  @for (card of cards(); track card.titleKey) {
+  <div
+    class="relative rounded-2xl overflow-hidden min-h-[160px] sm:min-h-[180px] md:min-h-[200px] bg-cover bg-center flex flex-col items-start justify-end p-3 sm:p-4 text-start"
+    [style.background-image]="'url(' + card.image + ')'">
+    <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent"></div>
+
+    <div class="relative z-10 text-start w-full">
+      <span
+        class="inline-block bg-[#FBEAEA] text-[#741C21] text-[10px] sm:text-xs font-medium px-2.5 sm:px-3 py-1 rounded-full mb-1.5 sm:mb-2 text-start">
+        {{ card.badgeKey | translate }}
+      </span>
+      <h3 class="text-white text-sm sm:text-base font-semibold leading-snug text-start">
+        {{ card.titleKey | translate }}
+      </h3>
+    </div>
+  </div>
+  }
+</section>

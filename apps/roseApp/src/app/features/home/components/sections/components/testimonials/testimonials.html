@@ -1,0 +1,18 @@
+<section class="testimonials-section w-full p-2 sm:p-0 md:p-0 lg:p-0">
+  <lib-title-section [subtitle]="'testimonials.subtitle' | translate" [title]="'testimonials.title' | translate">
+  </lib-title-section>
+
+  <div class="testimonials-section-slider" [attr.dir]="isArabic ? 'rtl' : 'ltr'">
+    <owl-carousel-o [options]="customOptions" class="testimonials-carousel">
+
+      @for (item of reviews; track item.id) {
+      <ng-template carouselSlide [id]="item.id.toString()">
+        <lib-card-review [name]="item.name | translate" [avatar]="item.avatar" [rating]="item.rating"
+          [review]="item.review | translate" [date]="item.date | translate">
+      </lib-card-review>
+      </ng-template>
+      }
+
+    </owl-carousel-o>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+<section class="w-full bg-white pt-20">
+  <div
+    class="flex flex-col lg:flex-row items-stretch text-left gap-8"
+    [class]="currentLang === 'ar' ? 'text-end' : 'text-start'"
+  >
+    <div class="w-full lg:w-1/4 shrink-0 flex flex-col">
+      <span class="text-[11px] font-semibold tracking-widest text-[#FF668B]">
+        {{ 'bestSeller.eyebrow' | translate }}
+      </span>
+
+      <h2
+        class="mt-2 text-2xl sm:text-3xl font-bold leading-tight text-gray-900"
+        [innerHTML]="'bestSeller.heading' | translate"
+      ></h2>
+
+      <p class="mt-3 text-sm text-gray-500 leading-relaxed">
+        {{ 'bestSeller.description' | translate }}
+      </p>
+
+      <div class="mt-auto pt-8">
+        <lib-button
+          type="submit"
+          [label]="'bestSeller.exploreGifts' | translate"
+          [icon]="currentLang === 'ar' ? 'pi pi-arrow-left' : 'pi pi-arrow-right'"
+          [iconPos]="currentLang === 'ar' ? 'left' : 'right'"
+          [color]="isDark() ? '#FFA6B9' : '#8D1C24'"
+          (click)="exploreGifts()"
+          styleClass="w-full py-2.5 sm:py-3 text-sm sm:text-base font-semibold"
+        />
+      </div>
+    </div>
+
+    <div class="w-full lg:flex-1 min-w-0 overflow-hidden">
+      @if (products() && products().length) {
+      <p-carousel
+        [value]="products()"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="false"
+        [responsiveOptions]="responsiveOptions"
+        [showIndicators]="false"
+        contentClass="gap-4 sm:gap-6 py-4"
+      >
+        <ng-template #item let-product>
+          <div class="h-full w-full lg:w-[18rem] px-2">
+            <lib-card
+              class="block h-full w-full"
+              [card]="product"
+              (wishlistToggle)="toggleWishlist(product)"
+              [hoverActions]="[actionsFor(product)[0], actionsFor(product)[1]]"
+            >
+            </lib-card>
+          </div>
+        </ng-template>
+      </p-carousel>
+      }
+    </div>
+  </div>
+</section>

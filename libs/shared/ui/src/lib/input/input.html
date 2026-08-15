@@ -1,0 +1,64 @@
+<div class="flex flex-col gap-1 w-full">
+
+  @if (label()) {
+  <label [for]="controlId" class="text-sm font-medium text-gray-700 block">
+    {{ label() }}
+  </label>
+  }
+
+  @switch (type()) {
+
+@case ('password') {
+  <p-password
+    [inputId]="controlId"
+    [placeholder]="placeholder()"
+    [disabled]="isControlDisabled"
+    [feedback]="false"
+    [formControl]="control()"
+    [toggleMask]="true"
+    (onBlur)="onBlur()"
+    (input)="onInput($event)"
+    styleClass="w-full"
+    inputStyleClass="w-full" />
+}
+  @case ('textarea') {
+  <textarea pTextarea [id]="controlId" [placeholder]="placeholder()" [disabled]="isControlDisabled"
+   [formControl]="control()"
+    [readOnly]="isReadonly()" [value]="value()" (input)="onTextareaInput($event)" (blur)="onBlur()" class="w-full"
+    rows="4"></textarea>
+  }
+
+  @case ('calendar') {
+  <p-datepicker [inputId]="controlId" [placeholder]="placeholder()" [disabled]="isControlDisabled"
+    [readonlyInput]="isReadonly()"  (onBlur)="onBlur()"
+     [formControl]="control()"
+    styleClass="w-full" />
+  }
+
+  @default {
+  <input pInputText
+    [id]="controlId"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [disabled]="isControlDisabled"
+    [readOnly]="isReadonly()"
+    [value]="currentValue() ? currentValue() : value()"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    class="w-full block" />
+  }
+
+  }
+
+   <small class="text-red-500 text-xs block">
+    <lib-error-message  [control]="control()!" [message]="label()" />
+  </small>
+  @if (control()) {
+
+  } @else if (helperText()) {
+  <small class="text-gray-500 text-xs block">
+    {{ helperText() }}
+  </small>
+  }
+
+</div>

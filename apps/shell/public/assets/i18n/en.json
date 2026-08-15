@@ -1,0 +1,38 @@
+{
+  "app": {
+    "title": "Shell App",
+    "welcome": "Welcome to the application"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "SEARCH": {
+    "LOADING": "Searching...",
+    "NO_RESULTS": "No products found"
+  },
+  "PRODUCT": {
+    "RATINGS": "ratings"
+  },
+  "CURRENCY": {
+    "EGP": "EGP"
+  },
+  "NAVBAR": {
+    "SEARCH_PLACEHOLDER": "What awesome gift are you looking for?",
+    "LOGIN": "Login",
+    "SIGNOUT": "Signout"
+  },
+  "error": {
+    "not-confirmed-password": "The Password And Confirmation Password Do Not Match",
+    "enter-plz": "Please Enter ",
+    "enter-num": "Please Enter a Maximum Of ",
+    "choose-plz": "Please Choose",
+    "number": " Number ",
+    "numbers": " Numbers ",
+    "valid-mail": "Please Enter Valid Email EX:(xyz@xyz.xyz)",
+    "enter-more-plz": "Please Enter More Than",
+    "maximum": "Maximum",
+    "at-least": "At Least",
+    "pattern": "Please Enter a Valid Formula"
+  }
+}

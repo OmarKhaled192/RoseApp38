@@ -1,0 +1,90 @@
+{
+  "app": {
+    "title": "تسجيل الدخول",
+    "welcome": "مرحبًا بك في التطبيق",
+    "msg1Prefix": {
+      "title": "تم إرسال رابط إعادة تعيين كلمة المرور",
+      "msg1_prefix": "لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى:",
+      "msg2": "يرجى التحقق من صندوق الوارد واتباع التعليمات لإعادة تعيين كلمة المرور.",
+      "msg3": "إذا لم تجد البريد الإلكتروني خلال بضع دقائق، تحقق من مجلد البريد العشوائي.",
+      "msg4": "ليس لديك حساب؟",
+      "msg5": "أنشئ حسابك"
+    }
+  },
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "otherLanguage": "English",
+    "somethingWentWrong": "حدث خطأ ما. حاول مرة أخرى."
+  },
+  "auth": {
+    "welcomeBack": "مرحباً بعودتك!",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "forgetPassword": "هل نسيت كلمة المرور؟",
+    "rememberMe": "تذكرني",
+    "login": "تسجيل الدخول",
+    "noAccount": "ليس لديك حساب بعد؟",
+    "createOne": "أنشئ حساباً الآن!",
+    "createAccount": "إنشاء حساب",
+    "haveAccount": "لديك حساب بالفعل؟",
+    "writeyouraccount": "اكتب بريدك الإلكتروني",
+    "continue": "متابعة",
+    "verifyOtp": "أدخل رمز التحقق",
+    "registrationFailed": "فشل التسجيل",
+    "emailMismatch": "البريد الإلكتروني لا يطابق البريد المستخدم في التحقق",
+    "otpSentTo": "لقد أرسلنا رمزاً مكوناً من 6 أرقام إلى بريدك الإلكتروني",
+    "verify": "تحقق",
+    "resendOtp": "إرسال رمز جديد",
+    "resendIn": "إعادة الإرسال خلال",
+    "resending": "جاري الإرسال...",
+    "edit": "تعديل",
+    "needhelp": "يوجد لديك مشكلة؟",
+    "contact": "اتصل بنا",
+    "firstName": "الاسم الأول",
+    "lastName": "الاسم الأخير",
+    "username": "اسم المستخدم",
+    "gender": "الجنس",
+    "selectGender": "اختر الجنس",
+    "male": "ذكر",
+    "female": "أنثى",
+    "genderRequired": "الجنس مطلوب",
+    "confirmPassword": "تأكيد كلمة المرور"
+  },
+  "resetPassword": {
+    "title": "إنشاء كلمة مرور جديدة",
+    "subtitle": "تعيين كلمة مرور قوية لتأمين حسابك.",
+    "passwordLabel": "كلمة المرور",
+    "confirmPasswordLabel": "تأكيد كلمة المرور",
+    "passwordPlaceholder": "********",
+    "submitButton": "إعادة تعيين كلمة المرور",
+    "needHelp": "هل تحتاج إلى مساعدة؟",
+    "contactUs": "اتصل بنا"
+  },
+  "forgetPassword": {
+    "title": "هل نسيت كلمة المرور؟",
+    "subtitle": "لا تقلق، سنرسل لك التعليمات لمساعدتك في إعادة تعيينها.",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "[user@example.com](mailto:user@example.com)",
+    "submitButton": "متابعة",
+    "noAccount": "ليس لديك حساب بعد؟",
+    "createAccount": "أنشئ حساباً الآن!"
+  },
+  "msg": {
+    "password-changed": "تم تغيير كلمة المرور بنجاح",
+    "invalid-email": "البريد الالكتروني غير صحيح",
+    "password-send": "تم ارسال كلمة المرور الجديدة إلى بريدك الإلكتروني بنجاح"
+  },
+  "error": {
+    "not-confirmed-password": "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
+    "enter-plz": "يرجى إدخال ",
+    "choose-plz": "يرجى اختيار ",
+    "number": " رقم",
+    "numbers": " أرقام",
+    "valid-mail": "الرجاء إدخال بريد إلكتروني صحيح مثل ([xyz@xyz.xyz](mailto:xyz@xyz.xyz))",
+    "enter-more-plz": "يرجى إدخال أكثر من ",
+    "maximum": "كحد أقصى",
+    "at-least": "كحد أدنى",
+    "pattern": "يرجى إدخال صيغة صحيحة"
+  }
+}

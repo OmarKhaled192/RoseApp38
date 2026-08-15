@@ -1,0 +1,92 @@
+{
+  "app": {
+    "title": "Authentication App",
+    "welcome": "Welcome to the application",
+    "passwordReset": {
+      "title": "Password Reset Sent",
+      "msg1Prefix": "We have sent a password reset link to:",
+      "msg2": "Please check your inbox and follow the instructions to reset your password.",
+      "msg3": "If you don't see the email within a few minutes, check your spam or junk folder.",
+      "msg4": "Don't have an account?",
+      "msg5": "Create yours"
+    }
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "otherLanguage": "العربية",
+    "somethingWentWrong": "Something went wrong. Please try again."
+  },
+  "auth": {
+    "welcomeBack": "Welcome back!",
+    "email": "Email",
+    "password": "Password",
+    "forgetPassword": "forget your password?",
+    "rememberMe": "Remember me",
+    "login": "Login",
+    "noAccount": "Don't have an account yet?",
+    "createOne": "Create one now!",
+    "accountCreated": "Account created successfully!",
+    "registrationFailed": "Registration failed",
+    "emailMismatch": "Email does not match the one used for verification",
+    "createAccount": "Create Account",
+    "haveAccount": "Already have an account?",
+    "writeyouraccount": "Write your email account",
+    "continue": "Continue",
+    "verifyOtp": "Enter the OTP Code",
+    "otpSentTo": "We have sent a 6-digit code to your email",
+    "verify": "Verify OTP",
+    "resendOtp": "Send a new code",
+    "resendIn": "Resend in",
+    "resending": "Resending...",
+    "edit": "Edit",
+    "needhelp": "Need help?",
+    "contact": "Contact us",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "username": "Username",
+    "gender": "Gender",
+    "selectGender": "Select gender",
+    "male": "Male",
+    "female": "Female",
+    "genderRequired": "Gender is required",
+    "confirmPassword": "Confirm Password"
+  },
+  "resetPassword": {
+    "title": "Create a new password",
+    "subtitle": "Set a strong password to secure your account.",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "passwordPlaceholder": "********",
+    "submitButton": "Reset Password",
+    "needHelp": "Need help?",
+    "contactUs": "Contact us"
+  },
+  "forgetPassword": {
+    "title": "forget Password?",
+    "subtitle": "Worry not, we'll send you instructions to help you reset it.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "user@example.com",
+    "submitButton": "Continue",
+    "noAccount": "Don't have an account yet?",
+    "createAccount": "Create one now!"
+  },
+  "msg": {
+    "password-changed": "Password Was Changed Successfully",
+    "invalid-email": "Email Is Incorrect",
+    "password-send": "New Password Has Been Sent To Your Email Successfully"
+  },
+  "error": {
+    "not-confirmed-password": "The Password And Confirmation Password Do Not Match",
+    "enter-plz": "Please Enter ",
+    "enter-num": "Please Enter a Maximum Of ",
+    "choose-plz": "Please Choose",
+    "number": " Number ",
+    "numbers": " Numbers ",
+    "valid-mail": "Please Enter Valid Email EX:(xyz@xyz.xyz)",
+    "enter-more-plz": "Please Enter More Than",
+    "maximum": "Maximum",
+    "at-least": "At Least",
+    "pattern": "Please Enter a Valid Formula"
+  }
+}

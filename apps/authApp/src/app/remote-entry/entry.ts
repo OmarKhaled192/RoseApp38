@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
-import { NxWelcome } from './nx-welcome';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [NxWelcome],
-  selector: 'app-authApp-entry',
-  template: `<app-nx-welcome></app-nx-welcome>`,
+  imports: [RouterOutlet],
+  selector: 'app-auth-app-entry',
+  template: `<router-outlet></router-outlet>`,
+  styles: [`
+    :host {
+      display: block;
+      width: 100%;
+      min-height: 100vh;
+    }
+  `]
 })
-export class RemoteEntry {}
+export class RemoteEntry { }

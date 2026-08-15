@@ -1,0 +1,47 @@
+<section>
+  <div class="flex w-full items-center justify-between py-3">
+    <lib-title-section [title]="'mostPopular.title' | translate" subtitle=" " align="center" [highlightWidth]="'60%'"
+      [highlightHeight]="'45%'" [underlineWidth]="'50px'" [underlineHeight]="'2px'" />
+
+    <div class="flex items-center gap-4 sm:gap-6">
+      @for (tab of tabs(); track tab.value) {
+      <button type="button" (click)="selectTab(tab.value)" class="text-xs font-medium transition-colors sm:text-sm"
+        [ngClass]="
+          activeTab() === tab.value
+            ? 'text-[#E65073]'
+            : 'text-gray-500 hover:text-gray-700'
+        ">
+        {{ tab.label | translate }}
+      </button>
+      }
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    @for (product of products(); track product.id) {
+    <lib-card [card]="product"  (wishlistToggle)="toggleWishlist(product)" [hoverActions]="[actionsFor(product)[0], actionsFor(product)[1]]" />
+    }
+  </div>
+
+  <div class="my-6 flex w-full justify-end sm:my-8">
+    <button type="button" aria-label="View more products"
+      class="group inline-flex cursor-pointer items-center gap-2 border-none bg-transparent font-serif text-base text-[#7a2020] transition-colors duration-200 hover:text-[#5c1818] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7a2020]/40 focus-visible:ring-offset-2 sm:gap-3 sm:text-xl rounded-sm">
+      <span class="relative">
+        {{ 'mostPopular.viewMore' | translate }}
+        <span
+          class="absolute left-0 -bottom-0.5 h-px w-0 bg-current transition-all duration-300 ease-out group-hover:w-full"></span>
+      </span>
+
+      <span [dir]="isRtl ? 'rtl' : 'ltr'" class="flex items-center gap-1">
+        <svg width="30" height="14" viewBox="0 0 30 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+          class="shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-1.5">
+          <line x1="0" y1="7" x2="30" y2="7" stroke="currentColor" stroke-width="1.5" />
+          <path d="M24 1L30 7L24 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" fill="none" />
+        </svg>
+      </span>
+
+
+    </button>
+  </div>
+</section>

@@ -1,0 +1,111 @@
+<section>
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+    <h1 class="flex items-baseline gap-2">
+      <span class="text-[48px] sm:text-2xl font-bold text-gray-900">{{ 'cart.title' | translate }}</span>
+      <span class="text-sm text-gray-400">
+        {{ cartItems().length }} {{ 'cart.products' | translate }}
+      </span>
+    </h1>
+
+    <button type="button" (click)="onClearCart()" [disabled]="!cartItems().length"
+      class="flex items-center cursor-pointer gap-1.5 rounded-lg bg-[#FBEAEA] px-3 sm:px-4 py-2 text-sm font-medium text-[#A6252A] hover:bg-red-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
+        <path
+          d="M13.3338 18.3337L12.5004 15.0003M15.8338 11.6587C16.0548 11.6587 16.2667 11.5709 16.423 11.4146C16.5793 11.2583 16.6671 11.0463 16.6671 10.8253V10.0003C16.6671 9.5583 16.4915 9.13437 16.1789 8.82181C15.8664 8.50925 15.4425 8.33366 15.0004 8.33366H12.5004C12.2794 8.33366 12.0675 8.24586 11.9112 8.08958C11.7549 7.9333 11.6671 7.72134 11.6671 7.50033V3.33366C11.6671 2.89163 11.4915 2.46771 11.1789 2.15515C10.8664 1.84259 10.4425 1.66699 10.0004 1.66699C9.55841 1.66699 9.13449 1.84259 8.82192 2.15515C8.50936 2.46771 8.33377 2.89163 8.33377 3.33366V7.50033C8.33377 7.72134 8.24597 7.9333 8.08969 8.08958C7.93341 8.24586 7.72145 8.33366 7.50044 8.33366H5.00044C4.55841 8.33366 4.13449 8.50925 3.82192 8.82181C3.50936 9.13437 3.33377 9.5583 3.33377 10.0003V10.8253C3.33377 11.0463 3.42157 11.2583 3.57785 11.4146C3.73413 11.5709 3.94609 11.6587 4.1671 11.6587M6.6671 18.3337L7.50044 15.0003M4.1671 11.667H15.8338L17.4779 17.3062C17.5073 17.4287 17.5085 17.5563 17.4814 17.6793C17.4544 17.8023 17.3998 17.9177 17.3217 18.0166C17.2437 18.1155 17.1442 18.1954 17.0308 18.2503C16.9174 18.3052 16.7931 18.3337 16.6671 18.3337H3.33377C3.20778 18.3337 3.08342 18.3052 2.97004 18.2503C2.85666 18.1954 2.7572 18.1155 2.67916 18.0166C2.60111 17.9177 2.5465 17.8023 2.51945 17.6793C2.49239 17.5563 2.49358 17.4287 2.52294 17.3062L4.1671 11.667Z"
+          stroke="#A6252A" stroke-width="1.45833" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+
+      <span class="hidden sm:inline">{{ 'cart.clearCart' | translate }}</span>
+    </button>
+  </div>
+
+  <!-- @if (loading()) {
+  <div class="space-y-3">
+    @for (i of [1, 2, 3]; track i) {
+    <div class="h-28 rounded-xl bg-gray-100 animate-pulse"></div>
+    }
+  </div>
+  } -->
+  @if (!loading() && !cartItems().length) {
+  <div class="rounded-xl border border-dashed border-gray-200 p-10 text-center text-gray-400">
+    {{ 'cart.empty' | translate }}
+  </div>
+  }
+
+  <div class="space-y-3">
+    @for (item of cartItems(); track item) {
+    <article class="relative flex flex-col sm:flex-row gap-4 rounded-xl border border-gray-100 p-2 sm:p-5 shadow-sm">
+      <img [src]="item.product?.cover" [alt]="item.product?.title"
+        class="h-30 w-24 shrink-0 rounded-lg object-cover bg-gray-50 mx-auto sm:mx-0" />
+
+      <div class="flex flex-1 flex-col justify-between gap-3">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h2 class="font-semibold text-[#741C21]">
+              {{ item.product?.title }}
+            </h2>
+            <div class="mt-1 flex flex-wrap items-center gap-1 text-sm">
+              <span class="text-amber-400 text-xl">★</span>
+              <span>{{ 'cart.rating' | translate }} {{ item.product?.rating |
+                number: '1.0-1' }}/5</span>
+              <span class="text-blue-500 hover:underline font-bold">
+                ({{ item.product?.ratings }} {{ 'cart.ratings' | translate }})
+              </span>
+            </div>
+          </div>
+
+          <button type="button" (click)="onRemove(item)"
+            class="flex items-center cursor-pointer gap-1.5 rounded-lg bg-red-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-600 transition-colors shrink-0">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M2.5 5.00033H17.5M15.8333 5.00033V16.667C15.8333 17.5003 15 18.3337 14.1667 18.3337H5.83333C5 18.3337 4.16667 17.5003 4.16667 16.667V5.00033M6.66667 5.00033V3.33366C6.66667 2.50033 7.5 1.66699 8.33333 1.66699H11.6667C12.5 1.66699 13.3333 2.50033 13.3333 3.33366V5.00033M8.33333 9.16699V14.167M11.6667 9.16699V14.167"
+                stroke="white" stroke-width="1.45833" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+            {{ 'cart.remove' | translate }}
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-end justify-between gap-3">
+          <p class="text-sm">
+            <span class="text-[#741C21] mx-1">({{ 'cart.qtyShort' | translate }}{{ item.quantity }})</span>
+            <span class="text-xl font-bold">{{ item.product?.price | number: '1.0-2' }}</span>
+            {{ 'cart.currency' | translate }}
+          </p>
+
+          <div class="flex items-center gap-2 rounded-lg px-5 py-2.5">
+            <button type="button" (click)="onDecrease(item)" [disabled]="(item?.product?.stock ?? 0) <= 1"
+              class="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md bg-[#FBEAEA] text-red-500 hover:bg-red-200 transition-colors">
+              <svg width="20" height="30" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.1665 10H15.8332" stroke="#A6252A" stroke-width="1.45833" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+
+            <lib-input type="number" min="1" formControlName="quantity" (valueChange)="onQuantityInput(item, $event)"
+              [currentValue]="item.quantity" placeholder="Adrian"
+              class="flex h-10 w-20 shrink-0 items-center rounded-md border border-gray-200 text-center text-sm [&_input]:h-full [&_input]:w-full [&_input]:text-center [&_input]:border-0 [&_input]:outline-none" />
+
+            <button type="button" [disabled]="(item?.product?.stock ?? 0) <= 1" (click)="onIncrease(item)"
+              class="flex h-10 w-10 shrink-0 items-center cursor-pointer justify-center rounded-md bg-[#FBEAEA] text-red-500 hover:bg-red-200 transition-colors">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.16699 10.0003H15.8337M10.0003 4.16699V15.8337" stroke="#A6252A" stroke-width="1.45833"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+    }
+  </div>
+
+  <button type="button" [routerLink]="['/roseApp/products']"
+    class="mt-6 flex items-center gap-2 rounded-lg cursor-pointer bg-[#A6252A] px-5 py-2.5 text-sm font-medium text-white hover:bg-red-800 transition-colors w-full sm:w-auto justify-center">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4.99984 13.3337L1.6665 10.0003L4.99984 6.66699M1.6665 10.0003L18.3332 10.0003" stroke="white"
+        stroke-width="1.45833" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    {{ 'cart.continueShopping' | translate }}
+  </button>
+</section>

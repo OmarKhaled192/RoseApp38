@@ -1,0 +1,45 @@
+<div class="min-h-screen bg-white p-6 md:p-10 text-gray-800">
+  <h1 class="text-3xl font-bold mb-8 text-gray-900">{{ 'profile.title' | translate }}</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl">
+    <aside
+      class="md:col-span-1 bg-gray-50 border border-gray-100 rounded-2xl p-4 flex flex-col justify-between min-h-[500px]">
+      <nav class="space-y-2">
+        <a routerLink="profile" routerLinkActive="bg-neutral-900 text-white shadow"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors text-left text-gray-600 hover:bg-gray-100 hover:text-black">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
+            stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+          </svg>
+          {{ 'profile.title' | translate }}
+        </a>
+
+        <a routerLink="change-password" routerLinkActive="bg-neutral-900 text-white shadow"
+          class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors text-left text-gray-600 hover:bg-gray-100 hover:text-black">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
+            stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+          </svg>
+          {{ 'profile.changePassword' | translate }}
+        </a>
+      </nav>
+
+      <button type="button" (click)="logout()"
+        class="flex items-center gap-2 text-red-600 hover:bg-red-50 p-3 rounded-xl font-medium transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12" />
+        </svg>
+        {{ 'profile.logout' | translate }}
+      </button>
+    </aside>
+
+    <main class="md:col-span-3">
+      <router-outlet />
+    </main>
+  </div>
+</div>

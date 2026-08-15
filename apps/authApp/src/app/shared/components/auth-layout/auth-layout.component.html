@@ -1,0 +1,36 @@
+<lib-app-toast-msg />
+
+<div class="flex min-h-screen">
+
+  <div class="flex-1 flex justify-center">
+    <div class="auth-content flex flex-col w-full max-w-xl">
+
+      <div class="auth-topbar flex justify-end gap-2 p-4">
+        <lib-dark-mode />
+        <lib-language-switcher />
+      </div>
+
+      <div class="flourish">
+        <img src="/assets/surrond.svg" alt="Top Svg" />
+      </div>
+
+      <div class="auth-outlet flex-1 flex items-center justify-center px-4 py-8">
+        <router-outlet />
+      </div>
+
+      <div class="auth-footer">
+        <div class="flourish rotate-180">
+          <img src="/assets/surrond.svg" alt="Bottom Svg" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="hidden lg:block w-1/2">
+    <div class="sticky top-0 h-screen overflow-hidden">
+      <img src="/assets/auth_bg.png" alt="Luxury Gift Boxes" class="w-full h-full object-cover" />
+    </div>
+  </div>
+
+</div>

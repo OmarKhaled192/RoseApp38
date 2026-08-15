@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.otp-wrapper {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+:host-context(.dark) {
+  lib-title-form ::ng-deep h1 {
+    color: #FFA6B9 !important;
+  }
+
+  .divider {
+    border-color: #27272A !important;
+  }
+
+  p-inputotp ::ng-deep {
+    .p-inputotp-input {
+      background-color: #18181B !important;
+      border-color: #3F3F46 !important;
+      color: #FFFFFF !important;
+
+      &:focus {
+        border-color: #FFA6B9 !important;
+        box-shadow: 0 0 0 1px #FFA6B9 !important;
+      }
+    }
+  }
+}

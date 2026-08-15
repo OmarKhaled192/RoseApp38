@@ -1,0 +1,14 @@
+<section class="gallery-section">
+  <lib-title-section [subtitle]="'gallery.subtitle'| translate " [title]="'gallery.title' | translate">
+  </lib-title-section>
+
+  <div class="gallery-wrapper mt-4">
+    <div class="gallery-grid">
+      @for (item of gallery; track item.image) {
+      <div class="gallery-item" [class.large]="item.class === 'large'">
+        <img [src]="item.image" alt="Gallery Image" />
+      </div>
+      }
+    </div>
+  </div>
+</section>

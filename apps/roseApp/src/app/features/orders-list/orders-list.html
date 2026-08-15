@@ -1,0 +1,334 @@
+<div class="m-10">
+    <h5 class="text-4xl font-bold text-gray-800 mx-4">
+        {{ 'ORDERS.TITLE' | translate }}
+    </h5>
+
+    @for (order of orderitems(); track order.id) {
+    <div class="rounded-xl bg-white overflow-hidden shadow-sm m-4">
+
+        <!-- Order Header -->
+        <div
+            class="bg-[#A6252A] text-white flex justify-between align-center px-5 py-3">
+
+            <div class="font">
+                {{ 'ORDERS.ORDER' | translate }} #{{ order.id }}
+            </div>
+
+            <div class="text-xs text-gray-100">
+                {{ 'ORDERS.CREATED_IN' | translate }}:
+                {{ order.createdAt | date:'dd MMMM, yyyy, hh:mm a' }}
+            </div>
+
+        </div>
+
+        <div class="p-5 bg-gray-100">
+
+            <!-- Order Summary -->
+            <div class="flex justify-between items-center">
+
+                <div class="flex items-center gap-3">
+
+                    <span class="text-2xl text-gray-600">
+                        {{ 'ORDERS.TOTAL_PRICE' | translate }}:
+                    </span>
+
+                    <span class="text-2xl font-bold">
+                        {{ order.total | currency:'EGP':'symbol':'1.0-0' }}
+                    </span>
+
+                    @if (order.paymentStatus === 'paid') {
+
+                    <span
+                        class="inline-flex items-center gap-2 bg-[#00BC7D] text-white text-sm font-medium px-4 py-2 rounded-full">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 64 64"
+                            class="w-4 h-4 shrink-0"
+                            fill="none">
+
+                            <path
+                                d="M14 34L27 47L50 20"
+                                stroke="currentColor"
+                                stroke-width="5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round" />
+
+                        </svg>
+
+                        <span>
+                            {{ 'ORDERS.PAID' | translate }}
+                        </span>
+
+                    </span>
+                    }
+
+                </div>
+
+                <!-- Status -->
+                <div class="flex items-center gap-2">
+
+                    <span class="text-gray-500">
+                        {{ 'ORDERS.STATUS' | translate }}:
+                    </span>
+
+                    <span
+                        [class]="'text-white text-xs px-3 py-1 rounded-full ' + statusBadgeClass(order.status)">
+
+                        {{ ('ORDERS.STATUS_VALUES.' + order.status) | translate
+                        }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <hr class="my-4 border-gray-200" />
+
+            <!-- Payment Information -->
+            <div class="mt-5 text-start text-sm">
+
+                <div class="flex items-center">
+
+                    <span class="font-semibold">
+                        {{ 'ORDERS.PAYMENT_METHOD' | translate }}:
+                    </span>
+
+                    @if (order.paymentMethod === 'CASH_ON_DELIVERY') {
+
+                    <span
+                        class="ml-2 inline-flex items-center gap-1 font-medium text-gray-500">
+
+                        <!-- Cash SVG -->
+
+                        <span>
+                            {{ 'ORDERS.CASH' | translate }}
+                        </span>
+
+                    </span>
+
+                    } @else {
+
+                    <span
+                        class="ml-2 inline-flex items-center gap-1 font-medium text-gray-500">
+
+                        <!-- Credit Card SVG -->
+
+                        <span>
+                            {{ 'ORDERS.CREDIT_CARD' | translate }}
+                        </span>
+
+                    </span>
+
+                    }
+
+                </div>
+
+                <!-- Delivery Status -->
+                <div class="flex items-center gap-2 whitespace-nowrap">
+
+                    <span class="font-semibold">
+                        {{ 'ORDERS.DELIVERY_STATUS' | translate }}:
+                    </span>
+
+                    <span
+                        class="inline-flex items-center gap-1 text-yellow-500 font-semibold whitespace-nowrap">
+
+                        <svg class="w-5 h-5 shrink-0"
+                            viewBox="0 0 64 64"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+
+                            <g
+                                stroke="currentColor"
+                                stroke-width="3.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+
+                                <rect x="8" y="16" width="28" height="24"
+                                    rx="3" />
+                                <path d="M36 24H46L54 32V40H36V24Z" />
+                                <path d="M46 24V32H54" />
+                                <path d="M8 40H54" />
+                                <circle cx="18" cy="42" r="3.5" />
+                                <circle cx="46" cy="42" r="3.5" />
+
+                            </g>
+
+                        </svg>
+
+                        <span>
+                            {{ 'ORDERS.PENDING' | translate }}
+                        </span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- Order Items -->
+            <div class="mt-6">
+
+                <h3 class="font-bold text-start text-xl mb-3">
+                    {{ 'ORDERS.ORDER_ITEMS' | translate }}
+                </h3>
+
+                <div class="relative">
+
+                    <div
+                        class="grid md:grid-cols-2 gap-4 bg-white p-5 rounded-xl"
+                        [class.overflow-hidden]="!isOrderExpanded(order.id) && order.orderItems.length > visibleItemCount"
+                        [style.maxHeight]="!isOrderExpanded(order.id) && order.orderItems.length > visibleItemCount ? '360px' : null">
+
+                        @for (item of order.orderItems; track item.id) {
+
+                        <div
+                            class="text-start flex gap-5 bg-gray-50 rounded-xl">
+
+                            <img
+                                [src]="item.product.cover"
+                                [alt]="item.product.title"
+                                class="w-30 h-40 object-cover rounded-tl-lg rounded-bl-lg" />
+
+                            <div class="flex flex-col py-3 h-full">
+
+                                <div>
+
+                                    <h4
+                                        class="font-semibold text-red-800 text-sm line-clamp-2">
+
+                                        {{ item.product.title }}
+
+                                    </h4>
+
+                                    <div class="flex items-center gap-1 mt-1">
+
+                                        <span class="text-yellow-500 text-sm">
+                                            ★
+                                        </span>
+
+                                        <span class="text-xs text-gray-700">
+                                            {{ 'ORDERS.RATING' | translate }}:
+                                            5/5
+                                        </span>
+
+                                        <span class="text-xs text-blue-600">
+                                            (4 {{ 'ORDERS.RATINGS' | translate
+                                            }})
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <div
+                                    class="mt-auto flex items-baseline gap-1 pt-4">
+
+                                    <span class="text-[11px] text-red-400">
+                                        (x{{ item.quantity }})
+                                    </span>
+
+                                    <span
+                                        class="text-lg font-bold text-gray-500">
+                                        {{ item.price }}
+                                    </span>
+
+                                    <span class="text-xs text-gray-400">
+                                        EGP
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        }
+
+                    </div>
+
+                    <!-- Show All -->
+                    @if (
+                    !isOrderExpanded(order.id) &&
+                    order.orderItems.length > visibleItemCount
+                    ) {
+
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-24 rounded-b-xl bg-gradient-to-t from-white via-white/90 to-transparent flex items-end justify-center pb-2 pointer-events-none">
+
+                        <button
+                            type="button"
+                            (click)="toggleOrderExpanded(order.id)"
+                            class="pointer-events-auto flex flex-col items-center text-[#A6252A] font-semibold text-sm hover:opacity-80">
+
+                            <span>
+                                {{ 'ORDERS.SHOW_ALL' | translate }}
+                            </span>
+
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+
+                                <polyline points="6 9 12 15 18 9" />
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+                    }
+
+                    <!-- Show Less -->
+                    @if (
+                    isOrderExpanded(order.id) &&
+                    order.orderItems.length > visibleItemCount
+                    ) {
+
+                    <div class="flex justify-center pt-3">
+
+                        <button
+                            type="button"
+                            (click)="toggleOrderExpanded(order.id)"
+                            class="flex flex-col items-center text-[#A6252A] font-semibold text-sm hover:opacity-80">
+
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+
+                                <polyline points="18 15 12 9 6 15" />
+
+                            </svg>
+
+                            <span>
+                                {{ 'ORDERS.SHOW_LESS' | translate }}
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    }
+</div>

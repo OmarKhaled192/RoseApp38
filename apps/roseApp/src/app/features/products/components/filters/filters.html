@@ -1,0 +1,58 @@
+<div class="flex flex-col">
+  <app-filter-section title="products.filters.occasion" [showReset]="selectedOccasions().length > 0"
+    (resetData)="resetOccasions()">
+    <div class="grid grid-cols-2 gap-2 p-2 max-h-[220px] overflow-y-auto pr-1">
+      @for (occasion of occasions(); track occasion.id) {
+      <button type="button" (click)="toggleOccasion(occasion.id)"
+        class="relative h-16 rounded-lg overflow-hidden ring-2 transition-all flex items-end"
+        [ngClass]="selectedOccasions().includes(occasion.id) ? 'ring-[#A6252A]' : 'ring-transparent'">
+        <img class="absolute inset-0 w-full h-full object-cover" [src]="occasion.image" [alt]="occasion.title" />
+        <span class="absolute inset-0 bg-black/35"></span>
+        <div
+          class="relative z-10 flex h-full w-full items-center justify-center p-2 text-[15px] font-medium text-white">
+          {{occasion.title }}</div>
+      </button>
+      }
+    </div>
+  </app-filter-section>
+
+  <app-filter-section title="products.filters.rating" [showReset]="!!selectedRating()" (resetData)="resetRating()">
+    <div class="flex items-center gap-1 px-2 pb-1">
+      @for (star of stars; track star) {
+      <button type="button" (click)="setRating(star)" [attr.aria-label]="star + ' stars & up'">
+        <i class="pi text-lg"
+          [ngClass]="star <= (selectedRating() ?? 0) ? 'pi-star-fill text-[#F5A623]' : 'pi-star text-gray-300'"></i>
+      </button>
+      }
+    </div>
+  </app-filter-section>
+
+  <app-filter-section title="products.filters.price" [showReset]="priceFrom() !== null || priceTo() !== null"
+    (resetData)="resetPrice()">
+    <div class="flex items-end gap-2 px-2 pb-2">
+      <div class="flex-1">
+        <label for="price-from" class="text-[11px] text-gray-400">{{ 'products.filters.from' | translate }}</label>
+        <input id="price-from" type="number" min="0" [value]="priceFrom()"
+          (input)="onPriceFromChange($any($event.target).value)"
+          class="text-gray-400 w-full mt-1 rounded-md border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-[#A6252A]" />
+      </div>
+      <span class="text-gray-300 pb-2">-</span>
+      <div class="flex-1">
+        <label for="price-to" class="text-[11px] text-gray-400">{{ 'products.filters.to' | translate }}</label>
+        <input id="price-to" type="number" min="0" [value]="priceTo()"
+          (input)="onPriceToChange($any($event.target).value)"
+          class="text-gray-400 w-full mt-1 rounded-md border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-[#A6252A]" />
+      </div>
+    </div>
+    @if (priceError()) {
+    <p class="px-2 pb-2 text-xs text-red-500">{{ priceError() | translate }}</p>
+    }
+  </app-filter-section>
+
+  <!-- Reset all -->
+  <button type="button" (click)="resetAllFilters()"
+    class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-[#FBE7EA] text-[#A6252A] text-sm font-medium hover:bg-[#F6D3D8] transition-colors">
+    <i class="pi pi-refresh text-xs"></i>
+    {{ 'products.filters.resetAll' | translate }}
+  </button>
+</div>
