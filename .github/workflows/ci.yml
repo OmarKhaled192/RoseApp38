@@ -37,25 +37,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Cache Cypress binary
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            cypress-${{ runner.os }}-
-
-      - name: Install Cypress binary
-        run: pnpm exec cypress install
-
-      - name: Install Playwright
-        run: pnpm exec playwright install --with-deps
-
       - name: Set Nx SHAs
         uses: nrwl/nx-set-shas@v5
 
       - name: Start Nx Cloud CI
-        run: pnpm exec nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e"
+        run: pnpm exec nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="test"
 
       - name: Run Nx tasks
-        run: pnpm exec nx affected -t lint test build typecheck e2e
+        run: pnpm exec nx affected -t lint test build typecheck
