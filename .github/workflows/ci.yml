@@ -28,22 +28,24 @@ jobs:
           node-version: 20
           cache: npm
 
+      # Use npm install instead of npm ci because
+      # package.json and package-lock.json are currently
+      # not synchronized.
       - name: Install dependencies
-        run: npm ci
-
-      - name: Set Nx SHAs
-        uses: nrwl/nx-set-shas@v5
+        run: npm install --legacy-peer-deps
 
       - name: Install Playwright
         run: npx playwright install --with-deps
 
-      # Nx Cloud distributed execution
+      - name: Set Nx SHAs
+        uses: nrwl/nx-set-shas@v5
+
       - name: Start Nx Cloud CI
         run: npx nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e"
 
-      - name: Run Nx CI
+      - name: Run Nx tasks
         run: npx nx affected -t lint test build typecheck e2e
 
       - name: Fix CI
-        run: npx nx fix-ci
         if: always()
+        run: npx nx fix-ci
