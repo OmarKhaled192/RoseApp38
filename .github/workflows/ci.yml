@@ -22,17 +22,17 @@ jobs:
           filter: tree:0
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
           run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -44,11 +44,7 @@ jobs:
         uses: nrwl/nx-set-shas@v5
 
       - name: Start Nx Cloud CI
-        run: npx nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e"
+        run: pnpm exec nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e"
 
       - name: Run Nx tasks
         run: pnpm exec nx affected -t lint test build typecheck e2e
-
-      - name: Fix CI
-        if: always()
-        run: pnpm exec nx fix-ci
