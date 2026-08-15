@@ -26,16 +26,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          cache: pnpm
 
-      # Use npm install instead of npm ci because
-      # package.json and package-lock.json are currently
-      # not synchronized.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: pnpm install --frozen-lockfile
 
       - name: Install Playwright
-        run: npx playwright install --with-deps
+        run: pnpm exec playwright install --with-deps
 
       - name: Set Nx SHAs
         uses: nrwl/nx-set-shas@v5
@@ -44,8 +47,8 @@ jobs:
         run: npx nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e"
 
       - name: Run Nx tasks
-        run: npx nx affected -t lint test build typecheck e2e
+        run: pnpm exec nx affected -t lint test build typecheck e2e
 
       - name: Fix CI
         if: always()
-        run: npx nx fix-ci
+        run: pnpm exec nx fix-ci
