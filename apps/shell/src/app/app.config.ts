@@ -18,7 +18,7 @@ import { catchError, map } from 'rxjs/operators';
 import { authenticationInterceptor } from '@org/auth';
 
 
-const DEFAULT_LANG: string = 'en';
+const DEFAULT_LANG = 'en';
 
 export class MultiTranslateHttpLoader implements TranslateLoader {
   constructor(private http: HttpClient) { }

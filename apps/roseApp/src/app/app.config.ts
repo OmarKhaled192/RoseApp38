@@ -13,7 +13,7 @@ import { appRoutes } from './app.routes';
 import { authenticationInterceptor } from '@org/auth';
 
 
-const DEFAULT_LANG: string = 'en';
+const DEFAULT_LANG = 'en';
 
 export const appConfig: ApplicationConfig = {
   providers: [
