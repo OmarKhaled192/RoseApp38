@@ -57,7 +57,7 @@
         class="flex items-center gap-1.5 text-sm text-gray-700 hover:text-[#e07090] transition-colors duration-200 cursor-pointer">
         <span class="hidden sm:flex flex-col items-start leading-tight">
           <span class="text-[11px] text-gray-400">Hello,</span>
-          <span class="font-medium">{{ firstName() }}</span>
+          <span class="font-medium text-[#741C21]">{{ firstName }}</span>
         </span>
         <svg class="w-3.5 h-3.5 text-gray-400 transition-transform duration-200" [class.rotate-180]="userMenuOpen"
           fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -68,8 +68,8 @@
       @if (userMenuOpen) {
       <div class="absolute right-0 mt-2 w-52 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-[999999999]">
         <div class="px-4 py-2 border-b border-gray-100">
-          <p class="text-sm font-semibold text-[#e07090]">
-            {{ firstName() }}
+          <p class="text-sm font-semibold text-[#741C21]">
+            {{ firstName }}
           </p>
         </div>
 

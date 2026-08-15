@@ -1,4 +1,5 @@
 import { computed, inject } from "@angular/core";
+import { TranslateService } from '@ngx-translate/core';
 import { tap, pipe, switchMap } from "rxjs";
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
@@ -34,7 +35,7 @@ export const CartStore = signalStore(
     cartItems: computed(() => _cartResource.value()?.payload.cartItems || []),
     cartLoading: computed(() => _cartResource.isLoading()),
   })),
-  withMethods((store, cartService = inject(CartService), messageService = inject(Message)) => ({
+  withMethods((store, cartService = inject(CartService), messageService = inject(Message), translate = inject(TranslateService)) => ({
 
     addToCart: rxMethod<CartItem>(
       pipe(
@@ -47,11 +48,11 @@ export const CartStore = signalStore(
                   isLoading: false
                 }));
                  store._cartResource.reload();
-                messageService.show('success', res.message || 'تم إضافة المنتج للسلة بنجاح');
+                messageService.show('success', res.message || translate.instant('cart.addSuccess'));
               },
               error: (err) => {
                 patchState(store, { isLoading: false });
-                messageService.show('error', err.error?.message || 'فشلت إضافة المنتج للسلة');
+                messageService.show('error', err.error?.message || translate.instant('cart.addFailed'));
               }
             })
           )
@@ -69,11 +70,11 @@ export const CartStore = signalStore(
                   isLoading: false
                 }));
                 store._cartResource.reload();
-                messageService.show('success', 'تم تحديث كمية المنتج بنجاح');
+                messageService.show('success', translate.instant('cart.updateQuantitySuccess'));
               },
               error: (err) => {
                 patchState(store, { isLoading: false });
-                messageService.show('error', err.error?.message || 'فشلت تحديث كمية المنتج');
+                messageService.show('error', err.error?.message || translate.instant('cart.updateQuantityFailed'));
               }
             })
           )
@@ -91,11 +92,11 @@ export const CartStore = signalStore(
                   isLoading: false
                 }));
                  store._cartResource.reload();
-                messageService.show('success', 'تم حذف المنتج من السلة بنجاح');
+                messageService.show('success', translate.instant('cart.removeSuccess'));
               },
               error: (err) => {
                 patchState(store, { isLoading: false });
-                messageService.show('error', err.error?.message || 'فشلت حذف المنتج من السلة');
+                messageService.show('error', err.error?.message || translate.instant('cart.removeFailed'));
               }
             })
           )
@@ -113,11 +114,11 @@ export const CartStore = signalStore(
                   isLoading: false
                 }));
                   store._cartResource.reload();
-                messageService.show('success', 'تم حذف  كل المنتجات من السلة بنجاح');
+                messageService.show('success', translate.instant('cart.clearSuccess'));
               },
               error: (err) => {
                 patchState(store, { isLoading: false });
-                messageService.show('error', err.error?.message || 'فشلت حذف المنتج من السلة');
+                messageService.show('error', err.error?.message || translate.instant('cart.clearFailed'));
               }
             })
           )

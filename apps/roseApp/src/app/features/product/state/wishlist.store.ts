@@ -1,4 +1,5 @@
 import { inject } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { tap, pipe, switchMap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
@@ -24,6 +25,7 @@ export const WishlistStore = signalStore(
       store,
       wishlistService = inject(WishlistService),
       messageService = inject(Message),
+      translate = inject(TranslateService),
     ) => ({
       addToWishlist: rxMethod<Wishlist>(
         pipe(
@@ -34,7 +36,7 @@ export const WishlistStore = signalStore(
                 next: (res) => {
                   messageService.show(
                     'success',
-                    res.message || 'تمت الإضافة للمفضلة بنجاح',
+                    res.message || translate.instant('notifications.wishlist.addSuccess'),
                   );
                   console.log('3️⃣ next - response: ', res);
                   patchState(store, (state) => ({
@@ -47,7 +49,7 @@ export const WishlistStore = signalStore(
                   patchState(store, { isLoading: false });
                   messageService.show(
                     'error',
-                    err.error?.message || 'فشلت الإضافة للمفضلة',
+                    err.error?.message || translate.instant('notifications.wishlist.addFailed'),
                   );
                 },
               }),

@@ -3,17 +3,17 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthApiService } from './services/auth-api.service';
-import { AuthService } from './services/auth.service';
 import {  DataResponse, Message } from '@org/data-access';
 import { LoginRequest } from './models/login';
 import { RegisterResponse } from './models/register';
+import { AuthenticationService } from '@org/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthFacade {
   private readonly authApiService = inject(AuthApiService);
-  private readonly authService = inject(AuthService);
+  private readonly authService = inject(AuthenticationService);
   private readonly messageService = inject(Message);
   private readonly router = inject(Router);
 
@@ -28,6 +28,7 @@ export class AuthFacade {
           this._isLoading.set(false);
           if (res.status) {
             this.authService.setToken(res.payload.token);
+            this.authService.setUserData(res.payload.user);
             this.messageService.show('success', res.message || 'Login successful!');
             this.router.navigate(['/roseApp']);
           } else {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -25,10 +25,11 @@ import { SearchProducts } from '../search-products/search-products';
   styleUrl: './navbar.css',
 })
 export class Navbar {
+
   private readonly router = inject(Router);
   private translate = inject(TranslateService);
   readonly authService = inject(AuthenticationService);
-  firstName = this.authService.firstName;
+firstName = this.authService.getUserData()?.firstName || '';
   searchQuery = '';
   searchOpen = false;
   isArabic = true;
@@ -40,6 +41,7 @@ export class Navbar {
       this.closeSearch();
     }
   }
+
 
   openSearch(): void {
     this.searchOpen = true;

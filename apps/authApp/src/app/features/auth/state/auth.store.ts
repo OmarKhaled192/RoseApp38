@@ -36,6 +36,7 @@ export const authStore = signalStore(
               next: (res) => {
                 if (res.status) {
                   authService.setToken(res.payload.token);
+                  authService.setUserData(res.payload.user);
                   messageService.show('success', res.message || 'Login successful!');
                   patchState(store, { ...res.payload , isLoading: false });
                   router.navigate(['/roseApp']);

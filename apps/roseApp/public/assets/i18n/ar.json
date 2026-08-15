@@ -281,6 +281,42 @@
     "passwordMismatch": "كلمتا المرور غير متطابقتين.",
     "changingPassword": "جاري تغيير كلمة المرور...",
     "passwordChangedSuccess": "تم تغيير كلمة المرور بنجاح",
-    "passwordChangeFailed": "فشل تغيير كلمة المرور. حاول مرة أخرى."
+    "passwordChangeFailed": "فشل تغيير كلمة المرور. حاول مرة أخرى.",
+    "logout":"تسجيل خروج"
+  }
+  ,
+  "notifications": {
+    "coupon": {
+      "appliedSuccess": "تم تطبيق الكوبون بنجاح",
+      "applyFailed": "فشلت تطبيق الكوبون"
+    },
+    "order": {
+      "createdSuccess": "تم إنشاء الطلب بنجاح",
+      "createFailed": "تعذر إنشاء الطلب"
+    },
+    "wishlist": {
+      "addSuccess": "تمت الإضافة للمفضلة بنجاح",
+      "addFailed": "فشلت الإضافة للمفضلة"
+    },
+    "profile": {
+      "loadFailed": "فشل تحميل البيانات الشخصية",
+      "updateSuccess": "تم تحديث البيانات الشخصية بنجاح",
+      "updateFailed": "فشل تحديث البيانات الشخصية",
+      "photoUpdateSuccess": "تم تحديث الصورة الشخصية بنجاح",
+      "photoUpdateFailed": "فشل تحديث الصورة الشخصية",
+      "deleteSuccess": "تم حذف الحساب بنجاح",
+      "deleteFailed": "فشل حذف الحساب"
+    }
+  }
+  ,
+  "cart": {
+    "addSuccess": "تم إضافة المنتج للسلة بنجاح",
+    "addFailed": "فشلت إضافة المنتج للسلة",
+    "updateQuantitySuccess": "تم تحديث كمية المنتج بنجاح",
+    "updateQuantityFailed": "فشلت تحديث كمية المنتج",
+    "removeSuccess": "تم حذف المنتج من السلة بنجاح",
+    "removeFailed": "فشلت حذف المنتج من السلة",
+    "clearSuccess": "تم حذف كل المنتجات من السلة بنجاح",
+    "clearFailed": "فشلت حذف المنتجات من السلة"
   }
 }

@@ -51,12 +51,12 @@ export const OrderStore = signalStore(
                     order: res.payload.order,
                   }));
                   cartStore.clearCart();
-                  messageService.show('success', res.message || 'Order created successfully.');
+                  messageService.show('success', res.message || translate.instant('notifications.order.createdSuccess'));
                   router.navigate(['/roseApp']);
                 },
                 error: (err) => {
                   patchState(store, { isLoading: false });
-                  messageService.show('error', err.error?.message || 'Unable to create the order.');
+                  messageService.show('error', err.error?.message || translate.instant('notifications.order.createFailed'));
                 },
               }),
             ),

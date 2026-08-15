@@ -1,4 +1,5 @@
 import { computed, inject } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { tap, pipe, switchMap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import {
@@ -38,6 +39,7 @@ export const CouponStore = signalStore(
       store,
       couponService = inject(CouponService),
       messageService = inject(Message),
+      translate = inject(TranslateService),
     ) => ({
       applyCoupon: rxMethod<string>(
         pipe(
@@ -52,14 +54,14 @@ export const CouponStore = signalStore(
 
                   messageService.show(
                     'success',
-                    res.message || 'تم تطبيق الكوبون بنجاح',
+                    res.message || translate.instant('notifications.coupon.appliedSuccess'),
                   );
                 },
                 error: (err) => {
                   patchState(store, { isLoading: false });
                   messageService.show(
                     'error',
-                    err.error?.message || 'فشلت تطبيق الكوبون',
+                    err.error?.message || translate.instant('notifications.coupon.applyFailed'),
                   );
                 },
               }),

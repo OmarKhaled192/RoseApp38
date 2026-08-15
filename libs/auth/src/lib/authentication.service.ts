@@ -1,4 +1,5 @@
 import { computed, Injectable, signal, } from '@angular/core';
+import {User} from '@org/ui'
 interface DecodedToken {
   sub?: string;
   firstName?: string;
@@ -27,8 +28,26 @@ export class AuthenticationService {
     return this.getCookie('token');
   }
 
+  setUserData(data: User | null): void {
+    this.setCookie('data', JSON.stringify(data), 7);
+    this.loggedInState.set(true);
+  }
+
+ getUserData(): User | null {
+  const raw = this.getCookie('data');
+  if (!raw) {
+    return null;
+  }
+  try {
+    return JSON.parse(raw) as User;
+  } catch {
+    return null;
+  }
+}
+
   removeToken(): void {
     this.deleteCookie('token');
+    this.deleteCookie('data');
     this.loggedInState.set(false);
   }
 

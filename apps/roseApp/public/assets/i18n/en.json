@@ -283,6 +283,42 @@
     "passwordMismatch": "Passwords do not match.",
     "changingPassword": "Changing Password...",
     "passwordChangedSuccess": "Password changed successfully",
-    "passwordChangeFailed": "Change password failed. Please try again."
+    "passwordChangeFailed": "Change password failed. Please try again.",
+    "logout":"Logout"
+  }
+  ,
+  "notifications": {
+    "coupon": {
+      "appliedSuccess": "Coupon applied successfully.",
+      "applyFailed": "Failed to apply coupon."
+    },
+    "order": {
+      "createdSuccess": "Order created successfully.",
+      "createFailed": "Unable to create the order."
+    },
+    "wishlist": {
+      "addSuccess": "Added to wishlist successfully.",
+      "addFailed": "Failed to add to wishlist."
+    },
+    "profile": {
+      "loadFailed": "Failed to load profile data.",
+      "updateSuccess": "Profile updated successfully.",
+      "updateFailed": "Failed to update profile.",
+      "photoUpdateSuccess": "Profile photo updated successfully.",
+      "photoUpdateFailed": "Failed to update profile photo.",
+      "deleteSuccess": "Account deleted successfully.",
+      "deleteFailed": "Failed to delete account."
+    }
+  }
+  ,
+  "cart": {
+    "addSuccess": "Product added to cart successfully.",
+    "addFailed": "Failed to add product to cart.",
+    "updateQuantitySuccess": "Product quantity updated successfully.",
+    "updateQuantityFailed": "Failed to update product quantity.",
+    "removeSuccess": "Product removed from cart successfully.",
+    "removeFailed": "Failed to remove product from cart.",
+    "clearSuccess": "All products removed from cart successfully.",
+    "clearFailed": "Failed to clear cart."
   }
 }
