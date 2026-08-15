@@ -1,4 +1,4 @@
-<app-filter-section title="products.category" [showReset]="selectedIds().length > 0" (reset)="resetCategories.emit()">
+<app-filter-section title="products.category" [showReset]="selectedIds().length > 0" (resetData)="resetCategories.emit()">
   <ul class="flex flex-col gap-1 max-h-[280px] overflow-y-auto pr-1">
     @for (row of visibleItems(); track row.item.id) {
     <li [style.marginLeft.px]="row.depth * 16">

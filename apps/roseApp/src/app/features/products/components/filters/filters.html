@@ -1,6 +1,6 @@
 <div class="flex flex-col">
   <app-filter-section title="products.filters.occasion" [showReset]="selectedOccasions().length > 0"
-    (reset)="resetOccasions()">
+    (resetData)="resetOccasions()">
     <div class="grid grid-cols-2 gap-2 p-2 max-h-[220px] overflow-y-auto pr-1">
       @for (occasion of occasions(); track occasion.id) {
       <button type="button" (click)="toggleOccasion(occasion.id)"
@@ -16,7 +16,7 @@
     </div>
   </app-filter-section>
 
-  <app-filter-section title="products.filters.rating" [showReset]="!!selectedRating()" (reset)="resetRating()">
+  <app-filter-section title="products.filters.rating" [showReset]="!!selectedRating()" (resetData)="resetRating()">
     <div class="flex items-center gap-1 px-2 pb-1">
       @for (star of stars; track star) {
       <button type="button" (click)="setRating(star)" [attr.aria-label]="star + ' stars & up'">
@@ -28,7 +28,7 @@
   </app-filter-section>
 
   <app-filter-section title="products.filters.price" [showReset]="priceFrom() !== null || priceTo() !== null"
-    (reset)="resetPrice()">
+    (resetData)="resetPrice()">
     <div class="flex items-end gap-2 px-2 pb-2">
       <div class="flex-1">
         <label for="price-from" class="text-[11px] text-gray-400">{{ 'products.filters.from' | translate }}</label>

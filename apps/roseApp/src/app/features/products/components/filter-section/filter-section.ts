@@ -11,5 +11,5 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class FilterSection {
   @Input() title?: string;
   @Input() showReset = false;
-  @Output() reset = new EventEmitter<void>();
+  @Output() resetData = new EventEmitter<void>();
 }
