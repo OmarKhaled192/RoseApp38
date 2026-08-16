@@ -1,4 +1,4 @@
-import { inject,sInjectable } from '@angular/core';
+import { inject,Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '@org/data-access';
 import { ResetPassword } from '../models/reset-password';
