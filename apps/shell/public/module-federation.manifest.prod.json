@@ -1,0 +1,5 @@
+{
+  "adminDashboard": "adminDashboard/mf-manifest.json",
+  "authApp": "authApp/mf-manifest.json",
+  "roseApp": "roseApp/mf-manifest.json"
+}
