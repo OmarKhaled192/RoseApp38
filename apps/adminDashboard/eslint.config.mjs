@@ -37,7 +37,7 @@ export default [
 
             {
               sourceTag: 'scope:admin',
-              onlyDependOnLibsWithTags: ['scope:shared', 'scope:admin'],
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:admin', 'scope:auth'],
             },
 
             {
