@@ -9,13 +9,13 @@ import {
   ProductData,
   TitleSection,
 } from '@org/ui';
-import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
-import { ProductStore } from 'apps/roseApp/src/app/features/product/state/product.store';
 
-import { CategoryStore } from 'apps/roseApp/src/app/features/product/state/cateory.store';
 import { ICategory } from '../../model/category';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { WishlistStore } from '../../../wishlist/store/wishlistStore';
+import { ProductStore } from '../../../product/state/product.store';
+import { CategoryStore } from '../../../product/state/cateory.store';
+import { mapProductToCardData } from '../../../product/services/product-to-card.mapper';
 
 @Component({
   selector: 'app-most-popular',

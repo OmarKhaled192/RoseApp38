@@ -1,13 +1,11 @@
-import { Product } from './../../../wishlist/model/wishlist-product';
 import { Component, computed, inject, signal } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { Card, Button, DarkModeService } from '@org/ui';
-import { CardAction, CardData } from 'libs/shared/ui/src/models/card-type';
+import { Card, Button, DarkModeService, CardData, CardAction } from '@org/ui';
 import { Carousel } from 'primeng/carousel';
 
-import { ProductStore } from 'apps/roseApp/src/app/features/product/state/product.store';
-import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
 import { WishlistStore } from '../../../wishlist/store/wishlistStore';
+import { ProductStore } from '../../../product/state/product.store';
+import { mapProductToCardData } from '../../../product/services/product-to-card.mapper';
 
 @Component({
   selector: 'app-best-seller',

@@ -1,12 +1,11 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
 
 import { TranslatePipe } from '@ngx-translate/core';
-import { Card, DarkModeService, TitleSection } from '@org/ui';
-import { mapProductToCardData } from 'apps/roseApp/src/app/features/product/services/product-to-card.mapper';
-import { CardAction, CardData } from 'libs/shared/ui/src/models/card-type';
+import { Card, CardAction, CardData, DarkModeService, TitleSection } from '@org/ui';
 import { Carousel } from 'primeng/carousel';
 import { WishlistStore } from '../../../wishlist/store/wishlistStore';
 import { ProductStore } from '../../state/product.store';
+import { mapProductToCardData } from '../../services/product-to-card.mapper';
 
 @Component({
   selector: 'app-related-product',
