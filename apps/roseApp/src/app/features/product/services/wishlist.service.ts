@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject , Injectable } from '@angular/core';
 import { ApiService } from '@org/data-access';
 import { HttpClient } from '@angular/common/http';
 import { Wishlist } from "../models/wishlist";
@@ -9,8 +9,8 @@ import { Wishlist } from "../models/wishlist";
 export class WishlistService extends ApiService<Wishlist> {
   protected override endpoint = 'wishlist';
 
-  constructor( http: HttpClient) {
-    super(http);
+  constructor() {
+    super(inject(HttpClient));
   }
 
   

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ApiService } from '@org/data-access';
 import { HttpClient } from '@angular/common/http';
 import { Product, ProductData } from '@org/ui';
@@ -9,8 +9,8 @@ import { Product, ProductData } from '@org/ui';
 export class ProductService extends ApiService<ProductData> {
   protected override endpoint = 'products';
 
-  constructor(http: HttpClient) {
-    super(http);
+  constructor() {
+    super(inject(HttpClient));
   }
 
   getProductDetail(id: () => string) {

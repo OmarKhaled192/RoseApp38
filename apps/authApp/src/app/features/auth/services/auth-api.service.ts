@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse, ApiService, DataResponse } from '@org/data-access';
@@ -14,8 +14,8 @@ import { RegisterRequest, RegisterResponse } from '../models/register';
 export class AuthApiService extends ApiService<LoginRequest> {
   protected override endpoint = 'auth/';
 
-  constructor( http: HttpClient) {
-    super(http);
+  constructor() {
+    super(inject(HttpClient));
   }
 
   login(body: LoginRequest): Observable<DataResponse<RegisterResponse>> {

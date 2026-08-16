@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject , Injectable } from '@angular/core';
 import { ApiService } from '@org/data-access';
 import { Cart } from '../models/cart.interface';
 
@@ -9,8 +9,8 @@ import { Cart } from '../models/cart.interface';
 export class CartService extends ApiService<Cart> {
   protected override endpoint = 'cart';
 
-  constructor( http: HttpClient) {
-    super(http);
+  constructor() {
+    super(inject(HttpClient));
   }
 
 }
