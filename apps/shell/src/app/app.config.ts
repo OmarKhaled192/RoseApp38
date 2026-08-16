@@ -18,7 +18,7 @@ import { catchError, map } from 'rxjs/operators';
 import { authenticationInterceptor } from '@org/auth';
 
 
-const DEFAULT_LANG = 'en';
+const DEFAULT_LANG: 'en' | 'ar' = 'en';
 
 export class MultiTranslateHttpLoader implements TranslateLoader {
   constructor(private http: HttpClient) { }
@@ -96,7 +96,7 @@ export const appConfig: ApplicationConfig = {
       useFactory: () => () => {
         const document = inject(DOCUMENT);
         document.documentElement.lang = DEFAULT_LANG;
-        document.documentElement.dir = DEFAULT_LANG === 'ar' ? 'rtl' : 'ltr';
+document.documentElement.dir = (DEFAULT_LANG as string) === 'ar' ? 'rtl' : 'ltr';
         return Promise.resolve();
       },
     },
