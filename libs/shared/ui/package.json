@@ -10,7 +10,10 @@
     "@angular/router": "21.2.9",
     "vite": "^7.3.2",
     "@analogjs/vite-plugin-angular": "2.2.0",
-    "@nx/vite": "22.7.5"
+    "@nx/vite": "22.7.5",
+    "@org/data-access": "*",
+    "rxjs": "*",
+    "@ngrx/signals": "*"
   },
   "sideEffects": false
 }
