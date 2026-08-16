@@ -25,10 +25,10 @@ export class MultiTranslateHttpLoader implements TranslateLoader {
 
   getTranslation(lang: string): Observable<any> {
     const urls = [
-      `/assets/i18n/${lang}.json`,
-      `/assets/i18n/authApp/${lang}.json`,
-      `/assets/i18n/roseApp/${lang}.json`,
-      `/assets/i18n/adminDashboard/${lang}.json`
+      `assets/i18n/${lang}.json`,
+      `assets/i18n/authApp/${lang}.json`,
+      `assets/i18n/roseApp/${lang}.json`,
+      `assets/i18n/adminDashboard/${lang}.json`
     ];
 
     const requests = urls.map(url =>
