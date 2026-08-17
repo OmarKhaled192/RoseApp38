@@ -95,14 +95,21 @@ jobs:
 
       - name: Assemble deploy folder
         run: |
+          set -e
           mkdir -p deploy-output
-          cp -r dist/apps/shell/* deploy-output/ || cp -r dist/shell/* deploy-output/
+          cp -r dist/apps/shell/* deploy-output/
           mkdir -p deploy-output/authApp
-          cp -r dist/apps/authApp/* deploy-output/authApp/ || cp -r dist/authApp/* deploy-output/authApp/
+          cp -r dist/apps/authApp/* deploy-output/authApp/
           mkdir -p deploy-output/adminDashboard
-          cp -r dist/apps/adminDashboard/* deploy-output/adminDashboard/ || cp -r dist/adminDashboard/* deploy-output/adminDashboard/
+          cp -r dist/apps/adminDashboard/* deploy-output/adminDashboard/
           mkdir -p deploy-output/roseApp
-          cp -r dist/apps/roseApp/* deploy-output/roseApp/ || cp -r dist/roseApp/* deploy-output/roseApp/
+          cp -r dist/apps/roseApp/* deploy-output/roseApp/
+          cp apps/shell/public/404.html deploy-output/404.html
+          cp apps/authApp/public/404.html deploy-output/authApp/404.html
+          cp apps/adminDashboard/public/404.html deploy-output/adminDashboard/404.html
+          cp apps/roseApp/public/404.html deploy-output/roseApp/404.html
+          echo "--- Verifying roseApp base href ---"
+          grep -o '<base href="[^"]*"' deploy-output/roseApp/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

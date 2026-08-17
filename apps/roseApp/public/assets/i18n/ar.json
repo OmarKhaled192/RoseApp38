@@ -182,6 +182,14 @@
     "empty": "سلتك فارغة.",
     "continueShopping": "متابعة التسوق",
     "youMayLike": "منتجات قد تعجبك",
+    "addSuccess": "تم إضافة المنتج للسلة بنجاح",
+    "addFailed": "فشلت إضافة المنتج للسلة",
+    "updateQuantitySuccess": "تم تحديث كمية المنتج بنجاح",
+    "updateQuantityFailed": "فشلت تحديث كمية المنتج",
+    "removeSuccess": "تم حذف المنتج من السلة بنجاح",
+    "removeFailed": "فشلت حذف المنتج من السلة",
+    "clearSuccess": "تم حذف كل المنتجات من السلة بنجاح",
+    "clearFailed": "فشلت حذف المنتجات من السلة",
     "summary": {
       "title": "ملخص الطلب",
       "couponPlaceholder": "كود الخصم",
@@ -307,16 +315,5 @@
       "deleteSuccess": "تم حذف الحساب بنجاح",
       "deleteFailed": "فشل حذف الحساب"
     }
-  }
-  ,
-  "cart": {
-    "addSuccess": "تم إضافة المنتج للسلة بنجاح",
-    "addFailed": "فشلت إضافة المنتج للسلة",
-    "updateQuantitySuccess": "تم تحديث كمية المنتج بنجاح",
-    "updateQuantityFailed": "فشلت تحديث كمية المنتج",
-    "removeSuccess": "تم حذف المنتج من السلة بنجاح",
-    "removeFailed": "فشلت حذف المنتج من السلة",
-    "clearSuccess": "تم حذف كل المنتجات من السلة بنجاح",
-    "clearFailed": "فشلت حذف المنتجات من السلة"
   }
 }

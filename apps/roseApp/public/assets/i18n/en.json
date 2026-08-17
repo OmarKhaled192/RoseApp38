@@ -226,7 +226,6 @@
     "item": "item",
     "items": "items",
     "clearWishlist": "Clear Wishlist",
-    "continueShopping": "Continue Shopping",
     "inStock": "In Stock",
     "outOfStock": "Out of Stock",
     "ratings": "ratings",
@@ -239,7 +238,15 @@
     "confirm": "Confirm",
     "emptyTitle": "Your wishlist is empty",
     "emptyDescription": "Save the items you love by tapping the heart icon — they'll show up here so you can find them anytime.",
-    "continueShopping": "Continue Shopping"
+    "continueShopping": "Continue Shopping",
+     "addSuccess": "Product added to cart successfully.",
+    "addFailed": "Failed to add product to cart.",
+    "updateQuantitySuccess": "Product quantity updated successfully.",
+    "updateQuantityFailed": "Failed to update product quantity.",
+    "removeSuccess": "Product removed from cart successfully.",
+    "removeFailed": "Failed to remove product from cart.",
+    "clearSuccess": "All products removed from cart successfully.",
+    "clearFailed": "Failed to clear cart."
   },
 
   "checkoutPayment": {
@@ -309,16 +316,5 @@
       "deleteSuccess": "Account deleted successfully.",
       "deleteFailed": "Failed to delete account."
     }
-  }
-  ,
-  "cart": {
-    "addSuccess": "Product added to cart successfully.",
-    "addFailed": "Failed to add product to cart.",
-    "updateQuantitySuccess": "Product quantity updated successfully.",
-    "updateQuantityFailed": "Failed to update product quantity.",
-    "removeSuccess": "Product removed from cart successfully.",
-    "removeFailed": "Failed to remove product from cart.",
-    "clearSuccess": "All products removed from cart successfully.",
-    "clearFailed": "Failed to clear cart."
   }
 }
