@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Layout } from '../features/layout/layout';
+import { RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-roseapp-entry',
-  template: `<app-layout></app-layout>`,
+  template: `<router-outlet/>`,
   standalone: true,
-  imports: [Layout]
+  imports: [RouterOutlet],
 })
 export class RoseApp { }

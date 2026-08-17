@@ -2,11 +2,12 @@ import { Route } from '@angular/router';
 import { HomeComponent } from '../features/home/home';
 import { RoseApp } from './entry';
 import { CartComponent } from '../features/checkout/pages/checkout/cart/cart';
+import { Layout } from '../features/layout/layout';
 
 export const remoteRoutes: Route[] = [
   {
     path: '',
-    component: RoseApp,
+    component: Layout,
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {

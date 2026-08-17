@@ -22,21 +22,21 @@ export class SpecialGifts {
   }
   slides = signal<BannerSlide[]>([
     {
-      image: '/images/SpecialGifts/carousel.png',
+      image: 'images/SpecialGifts/carousel.png',
       titleKey: 'specialGifts.slides.flowers.title',
       subtitleKey: 'specialGifts.slides.flowers.subtitle',
       ctaLabelKey: 'specialGifts.slides.flowers.ctaLabel',
       ctaLink: '/category/flowers',
     },
     {
-      image: '/images/SpecialGifts/carousel.png',
+      image: 'images/SpecialGifts/carousel.png',
       titleKey: 'specialGifts.slides.chocolates.title',
       subtitleKey: 'specialGifts.slides.chocolates.subtitle',
       ctaLabelKey: 'specialGifts.slides.chocolates.ctaLabel',
       ctaLink: '/category/chocolates',
     },
     {
-      image: '/images/SpecialGifts/carousel.png',
+      image: 'images/SpecialGifts/carousel.png',
       titleKey: 'specialGifts.slides.flowers.title',
       subtitleKey: 'specialGifts.slides.flowers.subtitle',
       ctaLabelKey: 'specialGifts.slides.flowers.ctaLabel',
@@ -46,17 +46,17 @@ export class SpecialGifts {
 
   cards = signal<FeaturedCard[]>([
     {
-      image: '/images/SpecialGifts/wedding.png',
+      image: 'images/SpecialGifts/wedding.png',
       badgeKey: 'specialGifts.cards.wedding.badge',
       titleKey: 'specialGifts.cards.wedding.title',
     },
     {
-      image: '/images/SpecialGifts/Engagement.png',
+      image: 'images/SpecialGifts/Engagement.png',
       badgeKey: 'specialGifts.cards.engagement.badge',
       titleKey: 'specialGifts.cards.engagement.title',
     },
     {
-      image: '/images/SpecialGifts/Anniversary.png',
+      image: 'images/SpecialGifts/Anniversary.png',
       badgeKey: 'specialGifts.cards.anniversary.badge',
       titleKey: 'specialGifts.cards.anniversary.title',
     },

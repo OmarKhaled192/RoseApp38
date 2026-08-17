@@ -35,25 +35,25 @@ export class GallerySection {
   // ];
   gallery: GalleryItem[] = [
     {
-      image: '/images/galleries/first.png',
+      image: 'images/galleries/first.png',
       class: 'large',
     },
     {
-      image: '/images/galleries/third.png',
+      image: 'images/galleries/third.png',
     },
     {
-      image: '/images/galleries/fifth.png',
+      image: 'images/galleries/fifth.png',
     },
     {
-      image: '/images/galleries/fourth.png',
+      image: 'images/galleries/fourth.png',
       class: 'large'
     },
     {
-      image: '/images/galleries/sixth.png',
+      image: 'images/galleries/sixth.png',
       class: 'large'
     },
     {
-      image: '/images/galleries/second.png',
+      image: 'images/galleries/second.png',
     },
   ];
 }
