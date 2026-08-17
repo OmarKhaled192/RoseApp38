@@ -81,6 +81,9 @@ jobs:
       - name: Build shell app
         run: pnpm exec nx build shell --configuration=production --base-href=/${{ github.event.repository.name }}/
 
+      - name: Override module federation manifest for production
+        run: cp apps/shell/public/module-federation.manifest.prod.json dist/apps/shell/module-federation.manifest.json
+
       - name: Build authApp
         run: pnpm exec nx build authApp --configuration=production --base-href=/${{ github.event.repository.name }}/authApp/
 
