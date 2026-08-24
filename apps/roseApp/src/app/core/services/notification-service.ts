@@ -18,7 +18,7 @@ export class NotificationService extends ApiService<NotificationItem> {
     return this.getListResource();
   }
 
-  getUnreadCount(): HttpResourceRef<DataResponse<{ count: number }> | undefined> {
+  getUnreadCount(): HttpResourceRef<DataResponse<{ unreadCount: number }> | undefined> {
     return this.getListResourceData('/unread-count');
   }
 

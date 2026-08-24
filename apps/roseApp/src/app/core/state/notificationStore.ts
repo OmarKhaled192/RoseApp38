@@ -24,7 +24,7 @@ export const NotificationStore = signalStore(
   withComputed(({ _notificationResource, _unreadCountResource }) => ({
     notificationsList: computed(() => _notificationResource.value()?.payload.data || []),
     notificationsLoading: computed(() => _notificationResource.isLoading()),
-    unreadCount: computed(() => _unreadCountResource.value()?.payload?.count || 0),
+    unreadCount: computed(() => _unreadCountResource.value()?.payload?.unreadCount || 0),
   })),
   withMethods((
     store,
