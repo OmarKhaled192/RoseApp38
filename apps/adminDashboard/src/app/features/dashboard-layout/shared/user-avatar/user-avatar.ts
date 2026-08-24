@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { AuthenticationService } from '@org/auth';
 
 
 @Component({
@@ -8,9 +9,11 @@ import { Component, Input } from '@angular/core';
   templateUrl: './user-avatar.html',
 })
 export class UserAvatar {
-  @Input() name: string | null | undefined = '';
-  @Input() email: string | null | undefined = '';
-  @Input() photoUrl: string | null | undefined = null;
+  readonly authService = inject(AuthenticationService);
+  firstName = this.authService.getUserData()?.firstName || '';
+  lastName = this.authService.getUserData()?.lastName || '';
+  email = this.authService.getUserData()?.email || '';
+  photo = this.authService.getUserData()?.photo || '';
   @Input() size = 40;
 
   hasPhoto = true;
@@ -23,26 +26,22 @@ export class UserAvatar {
 
   ngOnChanges(): void {
     this.hasPhoto = true;
+
   }
 
   get userInitial(): string {
-    const name = this.name?.trim();
-    if (!name) return '?';
+    const first = this.firstName?.trim()?.charAt(0)?.toUpperCase() || '';
+    const last = this.lastName?.trim()?.charAt(0)?.toUpperCase() || '';
 
-    const parts = name.split(/\s+/).filter(Boolean);
-
-    if (parts.length === 1) {
-      return parts[0].charAt(0).toUpperCase();
+    if (first && last) {
+      return `${first}${last}`;
     }
 
-    const first = parts[0].charAt(0).toUpperCase();
-    const last = parts[parts.length - 1].charAt(0).toUpperCase();
-
-    return `${first}${last}`;
+    return first || last || '?';
   }
 
   get avatarColor(): string {
-    const seed = this.name || this.email || '';
+    const seed = this.firstName || this.email || '';
     const hash = this.hashString(seed);
     const index = hash % this.avatarPalette.length;
     return this.avatarPalette[index];
@@ -56,5 +55,5 @@ export class UserAvatar {
     }
     return Math.abs(hash);
   }
-  
+
 }

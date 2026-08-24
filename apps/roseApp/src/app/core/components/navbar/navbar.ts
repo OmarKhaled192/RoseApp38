@@ -29,7 +29,7 @@ export class Navbar {
   private readonly router = inject(Router);
   private translate = inject(TranslateService);
   readonly authService = inject(AuthenticationService);
-firstName = this.authService.getUserData()?.firstName || '';
+  firstName = this.authService.getUserData()?.firstName || '';
   searchQuery = '';
   searchOpen = false;
   isArabic = true;

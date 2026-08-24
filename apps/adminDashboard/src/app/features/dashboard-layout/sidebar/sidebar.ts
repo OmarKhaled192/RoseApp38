@@ -3,6 +3,7 @@ import { Component, ElementRef, HostListener, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AppUser } from '../interface/user';
 import { UserAvatar } from "../shared/user-avatar/user-avatar";
+import { AuthenticationService } from '@org/auth';
 
 
 
@@ -10,17 +11,19 @@ import { UserAvatar } from "../shared/user-avatar/user-avatar";
   selector: 'app-sidebar',
   imports: [RouterLinkActive, RouterLink, CommonModule, UserAvatar],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.css',
+
 })
 export class Sidebar {
 
   router = inject(Router)
   menuOpen = false;
-  user: AppUser | null = {
-    name: 'Obaid Ramadan',
-    email: 'ObaidRamadan@gmail.com',
-    photoUrl: null
-  };
+
+  readonly authService = inject(AuthenticationService);
+  firstName = this.authService.getUserData()?.firstName || '';
+  lastName = this.authService.getUserData()?.lastName || '';
+  email = this.authService.getUserData()?.email || '';
+  photo = this.authService.getUserData()?.photo || '';
+
 
   constructor(private elementRef: ElementRef) { }
 

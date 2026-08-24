@@ -2,9 +2,9 @@
     class="rounded-full flex items-center justify-center overflow-hidden text-white font-semibold uppercase flex-shrink-0"
     [style.width.px]="size" [style.height.px]="size"
     [style.font-size.px]="size * 0.35"
-    [style.background]="!photoUrl || !hasPhoto ? avatarColor : null">
-    @if (hasPhoto && photoUrl) {
-    <img [src]="photoUrl" [alt]="name || 'avatar'" (error)="hasPhoto = false"
+    [style.background]="!photo || !hasPhoto ? avatarColor : null">
+    @if (hasPhoto && photo) {
+    <img [src]="photo" [alt]="firstName || 'avatar'" (error)="hasPhoto = false"
         class="w-full h-full object-cover" />
     } @else {
     <span

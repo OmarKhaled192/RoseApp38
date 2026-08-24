@@ -6,19 +6,20 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { filter } from 'rxjs';
 import { AppUser } from '../interface/user';
 import { UserAvatar } from "../shared/user-avatar/user-avatar";
+import { AuthenticationService } from '@org/auth';
 
-export interface NavbarUser {
-  name: string;
-  email: string;
-  photoUrl?: string | null;
-}
+
 @Component({
   selector: 'app-navbar',
   imports: [BreadcrumbModule, CommonModule, UserAvatar],
   templateUrl: './navbar.html',
 })
 export class Navbar implements OnInit {
-
+  readonly authService = inject(AuthenticationService);
+  firstName = this.authService.getUserData()?.firstName || '';
+  lastName = this.authService.getUserData()?.lastName || '';
+  email = this.authService.getUserData()?.email || '';
+  photo = this.authService.getUserData()?.photo || '';
 
   user: AppUser | null = {
     name: 'Obaid Ramadan',
@@ -37,10 +38,10 @@ export class Navbar implements OnInit {
   activatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
-  
+
     this.updateBreadcrumb();
 
-   
+
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -79,7 +80,7 @@ export class Navbar implements OnInit {
   }
 
   toggleMobileMenu(event: Event): void {
-    
+
     event.stopPropagation();
     this.menuOpen = !this.menuOpen;
     this.mobileMenuToggle.emit();
