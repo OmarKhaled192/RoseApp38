@@ -56,4 +56,5 @@ export class UserAvatar {
     }
     return Math.abs(hash);
   }
+  
 }
