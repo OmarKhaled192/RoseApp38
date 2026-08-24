@@ -23,7 +23,7 @@ export class NotificationService extends ApiService<NotificationItem> {
   }
 
   markAsRead(id: string): Observable<NotificationItem> {
-    return this.patch(`${id}/read`, {});
+    return this.patch(`${id}`,{isRead: true});
   }
 
   markAllAsRead(): Observable<void> {

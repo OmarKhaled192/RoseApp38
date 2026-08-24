@@ -32,7 +32,10 @@ export const NotificationStore = signalStore(
     messageService = inject(Message),
     translate = inject(TranslateService)
   ) => ({
-
+    reloadNotifications: () => {
+      store._notificationResource.reload();
+      store._unreadCountResource.reload();
+    },
     markAsRead: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
@@ -43,11 +46,11 @@ export const NotificationStore = signalStore(
                 patchState(store, { isLoading: false });
                 store._notificationResource.reload();
                 store._unreadCountResource.reload();
-                messageService.show('success', translate.instant('notification.markReadSuccess'));
+                messageService.show('success', translate.instant('notifications.markReadSuccess'));
               },
               error: (err) => {
                 patchState(store, { isLoading: false });
-                messageService.show('error', err.error?.message || translate.instant('notification.markReadFailed'));
+                messageService.show('error', err.error?.message || translate.instant('notifications.markReadFailed'));
               }
             })
           )
