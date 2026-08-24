@@ -9,6 +9,9 @@ import {
   LanguageSwitcherComponent
 } from '@org/ui';
 import { SearchProducts } from '../search-products/search-products';
+import { NotificationStore } from '../../state/notificationStore';
+import { NotificationComponent } from "./notification/notification";
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -20,16 +23,18 @@ import { SearchProducts } from '../search-products/search-products';
     RouterLink,
     RouterModule,
     SearchProducts,
+    NotificationComponent
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar {
-
+  readonly notificationStore = inject(NotificationStore);
+  isNotificationsOpen = signal<boolean>(false);
   private readonly router = inject(Router);
   private translate = inject(TranslateService);
   readonly authService = inject(AuthenticationService);
-firstName = this.authService.getUserData()?.firstName || '';
+  firstName = this.authService.getUserData()?.firstName || '';
   searchQuery = '';
   searchOpen = false;
   isArabic = true;
@@ -128,6 +133,17 @@ firstName = this.authService.getUserData()?.firstName || '';
   }
 
   onNotifications(): void {
-    console.log('Notifications clicked');
+    this.isNotificationsOpen.update((val) => !val);
+
+  }
+
+  @HostListener('document:click')
+  closeNotifications(): void {
+    this.isNotificationsOpen.set(false);
+  }
+
+  toggleNotifications(event: MouseEvent): void {
+    event.stopPropagation(); 
+    this.isNotificationsOpen.update((open) => !open);
   }
 }

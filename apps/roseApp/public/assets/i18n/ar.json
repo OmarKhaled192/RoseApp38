@@ -294,6 +294,21 @@
   }
   ,
   "notifications": {
+    "title": "الإشعارات",
+    "markAllRead": "تحديد الكل كمقروء",
+    "clearAll": "مسح الكل",
+    "markAsRead": "تحديد كمقروء",
+    "delete": "حذف",
+    "empty": "لا توجد إشعارات حالياً",
+    "loading": "جاري تحميل الإشعارات...",
+    "markReadSuccess": "تم تمييز الإشعار كمقروء بنجاح",
+    "markReadFailed": "فشل في تمييز الإشعار كمقروء",
+    "markAllReadSuccess": "تم تحديد جميع الإشعارات كمقروءة",
+    "markAllReadFailed": "فشل في تحديد جميع الإشعارات كمقروءة",
+    "deleteSuccess": "تم حذف الإشعار بنجاح",
+    "deleteFailed": "فشل في حذف الإشعار",
+    "clearAllSuccess": "تم مسح جميع الإشعارات",
+    "clearAllFailed": "فشل في مسح الإشعارات",
     "coupon": {
       "appliedSuccess": "تم تطبيق الكوبون بنجاح",
       "applyFailed": "فشلت تطبيق الكوبون"
