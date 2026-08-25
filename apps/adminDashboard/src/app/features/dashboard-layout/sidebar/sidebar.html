@@ -74,8 +74,7 @@
 
 
     <div class="h-16 border-t border-[#F0E9EA] flex items-center px-4 gap-2.5">
-        <app-userAavatar 
-            [size]="40"></app-userAavatar>
+        <app-userAavatar   [size]="40" />
         <div class="flex-1 min-w-0">
             <h5 class="m-0 text-xs font-semibold text-[#3A2C30] whitespace-nowrap overflow-hidden text-ellipsis">{{
                 firstName }} {{lastName}}</h5>
@@ -83,7 +82,7 @@
         </div>
         <div class="relative">
             <button class="bg-transparent border-none text-[#B7AAAE] hover:text-[#6B5C60] cursor-pointer text-sm p-1.5"
-                (click)="toggleMenu($event)">
+                (click)="toggleMenu($event)">       
                 <i class="pi pi-ellipsis-v"></i>
             </button>
             @if (menuOpen) {

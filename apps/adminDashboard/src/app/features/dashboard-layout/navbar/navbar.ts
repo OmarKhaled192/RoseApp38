@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AuthenticationService } from '@org/auth';
 import { MenuItem } from 'primeng/api';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { filter } from 'rxjs';
-import { AppUser } from '../interface/user';
 import { UserAvatar } from "../shared/user-avatar/user-avatar";
-import { AuthenticationService } from '@org/auth';
 
 
 @Component({
@@ -21,11 +20,7 @@ export class Navbar implements OnInit {
   email = this.authService.getUserData()?.email || '';
   photo = this.authService.getUserData()?.photo || '';
 
-  user: AppUser | null = {
-    name: 'Obaid Ramadan',
-    email: 'ObaidRamadan@gmail.com',
-    photoUrl: null
-  };
+
 
 
   @Output() mobileMenuToggle = new EventEmitter<void>();
@@ -91,8 +86,9 @@ export class Navbar implements OnInit {
 
   }
 
-  logout() {
-    // console.log('dddd');
+  logout(): void {
+    this.authService.removeToken();
+    this.router.navigateByUrl('/auth/login');
   }
 
 }

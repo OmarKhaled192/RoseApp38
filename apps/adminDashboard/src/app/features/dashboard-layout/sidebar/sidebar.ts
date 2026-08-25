@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { AppUser } from '../interface/user';
-import { UserAvatar } from "../shared/user-avatar/user-avatar";
 import { AuthenticationService } from '@org/auth';
+import { UserAvatar } from "../shared/user-avatar/user-avatar";
 
 
 
@@ -45,13 +44,15 @@ export class Sidebar {
 
   }
 
+
+
   logout(): void {
+    this.authService.removeToken();
+    this.router.navigateByUrl('/auth/login');
     this.menuOpen = false;
     sessionStorage.clear();
     localStorage.clear();
-
     this.router.navigate(['/login'])
-
   }
 
 }
