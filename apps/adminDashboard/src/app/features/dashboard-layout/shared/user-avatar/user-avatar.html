@@ -1,14 +1,25 @@
 <div
     class="rounded-full flex items-center justify-center overflow-hidden text-white font-semibold uppercase flex-shrink-0"
-    [style.width.px]="size" [style.height.px]="size"
-    [style.font-size.px]="size * 0.35"
-    [style.background]="!photo || !hasPhoto ? avatarColor : null">
-    @if (hasPhoto && photo) {
-    <img [src]="photo" [alt]="firstName || 'avatar'" (error)="hasPhoto = false"
+    [style.width.px]="size()"
+    [style.height.px]="size()"
+    [style.font-size.px]="size() * 0.35"
+    [style.background]="!photo() || !hasPhoto() ? avatarColor() : null">
+
+    @if (hasPhoto() && photo()) {
+
+    <img
+        [src]="photo()"
+        [alt]="firstName() || 'avatar'"
+        (error)="onImageError()"
         class="w-full h-full object-cover" />
+
     } @else {
+
     <span
-        class="flex items-center justify-center w-full h-full leading-none select-none">{{
-        userInitial }}</span>
+        class="flex items-center justify-center w-full h-full leading-none select-none">
+        {{ userInitial() }}
+    </span>
+
     }
+
 </div>

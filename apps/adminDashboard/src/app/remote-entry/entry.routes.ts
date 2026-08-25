@@ -1,11 +1,13 @@
 import { Route } from '@angular/router';
-import { RemoteEntry } from './entry';
+import { DashboardLayout } from '../features/dashboard-layout/dashboard-layout';
 
 export const remoteRoutes: Route[] = [
-    
-    { path: '', component: RemoteEntry },
     {
-        
+        path: '',
+        component: DashboardLayout,
+        children: [
+            // { path: '', component:DashboardLayout , pathMatch: 'full' },
+        ]
     }
 
 ];
