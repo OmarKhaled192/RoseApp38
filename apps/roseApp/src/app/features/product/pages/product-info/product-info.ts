@@ -24,8 +24,11 @@ export class ProductInfo {
       const product = this.product();
       if (!product) return;
       const images = this.parseImages(product.gallery);
+      const cover = product.cover
       if (images[0]) {
         this.selectImage(images[0], 1);
+      } else {
+        this.selectedImage.set(cover);
       }
     });
   }
@@ -39,17 +42,17 @@ export class ProductInfo {
   }
 
 
- toggleWishlist() {
-  this.isWishlist.set(true)
-  const productId = this.productId();
-  if (!productId) return;
-  this.wishlistStore.addToWishlist({ productId });
-}
+  toggleWishlist() {
+    this.isWishlist.set(true)
+    const productId = this.productId();
+    if (!productId) return;
+    this.wishlistStore.addToWishlist({ productId });
+  }
 
   addToCart() {
-  const productId = this.productId();
-  if (!productId) return;
-   this.cartStore.addToCart({productId, quantity:1});
+    const productId = this.productId();
+    if (!productId) return;
+    this.cartStore.addToCart({ productId, quantity: 1 });
   }
 
   parseImages(data: string): string[] {
