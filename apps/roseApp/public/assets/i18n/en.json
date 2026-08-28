@@ -295,6 +295,21 @@
   }
   ,
   "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "clearAll": "Clear all notifications",
+    "markAsRead": "Mark as read",
+    "delete": "Delete notification",
+    "empty": "No notifications to display.",
+    "loading": "Loading notifications...",
+    "markReadSuccess": "Notification marked as read successfully",
+    "markReadFailed": "Failed to mark notification as read",
+    "markAllReadSuccess": "All notifications marked as read",
+    "markAllReadFailed": "Failed to mark all notifications as read",
+    "deleteSuccess": "Notification deleted successfully",
+    "deleteFailed": "Failed to delete notification",
+    "clearAllSuccess": "All notifications cleared",
+    "clearAllFailed": "Failed to clear notifications",
     "coupon": {
       "appliedSuccess": "Coupon applied successfully.",
       "applyFailed": "Failed to apply coupon."
