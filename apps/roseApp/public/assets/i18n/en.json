@@ -248,7 +248,6 @@
     "emptyDescription": "Save the items you love by tapping the heart icon — they'll show up here so you can find them anytime.",
     "continueShopping": "Continue Shopping"
   },
-
   "checkoutPayment": {
     "testDescription": "Your payment will be confirmed automatically.",
     "testTitle": "Confirming payment",
@@ -291,9 +290,8 @@
     "changingPassword": "Changing Password...",
     "passwordChangedSuccess": "Password changed successfully",
     "passwordChangeFailed": "Change password failed. Please try again.",
-    "logout":"Logout"
-  }
-  ,
+    "logout": "Logout"
+  },
   "notifications": {
     "headers": {
       "success": "Success",
@@ -303,6 +301,21 @@
       "secondary": "Notice",
       "contrast": "Notice"
     },
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "clearAll": "Clear all notifications",
+    "markAsRead": "Mark as read",
+    "delete": "Delete notification",
+    "empty": "No notifications to display.",
+    "loading": "Loading notifications...",
+    "markReadSuccess": "Notification marked as read successfully",
+    "markReadFailed": "Failed to mark notification as read",
+    "markAllReadSuccess": "All notifications marked as read",
+    "markAllReadFailed": "Failed to mark all notifications as read",
+    "deleteSuccess": "Notification deleted successfully",
+    "deleteFailed": "Failed to delete notification",
+    "clearAllSuccess": "All notifications cleared",
+    "clearAllFailed": "Failed to clear notifications",
     "coupon": {
       "appliedSuccess": "Coupon applied successfully.",
       "applyFailed": "Failed to apply coupon."

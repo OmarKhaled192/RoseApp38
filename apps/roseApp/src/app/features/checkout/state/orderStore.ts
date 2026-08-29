@@ -9,6 +9,7 @@ import { pipe, switchMap, tap } from 'rxjs';
 import { CreateOrderRequest } from '../models/create-order-request';
 import { Order } from '../models/order';
 import { OrderService } from '../services/order';
+import { NotificationStore } from '../../../core/state/notificationStore';
 
 export interface OrderState extends LoadingState {
   order: Order | null;
@@ -34,6 +35,7 @@ export const OrderStore = signalStore(
     (
       store,
       orderService = inject(OrderService),
+      notificationStore = inject(NotificationStore),
       cartStore = inject(CartStore),
       router = inject(Router),
       messageService = inject(Message),
@@ -52,6 +54,7 @@ export const OrderStore = signalStore(
                   }));
                   cartStore.clearCart();
                   messageService.show('success', res.message || translate.instant('notifications.order.createdSuccess'));
+                 notificationStore.reloadNotifications();
                   router.navigate(['/roseApp']);
                 },
                 error: (err) => {
