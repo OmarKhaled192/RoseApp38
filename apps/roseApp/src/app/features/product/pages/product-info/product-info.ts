@@ -1,8 +1,8 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DecimalPipe } from '@angular/common';
-import { WishlistStore } from '../../state/wishlist.store';
+import { WishlistStore } from '../../../wishlist/store/wishlistStore';
 import { CartStore, ProductData } from '@org/ui';
 
 @Component({
@@ -13,9 +13,12 @@ import { CartStore, ProductData } from '@org/ui';
 export class ProductInfo {
   readonly cartStore = inject(CartStore);
   readonly wishlistStore = inject(WishlistStore);
-  isWishlist = signal(false);
   product = input<ProductData | null>(null);
   productId = input<string>();
+  readonly isWishlist = computed(() => {
+    const productId = this.productId();
+    return !!productId && this.wishlistStore.products().some((item) => item.productId === productId);
+  });
   isLoading = input<boolean>();
   readonly selectedIndex = signal(1);
   selectedImage = signal<string | null>(null);
@@ -43,10 +46,13 @@ export class ProductInfo {
 
 
   toggleWishlist() {
-    this.isWishlist.set(true)
     const productId = this.productId();
     if (!productId) return;
-    this.wishlistStore.addToWishlist({ productId });
+    if (this.isWishlist()) {
+      this.wishlistStore.removeProductFromWishlist(productId);
+    } else {
+      this.wishlistStore.addProductToWishlist(productId);
+    }
   }
 
   addToCart() {

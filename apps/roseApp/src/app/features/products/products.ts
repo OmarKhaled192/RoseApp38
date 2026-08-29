@@ -18,7 +18,6 @@ import { WishlistStore } from '../wishlist/store/wishlistStore';
   imports: [Card, TranslatePipe, Pagination, ProductsCategory, Filters],
   templateUrl: './products.html',
   styleUrl: './products.css',
-  providers: [WishlistStore],
 })
 export class Products {
   readonly categoryStore = inject(CategoryStore);

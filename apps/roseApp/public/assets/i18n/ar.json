@@ -294,6 +294,14 @@
   }
   ,
   "notifications": {
+    "headers": {
+      "success": "تم بنجاح",
+      "info": "معلومة",
+      "warn": "تنبيه",
+      "error": "حدث خطأ",
+      "secondary": "إشعار",
+      "contrast": "إشعار"
+    },
     "coupon": {
       "appliedSuccess": "تم تطبيق الكوبون بنجاح",
       "applyFailed": "فشلت تطبيق الكوبون"

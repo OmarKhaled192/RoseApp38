@@ -12,7 +12,6 @@ import { mapProductToCardData } from '../../../product/services/product-to-card.
   imports: [Card, Button, TranslatePipe, Carousel],
   templateUrl: './best-seller.html',
   styleUrl: './best-seller.css',
-  providers: [WishlistStore],
 })
 export class BestSeller {
   private translateService = inject(TranslateService);

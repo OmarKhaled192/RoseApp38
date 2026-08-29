@@ -127,7 +127,7 @@
 
       @if (footerActions().length) {
       <button
-        (click)="footerActions()[0].action()"
+        (click)="$event.stopPropagation(); footerActions()[0].action()"
       [disabled]="card().stock === 0"
         class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#A6252A] text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-[#8F1D22]"
       >

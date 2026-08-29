@@ -27,6 +27,7 @@ const initialState: WishListProductState = {
 };
 
 export const WishlistStore = signalStore(
+  { providedIn: 'root' },
   withState(initialState),
 
   withComputed((store) => ({
@@ -98,7 +99,7 @@ export const WishlistStore = signalStore(
           api.removeProductFromWishlist(productId).pipe(
             tap(() => {
               patchState(store, {
-                products: store.products().filter((p) => p.id !== productId),
+                products: store.products().filter((p) => p.productId !== productId),
               });
             }),
             catchError(() => {

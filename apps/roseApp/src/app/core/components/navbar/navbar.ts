@@ -1,14 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, HostListener, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from '@org/auth';
 import {
   DarkModeComponent,
-  LanguageSwitcherComponent
+  LanguageSwitcherComponent,
+  CartStore,
 } from '@org/ui';
 import { SearchProducts } from '../search-products/search-products';
+import { WishlistStore } from '../../../features/wishlist/store/wishlistStore';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -24,12 +26,18 @@ import { SearchProducts } from '../search-products/search-products';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
-export class Navbar {
+export class Navbar implements OnInit {
 
   private readonly router = inject(Router);
   private translate = inject(TranslateService);
   readonly authService = inject(AuthenticationService);
-firstName = this.authService.getUserData()?.firstName || '';
+  readonly cartStore = inject(CartStore);
+  readonly wishlistStore = inject(WishlistStore);
+  readonly cartCount = computed(() =>
+    this.cartStore.cartItems().reduce((total, item) => total + item.quantity, 0),
+  );
+  readonly wishlistCount = computed(() => this.wishlistStore.totalProducts());
+  firstName = this.authService.getUserData()?.firstName || '';
   searchQuery = '';
   searchOpen = false;
   isArabic = true;
@@ -115,9 +123,13 @@ firstName = this.authService.getUserData()?.firstName || '';
   }
 
 
-  wishlistCount = signal<number>(0);
-  cartCount = signal<number>(0);
   notificationCount = signal<number>(0);
+
+  ngOnInit(): void {
+    if (this.isLoggedIn()) {
+      this.wishlistStore.loadWishListProducts();
+    }
+  }
 
   onLove(): void {
     this.router.navigateByUrl('/roseApp/wishlist');
