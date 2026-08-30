@@ -251,6 +251,8 @@
   "checkoutPayment": {
     "testDescription": "Your payment will be confirmed automatically.",
     "testTitle": "Confirming payment",
+    "redirectTitle": "Continue to secure payment",
+    "redirectDescription": "We will open Stripe's secure checkout in a new tab.",
     "cardDescription": "Pay securely with your credit or debit card.",
     "cardDetails": "Card details",
     "cardHint": "Enter your card details below to complete payment.",
@@ -261,6 +263,9 @@
     "success": "Payment completed successfully.",
     "errors": {
       "intent": "We could not start your card payment. Please try again.",
+      "checkoutSession": "We could not start your secure checkout. Please try again.",
+      "checkoutStatus": "We could not confirm your checkout result. Please try again.",
+      "paymentNotCompleted": "Your payment has not been completed yet.",
       "order": "We could not create your order. Please try again.",
       "orderId": "We could not prepare your order for card payment.",
       "confirm": "We could not confirm your payment. Please try again.",
