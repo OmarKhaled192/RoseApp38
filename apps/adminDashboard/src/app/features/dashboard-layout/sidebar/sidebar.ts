@@ -2,15 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthenticationService } from '@org/auth';
+import { TranslatePipe } from '@ngx-translate/core';
 import { UserAvatar } from "../shared/user-avatar/user-avatar";
-
-
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLinkActive, RouterLink, CommonModule, UserAvatar],
+  imports: [RouterLinkActive, RouterLink, CommonModule, UserAvatar, TranslatePipe],
   templateUrl: './sidebar.html',
-
 })
 export class Sidebar {
 

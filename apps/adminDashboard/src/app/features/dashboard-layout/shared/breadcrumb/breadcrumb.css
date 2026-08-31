@@ -1,0 +1,39 @@
+:host ::ng-deep .p-breadcrumb {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+:host ::ng-deep .p-breadcrumb-item-link {
+  color: #8B9199 !important;
+  text-decoration: none !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: color 0.2s ease;
+}
+
+:host ::ng-deep .p-breadcrumb-item-link:hover {
+  color: #9E1B41 !important;
+}
+
+:host ::ng-deep .p-breadcrumb-item:last-child .p-breadcrumb-item-link {
+  color: #3A2C30 !important;
+  font-weight: 600 !important;
+}
+
+:host-context(.dark) ::ng-deep .p-breadcrumb-item-link {
+  color: #9CA3AF !important;
+}
+
+:host-context(.dark) ::ng-deep .p-breadcrumb-item-link:hover {
+  color: #f3a4b9 !important;
+}
+
+:host-context(.dark) ::ng-deep .p-breadcrumb-item:last-child .p-breadcrumb-item-link {
+  color: #F3F4F6 !important;
+  font-weight: 600 !important;
+}
+
+:host-context(.dark) ::ng-deep .p-breadcrumb-separator {
+  color: #6B7280 !important;
+}

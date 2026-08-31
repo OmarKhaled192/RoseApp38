@@ -6,5 +6,26 @@
   "common": {
     "save": "حفظ",
     "cancel": "إلغاء"
+  },
+  "dashboard": {
+    "sidebar": {
+      "previewWebsite": "معاينة الموقع",
+      "overview": "نظرة عامة",
+      "categories": "الفئات",
+      "occasions": "المناسبات",
+      "products": "المنتجات"
+    },
+    "userMenu": {
+      "profile": "الملف الشخصي",
+      "logout": "تسجيل الخروج"
+    },
+    "breadcrumb": {
+      "dashboard": "لوحة التحكم",
+      "overview": "نظرة عامة",
+      "categories": "الفئات",
+      "occasions": "المناسبات",
+      "products": "المنتجات",
+      "preview": "معاينة الموقع"
+    }
   }
 }

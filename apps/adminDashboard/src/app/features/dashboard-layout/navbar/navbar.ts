@@ -1,94 +1,62 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, EventEmitter, HostListener, Output, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '@org/auth';
-import { MenuItem } from 'primeng/api';
-import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { filter } from 'rxjs';
-import { UserAvatar } from "../shared/user-avatar/user-avatar";
-
+import { DarkModeComponent, LanguageSwitcherComponent } from '@org/ui';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { UserAvatar } from '../shared/user-avatar/user-avatar';
+import { Breadcrumb } from '../shared/breadcrumb/breadcrumb';
 
 @Component({
   selector: 'app-navbar',
-  imports: [BreadcrumbModule, CommonModule, UserAvatar],
+  imports: [
+    CommonModule,
+    UserAvatar,
+    DarkModeComponent,
+    LanguageSwitcherComponent,
+    TranslatePipe,
+    Breadcrumb,
+  ],
   templateUrl: './navbar.html',
 })
-export class Navbar implements OnInit {
+export class Navbar {
   readonly authService = inject(AuthenticationService);
+  private readonly translate = inject(TranslateService);
+  readonly router = inject(Router);
+
   firstName = this.authService.getUserData()?.firstName || '';
   lastName = this.authService.getUserData()?.lastName || '';
   email = this.authService.getUserData()?.email || '';
   photo = this.authService.getUserData()?.photo || '';
 
-
-
-
   @Output() mobileMenuToggle = new EventEmitter<void>();
 
-  items: MenuItem[] = [];
   menuOpen = false;
 
-
-  router = inject(Router);
-  activatedRoute = inject(ActivatedRoute);
-
-  ngOnInit(): void {
-
-    this.updateBreadcrumb();
-
-
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.updateBreadcrumb();
-      });
-  }
-
-  private updateBreadcrumb(): void {
-
-    let route = this.activatedRoute;
-
-    while (route.firstChild) {
-      route = route.firstChild;
-    }
-
-    const breadcrumb = route.snapshot.data['breadcrumb'];
-
-    if (breadcrumb) {
-      this.items = [
-        {
-          label: 'Dashboard',
-          routerLink: '/dashboard'
-        },
-        {
-          label: breadcrumb
-        }
-      ];
-    } else {
-      this.items = [
-        {
-          label: 'Dashboard',
-          routerLink: '/dashboard'
-        }
-      ];
-    }
+  onLanguageChanged(lang: string): void {
+    this.translate.use(lang);
   }
 
   toggleMobileMenu(event: Event): void {
-
     event.stopPropagation();
     this.menuOpen = !this.menuOpen;
     this.mobileMenuToggle.emit();
   }
 
-  goToAccount() {
-    console.log("dsds");
+  @HostListener('document:click')
+  onDocumentClick(): void {
+    if (this.menuOpen) {
+      this.menuOpen = false;
+    }
+  }
 
+  goToAccount(): void {
+    this.menuOpen = false;
   }
 
   logout(): void {
     this.authService.removeToken();
+    this.menuOpen = false;
     this.router.navigateByUrl('/auth/login');
   }
-
 }
