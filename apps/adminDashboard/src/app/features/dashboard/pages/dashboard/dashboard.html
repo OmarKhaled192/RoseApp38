@@ -3,11 +3,11 @@
 
     @if (dashboardStore.isLoading() && !dashboardStore.summary()) {
       <div class="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-500">
-        Loading dashboard data...
+        {{ 'dashboard.loading' | translate }}
       </div>
     } @else if (dashboardStore.error() && !dashboardStore.summary()) {
       <div class="rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-600">
-        Unable to load dashboard data. Please try again.
+        {{ 'dashboard.loadError' | translate }}
       </div>
     } @else if (dashboardStore.summary(); as summary) {
 
@@ -20,7 +20,7 @@
 </svg>
             </div>
             <p class="text-xl font-bold text-[#A6252A] sm:text-2xl">{{ formatNumber(summary.totalProducts) }}</p>
-            <p class=" text-xs text-slate-600 sm:text-sm">Total products</p>
+            <p class=" text-xs text-slate-600 sm:text-sm">{{ 'dashboard.summary.totalProducts' | translate }}</p>
           </article>
 
           <article class="rounded-xl h-[178px] flex flex-col justify-center bg-[#0063D00D] px-2 sm:p-5">
@@ -30,7 +30,7 @@
 </svg>
             </div>
             <p class="text-xl font-bold text-blue-600 sm:text-2xl">{{ formatNumber(summary.totalOrders) }}</p>
-            <p class=" text-xs text-slate-600 sm:text-sm">Total orders</p>
+            <p class=" text-xs text-slate-600 sm:text-sm">{{ 'dashboard.summary.totalOrders' | translate }}</p>
           </article>
 
           <article class="rounded-xl h-[178px] flex flex-col justify-center bg-[#753CBF0D] px-2 sm:p-5">
@@ -40,7 +40,7 @@
 </svg>
             </div>
             <p class="text-xl font-bold text-[#753CBF] sm:text-2xl">{{ formatNumber(summary.totalCategories) }}</p>
-            <p class=" text-xs text-slate-600 sm:text-sm">Total categories</p>
+            <p class=" text-xs text-slate-600 sm:text-sm">{{ 'dashboard.summary.totalCategories' | translate }}</p>
           </article>
 
           <article class="rounded-xl h-[178px] flex flex-col justify-center bg-[#0089610D] px-2 sm:p-5">
@@ -50,22 +50,22 @@
 </svg>
             </div>
             <p class="text-xl font-bold text-emerald-600 sm:text-2xl">{{ formatCurrency(summary.totalRevenue, summary.currency) }}</p>
-            <p class=" text-xs text-slate-600 sm:text-sm">Total revenue</p>
+            <p class=" text-xs text-slate-600 sm:text-sm">{{ 'dashboard.summary.totalRevenue' | translate }}</p>
           </article>
         </div>
 
         <article class="rounded-2xl bg-white p-5 shadow-sm xl:col-span-3">
           <div class="mb-4 flex items-center justify-between">
-            <h2 class="text-xl font-semibold">All Categories</h2>
+            <h2 class="text-xl font-semibold">{{ 'dashboard.categories.title' | translate }}</h2>
           </div>
           <div class="max-h-72 space-y-1 overflow-y-auto pr-1 xl:max-h-[21rem]">
             @for (category of dashboardStore.categories(); track category.id) {
               <div class="flex items-center justify-between border-b border-slate-200 py-3 last:border-0">
                 <span class="truncate pr-4 text-sm font-medium">{{ category.title }}</span>
-                <span class="shrink-0 rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600">{{ category.productCount }} Products</span>
+                <span class="shrink-0 rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600">{{ 'dashboard.categories.productsCount' | translate: { count: category.productCount } }}</span>
               </div>
             } @empty {
-              <p class="py-8 text-center text-sm text-slate-500">No categories available.</p>
+              <p class="py-8 text-center text-sm text-slate-500">{{ 'dashboard.categories.empty' | translate }}</p>
             }
           </div>
         </article>
@@ -73,7 +73,7 @@
 
 <section class="mt-6 grid gap-6 xl:grid-cols-12">
   <article class="rounded-2xl bg-white p-5 shadow-sm xl:col-span-3">
-    <h2 class="text-xl font-semibold">Orders Status</h2>
+    <h2 class="text-xl font-semibold">{{ 'dashboard.orderStatus.title' | translate }}</h2>
 
     <div class="relative mx-auto mt-6 h-40 w-40">
   <p-chart
@@ -82,7 +82,7 @@
     [options]="orderStatusChartOptions"
     [plugins]="orderStatusChartPlugins"
     [style]="{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%' }"
-    ariaLabel="Orders status chart"
+    [attr.aria-label]="'dashboard.orderStatus.ariaLabel' | translate"
   />
 </div>
 
@@ -91,21 +91,21 @@
         <div class="flex justify-between gap-2 mt-2">
          <div class="flex justify-center items-center">
            <span class="h-2.5 w-2.5 mx-1 shrink-0 rounded-full bg-emerald-500"></span>
-          <span class="text-slate-700">Completed</span>
+          <span class="text-slate-700">{{ 'dashboard.orderStatus.completed' | translate }}</span>
          </div>
           <span class="ml-auto font-medium text-slate-800">{{ status.completed.count }} ({{ status.completed.percent }}%)</span>
         </div>
         <div class="flex justify-between gap-2">
           <div class="flex justify-center items-center">
             <span class="h-2.5 w-2.5 mx-1 shrink-0 rounded-full bg-blue-500"></span>
-          <span class="text-slate-700">In progress</span>
+          <span class="text-slate-700">{{ 'dashboard.orderStatus.inProgress' | translate }}</span>
           </div>
           <span class="ml-auto font-medium text-slate-800">{{ status.inProgress.count }} ({{ status.inProgress.percent }}%)</span>
         </div>
         <div class="flex justify-between gap-2">
           <div class="flex justify-center items-center">
             <span class="h-2.5 w-2.5 mx-1 shrink-0 rounded-full bg-red-500"></span>
-          <span class="text-slate-700">Canceled</span>
+          <span class="text-slate-700">{{ 'dashboard.orderStatus.canceled' | translate }}</span>
           </div>
           <span class="ml-auto font-medium text-slate-800">{{ status.canceled.count }} ({{ status.canceled.percent }}%)</span>
         </div>
@@ -115,7 +115,7 @@
 
   <article class="rounded-2xl bg-white p-5 shadow-sm xl:col-span-9">
     <div class="flex flex-wrap items-center justify-between gap-3">
-      <h2 class="text-xl font-semibold">Revenue</h2>
+      <h2 class="text-xl font-semibold">{{ 'dashboard.revenue.title' | translate }}</h2>
       <div class="flex items-center gap-4 text-sm font-semibold">
         <button
           type="button"
@@ -123,14 +123,14 @@
           [class.text-rose-600]="dashboardStore.revenuePeriod() === 'monthly'"
           [class.text-slate-400]="dashboardStore.revenuePeriod() !== 'monthly'"
           (click)="setRevenuePeriod('monthly')"
-        >Monthly</button>
+        >{{ 'dashboard.revenue.monthly' | translate }}</button>
         <button
           type="button"
           class="transition"
           [class.text-rose-600]="dashboardStore.revenuePeriod() === 'week'"
           [class.text-slate-400]="dashboardStore.revenuePeriod() !== 'week'"
           (click)="setRevenuePeriod('week')"
-        >Last week</button>
+        >{{ 'dashboard.revenue.lastWeek' | translate }}</button>
       </div>
     </div>
 
@@ -141,7 +141,7 @@
     [options]="revenueChartOptions"
     [plugins]="revenueChartPlugins"
     [style]="{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%' }"
-    ariaLabel="Revenue chart"
+    [attr.aria-label]="'dashboard.revenue.ariaLabel' | translate"
   />
 </div>
   </article>
@@ -149,7 +149,7 @@
 
       <section class="mt-6 grid gap-6 lg:grid-cols-2">
        <article class="rounded-2xl bg-white p-5 shadow-sm">
-  <h2 class="mb-4 text-xl font-semibold">Top Selling Products</h2>
+  <h2 class="mb-4 text-xl font-semibold">{{ 'dashboard.topSelling.title' | translate }}</h2>
   <div class="max-h-80 space-y-1 overflow-y-auto pr-1">
     @for (product of dashboardStore.topSellingProducts(); track product.productId; let i = $index) {
       <div
@@ -162,17 +162,17 @@
           <span class="font-semibold">{{ product.title }}</span>
           <span class="text-xs text-slate-500"> ({{ formatCurrency(product.unitPrice, summary.currency) }})</span>
         </p>
-        <span class="shrink-0 text-sm font-bold">{{ product.totalSales }} Sales</span>
+        <span class="shrink-0 text-sm font-bold">{{ 'dashboard.topSelling.salesCount' | translate: { count: product.totalSales } }}</span>
       </div>
     } @empty {
-      <p class="py-8 text-center text-sm text-slate-500">No sales data available.</p>
+      <p class="py-8 text-center text-sm text-slate-500">{{ 'dashboard.topSelling.empty' | translate }}</p>
     }
   </div>
 </article>
 
 <article class="rounded-2xl bg-white p-5 shadow-sm">
   <div class="mb-4 flex items-center justify-between">
-    <h2 class="text-xl font-semibold">Low Stock Products</h2>
+    <h2 class="text-xl font-semibold">{{ 'dashboard.lowStock.title' | translate }}</h2>
   </div>
   <div class="max-h-80 divide-y divide-slate-200 overflow-y-auto pr-1">
     @for (product of dashboardStore.lowStockProducts(); track product.id) {
@@ -183,11 +183,11 @@
           [class.text-red-500]="product.stock < 5"
           [class.text-slate-700]="product.stock >= 5"
         >
-          {{ product.stock }} Products
+          {{ 'dashboard.lowStock.productsCount' | translate: { count: product.stock } }}
         </span>
       </div>
     } @empty {
-      <p class="py-8 text-center text-sm text-slate-500">No low stock products found.</p>
+      <p class="py-8 text-center text-sm text-slate-500">{{ 'dashboard.lowStock.empty' | translate }}</p>
     }
   </div>
 </article>

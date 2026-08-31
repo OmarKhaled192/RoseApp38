@@ -1,42 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { UIChart } from 'primeng/chart';
 import { DashboardStore } from '../../state/dashboard.store';
 import { RevenuePeriod } from '../../models/dashboard.model';
-
-interface DashboardChartPlugin<TChart> {
-  id: string;
-  afterDatasetsDraw: (chart: TChart) => void;
-}
-
-interface DoughnutArc {
-  startAngle: number;
-  endAngle: number;
-  outerRadius: number;
-  x: number;
-  y: number;
-}
-
-interface DoughnutChartInstance {
-  ctx: CanvasRenderingContext2D;
-  data: { datasets: Array<{ data: number[] }> };
-  getDatasetMeta: (index: number) => { data: DoughnutArc[] };
-}
-
-interface LinePoint {
-  x: number;
-  y: number;
-}
-
-interface LineChartInstance {
-  ctx: CanvasRenderingContext2D;
-  data: { datasets: Array<{ data: number[] }> };
-  getDatasetMeta: (index: number) => { data: LinePoint[] };
-}
+import {
+  DashboardChartPlugin,
+  DoughnutChartInstance,
+  LineChartInstance,
+} from '../../models/dashboard-chart.interface';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, UIChart],
+  imports: [CommonModule, TranslatePipe, UIChart],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {
