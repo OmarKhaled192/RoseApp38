@@ -43,6 +43,7 @@ export class Navbar implements OnInit {
   );
   readonly wishlistCount = computed(() => this.wishlistStore.totalProducts());
   firstName = this.authService.getUserData()?.firstName || '';
+  isAdmin = this.authService.getUserData()?.role === 'ADMIN';
   searchQuery = '';
   searchOpen = false;
   isArabic = true;
