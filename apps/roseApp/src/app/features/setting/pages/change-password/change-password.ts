@@ -13,7 +13,6 @@ import { InputComponent } from '@org/ui';
 import { Message } from '@org/data-access';
 import { ProfileService } from '../../service/profile';
 
-
 @Component({
   selector: 'app-change-password',
   standalone: true,
@@ -34,7 +33,10 @@ export class ChangePassword {
 
   readonly form = this.fb.nonNullable.group(
     {
-      currentPassword: ['', [Validators.required]],
+      currentPassword: [
+        '',
+        [Validators.required],
+      ],
 
       newPassword: [
         '',
@@ -46,9 +48,7 @@ export class ChangePassword {
 
       confirmPassword: [
         '',
-        [
-          Validators.required,
-        ],
+        [Validators.required],
       ],
     },
     {
@@ -84,7 +84,7 @@ export class ChangePassword {
   }
 
   onSubmit(): void {
-    if (this.form.invalid) {
+    if (this.form.invalid || this.isSubmitting()) {
       this.form.markAllAsTouched();
       return;
     }
@@ -106,19 +106,24 @@ export class ChangePassword {
       )
       .subscribe({
         next: (response) => {
-          console.log('Password changed successfully', response);
           this.messageService.show(
             'success',
-            response.message || this.translateService.instant('profile.passwordChangedSuccess')
+            response.message ||
+            this.translateService.instant(
+              'profile.passwordChangedSuccess'
+            )
           );
+
           this.form.reset();
         },
 
         error: (error) => {
-          console.error('Change password failed', error);
           this.messageService.show(
             'error',
-            error.error?.message || this.translateService.instant('profile.passwordChangeFailed')
+            error.error?.message ||
+            this.translateService.instant(
+              'profile.passwordChangeFailed'
+            )
           );
         },
       });

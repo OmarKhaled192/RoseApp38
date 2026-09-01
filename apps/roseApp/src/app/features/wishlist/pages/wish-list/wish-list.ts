@@ -20,7 +20,6 @@ import { CartStore } from '@org/ui';
     RouterLink,
   ],
   templateUrl: './wish-list.html',
-  providers: [WishlistStore],
 })
 export class WishList implements OnInit {
   showDeleteDialog = signal<boolean>(false);

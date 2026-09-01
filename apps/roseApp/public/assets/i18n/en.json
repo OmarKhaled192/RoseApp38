@@ -211,6 +211,14 @@
     "empty": "Your cart is empty.",
     "continueShopping": "Continue Shopping",
     "youMayLike": "Products You May Like",
+    "addSuccess": "Product added to cart successfully.",
+    "addFailed": "Failed to add product to cart.",
+    "updateQuantitySuccess": "Product quantity updated successfully.",
+    "updateQuantityFailed": "Failed to update product quantity.",
+    "removeSuccess": "Product removed from cart successfully.",
+    "removeFailed": "Failed to remove product from cart.",
+    "clearSuccess": "All products removed from cart successfully.",
+    "clearFailed": "Failed to clear cart.",
     "summary": {
       "title": "Summary",
       "couponPlaceholder": "Coupon Code",
@@ -238,17 +246,8 @@
     "confirm": "Confirm",
     "emptyTitle": "Your wishlist is empty",
     "emptyDescription": "Save the items you love by tapping the heart icon — they'll show up here so you can find them anytime.",
-    "continueShopping": "Continue Shopping",
-     "addSuccess": "Product added to cart successfully.",
-    "addFailed": "Failed to add product to cart.",
-    "updateQuantitySuccess": "Product quantity updated successfully.",
-    "updateQuantityFailed": "Failed to update product quantity.",
-    "removeSuccess": "Product removed from cart successfully.",
-    "removeFailed": "Failed to remove product from cart.",
-    "clearSuccess": "All products removed from cart successfully.",
-    "clearFailed": "Failed to clear cart."
+    "continueShopping": "Continue Shopping"
   },
-
   "checkoutPayment": {
     "testDescription": "Your payment will be confirmed automatically.",
     "testTitle": "Confirming payment",
@@ -291,10 +290,32 @@
     "changingPassword": "Changing Password...",
     "passwordChangedSuccess": "Password changed successfully",
     "passwordChangeFailed": "Change password failed. Please try again.",
-    "logout":"Logout"
-  }
-  ,
+    "logout": "Logout"
+  },
   "notifications": {
+    "headers": {
+      "success": "Success",
+      "info": "Information",
+      "warn": "Attention",
+      "error": "Something went wrong",
+      "secondary": "Notice",
+      "contrast": "Notice"
+    },
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "clearAll": "Clear all notifications",
+    "markAsRead": "Mark as read",
+    "delete": "Delete notification",
+    "empty": "No notifications to display.",
+    "loading": "Loading notifications...",
+    "markReadSuccess": "Notification marked as read successfully",
+    "markReadFailed": "Failed to mark notification as read",
+    "markAllReadSuccess": "All notifications marked as read",
+    "markAllReadFailed": "Failed to mark all notifications as read",
+    "deleteSuccess": "Notification deleted successfully",
+    "deleteFailed": "Failed to delete notification",
+    "clearAllSuccess": "All notifications cleared",
+    "clearAllFailed": "Failed to clear notifications",
     "coupon": {
       "appliedSuccess": "Coupon applied successfully.",
       "applyFailed": "Failed to apply coupon."
