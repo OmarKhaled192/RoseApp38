@@ -33,7 +33,9 @@ export class DarkModeService {
   private resolveInitialTheme(): boolean {
     const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
     const prefersDark =
-      typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     return savedTheme === 'dark' || (!savedTheme && prefersDark);
   }

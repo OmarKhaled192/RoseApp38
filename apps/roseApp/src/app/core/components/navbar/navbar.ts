@@ -42,7 +42,7 @@ export class Navbar implements OnInit {
     this.cartStore.cartItems().reduce((total, item) => total + item.quantity, 0),
   );
   readonly wishlistCount = computed(() => this.wishlistStore.totalProducts());
-  firstName = this.authService.getUserData()?.firstName || '';
+    firstName = this.authService.getUserData()?.firstName || '';
   searchQuery = '';
   searchOpen = false;
   isArabic = true;
