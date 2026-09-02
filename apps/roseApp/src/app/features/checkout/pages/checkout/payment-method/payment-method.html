@@ -52,20 +52,20 @@
         Credit Card
       </span>
       <span class="text-xs text-gray-400 mt-1 leading-snug">
-        {{ 'checkoutPayment.testDescription' | translate }}
+        {{ 'checkoutPayment.cardDescription' | translate }}
       </span>
     </button>
   </div>
 
   @if (selected() === 'card') {
     <section class="mt-6 rounded-2xl border border-gray-200 bg-white p-6">
-      <h2 class="text-lg font-semibold text-gray-900">{{ 'checkoutPayment.testTitle' | translate }}</h2>
+      <h2 class="text-lg font-semibold text-gray-900">{{ 'checkoutPayment.redirectTitle' | translate }}</h2>
       @if (paymentOrderError()) {
         <p class="mt-2 text-sm text-red-600">{{ paymentOrderError() }}</p>
       } @else if (paymentError()) {
         <p class="mt-2 text-sm text-red-600">{{ paymentError() }}</p>
       } @else {
-        <p class="mt-2 text-sm text-gray-500">{{ 'checkoutPayment.processing' | translate }}</p>
+        <p class="mt-2 text-sm text-gray-500">{{ 'checkoutPayment.redirectDescription' | translate }}</p>
       }
     </section>
   }
@@ -83,7 +83,7 @@
   </div>
   } @else if (paymentError()) {
   <div class="flex justify-end mt-8">
-    <button type="button" (click)="retryPaymentIntent()" [disabled]="isProcessingPayment()"
+    <button type="button" (click)="retryCheckout()" [disabled]="isProcessingPayment()"
       class="flex items-center gap-3 bg-[#A6252A] hover:bg-red-950 text-white px-6 py-3 rounded-xl text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40">
       {{ 'checkoutPayment.retry' | translate }}
     </button>
