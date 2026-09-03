@@ -5,9 +5,7 @@ export const remoteRoutes: Route[] = [
     {
         path: '',
         component: DashboardLayout,
-        children: [
-            // { path: '', component:DashboardLayout , pathMatch: 'full' },
-        ]
+
     }
 
 ];

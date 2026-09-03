@@ -97,5 +97,18 @@
   },
   "nx": {
     "includedScripts": []
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@swc/core",
+      "cypress",
+      "esbuild",
+      "less",
+      "lmdb",
+      "msgpackr-extract",
+      "nx",
+      "unrs-resolver"
+    ]
   }
 }
