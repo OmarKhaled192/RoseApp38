@@ -43,6 +43,25 @@
       "title": "المنتجات منخفضة المخزون",
       "productsCount": "{{count}} منتجات",
       "empty": "لا توجد منتجات منخفضة المخزون."
+    },
+    "sidebar": {
+      "previewWebsite": "معاينة الموقع",
+      "overview": "نظرة عامة",
+      "categories": "الفئات",
+      "occasions": "المناسبات",
+      "products": "المنتجات"
+    },
+    "userMenu": {
+      "profile": "الملف الشخصي",
+      "logout": "تسجيل الخروج"
+    },
+    "breadcrumb": {
+      "dashboard": "لوحة التحكم",
+      "overview": "نظرة عامة",
+      "categories": "الفئات",
+      "occasions": "المناسبات",
+      "products": "المنتجات",
+      "preview": "معاينة الموقع"
     }
   }
 }

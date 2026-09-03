@@ -6,21 +6,22 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { CartStore } from '@org/ui';
 import { LoadingState, Message } from '@org/data-access';
 import { pipe, switchMap, tap } from 'rxjs';
-import { ConfirmPaymentRequest, CreatePaymentIntentRequest } from '../models/payment';
+import {
+  CheckoutSessionPayload,
+  CheckoutSessionStatusPayload,
+  CreateCheckoutSessionRequest,
+} from '../models/payment';
 import { PaymentService } from '../services/payment';
 
 interface PaymentState extends LoadingState {
-  paymentIntentId: string | null;
+  checkoutUrl: string | null;
+  checkoutSessionId: string | null;
   errorMessage: string | null;
 }
 
-interface CreatePaymentIntentPayload {
-  clientSecret: string;
-  paymentIntentId: string;
-}
-
 const initialState: PaymentState = {
-  paymentIntentId: null,
+  checkoutUrl: null,
+  checkoutSessionId: null,
   errorMessage: null,
   isLoading: false,
 };
@@ -37,54 +38,78 @@ export const PaymentStore = signalStore(
       messageService = inject(Message),
       translate = inject(TranslateService),
     ) => ({
-      createPaymentIntent: rxMethod<CreatePaymentIntentRequest>(
+      createCheckoutSession: rxMethod<CreateCheckoutSessionRequest>(
         pipe(
-          tap(() => patchState(store, { isLoading: true, paymentIntentId: null, errorMessage: null })),
+          tap(() =>
+            patchState(store, {
+              isLoading: true,
+              checkoutUrl: null,
+              checkoutSessionId: null,
+              errorMessage: null,
+            }),
+          ),
           switchMap((body) =>
-            paymentService.post<CreatePaymentIntentRequest, CreatePaymentIntentPayload>(body, '/create-intent').pipe(
-              tap({
-                next: (res) => {
-                  patchState(store, { isLoading: false });
-                  if (!res.status || !res.payload) {
-                    const errorMessage = res.message || translate.instant('checkoutPayment.errors.intent');
-                    patchState(store, { errorMessage });
-                    messageService.show('error', errorMessage);
-                    return;
-                  }
+            paymentService
+              .post<CreateCheckoutSessionRequest, CheckoutSessionPayload>(body, '/checkout-session')
+              .pipe(
+                tap({
+                  next: (res) => {
+                    patchState(store, { isLoading: false });
+                    if (!res.status || !res.payload?.checkoutUrl || !res.payload.sessionId) {
+                      const errorMessage =
+                        res.message || translate.instant('checkoutPayment.errors.checkoutSession');
+                      patchState(store, { errorMessage });
+                      messageService.show('error', errorMessage);
+                      return;
+                    }
 
-                  patchState(store, { paymentIntentId: res.payload.paymentIntentId });
-                },
-                error: (err) => {
-                  const errorMessage = err.error?.message || translate.instant('checkoutPayment.errors.intent');
-                  patchState(store, { isLoading: false, errorMessage });
-                  messageService.show('error', errorMessage);
-                },
-              }),
-            ),
+                    patchState(store, {
+                      checkoutUrl: res.payload.checkoutUrl,
+                      checkoutSessionId: res.payload.sessionId,
+                    });
+                  },
+                  error: (err) => {
+                    const errorMessage =
+                      err.error?.message || translate.instant('checkoutPayment.errors.checkoutSession');
+                    patchState(store, { isLoading: false, errorMessage });
+                    messageService.show('error', errorMessage);
+                  },
+                }),
+              ),
           ),
         ),
       ),
-      confirmPayment: rxMethod<ConfirmPaymentRequest>(
+      reconcileCheckoutSession: rxMethod<string>(
         pipe(
           tap(() => patchState(store, { isLoading: true, errorMessage: null })),
-          switchMap((body) =>
-            paymentService.post<ConfirmPaymentRequest>(body, '/confirm').pipe(
+          switchMap((sessionId) =>
+            paymentService.getCheckoutSession(sessionId).pipe(
               tap({
                 next: (res) => {
                   patchState(store, { isLoading: false });
-                  if (!res.status) {
-                    const errorMessage = res.message || translate.instant('checkoutPayment.errors.confirm');
+                  const payload: CheckoutSessionStatusPayload | undefined = res.payload;
+                  if (!res.status || !payload) {
+                    const errorMessage =
+                      res.message || translate.instant('checkoutPayment.errors.checkoutStatus');
                     patchState(store, { errorMessage });
                     messageService.show('error', errorMessage);
                     return;
                   }
 
-                  messageService.show('success', res.message || translate.instant('checkoutPayment.success'));
+                  if (payload.paymentStatus.toLowerCase() !== 'paid') {
+                    const errorMessage = translate.instant('checkoutPayment.errors.paymentNotCompleted');
+                    patchState(store, { errorMessage });
+                    messageService.show('error', errorMessage);
+                    return;
+                  }
+
                   cartStore.clearCart();
+                  messageService.show('success', translate.instant('checkoutPayment.success'));
                   router.navigate(['/roseApp']);
                 },
                 error: (err) => {
-                  const errorMessage = err.error?.message || translate.instant('checkoutPayment.errors.confirm');
+                  const errorMessage =
+                    err.error?.message || translate.instant('checkoutPayment.errors.checkoutStatus');
                   patchState(store, { isLoading: false, errorMessage });
                   messageService.show('error', errorMessage);
                 },

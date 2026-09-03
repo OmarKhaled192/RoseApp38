@@ -2,9 +2,7 @@
   "app": {
     "title": "Admin Dashboard",
     "welcome": "Welcome to the application",
-    "featureName": {
-
-    }
+    "featureName": {}
   },
   "common": {
     "save": "Save",
@@ -46,6 +44,25 @@
       "title": "Low Stock Products",
       "productsCount": "{{count}} Products",
       "empty": "No low stock products found."
+    },
+    "sidebar": {
+      "previewWebsite": "Preview Website",
+      "overview": "Overview",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "products": "Products"
+    },
+    "userMenu": {
+      "profile": "Profile",
+      "logout": "Log out"
+    },
+    "breadcrumb": {
+      "dashboard": "Dashboard",
+      "overview": "Overview",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "products": "Products",
+      "preview": "Preview Website"
     }
   }
 }

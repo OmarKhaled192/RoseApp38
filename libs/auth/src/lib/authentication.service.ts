@@ -5,6 +5,7 @@ interface DecodedToken {
   firstName?: string;
   lastName?: string;
   email?: string;
+  photo?: string;
   [key: string]: unknown;
 }
 @Injectable({
@@ -17,6 +18,9 @@ export class AuthenticationService {
   readonly isLoggedIn = this.loggedInState.asReadonly();
   readonly user = this.userState.asReadonly();
    firstName = computed(() => this.userState()?.firstName ?? null);
+   lastName = computed(() => this.userState()?.lastName ?? null);
+   email = computed(() => this.userState()?.email ?? null);
+   photo = computed(() => this.userState()?.photo ?? null);
 
 
   setToken(token: string): void {
