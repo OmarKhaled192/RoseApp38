@@ -9,6 +9,42 @@
     "cancel": "Cancel"
   },
   "dashboard": {
+    "loading": "Loading dashboard data...",
+    "loadError": "Unable to load dashboard data. Please try again.",
+    "summary": {
+      "totalProducts": "Total products",
+      "totalOrders": "Total orders",
+      "totalCategories": "Total categories",
+      "totalRevenue": "Total revenue"
+    },
+    "categories": {
+      "title": "All Categories",
+      "productsCount": "{{count}} Products",
+      "empty": "No categories available."
+    },
+    "orderStatus": {
+      "title": "Orders Status",
+      "ariaLabel": "Orders status chart",
+      "completed": "Completed",
+      "inProgress": "In progress",
+      "canceled": "Canceled"
+    },
+    "revenue": {
+      "title": "Revenue",
+      "ariaLabel": "Revenue chart",
+      "monthly": "Monthly",
+      "lastWeek": "Last week"
+    },
+    "topSelling": {
+      "title": "Top Selling Products",
+      "salesCount": "{{count}} Sales",
+      "empty": "No sales data available."
+    },
+    "lowStock": {
+      "title": "Low Stock Products",
+      "productsCount": "{{count}} Products",
+      "empty": "No low stock products found."
+    },
     "sidebar": {
       "previewWebsite": "Preview Website",
       "overview": "Overview",
