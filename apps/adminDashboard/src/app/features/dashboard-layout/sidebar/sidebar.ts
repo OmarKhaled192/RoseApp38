@@ -39,6 +39,7 @@ export class Sidebar {
 
   goToAccount(): void {
     this.menuOpen = false;
+    this.router.navigate(['/roseApp/setting/profile'])
 
   }
 
@@ -46,11 +47,10 @@ export class Sidebar {
 
   logout(): void {
     this.authService.removeToken();
-    this.router.navigateByUrl('/auth/login');
     this.menuOpen = false;
     sessionStorage.clear();
     localStorage.clear();
-    this.router.navigate(['/login'])
+    this.router.navigate(['auth/login'])
   }
 
 }

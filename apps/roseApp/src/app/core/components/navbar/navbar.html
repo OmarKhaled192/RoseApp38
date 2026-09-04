@@ -98,7 +98,7 @@
           </svg>
           Orders
         </a>
-        
+        @if(isAdmin){
         <a routerLink="/admin" (click)="closeUserMenu()"
         class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#e07090] transition-colors duration-200 cursor-pointer">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
@@ -109,6 +109,7 @@
         </svg>
         Dashboard
       </a>
+    }
 
         <div class="border-t border-gray-100 dark:border-slate-700 mt-1 pt-1">
           <button (click)="onSignout()"
