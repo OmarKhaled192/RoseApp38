@@ -6,11 +6,14 @@ import { Injectable, inject, signal } from '@angular/core';
 })
 export class DarkModeService {
   private readonly document = inject(DOCUMENT);
-
-  readonly isDark = signal(this.resolveInitialTheme());
+  readonly isDark = signal<boolean>(false);
 
   constructor() {
-    this.updateDocument(this.isDark());
+    const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
+    const prefersDark = typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDarkTheme = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    this.isDark.set(isDarkTheme);
+    this.updateDocument(isDarkTheme);
   }
 
   toggle(): void {
@@ -28,14 +31,6 @@ export class DarkModeService {
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     }
     this.updateDocument(isDark);
-  }
-
-  private resolveInitialTheme(): boolean {
-    const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
-    const prefersDark =
-      typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    return savedTheme === 'dark' || (!savedTheme && prefersDark);
   }
 
   private updateDocument(isDark: boolean): void {

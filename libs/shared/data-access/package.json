@@ -9,6 +9,7 @@
     "primeng": "^21.1.9",
     "vite": "^7.3.2",
     "@analogjs/vite-plugin-angular": "2.2.0",
+    "@ngx-translate/core": "^18.0.0",
     "@nx/vite": "22.7.5",
     "@angular/forms": "*"
   },

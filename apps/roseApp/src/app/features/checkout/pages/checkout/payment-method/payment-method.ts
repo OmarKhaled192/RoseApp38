@@ -1,5 +1,5 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CouponStore } from './../../../state/coupon.store';
 import { PaymentMethod as PaymentMethodEnum } from '../../../models/create-order-request';
@@ -8,8 +8,6 @@ import { OrderStore } from '../../../state/orderStore';
 import { PaymentStore } from '../../../state/payment.store';
 
 type PaymentMethod = 'cash' | 'card';
-
-const TEST_PAYMENT_METHOD_ID = 'pm_card_visa';
 
 @Component({
   selector: 'app-pyment-method',
@@ -21,8 +19,11 @@ export class PymentMethod {
   readonly orderStore = inject(OrderStore);
   private readonly couponStore = inject(CouponStore);
   private readonly paymentStore = inject(PaymentStore);
-  private requestedPaymentIntentForOrder: string | null = null;
-  private confirmedPaymentIntentId: string | null = null;
+  private readonly route = inject(ActivatedRoute);
+  private requestedCheckoutForOrder: string | null = null;
+  private reconciledSessionId: string | null = null;
+  private openedCheckoutSessionId: string | null = null;
+  private checkoutWindow: Window | null = null;
 
   isLoading = this.orderStore.isLoading;
   isProcessingPayment = computed(
@@ -31,12 +32,14 @@ export class PymentMethod {
   addressId = computed(() => this.orderStore.order()?.addressId ?? '');
   paymentOrderId = this.orderStore.paymentOrderId;
   paymentOrderError = this.orderStore.paymentOrderError;
-  paymentIntentId = this.paymentStore.paymentIntentId;
+  checkoutUrl = this.paymentStore.checkoutUrl;
+  checkoutSessionId = this.paymentStore.checkoutSessionId;
   paymentError = this.paymentStore.errorMessage;
 
   constructor() {
-    effect(() => this.requestPaymentIntent());
-    effect(() => this.confirmTestPayment());
+    effect(() => this.requestCheckoutSession());
+    effect(() => this.openStripeCheckout());
+    effect(() => this.reconcileReturnedCheckout());
   }
 
   select(method: PaymentMethod): void {
@@ -49,6 +52,7 @@ export class PymentMethod {
   checkout(): void {
     const addressId = this.addressId();
     if (this.selected() === 'card') {
+      this.checkoutWindow = window.open('', '_blank');
       this.orderStore.createOrderForPayment({
         addressId,
         couponCode: this.couponStore.couponItems()[0]?.code,
@@ -64,37 +68,60 @@ export class PymentMethod {
     });
   }
 
-  retryPaymentIntent(): void {
+  retryCheckout(): void {
     const orderId = this.paymentOrderId();
     if (!orderId) {
       return;
     }
 
-    this.requestedPaymentIntentForOrder = orderId;
-    this.confirmedPaymentIntentId = null;
-    this.paymentStore.createPaymentIntent({ orderId });
+    this.requestedCheckoutForOrder = null;
+    this.openedCheckoutSessionId = null;
+    this.checkoutWindow = window.open('', '_blank');
+    this.createCheckoutSession(orderId);
   }
 
-  private requestPaymentIntent(): void {
+  private requestCheckoutSession(): void {
     const orderId = this.paymentOrderId();
-    if (this.selected() !== 'card' || !orderId || orderId === this.requestedPaymentIntentForOrder) {
+    if (this.selected() !== 'card' || !orderId || orderId === this.requestedCheckoutForOrder) {
       return;
     }
 
-    this.requestedPaymentIntentForOrder = orderId;
-    this.paymentStore.createPaymentIntent({ orderId });
+    this.createCheckoutSession(orderId);
   }
 
-  private confirmTestPayment(): void {
-    const paymentIntentId = this.paymentIntentId();
-    if (!paymentIntentId || paymentIntentId === this.confirmedPaymentIntentId) {
+  private createCheckoutSession(orderId: string): void {
+    this.requestedCheckoutForOrder = orderId;
+    const paymentRoute = `${window.location.origin}/roseApp/checkout/payment`;
+    this.paymentStore.createCheckoutSession({
+      orderId,
+      successUrl: `${paymentRoute}?session_id={CHECKOUT_SESSION_ID}`,
+      cancelUrl: paymentRoute,
+    });
+  }
+
+  private openStripeCheckout(): void {
+    const checkoutUrl = this.checkoutUrl();
+    const sessionId = this.checkoutSessionId();
+    if (!checkoutUrl || !sessionId || sessionId === this.openedCheckoutSessionId) {
       return;
     }
 
-    this.confirmedPaymentIntentId = paymentIntentId;
-    this.paymentStore.confirmPayment({
-      paymentIntentId,
-      paymentMethodId: TEST_PAYMENT_METHOD_ID,
-    });
+    this.openedCheckoutSessionId = sessionId;
+    if (this.checkoutWindow && !this.checkoutWindow.closed) {
+      this.checkoutWindow.location.replace(checkoutUrl);
+    } else {
+      window.open(checkoutUrl, '_blank', 'noopener');
+    }
+    this.checkoutWindow = null;
+  }
+
+  private reconcileReturnedCheckout(): void {
+    const sessionId = this.route.snapshot.queryParamMap.get('session_id');
+    if (!sessionId || sessionId === this.reconciledSessionId) {
+      return;
+    }
+
+    this.reconciledSessionId = sessionId;
+    this.paymentStore.reconcileCheckoutSession(sessionId);
   }
 }

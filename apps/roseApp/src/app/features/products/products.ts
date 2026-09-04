@@ -18,7 +18,6 @@ import { WishlistStore } from '../wishlist/store/wishlistStore';
   imports: [Card, TranslatePipe, Pagination, ProductsCategory, Filters],
   templateUrl: './products.html',
   styleUrl: './products.css',
-  providers: [WishlistStore],
 })
 export class Products {
   readonly categoryStore = inject(CategoryStore);
@@ -100,7 +99,7 @@ export class Products {
     });
   });
 
-  readonly products = computed<CardData[]>(() => {
+  readonly productCards = computed<CardData[]>(() => {
     const start = this.page() * this.pageSize();
     return this.filteredProducts()
       .slice(start, start + this.pageSize())

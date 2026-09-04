@@ -6,5 +6,62 @@
   "common": {
     "save": "حفظ",
     "cancel": "إلغاء"
+  },
+  "dashboard": {
+    "loading": "جارٍ تحميل بيانات لوحة التحكم...",
+    "loadError": "تعذّر تحميل بيانات لوحة التحكم. يرجى المحاولة مرة أخرى.",
+    "summary": {
+      "totalProducts": "إجمالي المنتجات",
+      "totalOrders": "إجمالي الطلبات",
+      "totalCategories": "إجمالي التصنيفات",
+      "totalRevenue": "إجمالي الإيرادات"
+    },
+    "categories": {
+      "title": "كل التصنيفات",
+      "productsCount": "{{count}} منتجات",
+      "empty": "لا توجد تصنيفات متاحة."
+    },
+    "orderStatus": {
+      "title": "حالة الطلبات",
+      "ariaLabel": "مخطط حالة الطلبات",
+      "completed": "مكتمل",
+      "inProgress": "قيد التنفيذ",
+      "canceled": "ملغي"
+    },
+    "revenue": {
+      "title": "الإيرادات",
+      "ariaLabel": "مخطط الإيرادات",
+      "monthly": "شهريًا",
+      "lastWeek": "الأسبوع الماضي"
+    },
+    "topSelling": {
+      "title": "المنتجات الأكثر مبيعًا",
+      "salesCount": "{{count}} مبيعات",
+      "empty": "لا توجد بيانات مبيعات متاحة."
+    },
+    "lowStock": {
+      "title": "المنتجات منخفضة المخزون",
+      "productsCount": "{{count}} منتجات",
+      "empty": "لا توجد منتجات منخفضة المخزون."
+    },
+    "sidebar": {
+      "previewWebsite": "معاينة الموقع",
+      "overview": "نظرة عامة",
+      "categories": "الفئات",
+      "occasions": "المناسبات",
+      "products": "المنتجات"
+    },
+    "userMenu": {
+      "profile": "الملف الشخصي",
+      "logout": "تسجيل الخروج"
+    },
+    "breadcrumb": {
+      "dashboard": "لوحة التحكم",
+      "overview": "نظرة عامة",
+      "categories": "الفئات",
+      "occasions": "المناسبات",
+      "products": "المنتجات",
+      "preview": "معاينة الموقع"
+    }
   }
 }

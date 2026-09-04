@@ -12,7 +12,6 @@ import { mapProductToCardData } from '../../services/product-to-card.mapper';
   imports: [Card, Carousel, TitleSection, TranslatePipe],
   templateUrl: './related-product.html',
   styleUrl: '../../../home/components/best-seller/best-seller.css',
-  providers: [WishlistStore],
 })
 export class RelatedProduct {
   private readonly darkModeService = inject(DarkModeService);
