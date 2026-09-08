@@ -1,5 +1,24 @@
 <main class="min-h-screen bg-slate-50 p-4 text-slate-900 sm:p-6 lg:p-8">
   <div class="mx-auto ">
+    <section class="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" aria-labelledby="error-preview-title">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 id="error-preview-title" class="text-lg font-semibold">{{ 'dashboard.errorPreview.title' | translate }}</h2>
+          <p class="mt-1 text-sm text-slate-500">{{ 'dashboard.errorPreview.message' | translate }}</p>
+        </div>
+        <div class="flex flex-col gap-2 sm:flex-row">
+          <a routerLink="/admin/unauthorized" class="inline-flex min-h-10 items-center justify-center rounded-lg border border-[#B94B5B] px-4 text-sm font-semibold text-[#B94B5B] transition hover:bg-[#FCECEE] focus:outline-none focus:ring-2 focus:ring-[#B94B5B] focus:ring-offset-2">
+            {{ 'dashboard.errorPreview.unauthorized' | translate }}
+          </a>
+          <a routerLink="/admin/404" class="inline-flex min-h-10 items-center justify-center rounded-lg border border-slate-300 px-4 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#B94B5B] focus:ring-offset-2">
+            {{ 'dashboard.errorPreview.notFound' | translate }}
+          </a>
+          <a routerLink="/admin/500" class="inline-flex min-h-10 items-center justify-center rounded-lg bg-[#B94B5B] px-4 text-sm font-semibold text-white transition hover:bg-[#9F3D4D] focus:outline-none focus:ring-2 focus:ring-[#B94B5B] focus:ring-offset-2">
+            {{ 'dashboard.errorPreview.server' | translate }}
+          </a>
+        </div>
+      </div>
+    </section>
 
     @if (dashboardStore.isLoading() && !dashboardStore.summary()) {
       <div class="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-500">

@@ -22,6 +22,6 @@ describe('NotFoundPage', () => {
     expect(fixture.componentInstance).toBeTruthy();
     expect(element.querySelector('svg')).toBeTruthy();
     expect(element.querySelector('h1')?.textContent).toContain('errors.notFound.title');
-    expect(element.querySelector('a')?.getAttribute('href')).toBe('/adminDashboard');
+    expect(element.querySelector('a')?.getAttribute('href')).toBe('/admin');
   });
 });

@@ -23,6 +23,6 @@ describe('ServerErrorPage', () => {
     expect(element.querySelector('svg')).toBeTruthy();
     expect(element.querySelector('h1')?.textContent).toContain('errors.server.title');
     expect(element.querySelector('button')).toBeTruthy();
-    expect(element.querySelector('a')?.getAttribute('href')).toBe('/adminDashboard');
+    expect(element.querySelector('a')?.getAttribute('href')).toBe('/admin');
   });
 });

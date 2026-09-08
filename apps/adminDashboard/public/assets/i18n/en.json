@@ -82,6 +82,13 @@
       "occasions": "Occasions",
       "products": "Products",
       "preview": "Preview Website"
+    },
+    "errorPreview": {
+      "title": "Error page preview",
+      "message": "Open each state to check how it appears in the dashboard.",
+      "unauthorized": "401 / 403 Unauthorized",
+      "notFound": "404 Not found",
+      "server": "500 Server error"
     }
   }
 }

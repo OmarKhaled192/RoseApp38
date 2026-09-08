@@ -22,6 +22,6 @@ describe('UnauthorizedPage', () => {
     expect(fixture.componentInstance).toBeTruthy();
     expect(element.querySelector('svg')).toBeTruthy();
     expect(element.querySelector('h1')?.textContent).toContain('errors.unauthorized.title');
-    expect(element.querySelector('a')?.getAttribute('href')).toBe('/adminDashboard');
+    expect(element.querySelector('a')?.getAttribute('href')).toBe('/admin');
   });
 });

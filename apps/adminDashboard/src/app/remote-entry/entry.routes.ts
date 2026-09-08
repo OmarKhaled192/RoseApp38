@@ -18,7 +18,7 @@ export const remoteRoutes: Route[] = [
             { path: '**', component: NotFoundPage },
         ],
         canActivate: [authGuard],
-        data: { roles: ['ADMIN'], unauthorizedUrl: '/adminDashboard/unauthorized' }
+        data: { roles: ['ADMIN'], unauthorizedUrl: '/admin/unauthorized' }
     }
 
 ];
