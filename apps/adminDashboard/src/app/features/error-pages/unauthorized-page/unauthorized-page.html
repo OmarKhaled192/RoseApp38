@@ -1,0 +1,20 @@
+<main class="flex min-h-screen items-center justify-center bg-[#F8FAFC] px-5 py-12 text-[#3A2C30] dark:bg-gray-950 dark:text-gray-100 sm:px-8">
+  <section class="flex w-full max-w-xl flex-col items-center text-center" aria-labelledby="unauthorized-title">
+    <div class="mb-8 flex h-44 w-44 items-center justify-center rounded-full bg-[#FCECEE] sm:h-56 sm:w-56" aria-hidden="true">
+      <svg class="h-28 w-28 text-[#B94B5B] sm:h-36 sm:w-36" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M80 18 126 36v34c0 31-19 56-46 70-27-14-46-39-46-70V36l46-18Z" fill="currentColor" opacity=".16"/>
+        <path d="M80 18 126 36v34c0 31-19 56-46 70-27-14-46-39-46-70V36l46-18Z" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/>
+        <rect x="55" y="70" width="50" height="39" rx="7" fill="currentColor"/>
+        <path d="M65 70V58a15 15 0 0 1 30 0v12" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="80" cy="88" r="4" fill="white"/>
+        <path d="M80 92v8" stroke="white" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p class="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#B94B5B]">{{ 'errors.unauthorized.code' | translate }}</p>
+    <h1 id="unauthorized-title" class="max-w-lg text-3xl font-bold tracking-tight sm:text-4xl">{{ 'errors.unauthorized.title' | translate }}</h1>
+    <p class="mt-4 max-w-md text-base leading-7 text-slate-500 dark:text-slate-400">{{ 'errors.unauthorized.message' | translate }}</p>
+    <a routerLink="/adminDashboard" class="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg bg-[#B94B5B] px-7 text-sm font-semibold text-white shadow-sm transition hover:bg-[#9F3D4D] focus:outline-none focus:ring-2 focus:ring-[#B94B5B] focus:ring-offset-2">
+      {{ 'errors.actions.home' | translate }}
+    </a>
+  </section>
+</main>
