@@ -1,7 +1,7 @@
 import {inject, Injectable } from '@angular/core';
 import { ApiService } from '@org/data-access';
 import { HttpClient } from '@angular/common/http';
-import { IOccasion } from '../../products/models/products.models';
+import { IOccasion } from '../models/products.models';
 
 @Injectable({
   providedIn: 'root',

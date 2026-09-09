@@ -9,9 +9,13 @@ export const remoteRoutes: Route[] = [
         component: DashboardLayout,
         children: [
             { path: '', component: Dashboard, pathMatch: 'full' },
+            {
+                path: 'product',
+                loadComponent: () =>
+                    import('../features/product/component/product/product').then((m) => m.Product),
+            },
         ],
         canActivate: [authGuard],
         data: { roles: ['ADMIN'] }
-    }
-
+    },
 ];

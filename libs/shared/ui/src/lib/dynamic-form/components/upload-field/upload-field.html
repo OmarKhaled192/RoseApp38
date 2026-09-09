@@ -1,0 +1,28 @@
+<div class="flex flex-col gap-2 w-full">
+  <label [for]="field().key" class="text-sm font-medium text-gray-700">
+    {{ field().label }}{{ field().required ? ' *' : '' }}
+  </label>
+
+  <div class="flex items-center justify-end w-full px-4 py-3 border border-gray-300 rounded-xl bg-white">
+    <p-fileupload 
+      mode="basic" 
+      [multiple]="field().multiple ?? false" 
+      [accept]="field().accept ?? ''"
+      [maxFileSize]="field().maxFileSize ?? 5000000" 
+      [customUpload]="true" 
+      [auto]="true" 
+      chooseLabel="Upload file"
+      chooseIcon="pi pi-upload"
+      (uploadHandler)="onUpload($event)"
+      styleClass="!bg-transparent !border-none !p-0 !m-0"
+      buttonStyleClass="!bg-transparent !border-none !shadow-none !outline-none !text-[#e53935] hover:!bg-transparent !p-0 !m-0 !text-base !font-normal flex-row-reverse gap-2 cursor-pointer" />
+  </div>
+
+  @if (fileNames().length) {
+    <ul class="flex flex-col gap-1 mt-2">
+      @for (name of fileNames(); track name) {
+        <li class="text-xs text-gray-600 bg-gray-50 p-2 rounded border border-gray-100">{{ name }}</li>
+      }
+    </ul>
+  }
+</div>

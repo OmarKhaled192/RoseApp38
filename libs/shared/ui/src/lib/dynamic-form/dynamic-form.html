@@ -1,0 +1,17 @@
+ <form (submit)="onSubmit($event)">
+      @for (field of fields(); track field.key) {
+        <div class="field-wrapper">
+          <ng-container
+            *ngComponentOutlet="FIELD_COMPONENTS[field.type]; inputs: getInputs(field)"
+          ></ng-container>
+
+          @if (userForm[field.key]().touched() && userForm[field.key]().errors().length) {
+            <span class="error">
+              {{ userForm[field.key]().errors()[0].message }}
+            </span>
+          }
+        </div>
+      }
+
+      <button type="submit" [disabled]="userForm().invalid()">إرسال</button>
+    </form>
