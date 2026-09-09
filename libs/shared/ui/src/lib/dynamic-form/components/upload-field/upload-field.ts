@@ -5,7 +5,9 @@ import { FileUploadModule, FileUploadHandlerEvent } from 'primeng/fileupload';
 @Component({
   selector: 'lib-upload-field',
   imports: [FileUploadModule],
-  templateUrl: './upload-field.html'
+  templateUrl: './upload-field.html',
+  styleUrl: './upload-field.css',
+
 })
 export class UploadField {
   field = input.required<Extract<FieldConfig, { type: 'upload' }>>();

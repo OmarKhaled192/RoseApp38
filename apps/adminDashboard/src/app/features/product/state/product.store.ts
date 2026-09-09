@@ -6,6 +6,7 @@ import { pipe, switchMap, tap } from 'rxjs';
 import { LoadingState, Message, QueryParams } from '@org/data-access';
 import { Product, ProductData } from '@org/ui';
 import { ProductService } from '../services/product';
+import { UploadService } from '../services/upload';
 
 export interface ProductState extends LoadingState {
   selectedId: string | null;
@@ -35,6 +36,7 @@ export const ProductStore = signalStore(
       store,
       productService = inject(ProductService),
       messageService = inject(Message),
+      uploadService = inject(UploadService),
       translate = inject(TranslateService)
     ) => ({
       getProductResource(id: () => string) {
@@ -52,8 +54,8 @@ export const ProductStore = signalStore(
               tap({
                 next: () => {
                   patchState(store, { isLoading: false });
-                  store.productsResource.reload();
                   messageService.show('success', translate.instant('notifications.product.createSuccess'));
+                  store.productsResource.reload();
                 },
                 error: (err) => {
                   patchState(store, { isLoading: false });
@@ -85,6 +87,22 @@ export const ProductStore = signalStore(
           )
         )
       ),
+
+      uploadPhoto(formData: FormData) {
+        patchState(store, { isLoading: true });
+        return uploadService.post(formData).pipe(
+          tap({
+            next: () => {
+              patchState(store, { isLoading: false });
+              messageService.show('success', translate.instant('notifications.profile.photoUpdateSuccess'));
+            },
+            error: (err) => {
+              patchState(store, { isLoading: false });
+              messageService.show('error', err.error?.message || translate.instant('notifications.profile.photoUpdateFailed'));
+            }
+          })
+        );
+      },
 
       deleteProduct: rxMethod<string>(
         pipe(

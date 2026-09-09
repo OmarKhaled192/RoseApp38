@@ -5,6 +5,7 @@ export interface BaseField {
   required?: boolean;
   readonly?: boolean;
   row?: number;
+  excludeFromSubmit?: boolean;
 }
 
 export type FieldConfig =

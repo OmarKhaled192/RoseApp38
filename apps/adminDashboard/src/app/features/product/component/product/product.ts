@@ -38,18 +38,20 @@ export class Product {
 
   fields = computed<FieldConfig[]>(() => [
     { key: 'title', label: 'Title', type: 'text', required: true, placeholder: 'Enter product title', row: 1 },
-    { key: 'description', label: 'Description', type: 'textarea', required: true, rows: 5, placeholder: 'Enter product description', row: 2 },
+    { key: 'description', label: 'Description', type: 'textarea', required: true,  placeholder: 'Enter product description', row: 2 },
     { key: 'price', label: 'Price', type: 'number', required: true, placeholder: 'Example: 5000', row: 3 },
-    { key: 'discount', label: 'Discount', type: 'number', placeholder: 'Example: 5', row: 3 },
-    { key: 'quantity', label: 'Quantity', type: 'number', required: true, placeholder: 'Example: 200', row: 4 },
-    { key: 'coverImage', label: 'Product cover image', type: 'upload', required: true, accept: 'image/*', row: 5 },
+    { key: 'discountValue', label: 'Discount', type: 'number', placeholder: 'Example: 5', row: 3 },
+    { key: 'priceAfterDiscount', label: 'Price after discount', type: 'number', excludeFromSubmit: true ,placeholder: 'Example: 5', readonly: true, row: 3 },
+    { key: 'stock', label: 'Quantity', type: 'number', required: true, placeholder: 'Example: 200', row: 4 },
+    { key: 'cover', label: 'Product cover image', type: 'upload', required: true, accept: 'image/*', row: 5 },
     { key: 'gallery', label: 'Product gallery', type: 'upload', required: true, multiple: true, accept: 'image/*', row: 5 },
     {
-      key: 'category', label: 'Category', type: 'select', required: true, row: 6,
+      key: 'categoryId', label: 'Category', type: 'select', required: true, row: 6,
       options: this.categoryOptions()
     },
     {
       key: 'occasion', label: 'Occasion', type: 'select', required: true, row: 7,
+      excludeFromSubmit: true,
       options: this.occasionOptions()
     },
   ]);
