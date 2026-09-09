@@ -6,7 +6,14 @@ import { TextareaModule } from 'primeng/textarea';
 @Component({
   selector: 'lib-textarea-field',
   imports: [FormField, TextareaModule],
-  templateUrl: './textarea-field.html'
+  template: `
+  <div class="flex flex-col gap-1 w-full">
+  <label class="text-sm font-medium text-gray-700" [for]="field().key">{{ field().label }}{{ field().required ? ' *' :
+    '' }}</label>
+  <textarea pTextarea [rows]="field().rows ?? 4" [placeholder]="field().placeholder ?? ''" [formField]="control()"
+    [autoResize]="true"></textarea>
+</div>
+  `
 })
 export class TextareaField {
   field = input.required<Extract<FieldConfig, { type: 'textarea' }>>();

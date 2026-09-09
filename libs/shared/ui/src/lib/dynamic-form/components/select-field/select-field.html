@@ -1,6 +1,0 @@
-<div class="flex flex-col gap-1 w-full">
-  <label class="text-sm font-medium text-gray-700" [for]="field().key">{{ field().label }}{{ field().required ? ' *' : '' }}</label>
-
-  <p-select [inputId]="field().key" [formField]="$any(control())" [options]="field().options" optionLabel="label"
-    optionValue="value" placeholder="اختر..." />
-</div>

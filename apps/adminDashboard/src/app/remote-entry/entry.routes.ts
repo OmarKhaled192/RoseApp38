@@ -14,6 +14,17 @@ export const remoteRoutes: Route[] = [
                 loadComponent: () =>
                     import('../features/product/component/product/product').then((m) => m.Product),
             },
+
+            {
+                path: 'product/add',
+                loadComponent: () =>
+                    import('../features/product/component/product/product').then((m) => m.Product)
+            },
+            {
+                path: 'product/edit/:id',
+                loadComponent: () =>
+                    import('../features/product/component/product/product').then((m) => m.Product)
+            }
         ],
         canActivate: [authGuard],
         data: { roles: ['ADMIN'] }

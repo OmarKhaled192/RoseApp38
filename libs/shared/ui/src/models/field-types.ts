@@ -1,3 +1,5 @@
+import { Observable } from "rxjs";
+
 export interface BaseField {
   key: string;
   label: string;
@@ -29,3 +31,6 @@ export type FieldValueType<T extends FieldType> =
   T extends 'date' ? Date :
   T extends 'upload' ? File | File[] | null :
   string;
+
+
+export type FileUploadFn = (file: File) => Observable<string>;
