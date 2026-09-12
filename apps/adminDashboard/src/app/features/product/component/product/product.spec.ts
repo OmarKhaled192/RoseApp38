@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideTranslateService } from '@ngx-translate/core';
-import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { Product } from './product';
 
@@ -13,8 +13,7 @@ describe('Product', () => {
       imports: [Product],
       providers: [
         MessageService,
-        PrimeNGConfig,
-        ...providePrimeNG(),
+        providePrimeNG(),
         provideTranslateService({ lang: 'en', fallbackLang: 'en' }),
       ],
     }).compileComponents();

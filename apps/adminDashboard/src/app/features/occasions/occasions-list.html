@@ -19,27 +19,13 @@
     </div>
   </div>
 
-  <div class="table-wrap" role="table" aria-label="Occasions list">
-    <div class="table-header" role="row">
-      <div role="columnheader">{{ 'dashboard.occasions.name' | translate }}</div>
-      <div role="columnheader">{{ 'dashboard.occasions.products' | translate }}</div>
-      <div role="columnheader" class="actions-col"></div>
-    </div>
-
-    @for (item of paginatedItems(); track trackById($index, item)) {
-      <div class="table-row" role="row">
-        <div class="cell name" role="cell">{{ item.name }}</div>
-        <div class="cell products" role="cell">{{ item.products }} {{ 'dashboard.occasions.productsLabel' | translate }}</div>
-        <div class="cell actions" role="cell">
-          <a class="action-btn edit-btn" [routerLink]="['/admin/occasions/edit', item.id]" aria-label="{{ 'dashboard.occasions.editLabel' | translate }} {{ item.name }}">
-            {{ 'dashboard.occasions.edit' | translate }}
-          </a>
-          <button type="button" class="action-btn delete-btn" [attr.aria-label]="('dashboard.occasions.deleteLabel' | translate) + ' ' + item.name">
-            {{ 'dashboard.occasions.delete' | translate }}
-          </button>
-        </div>
-      </div>
-    }
+  <div class="table-shell">
+    <app-reusable-table
+      [data]="paginatedItems()"
+      [columns]="columns"
+      (actionClicked)="onTableAction($event)"
+    >
+    </app-reusable-table>
   </div>
 
   <div class="pagination-wrap">

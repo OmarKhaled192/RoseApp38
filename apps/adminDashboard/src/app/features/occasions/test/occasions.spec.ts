@@ -6,9 +6,18 @@ import { OccasionsList } from '../occasions-list';
 describe('OccasionsList', () => {
   let component: OccasionsList;
   let fixture: ComponentFixture<OccasionsList>;
+  let translate: TranslateService;
 
   beforeEach(async () => {
-    const translate = new TranslateService();
+    await TestBed.configureTestingModule({
+      imports: [OccasionsList, RouterModule],
+      providers: [
+        provideRouter([]),
+        provideTranslateService({ lang: 'en', fallbackLang: 'en' }),
+      ],
+    }).compileComponents();
+
+    translate = TestBed.inject(TranslateService);
     translate.setTranslation('en', {
       dashboard: {
         occasions: {
@@ -26,18 +35,11 @@ describe('OccasionsList', () => {
           editTitle: 'Edit Occasion',
           addButton: 'Add Occasion',
           updateButton: 'Update Occasion',
+          actions: 'Actions',
         },
       },
     });
     translate.use('en');
-
-    await TestBed.configureTestingModule({
-      imports: [OccasionsList, RouterModule],
-      providers: [
-        provideRouter([]),
-        provideTranslateService({ lang: 'en', fallbackLang: 'en' }),
-      ],
-    }).compileComponents();
 
     fixture = TestBed.createComponent(OccasionsList);
     component = fixture.componentInstance;
@@ -48,10 +50,11 @@ describe('OccasionsList', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render page title and add form heading', () => {
+  it('should render the page title and add action', () => {
     const title = fixture.nativeElement.querySelector('h1');
     expect(title?.textContent).toContain('All Occasions');
-    const addHeading = fixture.nativeElement.querySelector('h2');
-    expect(addHeading?.textContent).toContain('Add a New Occasion');
+
+    const addAction = fixture.nativeElement.querySelector('a[routerLink="/admin/occasions/add"]');
+    expect(addAction?.textContent).toContain('Add a new occasion');
   });
 });

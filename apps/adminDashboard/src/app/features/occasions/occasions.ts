@@ -87,7 +87,7 @@ export class OccasionsList {
   }
 
   onSubmit(event: Record<string, any> = {}): void {
-    const name = typeof event?.name === 'string' ? event.name.trim() : '';
+    const name = typeof event?.['name'] === 'string' ? event['name'].trim() : '';
     if (!name) return;
 
     const newItem: OccasionItem = {

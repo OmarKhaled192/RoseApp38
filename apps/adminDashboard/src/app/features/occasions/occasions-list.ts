@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, computed, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Pagination } from '@org/ui';
+import { ReusableTable, ReusableTableActionEvent, ReusableTableColumn } from '../../shared/components/reusable-table';
 
-export interface OccasionItem {
+export interface OccasionItem extends Record<string, unknown> {
   id: string;
   name: string;
   products: number;
@@ -14,11 +15,13 @@ export interface OccasionItem {
 @Component({
   selector: 'app-occasions-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, Pagination, TranslatePipe],
+  imports: [CommonModule, RouterLink, Pagination, TranslatePipe, ReusableTable],
   templateUrl: './occasions-list.html',
   styleUrl: './occasions-list.css',
 })
 export class OccasionsList {
+  private readonly router = inject(Router);
+
   readonly search = signal('');
   readonly currentPage = signal(1);
   readonly pageSize = signal(10);
@@ -38,6 +41,20 @@ export class OccasionsList {
     { id: '12', name: 'Anniversary', products: 12 },
     { id: '13', name: 'Anniversary', products: 12 },
   ]);
+
+  readonly columns: readonly ReusableTableColumn[] = [
+    { name: 'name', labelName: 'dashboard.occasions.name', type: 'text' },
+    { name: 'products', labelName: 'dashboard.occasions.products', type: 'number' },
+    {
+      name: 'actions',
+      labelName: 'dashboard.occasions.actions',
+      type: 'actions',
+      actions: [
+        { name: 'edit', labelName: 'dashboard.occasions.edit', icon: 'pi pi-pencil', tone: 'primary' },
+        { name: 'delete', labelName: 'dashboard.occasions.delete', icon: 'pi pi-trash', tone: 'danger' },
+      ],
+    },
+  ];
 
   readonly filteredItems = computed(() => {
     const query = this.search().trim().toLowerCase();
@@ -65,6 +82,19 @@ export class OccasionsList {
 
   onPageChange({ page }: { page: number; size: number; first: number }): void {
     this.currentPage.set(page + 1);
+  }
+
+  onTableAction(event: ReusableTableActionEvent<OccasionItem>): void {
+    const { action, row } = event;
+
+    if (action === 'edit') {
+      this.router.navigate(['/admin/occasions/edit', row.id]);
+      return;
+    }
+
+    if (action === 'delete') {
+      this.items.update((current) => current.filter((item) => item.id !== row.id));
+    }
   }
 
   trackById(_index: number, item: OccasionItem): string {

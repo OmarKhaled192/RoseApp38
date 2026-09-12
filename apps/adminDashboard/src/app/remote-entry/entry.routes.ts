@@ -44,7 +44,7 @@ export const remoteRoutes: Route[] = [
                 path: 'product/edit/:id',
                 loadComponent: () =>
                     import('../features/product/component/product/product').then((m) => m.Product)
-            }
+            },
             { path: '404', component: NotFoundPage },
             { path: '500', component: ServerErrorPage },
             { path: '**', component: NotFoundPage },
