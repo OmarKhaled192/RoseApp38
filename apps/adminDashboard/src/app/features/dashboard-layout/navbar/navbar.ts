@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, HostListener, Output, inject } from '@angular/core';
+import { AdminAccountStore } from '../../account/state/account.store';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Output,
+  inject,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@org/auth';
 import { DarkModeComponent, LanguageSwitcherComponent } from '@org/ui';
@@ -21,13 +28,22 @@ import { Breadcrumb } from '../shared/breadcrumb/breadcrumb';
 })
 export class Navbar {
   readonly authService = inject(AuthenticationService);
+  readonly accountStore = inject(AdminAccountStore);
   private readonly translate = inject(TranslateService);
   readonly router = inject(Router);
 
-  firstName = this.authService.getUserData()?.firstName || '';
-  lastName = this.authService.getUserData()?.lastName || '';
-  email = this.authService.getUserData()?.email || '';
-  photo = this.authService.getUserData()?.photo || '';
+  get firstName() {
+    return this.accountStore.user()?.firstName ?? '';
+  }
+  get lastName() {
+    return this.accountStore.user()?.lastName ?? '';
+  }
+  get email() {
+    return this.accountStore.user()?.email ?? '';
+  }
+  get photo() {
+    return this.accountStore.user()?.photo ?? '';
+  }
 
   @Output() mobileMenuToggle = new EventEmitter<void>();
 
@@ -52,6 +68,7 @@ export class Navbar {
 
   goToAccount(): void {
     this.menuOpen = false;
+    void this.router.navigateByUrl('/admin/account/profile');
   }
 
   logout(): void {

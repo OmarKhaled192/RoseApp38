@@ -1,0 +1,197 @@
+<h1 class="mb-6 text-xl font-semibold md:text-2xl">
+  {{ 'adminAccount.title' | translate }}
+</h1>
+@if (store.isLoading() && !store.hasProfile()) {
+<p role="status" class="rounded-2xl bg-white p-6 dark:bg-gray-900">
+  {{ 'adminAccount.loading' | translate }}
+</p>
+} @else if (store.hasLoadError()) {
+<div role="alert" class="rounded-2xl bg-white p-6 dark:bg-gray-900">
+  <p class="mb-4">{{ 'adminAccount.loadFailed' | translate }}</p>
+  <lib-button
+    [label]="'adminAccount.retry' | translate"
+    (clicked)="store.reload()"
+  />
+</div>
+} @else {
+<form
+  [formGroup]="form"
+  (ngSubmit)="save()"
+  class="rounded-2xl bg-white p-4 md:p-6 dark:bg-gray-900"
+>
+  <fieldset
+    class="m-0 min-w-0 border-0 p-0"
+    [disabled]="store.isSaving() || store.isDeleting()"
+  >
+    <div class="mb-5 flex items-center gap-4">
+      <div
+        class="relative shrink-0 focus-within:rounded-full focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-rose-700"
+      >
+        @if (avatarUrl() && !imageFailed()) {
+        <img
+          [src]="avatarUrl()"
+          alt=""
+          (error)="imageFailed.set(true)"
+          class="size-16 rounded-full object-cover md:size-22"
+        />
+        } @else {
+        <span
+          class="flex size-16 items-center justify-center rounded-full bg-[#A6252A] text-2xl font-semibold text-white md:size-22"
+          >{{ initials() }}</span
+        >
+        }
+        <label
+          for="admin-avatar"
+          class="absolute end-0 bottom-0 grid size-6 cursor-pointer place-items-center rounded-full border border-zinc-200 bg-white text-xs text-zinc-600"
+          [attr.aria-label]="'adminAccount.uploadPhoto' | translate"
+          ><i class="pi pi-cloud-upload" aria-hidden="true"></i
+        ></label>
+        <input
+          id="admin-avatar"
+          type="file"
+          accept="image/jpeg,image/png,image/gif"
+          class="sr-only"
+          (change)="onFileSelected($event)"
+        />
+      </div>
+      <div>
+        <h2 class="mb-1 text-sm font-medium">
+          {{ 'adminAccount.uploadPhoto' | translate }}
+        </h2>
+        <p class="text-xs text-zinc-500 dark:text-zinc-400">
+          {{ 'adminAccount.uploadHint' | translate }}
+        </p>
+      </div>
+    </div>
+    @if (fileError()) {
+    <p role="alert" class="mb-3 text-xs text-red-600">
+      {{ 'adminAccount.fileError' | translate }}
+    </p>
+    }
+    <div class="grid grid-cols-1 gap-x-4 md:grid-cols-2">
+      @for (field of ['firstName', 'lastName']; track field) {
+      <div class="mb-4 flex flex-col gap-1.5">
+        <label [for]="field" class="text-xs"
+          >{{ ('adminAccount.' + field) | translate }}</label
+        ><input
+          pInputText
+          [id]="field"
+          [formControlName]="field"
+          [autocomplete]="field === 'firstName' ? 'given-name' : 'family-name'"
+          class="!h-10 !w-full !rounded-md !border-zinc-200 !bg-transparent !text-sm !shadow-none dark:!border-gray-700 dark:!text-gray-100"
+        />
+        @if (form.get(field)?.touched && form.get(field)?.invalid) {
+        <small class="text-xs text-red-600"
+          >{{ 'adminAccount.required' | translate }}</small
+        >
+        }
+      </div>
+      }
+    </div>
+    <div class="mb-4 flex flex-col gap-1.5">
+      <label for="admin-email" class="text-xs"
+        >{{ 'adminAccount.email' | translate }}</label
+      ><input
+        pInputText
+        id="admin-email"
+        type="email"
+        formControlName="email"
+        class="!h-10 !w-full !rounded-md !border-zinc-200 !bg-transparent !text-sm !shadow-none dark:!border-gray-700 dark:!text-gray-100 disabled:!text-zinc-500"
+      />
+    </div>
+    <div class="mb-4 flex flex-col gap-1.5">
+      <label for="admin-phone" class="text-xs"
+        >{{ 'adminAccount.phone' | translate }}</label
+      ><input
+        pInputText
+        id="admin-phone"
+        type="tel"
+        autocomplete="tel"
+        dir="ltr"
+        formControlName="phone"
+        class="!h-10 !w-full !rounded-md !border-zinc-200 !bg-transparent !text-sm !shadow-none dark:!border-gray-700 dark:!text-gray-100"
+      />
+    </div>
+    <div class="flex flex-col gap-1.5">
+      <label for="admin-gender" class="text-xs text-zinc-400"
+        >{{ 'adminAccount.gender' | translate }}</label
+      ><input
+        pInputText
+        id="admin-gender"
+        formControlName="gender"
+        class="!h-10 !w-full !rounded-md !border-transparent !bg-zinc-100 !text-sm !text-zinc-400 !shadow-none dark:!bg-gray-800"
+      />
+    </div>
+    <div
+      class="mt-10 flex flex-wrap items-center justify-between gap-4 text-xs md:mt-16 md:justify-start"
+    >
+      <button
+        type="button"
+        class="cursor-pointer text-red-600 hover:underline disabled:opacity-50"
+        (click)="deletingAccount.set(true)"
+      >
+        {{ 'adminAccount.deleteAccount' | translate }}
+      </button>
+      <a routerLink="/admin/account/change-password" class="hover:underline"
+        >{{ 'adminAccount.changePassword' | translate }}</a
+      >
+      <lib-button
+        type="submit"
+        [label]="'adminAccount.save' | translate"
+        [loading]="store.isSaving()"
+        [disabled]="form.invalid || store.isSaving() || store.isDeleting()"
+        class="w-full md:ms-auto md:w-auto"
+        styleClass="!h-10 !w-full md:!min-w-44 !rounded-md !text-xs !font-normal"
+      />
+    </div>
+  </fieldset>
+</form>
+}
+<p-dialog
+  [visible]="deletingAccount()"
+  (visibleChange)="deletingAccount.set($event)"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="!store.isDeleting()"
+  [closeOnEscape]="!store.isDeleting()"
+  styleClass="!w-[400px] !max-w-[calc(100vw-2rem)] !rounded-xl"
+  [header]="'adminAccount.deleteAccount' | translate"
+>
+  <ng-template #header
+    ><span class="sr-only"
+      >{{ 'adminAccount.deleteAccount' | translate }}</span
+    ></ng-template
+  >
+  <div class="pb-7 text-center">
+    <span
+      class="mx-auto mb-7 grid size-18 place-items-center rounded-full border-12 border-zinc-100 bg-zinc-200 text-zinc-600"
+      ><i class="pi pi-trash" aria-hidden="true"></i
+    ></span>
+    <h2 class="mb-1 text-sm font-medium">
+      {{ 'adminAccount.deleteTitle' | translate }}
+    </h2>
+    <p class="text-xs text-red-500">
+      {{ 'adminAccount.deleteWarning' | translate }}
+    </p>
+  </div>
+  <div class="flex gap-2">
+    <button
+      pButton
+      type="button"
+      class="!flex-1 !rounded-md !border-zinc-300 !bg-zinc-50 !px-2 !text-xs !font-normal !text-zinc-700"
+      [disabled]="store.isDeleting()"
+      (click)="deletingAccount.set(false)"
+    >
+      {{ 'adminAccount.cancelDelete' | translate }}</button
+    ><lib-button
+      [label]="'adminAccount.confirmDelete' | translate"
+      color="#E52529"
+      class="flex-1"
+      styleClass="!w-full !rounded-md !px-2 !text-xs !font-normal"
+      [loading]="store.isDeleting()"
+      [disabled]="store.isDeleting()"
+      (clicked)="store.deleteAccount()"
+    />
+  </div>
+</p-dialog>

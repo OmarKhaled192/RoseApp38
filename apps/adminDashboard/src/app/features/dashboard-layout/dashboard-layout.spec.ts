@@ -4,6 +4,8 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { DashboardLayout } from './dashboard-layout';
 import { Navbar } from './navbar/navbar';
 import { Sidebar } from './sidebar/sidebar';
+import { signal } from '@angular/core';
+import { AdminAccountStore } from '../account/state/account.store';
 
 describe('DashboardLayout', () => {
   let component: DashboardLayout;
@@ -12,11 +14,16 @@ describe('DashboardLayout', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DashboardLayout],
-      providers: [
-        provideRouter([]),
-        provideTranslateService(),
-      ],
-    }).compileComponents();
+      providers: [provideRouter([]), provideTranslateService()],
+    })
+      .overrideComponent(DashboardLayout, {
+        set: {
+          providers: [
+            { provide: AdminAccountStore, useValue: { user: signal(null) } },
+          ],
+        },
+      })
+      .compileComponents();
 
     fixture = TestBed.createComponent(DashboardLayout);
     component = fixture.componentInstance;

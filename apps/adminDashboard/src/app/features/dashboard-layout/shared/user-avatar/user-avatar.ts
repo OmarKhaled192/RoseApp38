@@ -1,35 +1,38 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
-import { AuthenticationService } from '@org/auth';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
+import { AdminAccountStore } from '../../../account/state/account.store';
 
 @Component({
   selector: 'app-userAavatar',
   templateUrl: './user-avatar.html',
 })
 export class UserAvatar {
-  readonly authService = inject(AuthenticationService);
-constructor(){
-  console.log("this.authService.getUserData()",this.authService.getUserData())
-  this.authService.getUserData()
-}
+  readonly accountStore = inject(AdminAccountStore);
   readonly size = input(40);
 
-  readonly firstName = signal(
-    this.authService.getUserData()?.firstName ?? ''
+  readonly firstName = computed(
+    () => this.accountStore.user()?.firstName ?? '',
   );
 
-  readonly lastName = signal(
-    this.authService.getUserData()?.lastName ?? ''
-  );
+  readonly lastName = computed(() => this.accountStore.user()?.lastName ?? '');
 
-  readonly email = signal(
-    this.authService.getUserData()?.email ?? ''
-  );
+  readonly email = computed(() => this.accountStore.user()?.email ?? '');
 
-  readonly photo = signal(
-    this.authService.getUserData()?.photo ?? ''
-  );
+  readonly photo = computed(() => this.accountStore.user()?.photo ?? '');
 
   readonly hasPhoto = signal(true);
+  constructor() {
+    effect(() => {
+      this.photo();
+      this.hasPhoto.set(true);
+    });
+  }
 
   private readonly avatarPalette = [
     '#9E1B41',
@@ -43,7 +46,7 @@ constructor(){
     '#3A2C9E',
     '#9E3A2C',
     '#2C9E3A',
-    '#9E2C6F'
+    '#9E2C6F',
   ];
 
   readonly userInitial = computed(() => {

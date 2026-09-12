@@ -64,5 +64,38 @@
       "products": "Products",
       "preview": "Preview Website"
     }
+  },
+  "adminAccount": {
+    "title": "Account Settings",
+    "uploadPhoto": "Upload Photo",
+    "uploadHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "gender": "Gender",
+    "save": "Save Changes",
+    "deleteAccount": "Delete My Account",
+    "changePassword": "Change Password",
+    "deleteTitle": "Are you sure you want to delete your account?",
+    "deleteWarning": "This action is permanent and cannot be undone.",
+    "cancelDelete": "Nope, not doing it",
+    "confirmDelete": "Yes, delete",
+    "loading": "Loading your account...",
+    "loadFailed": "Unable to load your account.",
+    "retry": "Try again",
+    "required": "This field is required.",
+    "fileError": "Choose a JPG, PNG, or GIF image no larger than 5MB.",
+    "saved": "Profile updated successfully.",
+    "saveFailed": "Unable to update your profile.",
+    "deleted": "Your account has been deleted.",
+    "deleteFailed": "Unable to delete your account.",
+    "currentPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "passwordLength": "Use at least 8 characters.",
+    "passwordMismatch": "Passwords do not match.",
+    "passwordChanged": "Password changed successfully.",
+    "passwordFailed": "Unable to change your password."
   }
 }
