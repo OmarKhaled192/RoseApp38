@@ -1,0 +1,130 @@
+<div class="overflow-hidden rounded-xl border border-slate-100 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+  <div class="hidden overflow-x-auto md:block">
+    <table class="w-full min-w-max table-fixed border-collapse text-left text-sm">
+      <thead class="bg-[#F9FAFB] text-xs font-semibold text-slate-600">
+        <tr>
+          @for (column of resolvedColumns(); track column.name) {
+            <th
+              scope="col"
+              class="whitespace-nowrap px-6 py-4"
+              [style.width]="column.type === 'actions' ? '200px' : null"
+              [class.sticky]="column.frozenColumn"
+              [style.left.px]="column.frozenColumn && column.type !== 'actions' ? column.frozenOffset : null"
+              [class.right-0]="column.frozenColumn && column.type === 'actions'"
+              [class.z-20]="column.frozenColumn"
+              [class.bg-slate-50]="column.frozenColumn"
+            >
+              {{ column.labelName | translate }}
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        @for (row of data(); track $index) {
+          <tr class="transition-colors hover:bg-rose-50/20">
+            @for (column of resolvedColumns(); track column.name) {
+              <td
+                class="whitespace-nowrap px-6 py-4 text-slate-700"
+                [style.width]="column.type === 'actions' ? '200px' : null"
+                [class.sticky]="column.frozenColumn"
+                [style.left.px]="column.frozenColumn && column.type !== 'actions' ? column.frozenOffset : null"
+                [class.right-0]="column.frozenColumn && column.type === 'actions'"
+                [class.z-10]="column.frozenColumn"
+                [class.bg-white]="column.frozenColumn"
+              >
+                @if (column.type === 'actions') {
+                  <div class="flex items-center justify-end gap-2.5">
+                    @for (action of column.actions; track action.name) {
+                      <button
+                        type="button"
+                        class="inline-flex h-8 items-center gap-1.5 rounded-lg px-3 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1"
+                        [class.bg-[#EAF2FE]]="action.tone === 'primary'"
+                        [class.text-[#2563EB]]="action.tone === 'primary'"
+                        [class.hover:bg-[#DBEAFE]]="action.tone === 'primary'"
+                        [class.bg-[#FDECEC]]="action.tone === 'danger'"
+                        [class.text-[#DC2626]]="action.tone === 'danger'"
+                        [class.hover:bg-[#FCD8D8]]="action.tone === 'danger'"
+                        [class.bg-slate-100]="action.tone === 'neutral' || !action.tone"
+                        [class.text-slate-700]="action.tone === 'neutral' || !action.tone"
+                        [attr.aria-label]="action.labelName ? (action.labelName | translate) : action.name"
+                        (click)="onAction(action, row, column)"
+                      >
+                        @if (action.icon) {
+                          <i [class]="action.icon" aria-hidden="true"></i>
+                        }
+                        <span>{{ (action.labelName ?? action.name) | translate }}</span>
+                      </button>
+                    }
+                  </div>
+                } @else {
+                  <span [class.font-bold]="column.prefixBold">{{ column.prefix }}</span>
+                  <span
+                    [class.font-bold]="column.bold"
+                    [class.text-slate-900]="column.bold"
+                    [class.text-red-500]="isDistinct(row[column.name], column.distinctValuesCondition)"
+                  >
+                    {{ valueOf(row, column.name) }}
+                  </span>
+                  <span [class.font-bold]="column.suffixBold">{{ column.suffix }}</span>
+                }
+              </td>
+            }
+          </tr>
+        } @empty {
+          <tr>
+            <td class="px-6 py-12 text-center text-slate-500" [attr.colspan]="resolvedColumns().length">
+              {{ emptyMessage() | translate }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile Card View -->
+  <div class="divide-y divide-slate-100 md:hidden">
+    @for (row of data(); track $index) {
+      <article class="space-y-3 p-4">
+        @for (column of resolvedColumns(); track column.name) {
+          @if (column.type === 'actions') {
+            <div class="flex justify-end gap-2 border-t border-slate-100 pt-3">
+              @for (action of column.actions; track action.name) {
+                <button
+                  type="button"
+                  class="inline-flex h-8 items-center gap-1.5 rounded-lg px-3 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-rose-500"
+                  [class.bg-[#EAF2FE]]="action.tone === 'primary'"
+                  [class.text-[#2563EB]]="action.tone === 'primary'"
+                  [class.bg-[#FDECEC]]="action.tone === 'danger'"
+                  [class.text-[#DC2626]]="action.tone === 'danger'"
+                  [class.bg-slate-100]="action.tone === 'neutral' || !action.tone"
+                  [class.text-slate-700]="action.tone === 'neutral' || !action.tone"
+                  (click)="onAction(action, row, column)"
+                >
+                  @if (action.icon) {
+                    <i [class]="action.icon" aria-hidden="true"></i>
+                  }
+                  {{ (action.labelName ?? action.name) | translate }}
+                </button>
+              }
+            </div>
+          } @else {
+            <div class="flex items-start justify-between gap-4">
+              <span class="text-xs font-medium text-slate-500">{{ column.labelName | translate }}</span>
+              <span
+                class="text-right text-sm text-slate-800"
+                [class.font-bold]="column.bold"
+                [class.text-red-500]="isDistinct(row[column.name], column.distinctValuesCondition)"
+              >
+                <span [class.font-bold]="column.prefixBold">{{ column.prefix }}</span>
+                {{ valueOf(row, column.name) }}
+                <span [class.font-bold]="column.suffixBold">{{ column.suffix }}</span>
+              </span>
+            </div>
+          }
+        }
+      </article>
+    } @empty {
+      <p class="p-8 text-center text-sm text-slate-500">{{ emptyMessage() | translate }}</p>
+    }
+  </div>
+</div>

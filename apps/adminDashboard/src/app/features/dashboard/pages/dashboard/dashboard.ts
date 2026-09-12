@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { UIChart } from 'primeng/chart';
 import { DashboardStore } from '../../state/dashboard.store';
@@ -12,7 +13,7 @@ import {
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, TranslatePipe, UIChart],
+  imports: [CommonModule, RouterLink, TranslatePipe, UIChart],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {
