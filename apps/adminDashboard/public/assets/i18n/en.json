@@ -8,6 +8,25 @@
     "save": "Save",
     "cancel": "Cancel"
   },
+  "errors": {
+    "actions": {
+      "home": "Return home",
+      "tryAgain": "Try again"
+    },
+    "unauthorized": {
+      "code": "401 / 403",
+      "title": "You are not authorized to access this page",
+      "message": "You do not have permission to view this page. Please contact support if you believe you should have access."
+    },
+    "notFound": {
+      "title": "This page does not exist.",
+      "message": "The page you are looking for may have moved, or the link may be incorrect. Check the address or return to the dashboard."
+    },
+    "server": {
+      "title": "Oops, something went wrong!",
+      "message": "We are having trouble loading this page. Refresh and try again, or come back in a few moments."
+    }
+  },
   "dashboard": {
     "loading": "Loading dashboard data...",
     "loadError": "Unable to load dashboard data. Please try again.",
@@ -63,6 +82,13 @@
       "occasions": "Occasions",
       "products": "Products",
       "preview": "Preview Website"
+    },
+    "errorPreview": {
+      "title": "Error page preview",
+      "message": "Open each state to check how it appears in the dashboard.",
+      "unauthorized": "401 / 403 Unauthorized",
+      "notFound": "404 Not found",
+      "server": "500 Server error"
     }
   }
 }

@@ -1,0 +1,42 @@
+<section
+  class="flex min-h-full items-center justify-center px-2 py-10 sm:px-6 sm:py-16"
+  aria-labelledby="server-error-title">
+  <div class="flex w-full max-w-2xl flex-col items-center text-center">
+    <div class="mb-7 flex h-48 w-full items-center justify-center sm:h-56"
+      aria-hidden="true">
+      <svg class="h-full w-full max-w-sm text-[#B94B5B]" viewBox="0 0 360 190"
+        fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M58 151h244" stroke="currentColor" stroke-width="6"
+          stroke-linecap="round" opacity=".2" />
+        <rect x="84" y="38" width="192" height="112" rx="12" fill="white"
+          stroke="currentColor" stroke-width="6" />
+        <path d="M84 69h192" stroke="currentColor" stroke-width="6" />
+        <circle cx="106" cy="54" r="5" fill="currentColor" /><circle cx="124"
+          cy="54" r="5" fill="currentColor" opacity=".55" /><circle cx="142"
+          cy="54" r="5" fill="currentColor" opacity=".3" />
+        <path d="m147 92 19 19 42-42M126 130h108" stroke="currentColor"
+          stroke-width="7" stroke-linecap="round" stroke-linejoin="round"
+          opacity=".6" />
+        <text x="180" y="139" text-anchor="middle" fill="currentColor"
+          font-size="28" font-weight="800" font-family="sans-serif">500</text>
+      </svg>
+    </div>
+    <h1 id="server-error-title"
+      class="text-3xl font-bold tracking-tight text-[#3A2C30] dark:text-white sm:text-4xl">{{
+      'errors.server.title' | translate }}</h1>
+    <p
+      class="mt-4 max-w-lg text-base leading-7 text-slate-500 dark:text-slate-400">{{
+      'errors.server.message' | translate }}</p>
+    <div
+      class="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
+      <button type="button" (click)="tryAgain()"
+        class="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-[#B94B5B] px-7 text-sm font-semibold text-white shadow-sm transition hover:bg-[#9F3D4D] focus:outline-none focus:ring-2 focus:ring-[#B94B5B] focus:ring-offset-2 sm:w-auto">
+        {{ 'errors.actions.tryAgain' | translate }}
+      </button>
+      <a routerLink="/admin"
+        class="inline-flex min-h-12 w-full items-center justify-center rounded-lg border border-slate-200 bg-white px-7 text-sm font-semibold text-[#3A2C30] transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#B94B5B] focus:ring-offset-2 dark:border-slate-700 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800 sm:w-auto">
+        {{ 'errors.actions.home' | translate }}
+      </a>
+    </div>
+  </div>
+</section>
