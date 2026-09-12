@@ -26,4 +26,8 @@ export * from './cart/models/product';
 export * from './cart/models/category';
 export * from './cart/models/cart.interface';
 export * from './cart/models/review';
-export * from './cart/models/register';
+export * from './cart/models/register'
+export * from './lib/dynamic-form/dynamic-form';
+export * from './lib/dynamic-form/components/form-page/form-page';
+export * from './models/field-types';
+export * from './constant/field-registry';
