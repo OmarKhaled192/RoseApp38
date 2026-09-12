@@ -51,6 +51,22 @@
       "occasions": "المناسبات",
       "products": "المنتجات"
     },
+    "occasions": {
+      "title": "كل المناسبات",
+      "addAction": "إضافة مناسبة جديدة",
+      "searchPlaceholder": "بحث...",
+      "name": "الاسم",
+      "products": "المنتجات",
+      "productsLabel": "منتجات",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "editLabel": "تعديل",
+      "deleteLabel": "حذف",
+      "addTitle": "إضافة مناسبة جديدة",
+      "editTitle": "تعديل المناسبة",
+      "addButton": "إضافة المناسبة",
+      "updateButton": "تحديث المناسبة"
+    },
     "userMenu": {
       "profile": "الملف الشخصي",
       "logout": "تسجيل الخروج"

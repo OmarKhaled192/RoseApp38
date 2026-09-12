@@ -1,0 +1,53 @@
+<section class="occasions-page">
+  <div class="page-header">
+    <h1>All Occasions</h1>
+    <button type="button" class="primary-btn">
+      <span class="plus">+</span>
+      <span>Add a new occasion</span>
+    </button>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-box">
+      <span class="search-icon">⌕</span>
+      <input
+        type="search"
+        placeholder="Search..."
+        [value]="search()"
+        (input)="onSearch($event)"
+      />
+    </div>
+  </div>
+
+  <div class="table-wrap" role="table" aria-label="Occasions list">
+    <div class="table-header" role="row">
+      <div role="columnheader">Name</div>
+      <div role="columnheader">Products</div>
+      <div role="columnheader" class="actions-col"></div>
+    </div>
+
+    @for (item of paginatedItems(); track trackById($index, item)) {
+      <div class="table-row" role="row">
+        <div class="cell name" role="cell">{{ item.name }}</div>
+        <div class="cell products" role="cell">{{ item.products }} products</div>
+        <div class="cell actions" role="cell">
+          <button type="button" class="action-btn edit-btn" aria-label="Edit {{ item.name }}">
+            Edit
+          </button>
+          <button type="button" class="action-btn delete-btn" aria-label="Delete {{ item.name }}">
+            Delete
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="pagination-wrap">
+    <lib-pagination [totalRecords]="totalRecords()" (pageChange)="onPageChange($event)" />
+  </div>
+
+  <section class="form-section">
+    <h2>Add a New Occasion</h2>
+    <lib-dynamic-form [fields]="formFields()" (formSubmit)="onSubmit($event)" />
+  </section>
+</section>

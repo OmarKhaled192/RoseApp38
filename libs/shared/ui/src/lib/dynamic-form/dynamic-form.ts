@@ -13,8 +13,10 @@ import { FieldConfig } from '../../models/field-types';
 export class DynamicForm {
   fields = input<FieldConfig[]>([]);
   mode = input<'create' | 'update'>('create');
+  submitLabelInput = input<string | null>(null);
   formSubmit = output<Record<string, any> | FormData>();
   submitLabel = computed(() => this.mode() === 'update' ? 'Update' : 'Add');
+  resolvedSubmitLabel = computed(() => this.submitLabelInput() ?? this.submitLabel());
   FIELD_COMPONENTS = FIELD_COMPONENTS;
 
   groupedFields = computed(() => {
@@ -59,39 +61,39 @@ export class DynamicForm {
     return { field, control: this.userForm[field.key] };
   }
 
- // dynamic-form.ts
-onSubmit(e: Event) {
-  e.preventDefault();
-  if (this.userForm().invalid()) return;
+  // dynamic-form.ts
+  onSubmit(e: Event) {
+    e.preventDefault();
+    if (this.userForm().invalid()) return;
 
-  const excludedKeys = this.fields()
-    .filter(f => f.excludeFromSubmit)
-    .map(f => f.key);
+    const excludedKeys = this.fields()
+      .filter(f => f.excludeFromSubmit)
+      .map(f => f.key);
 
-  const hasFiles = Object.keys(this.uploadedFiles()).length > 0;
+    const hasFiles = Object.keys(this.uploadedFiles()).length > 0;
 
-  if (hasFiles) {
-    const formData = new FormData();
-    const plainData = { ...this.modelSignal() };
+    if (hasFiles) {
+      const formData = new FormData();
+      const plainData = { ...this.modelSignal() };
 
-    excludedKeys.forEach(key => delete plainData[key]);
+      excludedKeys.forEach(key => delete plainData[key]);
 
-    this.fields()
-      .filter(f => f.type === 'upload')
-      .forEach(f => {
-        const value = plainData[f.key];
-        delete plainData[f.key];
-        if (Array.isArray(value)) value.forEach(file => formData.append(f.key, file));
-        else if (value) formData.append(f.key, value);
-      });
+      this.fields()
+        .filter(f => f.type === 'upload')
+        .forEach(f => {
+          const value = plainData[f.key];
+          delete plainData[f.key];
+          if (Array.isArray(value)) value.forEach(file => formData.append(f.key, file));
+          else if (value) formData.append(f.key, value);
+        });
 
-    formData.append('data', JSON.stringify(plainData));
-    this.formSubmit.emit(plainData);
-  } else {
-    const plainData = { ...this.modelSignal() };
-    excludedKeys.forEach(key => delete plainData[key]);
+      formData.append('data', JSON.stringify(plainData));
+      this.formSubmit.emit(plainData);
+    } else {
+      const plainData = { ...this.modelSignal() };
+      excludedKeys.forEach(key => delete plainData[key]);
 
-    this.formSubmit.emit(plainData);
+      this.formSubmit.emit(plainData);
+    }
   }
-}
 }

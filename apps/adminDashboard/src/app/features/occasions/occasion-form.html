@@ -1,0 +1,12 @@
+<section class="occasion-form-page">
+  <h2>{{ formTitle() | translate }}</h2>
+
+  <div class="form-card">
+    <lib-dynamic-form
+      [fields]="formFields()"
+      [mode]="mode() === 'edit' ? 'update' : 'create'"
+      [submitLabelInput]="submitLabel() | translate"
+      (formSubmit)="onSubmit($event)"
+    />
+  </div>
+</section>
