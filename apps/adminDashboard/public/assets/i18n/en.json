@@ -6,7 +6,67 @@
   },
   "common": {
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "close": "Close",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "name": "Name",
+    "products": "Products"
+  },
+  "table": {
+    "empty": "No data available."
+  },
+  "reusable-table": {
+    "empty": "No data available.",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search"
+  },
+  "reusableTable": {
+    "empty": "No data available.",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search"
+  },
+  "categories": {
+    "title": "All Categories",
+    "addCategory": "Add a new category",
+    "updateCategory": "Update Category",
+    "addCategoryTitle": "Add a New Category",
+    "updateCategoryTitle": "Update Category: {{name}}",
+    "name": "Name",
+    "namePlaceholder": "Enter category name",
+    "nameRequired": "Category name is required (at least 2 characters).",
+    "image": "Category image",
+    "imageRequired": "Category image is required.",
+    "imagePlaceholder": "Select an image (JPEG, PNG, WebP up to 5MB)",
+    "uploadFile": "Upload file",
+    "uploading": "Uploading...",
+    "changeImage": "Change image",
+    "viewImage": "View category image",
+    "previewTitle": "Category Image Preview",
+    "searchPlaceholder": "Search...",
+    "productsCount": "{{count}} products",
+    "products": "Products",
+    "empty": "No categories found.",
+    "loading": "Loading categories...",
+    "loadingDetails": "Loading category details...",
+    "backToList": "Back to Categories",
+    "currentImageHint": "Current category image linked. You may preview it or upload a replacement.",
+    "deleteModalTitle": "Delete Category",
+    "deleteModalConfirm": "Are you sure you want to delete \"{{name}}\"? This action cannot be undone.",
+    "deleteSuccess": "Category deleted successfully",
+    "createSuccess": "Category created successfully",
+    "updateSuccess": "Category updated successfully",
+    "deleteFailed": "Failed to delete category",
+    "createFailed": "Failed to create category",
+    "updateFailed": "Failed to update category",
+    "loadFailed": "Failed to load category details",
+    "invalidFileType": "Invalid file type. Please upload a JPEG, PNG, GIF, or WebP image.",
+    "fileSizeExceeded": "File size exceeds 5MB limit.",
+    "imageUploadSuccess": "Image uploaded successfully",
+    "imageUploadFailed": "Failed to upload image"
   },
   "errors": {
     "actions": {

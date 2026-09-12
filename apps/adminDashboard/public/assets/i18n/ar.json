@@ -5,7 +5,67 @@
   },
   "common": {
     "save": "حفظ",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "search": "بحث",
+    "name": "الاسم",
+    "products": "المنتجات"
+  },
+  "table": {
+    "empty": "لا توجد بيانات متاحة."
+  },
+  "reusable-table": {
+    "empty": "لا توجد بيانات متاحة.",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "search": "بحث"
+  },
+  "reusableTable": {
+    "empty": "لا توجد بيانات متاحة.",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "search": "بحث"
+  },
+  "categories": {
+    "title": "كل الفئات",
+    "addCategory": "إضافة فئة جديدة",
+    "updateCategory": "تحديث الفئة",
+    "addCategoryTitle": "إضافة فئة جديدة",
+    "updateCategoryTitle": "تحديث الفئة: {{name}}",
+    "name": "الاسم",
+    "namePlaceholder": "أدخل اسم الفئة",
+    "nameRequired": "اسم الفئة مطلوب (حرفين على الأقل).",
+    "image": "صورة الفئة",
+    "imageRequired": "صورة الفئة مطلوبة.",
+    "imagePlaceholder": "اختر صورة (JPEG, PNG, WebP بحد أقصى 5 ميجابايت)",
+    "uploadFile": "رفع ملف",
+    "uploading": "جارٍ الرفع...",
+    "changeImage": "تغيير الصورة",
+    "viewImage": "عرض صورة الفئة",
+    "previewTitle": "معاينة صورة الفئة",
+    "searchPlaceholder": "بحث...",
+    "productsCount": "{{count}} منتجات",
+    "products": "المنتجات",
+    "empty": "لم يتم العثور على فئات.",
+    "loading": "جارٍ تحميل الفئات...",
+    "loadingDetails": "جارٍ تحميل تفاصيل الفئة...",
+    "backToList": "العودة إلى الفئات",
+    "currentImageHint": "صورة الفئة الحالية مرتبطة. يمكنك معاينتها أو رفع صورة بديلة.",
+    "deleteModalTitle": "حذف الفئة",
+    "deleteModalConfirm": "هل أنت متأكد من رغبتك في حذف \"{{name}}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "deleteSuccess": "تم حذف الفئة بنجاح",
+    "createSuccess": "تم إنشاء الفئة بنجاح",
+    "updateSuccess": "تم تحديث الفئة بنجاح",
+    "deleteFailed": "فشل حذف الفئة",
+    "createFailed": "فشل إنشاء الفئة",
+    "updateFailed": "فشل تحديث الفئة",
+    "loadFailed": "فشل تحميل تفاصيل الفئة",
+    "invalidFileType": "نوع الملف غير صالح. يرجى رفع صورة بصيغة JPEG أو PNG أو GIF أو WebP.",
+    "fileSizeExceeded": "حجم الملف يتجاوز الحد الأقصى 5 ميجابايت.",
+    "imageUploadSuccess": "تم رفع الصورة بنجاح",
+    "imageUploadFailed": "فشل رفع الصورة"
   },
   "errors": {
     "actions": {
