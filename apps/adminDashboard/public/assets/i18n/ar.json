@@ -149,5 +149,52 @@
       "notFound": "404 غير موجود",
       "server": "500 خطأ في الخادم"
     }
+  },
+  "products": {
+    "name": "الاسم",
+    "price": "السعر",
+    "stock": "الكمية المتوفرة",
+    "sales": "المبيعات",
+    "ratings": "التقييمات",
+    "actions": "الإجراءات",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "title": "العنوان",
+    "description": "الوصف",
+    "discount": "الخصم",
+    "priceAfterDiscount": "السعر بعد الخصم",
+    "quantity": "الكمية",
+    "coverImage": "صورة الغلاف",
+    "gallery": "معرض الصور",
+    "category": "الفئة",
+    "occasion": "المناسبة",
+    "addProduct": "إضافة منتج",
+    "updateProduct": "تحديث المنتج",
+    "addNewProduct": "إضافة منتج جديد",
+    "editProduct": "تعديل المنتج",
+    "confirmDeleteTitle": "هل أنت متأكد من حذف هذا المنتج؟",
+    "confirmDeleteYes": "نعم، احذف",
+    "confirmDeleteNo": "لا، تراجع"
+  },
+  "notifications": {
+    "product": {
+      "createSuccess": "تم إضافة المنتج بنجاح",
+      "createFailed": "فشل في إضافة المنتج",
+      "updateSuccess": "تم تحديث المنتج بنجاح",
+      "updateFailed": "فشل في تحديث المنتج",
+      "deleteSuccess": "تم حذف المنتج بنجاح",
+      "deleteFailed": "فشل في حذف المنتج"
+    },
+    "profile": {
+      "photoUpdateSuccess": "تم تحديث الصورة بنجاح",
+      "photoUpdateFailed": "فشل في تحديث الصورة"
+    }
+  },
+  "customers": {
+    "name": "الاسم",
+    "balance": "الرصيد",
+    "actions": "الإجراءات",
+    "edit": "تعديل",
+    "delete": "حذف"
   }
 }

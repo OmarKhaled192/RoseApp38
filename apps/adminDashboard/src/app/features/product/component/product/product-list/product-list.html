@@ -1,0 +1,23 @@
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Products</h1>
+    <button routerLink="/admin/product/add" class="bg-[#A6252A] text-white px-4 py-2 rounded-lg text-sm font-semibold">
+      + Add Product
+    </button>
+  </div>
+
+  <app-reusable-table
+    [columns]="productColumns"
+    [data]="products()"
+    (actionClicked)="onAction($event)"
+  />
+</div>
+
+<lib-checkout-delete-modal
+  [open]="deletingProduct()"
+  [title]="'products.confirmDeleteTitle' | translate"
+  [confirmLabel]="'products.confirmDeleteYes' | translate"
+  [cancelLabel]="'products.confirmDeleteNo' | translate"
+  (confirmed)="confirmDelete()"
+  (cancelled)="cancelDelete()"
+/>

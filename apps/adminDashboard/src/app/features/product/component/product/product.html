@@ -1,9 +1,15 @@
-<div class="min-h-screen  p-6 font-sans">
-  <div class="mx-auto">
-    <h1 class="text-2xl font-bold text-gray-800 mb-6">Add a New Product</h1>
+<lib-form-page [title]="pageTitle()">
+ <lib-dynamic-form
+  [fields]="fields()"
+  [mode]="formMode()"
+  [initialData]="product()"
+  [uploadFn]="uploadFn"
+  [submitLabel]="submitLabel()"
+  (valueChanges)="formValues.set($event)"
+  (formSubmit)="handleSubmit($event)"
+/>
 
-    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
-      <lib-dynamic-form submitLabel="Add Product" [fields]="fields()" (formSubmit)="handleSubmit($event)" />
-    </div>
-  </div>
+<div class="mt-2 text-sm text-gray-600">
+  Price after discount: {{ priceAfterDiscount() }}
 </div>
+</lib-form-page>

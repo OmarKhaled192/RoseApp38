@@ -3,11 +3,21 @@
     {{ field().label }}{{ field().required ? ' *' : '' }}
   </label>
 
-  <div class="flex items-center justify-end w-full px-4 py-3 border border-gray-300 rounded-xl bg-white">
+  <div class="flex items-center justify-end gap-3 w-full px-4 py-3 border border-gray-300 rounded-xl bg-white">
+
+    @if (hasExistingImages() && !fileNames().length) {
+    <!-- ✅ وضع Update: صورة موجودة، اعرضي زرار View جنب زرار الرفع -->
+    <button type="button" (click)="galleryOpen.set(true)"
+      class="flex items-center gap-2 text-[#e53935] text-sm font-normal cursor-pointer">
+      <i class="pi pi-image"></i>
+      View {{ field().label }}
+    </button>
+    }
+
     <p-fileupload class="red-text-icon-only" mode="basic" [multiple]="field().multiple ?? false"
       [accept]="field().accept ?? ''" [maxFileSize]="field().maxFileSize ?? 5000000" [customUpload]="true" [auto]="true"
-      chooseLabel="Upload file" chooseIcon="pi pi-upload" (uploadHandler)="onUpload($event)"
-      styleClass="!bg-transparent !border-none !p-0 !m-0"
+      [chooseLabel]="hasExistingImages() ? 'Replace' : 'Upload file'" chooseIcon="pi pi-upload"
+      (uploadHandler)="onUpload($event)" styleClass="!bg-transparent !border-none !p-0 !m-0"
       buttonStyleClass="!bg-transparent !border-none !shadow-none !outline-none !text-[#e53935] hover:!bg-transparent !p-0 !m-0 !text-base !font-normal flex-row-reverse gap-2 cursor-pointer" />
   </div>
 
@@ -18,4 +28,6 @@
     }
   </ul>
   }
+
+  <lib-image-gallery-modal [images]="currentUrls()" [(open)]="galleryOpen" />
 </div>

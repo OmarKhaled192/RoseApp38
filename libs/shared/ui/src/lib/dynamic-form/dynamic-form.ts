@@ -2,7 +2,8 @@ import { NgComponentOutlet } from '@angular/common';
 import { Component, computed, effect, input, output, signal } from '@angular/core';
 import { form, required } from '@angular/forms/signals';
 import { FIELD_COMPONENTS } from '../../constant/field-registry';
-import { FieldConfig } from '../../models/field-types';
+import { FieldConfig, FileUploadFn } from '../../models/field-types';
+import { forkJoin, map, of } from 'rxjs';
 
 @Component({
   selector: 'lib-dynamic-form',
@@ -14,7 +15,12 @@ export class DynamicForm {
   fields = input<FieldConfig[]>([]);
   mode = input<'create' | 'update'>('create');
   formSubmit = output<Record<string, any> | FormData>();
-  submitLabel = computed(() => this.mode() === 'update' ? 'Update' : 'Add');
+  valueChanges = output<Record<string, any>>();
+  initialData = input<Record<string, any> | null>(null);
+  uploadFn = input<FileUploadFn>();
+  submitLabel = input<string>('Add');
+  isSubmitting = signal(false);
+
   FIELD_COMPONENTS = FIELD_COMPONENTS;
 
   groupedFields = computed(() => {
@@ -31,19 +37,21 @@ export class DynamicForm {
 
   constructor() {
     effect(() => {
-      this.modelSignal.set(
-        Object.fromEntries(
-          this.fields().map(f => [f.key, f.type === 'checkbox' ? false : ''])
-        )
+      const defaults = Object.fromEntries(
+        this.fields().map(f => [f.key, f.type === 'checkbox' ? false : ''])
       );
+      const data = this.initialData();
+      this.modelSignal.set(data ? { ...defaults, ...data } : defaults);
+    });
+
+    effect(() => {
+      this.valueChanges.emit(this.modelSignal());
     });
   }
 
   userForm = form(this.modelSignal, (path) => {
     this.fields().forEach(field => {
-      if (field.required) {
-        required(path[field.key], { message: `${field.label} مطلوب` });
-      }
+      if (field.required) required(path[field.key], { message: `${field.label} مطلوب` });
     });
   });
 
@@ -59,39 +67,47 @@ export class DynamicForm {
     return { field, control: this.userForm[field.key] };
   }
 
- // dynamic-form.ts
-onSubmit(e: Event) {
-  e.preventDefault();
-  if (this.userForm().invalid()) return;
+  onSubmit(e: Event) {
+    e.preventDefault();
+    if (this.userForm().invalid()) return;
 
-  const excludedKeys = this.fields()
-    .filter(f => f.excludeFromSubmit)
-    .map(f => f.key);
+    const excludedKeys = this.fields()
+      .filter(f => f.excludeFromSubmit)
+      .map(f => f.key);
 
-  const hasFiles = Object.keys(this.uploadedFiles()).length > 0;
+    const model = { ...this.modelSignal() };
+    excludedKeys.forEach(key => delete model[key]);
 
-  if (hasFiles) {
-    const formData = new FormData();
-    const plainData = { ...this.modelSignal() };
+    const uploadFields = this.fields().filter(f => f.type === 'upload');
+    const upload = this.uploadFn();
 
-    excludedKeys.forEach(key => delete plainData[key]);
+    if (!uploadFields.length || !upload) {
+      this.formSubmit.emit(model);
+      return;
+    }
 
-    this.fields()
-      .filter(f => f.type === 'upload')
-      .forEach(f => {
-        const value = plainData[f.key];
-        delete plainData[f.key];
-        if (Array.isArray(value)) value.forEach(file => formData.append(f.key, file));
-        else if (value) formData.append(f.key, value);
-      });
+    this.isSubmitting.set(true);
 
-    formData.append('data', JSON.stringify(plainData));
-    this.formSubmit.emit(plainData);
-  } else {
-    const plainData = { ...this.modelSignal() };
-    excludedKeys.forEach(key => delete plainData[key]);
+    const uploads$ = uploadFields.map(field => {
+      const value = model[field.key];
+      const files: File[] = Array.isArray(value) ? value : (value ? [value] : []);
 
-    this.formSubmit.emit(plainData);
+      if (!files.length) {
+        return of([field.key, field.multiple ? [] : null] as const);
+      }
+
+      return forkJoin(files.map(f => upload(f))).pipe(
+        map(urls => [field.key, field.multiple ? urls : urls[0]] as const)
+      );
+    });
+
+    forkJoin(uploads$).subscribe({
+      next: (results) => {
+        results.forEach(([key, url]) => (model[key] = url));
+        this.formSubmit.emit(model);
+        this.isSubmitting.set(false);
+      },
+      error: () => this.isSubmitting.set(false),
+    });
   }
-}
 }

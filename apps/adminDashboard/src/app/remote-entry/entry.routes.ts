@@ -16,7 +16,7 @@ export const remoteRoutes: Route[] = [
             {
                 path: 'product',
                 loadComponent: () =>
-                    import('../features/product/component/product/product').then((m) => m.Product),
+                    import('../features/product/component/product/product-list/product-list').then((m) => m.ProductList),
             },
 
             {
