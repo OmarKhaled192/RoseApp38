@@ -1,15 +1,4 @@
 <lib-form-page [title]="pageTitle()">
- <lib-dynamic-form
-  [fields]="fields()"
-  [mode]="formMode()"
-  [initialData]="product()"
-  [uploadFn]="uploadFn"
-  [submitLabel]="submitLabel()"
-  (valueChanges)="formValues.set($event)"
-  (formSubmit)="handleSubmit($event)"
-/>
-
-<div class="mt-2 text-sm text-gray-600">
-  Price after discount: {{ priceAfterDiscount() }}
-</div>
+  <lib-dynamic-form [submitLabel]="submitLabel()" [mode]="formMode()" [initialData]="product()" [uploadFn]="uploadFn"
+    [fields]="fields()" (valueChanges)="formValues.set($event)" (formSubmit)="handleSubmit($event)" />
 </lib-form-page>

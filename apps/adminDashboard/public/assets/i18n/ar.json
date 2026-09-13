@@ -150,31 +150,25 @@
       "server": "500 خطأ في الخادم"
     }
   },
-  "products": {
-    "name": "الاسم",
-    "price": "السعر",
-    "stock": "الكمية المتوفرة",
-    "sales": "المبيعات",
-    "ratings": "التقييمات",
-    "actions": "الإجراءات",
-    "edit": "تعديل",
-    "delete": "حذف",
+   "products": {
+    "updateProduct": "تحديث المنتج",
+    "addProduct": "إضافة منتج",
+    "addNewProduct": "إضافة منتج جديد",
     "title": "العنوان",
+    "titlePlaceholder": "أدخل عنوان المنتج",
     "description": "الوصف",
+    "descriptionPlaceholder": "أدخل وصف المنتج",
+    "price": "السعر",
+    "pricePlaceholder": "مثال: 5000",
     "discount": "الخصم",
+    "discountPlaceholder": "مثال: 5",
     "priceAfterDiscount": "السعر بعد الخصم",
     "quantity": "الكمية",
+    "quantityPlaceholder": "مثال: 200",
     "coverImage": "صورة الغلاف",
     "gallery": "معرض الصور",
     "category": "الفئة",
-    "occasion": "المناسبة",
-    "addProduct": "إضافة منتج",
-    "updateProduct": "تحديث المنتج",
-    "addNewProduct": "إضافة منتج جديد",
-    "editProduct": "تعديل المنتج",
-    "confirmDeleteTitle": "هل أنت متأكد من حذف هذا المنتج؟",
-    "confirmDeleteYes": "نعم، احذف",
-    "confirmDeleteNo": "لا، تراجع"
+    "occasion": "المناسبة"
   },
   "notifications": {
     "product": {

@@ -8,6 +8,11 @@ export interface BaseField {
   readonly?: boolean;
   row?: number;
   excludeFromSubmit?: boolean;
+   hiddenIn?: ('create' | 'update')[];
+    computedFrom?: {
+    fields: [string, string];
+    formula: (a: number, b: number) => number;
+  };
 }
 
 export type FieldConfig =

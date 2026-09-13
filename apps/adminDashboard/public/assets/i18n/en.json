@@ -151,31 +151,25 @@
       "server": "500 Server error"
     }
   },
-  "products": {
-    "name": "Name",
-    "price": "Price",
-    "stock": "Stock",
-    "sales": "Sales",
-    "ratings": "Ratings",
-    "actions": "Actions",
-    "edit": "Edit",
-    "delete": "Delete",
+ "products": {
+    "updateProduct": "Update Product",
+    "addProduct": "Add Product",
+    "addNewProduct": "Add a New Product",
     "title": "Title",
+    "titlePlaceholder": "Enter product title",
     "description": "Description",
+    "descriptionPlaceholder": "Enter product description",
+    "price": "Price",
+    "pricePlaceholder": "Example: 5000",
     "discount": "Discount",
+    "discountPlaceholder": "Example: 5",
     "priceAfterDiscount": "Price after discount",
     "quantity": "Quantity",
+    "quantityPlaceholder": "Example: 200",
     "coverImage": "Product cover image",
     "gallery": "Product gallery",
     "category": "Category",
-    "occasion": "Occasion",
-    "addProduct": "Add Product",
-    "updateProduct": "Update Product",
-    "addNewProduct": "Add a New Product",
-    "editProduct": "Edit Product",
-    "confirmDeleteTitle": "Are you sure you want to delete this product?",
-    "confirmDeleteYes": "Yes, delete",
-    "confirmDeleteNo": "Nope, not doing it"
+    "occasion": "Occasion"
   },
   "notifications": {
     "product": {
