@@ -1,23 +1,21 @@
 <div class="p-6">
-  <div class="flex items-center justify-between mb-6">
-    <h1 class="text-2xl font-bold text-gray-800">Products</h1>
-    <button routerLink="/admin/product/add" class="bg-[#A6252A] text-white px-4 py-2 rounded-lg text-sm font-semibold">
-      + Add Product
+  <div class="flex items-center justify-end mb-6">
+    <button routerLink="/admin/product/add"
+      class="bg-[#A6252A] text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.58325 11.0002H17.4166M10.9999 4.5835V17.4168" stroke="white" stroke-width="2.08333"
+          stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+
+      <span class="hidden md:inline">
+        {{ 'breadcrumb.addProduct' | translate }}
+      </span>
     </button>
   </div>
 
-  <app-reusable-table
-    [columns]="productColumns"
-    [data]="products()"
-    (actionClicked)="onAction($event)"
-  />
+  <app-reusable-table [columns]="productColumns" [data]="products()" (actionClicked)="onAction($event)" />
 </div>
 
-<lib-checkout-delete-modal
-  [open]="deletingProduct()"
-  [title]="'products.confirmDeleteTitle' | translate"
-  [confirmLabel]="'products.confirmDeleteYes' | translate"
-  [cancelLabel]="'products.confirmDeleteNo' | translate"
-  (confirmed)="confirmDelete()"
-  (cancelled)="cancelDelete()"
-/>
+<lib-checkout-delete-modal [open]="deletingProduct()" [title]="'product.confirmDeleteTitle' | translate"
+  [confirmLabel]="'product.confirmDeleteYes' | translate" [cancelLabel]="'product.confirmDeleteNo' | translate"
+  (confirmed)="confirmDelete()" (cancelled)="cancelDelete()" />

@@ -151,7 +151,7 @@
     }
   },
    "products": {
-    "updateProduct": "تحديث المنتج",
+  "updateProduct": "تحديث المنتج",
     "addProduct": "إضافة منتج",
     "addNewProduct": "إضافة منتج جديد",
     "title": "العنوان",
@@ -168,7 +168,14 @@
     "coverImage": "صورة الغلاف",
     "gallery": "معرض الصور",
     "category": "الفئة",
-    "occasion": "المناسبة"
+    "occasion": "المناسبة",
+    "name": "الاسم",
+    "stock": "المخزون",
+    "sales": "المبيعات",
+    "ratings": "التقييمات",
+    "actions": "الإجراءات",
+    "edit": "تعديل",
+    "delete": "حذف"
   },
   "notifications": {
     "product": {
