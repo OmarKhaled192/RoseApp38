@@ -21,13 +21,14 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CategoriesService } from '../../services/categories.service';
 import { CategoryItem } from '../../models/category.model';
 import { Message } from '@org/data-access';
+import { FormPage } from '@org/ui';
 
 export type CategoryFormMode = 'create' | 'update';
 
 @Component({
   selector: 'app-category-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslatePipe],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslatePipe, FormPage],
   templateUrl: './category-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
