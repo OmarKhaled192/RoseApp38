@@ -150,5 +150,51 @@
       "notFound": "404 Not found",
       "server": "500 Server error"
     }
+  },
+ "products": {
+    "updateProduct": "Update Product",
+    "addProduct": "Add Product",
+    "addNewProduct": "Add a New Product",
+    "title": "Title",
+    "titlePlaceholder": "Enter product title",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter product description",
+    "price": "Price",
+    "pricePlaceholder": "Example: 5000",
+    "discount": "Discount",
+    "discountPlaceholder": "Example: 5",
+    "priceAfterDiscount": "Price after discount",
+    "quantity": "Quantity",
+    "quantityPlaceholder": "Example: 200",
+    "coverImage": "Product cover image",
+    "gallery": "Product gallery",
+    "category": "Category",
+    "occasion": "Occasion"
+  },
+  "notifications": {
+    "product": {
+      "createSuccess": "Product created successfully",
+      "createFailed": "Failed to create product",
+      "updateSuccess": "Product updated successfully",
+      "updateFailed": "Failed to update product",
+      "deleteSuccess": "Product deleted successfully",
+      "deleteFailed": "Failed to delete product"
+    },
+    "profile": {
+      "photoUpdateSuccess": "Photo updated successfully",
+      "photoUpdateFailed": "Failed to update photo"
+    }
+  },
+  "customers": {
+    "name": "Name",
+    "balance": "Balance",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "breadcrumb": {
+    "productList": "Product List",
+    "addProduct": "Add Product",
+    "editProduct": "Edit Product"
   }
 }

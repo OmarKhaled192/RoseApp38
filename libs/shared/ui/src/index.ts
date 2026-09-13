@@ -31,3 +31,5 @@ export * from './lib/dynamic-form/dynamic-form';
 export * from './lib/dynamic-form/components/form-page/form-page';
 export * from './models/field-types';
 export * from './constant/field-registry';
+export * from './lib/checkout-delete-modal/checkout-delete-modal.component';
+export * from './lib/dynamic-form/components/upload-field/lib-image-gallery-modal/image-gallery-modal';
