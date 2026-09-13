@@ -16,7 +16,8 @@ export const remoteRoutes: Route[] = [
             {
                 path: 'product',
                 loadComponent: () =>
-                    import('../features/product/component/product/product').then((m) => m.Product),
+                    import('../features/product/component/product/product-list/product-list').then((m) => m.ProductList),
+                data: { breadcrumbKey: 'breadcrumb.productList' }
             },
             {
                 path: 'occasions',
@@ -38,11 +39,15 @@ export const remoteRoutes: Route[] = [
             {
                 path: 'product/add',
                 loadComponent: () =>
-                    import('../features/product/component/product/product').then((m) => m.Product)
+                    import('../features/product/component/product/product').then((m) => m.Product),
+                data: { breadcrumbKey: 'breadcrumb.addProduct' }
             },
             {
                 path: 'product/edit/:id',
                 loadComponent: () =>
+                    import('../features/product/component/product/product').then((m) => m.Product),
+                data: { breadcrumbKey: 'breadcrumb.editProduct' }
+            },
                     import('../features/product/component/product/product').then((m) => m.Product)
             },
             { path: '404', component: NotFoundPage },
