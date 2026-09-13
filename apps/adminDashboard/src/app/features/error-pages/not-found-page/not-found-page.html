@@ -1,0 +1,19 @@
+<section class="flex min-h-full items-center justify-center px-2 py-10 sm:px-6 sm:py-16" aria-labelledby="not-found-title">
+  <div class="flex w-full max-w-2xl flex-col items-center text-center">
+    <div class="mb-7 flex h-48 w-full items-center justify-center sm:h-56" aria-hidden="true">
+      <svg class="h-full w-full max-w-sm text-[#B94B5B]" viewBox="0 0 360 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M59 151h242" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".2"/>
+        <path d="M102 145V51h156v94" fill="white" stroke="currentColor" stroke-width="6"/>
+        <path d="M88 52h184l-12-26H100L88 52Z" fill="currentColor" opacity=".18" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/>
+        <path d="M126 91h108M126 112h73" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".35"/>
+        <path d="M77 145h206" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+        <text x="180" y="145" text-anchor="middle" fill="currentColor" font-size="74" font-weight="800" font-family="sans-serif">404</text>
+      </svg>
+    </div>
+    <h1 id="not-found-title" class="text-3xl font-bold tracking-tight text-[#3A2C30] dark:text-white sm:text-4xl">{{ 'errors.notFound.title' | translate }}</h1>
+    <p class="mt-4 max-w-lg text-base leading-7 text-slate-500 dark:text-slate-400">{{ 'errors.notFound.message' | translate }}</p>
+    <a routerLink="/admin" class="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg bg-[#B94B5B] px-7 text-sm font-semibold text-white shadow-sm transition hover:bg-[#9F3D4D] focus:outline-none focus:ring-2 focus:ring-[#B94B5B] focus:ring-offset-2">
+      {{ 'errors.actions.home' | translate }}
+    </a>
+  </div>
+</section>

@@ -68,6 +68,25 @@
     "imageUploadSuccess": "Image uploaded successfully",
     "imageUploadFailed": "Failed to upload image"
   },
+  "errors": {
+    "actions": {
+      "home": "Return home",
+      "tryAgain": "Try again"
+    },
+    "unauthorized": {
+      "code": "401 / 403",
+      "title": "You are not authorized to access this page",
+      "message": "You do not have permission to view this page. Please contact support if you believe you should have access."
+    },
+    "notFound": {
+      "title": "This page does not exist.",
+      "message": "The page you are looking for may have moved, or the link may be incorrect. Check the address or return to the dashboard."
+    },
+    "server": {
+      "title": "Oops, something went wrong!",
+      "message": "We are having trouble loading this page. Refresh and try again, or come back in a few moments."
+    }
+  },
   "dashboard": {
     "loading": "Loading dashboard data...",
     "loadError": "Unable to load dashboard data. Please try again.",
@@ -123,6 +142,66 @@
       "occasions": "Occasions",
       "products": "Products",
       "preview": "Preview Website"
+    },
+    "errorPreview": {
+      "title": "Error page preview",
+      "message": "Open each state to check how it appears in the dashboard.",
+      "unauthorized": "401 / 403 Unauthorized",
+      "notFound": "404 Not found",
+      "server": "500 Server error"
     }
+  },
+ "products": {
+   "updateProduct": "Update Product",
+    "addProduct": "Add Product",
+    "addNewProduct": "Add New Product",
+    "title": "Title",
+    "titlePlaceholder": "Enter product title",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter product description",
+    "price": "Price",
+    "pricePlaceholder": "e.g. 5000",
+    "discount": "Discount",
+    "discountPlaceholder": "e.g. 5",
+    "priceAfterDiscount": "Price After Discount",
+    "quantity": "Quantity",
+    "quantityPlaceholder": "e.g. 200",
+    "coverImage": "Cover Image",
+    "gallery": "Gallery",
+    "category": "Category",
+    "occasion": "Occasion",
+    "name": "Name",
+    "stock": "Stock",
+    "sales": "Sales",
+    "ratings": "Ratings",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "notifications": {
+    "product": {
+      "createSuccess": "Product created successfully",
+      "createFailed": "Failed to create product",
+      "updateSuccess": "Product updated successfully",
+      "updateFailed": "Failed to update product",
+      "deleteSuccess": "Product deleted successfully",
+      "deleteFailed": "Failed to delete product"
+    },
+    "profile": {
+      "photoUpdateSuccess": "Photo updated successfully",
+      "photoUpdateFailed": "Failed to update photo"
+    }
+  },
+  "customers": {
+    "name": "Name",
+    "balance": "Balance",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "breadcrumb": {
+    "productList": "Product List",
+    "addProduct": "Add Product",
+    "editProduct": "Edit Product"
   }
 }

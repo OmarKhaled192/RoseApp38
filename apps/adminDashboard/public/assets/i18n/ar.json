@@ -67,6 +67,25 @@
     "imageUploadSuccess": "تم رفع الصورة بنجاح",
     "imageUploadFailed": "فشل رفع الصورة"
   },
+  "errors": {
+    "actions": {
+      "home": "العودة إلى الصفحة الرئيسية",
+      "tryAgain": "حاول مرة أخرى"
+    },
+    "unauthorized": {
+      "code": "401 / 403",
+      "title": "غير مصرح لك بالوصول إلى هذه الصفحة",
+      "message": "لا تملك صلاحية عرض هذه الصفحة. يرجى التواصل مع الدعم إذا كنت تعتقد أن من المفترض أن يكون لديك وصول إليها."
+    },
+    "notFound": {
+      "title": "هذه الصفحة غير موجودة.",
+      "message": "ربما تم نقل الصفحة التي تبحث عنها أو أن الرابط غير صحيح. تحقق من العنوان أو عد إلى لوحة التحكم."
+    },
+    "server": {
+      "title": "عذرًا، حدث خطأ ما!",
+      "message": "نواجه مشكلة في تحميل هذه الصفحة. حدّث الصفحة وحاول مرة أخرى، أو عد بعد لحظات قليلة."
+    }
+  },
   "dashboard": {
     "loading": "جارٍ تحميل بيانات لوحة التحكم...",
     "loadError": "تعذّر تحميل بيانات لوحة التحكم. يرجى المحاولة مرة أخرى.",
@@ -122,6 +141,66 @@
       "occasions": "المناسبات",
       "products": "المنتجات",
       "preview": "معاينة الموقع"
+    },
+    "errorPreview": {
+      "title": "معاينة صفحات الخطأ",
+      "message": "افتح كل حالة للتحقق من طريقة ظهورها داخل لوحة التحكم.",
+      "unauthorized": "401 / 403 غير مصرح",
+      "notFound": "404 غير موجود",
+      "server": "500 خطأ في الخادم"
     }
+  },
+   "products": {
+  "updateProduct": "تحديث المنتج",
+    "addProduct": "إضافة منتج",
+    "addNewProduct": "إضافة منتج جديد",
+    "title": "العنوان",
+    "titlePlaceholder": "أدخل عنوان المنتج",
+    "description": "الوصف",
+    "descriptionPlaceholder": "أدخل وصف المنتج",
+    "price": "السعر",
+    "pricePlaceholder": "مثال: 5000",
+    "discount": "الخصم",
+    "discountPlaceholder": "مثال: 5",
+    "priceAfterDiscount": "السعر بعد الخصم",
+    "quantity": "الكمية",
+    "quantityPlaceholder": "مثال: 200",
+    "coverImage": "صورة الغلاف",
+    "gallery": "معرض الصور",
+    "category": "الفئة",
+    "occasion": "المناسبة",
+    "name": "الاسم",
+    "stock": "المخزون",
+    "sales": "المبيعات",
+    "ratings": "التقييمات",
+    "actions": "الإجراءات",
+    "edit": "تعديل",
+    "delete": "حذف"
+  },
+  "notifications": {
+    "product": {
+      "createSuccess": "تم إضافة المنتج بنجاح",
+      "createFailed": "فشل في إضافة المنتج",
+      "updateSuccess": "تم تحديث المنتج بنجاح",
+      "updateFailed": "فشل في تحديث المنتج",
+      "deleteSuccess": "تم حذف المنتج بنجاح",
+      "deleteFailed": "فشل في حذف المنتج"
+    },
+    "profile": {
+      "photoUpdateSuccess": "تم تحديث الصورة بنجاح",
+      "photoUpdateFailed": "فشل في تحديث الصورة"
+    }
+  },
+  "customers": {
+    "name": "الاسم",
+    "balance": "الرصيد",
+    "actions": "الإجراءات",
+    "edit": "تعديل",
+    "delete": "حذف"
+  },
+  "breadcrumb": {
+    "productList": "قائمة المنتجات",
+    "addProduct": "إضافة منتج",
+    "editProduct": "تعديل المنتج"
   }
 }
