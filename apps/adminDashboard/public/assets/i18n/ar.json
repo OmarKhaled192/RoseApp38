@@ -190,5 +190,10 @@
     "actions": "الإجراءات",
     "edit": "تعديل",
     "delete": "حذف"
+  },
+  "breadcrumb": {
+    "productList": "قائمة المنتجات",
+    "addProduct": "إضافة منتج",
+    "editProduct": "تعديل المنتج"
   }
 }

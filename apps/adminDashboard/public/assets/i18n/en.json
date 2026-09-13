@@ -191,5 +191,10 @@
     "actions": "Actions",
     "edit": "Edit",
     "delete": "Delete"
+  },
+  "breadcrumb": {
+    "productList": "Product List",
+    "addProduct": "Add Product",
+    "editProduct": "Edit Product"
   }
 }
