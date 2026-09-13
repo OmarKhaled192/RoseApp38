@@ -21,18 +21,18 @@ export const remoteRoutes: Route[] = [
             {
                 path: 'occasions',
                 loadComponent: () =>
-                    import('../features/occasions/occasions-list').then((m) => m.OccasionsList),
+                    import('../features/occasions/components/occasion-list/occasions-list').then((m) => m.OccasionsList),
             },
             {
                 path: 'occasions/add',
                 loadComponent: () =>
-                    import('../features/occasions/occasion-form').then((m) => m.OccasionForm),
+                    import('../features/occasions/components/occasion-form/occasion-form').then((m) => m.OccasionForm),
                 data: { mode: 'add' },
             },
             {
                 path: 'occasions/edit/:id',
                 loadComponent: () =>
-                    import('../features/occasions/occasion-form').then((m) => m.OccasionForm),
+                    import('../features/occasions/components/occasion-form/occasion-form').then((m) => m.OccasionForm),
                 data: { mode: 'edit' },
             },
             {
