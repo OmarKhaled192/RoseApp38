@@ -95,8 +95,8 @@ export class Product {
       },
     },
     { key: 'stock', label: this.translate.instant('products.quantity'), type: 'number', required: true, placeholder: this.translate.instant('products.quantityPlaceholder'), row: 4 },
-    { key: 'cover', label: this.translate.instant('products.coverImage'), type: 'upload', required: true, accept: 'image/*', row: 5, hiddenIn: ['create'] },
-    { key: 'gallery', label: this.translate.instant('products.gallery'), type: 'upload', required: true, multiple: true, accept: 'image/*', row: 5, hiddenIn: ['create'] },
+    { key: 'cover', label: this.translate.instant('products.coverImage'), type: 'upload', required: true, accept: 'image/*', row: 5, hiddenIn: ['update'] },
+    { key: 'gallery', label: this.translate.instant('products.gallery'), type: 'upload', required: true, multiple: true, accept: 'image/*', row: 5, hiddenIn: ['update'] },
     {
       key: 'categoryId', label: this.translate.instant('products.category'), type: 'select', required: true, row: 6,
       options: this.categoryOptions()
@@ -105,8 +105,8 @@ export class Product {
       key: 'occasion', label: this.translate.instant('products.occasion'), type: 'select', required: true, row: 7, excludeFromSubmit: true,
       options: this.occasionOptions()
     },
-    { key: 'cover', label: this.translate.instant('products.coverImage'), type: 'upload', required: true, accept: 'image/*', row: 5, hiddenIn: ['update'] },
-    { key: 'gallery', label: this.translate.instant('products.gallery'), type: 'upload', required: true, multiple: true, accept: 'image/*', row: 5, hiddenIn: ['update'] },
+    { key: 'cover', label: this.translate.instant('products.coverImage'), type: 'upload', accept: 'image/*', row: 5, hiddenIn: ['create'] },
+    { key: 'gallery', label: this.translate.instant('products.gallery'), type: 'upload', multiple: true, accept: 'image/*', row: 5, hiddenIn: ['create'] },
   ]);
 
   readonly isLoading = computed(
