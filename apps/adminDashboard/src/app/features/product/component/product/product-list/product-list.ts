@@ -4,7 +4,7 @@ import {
 } from '../../../../../shared/components/reusable-table/reusable-table';
 import { ProductStore } from '../../../state/product.store';
 import { Router, RouterLink } from '@angular/router';
-import { CheckoutDeleteModalComponent, Pagination } from '@org/ui';
+import { CheckoutDeleteModalComponent } from '@org/ui';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ReusableTableActionEvent } from 'apps/adminDashboard/src/app/shared/models/reusable-table.models';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +18,6 @@ import { QueryParams } from '@org/data-access';
     TranslatePipe,
     RouterLink,
     FormsModule,
-    Pagination
   ],
   templateUrl: './product-list.html'
 })

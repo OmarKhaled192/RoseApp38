@@ -16,19 +16,20 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { CategoriesService } from '../../services/categories.service';
 import { CategoryItem } from '../../models/category.model';
 import { Message } from '@org/data-access';
-import { FormPage } from '@org/ui';
+import { DynamicForm, FieldConfig, FileUploadFn, FormPage } from '@org/ui';
+import { map, Observable } from 'rxjs';
 
 export type CategoryFormMode = 'create' | 'update';
 
 @Component({
   selector: 'app-category-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslatePipe, FormPage],
+  imports: [CommonModule, ReactiveFormsModule, DynamicForm, FormPage],
   templateUrl: './category-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -47,6 +48,7 @@ export class CategoryForm implements OnInit {
   readonly mode = signal<CategoryFormMode>('create');
   readonly categoryId = signal<string | null>(null);
   readonly currentCategory = signal<CategoryItem | null>(null);
+  readonly formValues = signal<Record<string, unknown>>({});
 
   readonly isSubmitting = signal<boolean>(false);
   readonly isUploading = signal<boolean>(false);
@@ -81,6 +83,35 @@ export class CategoryForm implements OnInit {
       ? this.translate.instant('categories.updateCategory')
       : this.translate.instant('categories.addCategory');
   });
+
+  readonly formMode = computed(() => this.mode());
+
+  readonly initialData = computed<Record<string, unknown> | null>(() => {
+    const category = this.currentCategory();
+    return category ? { name: category.title, image: category.image } : null;
+  });
+
+  readonly fields = computed<FieldConfig[]>(() => [
+    {
+      key: 'name',
+      label: this.translate.instant('categories.name'),
+      type: 'text',
+      required: true,
+      placeholder: this.translate.instant('categories.namePlaceholder'),
+      row: 1,
+    },
+    {
+      key: 'image',
+      label: this.translate.instant('categories.image'),
+      type: 'upload',
+      required: true,
+      accept: 'image/jpeg,image/png,image/gif,image/webp',
+      row: 2,
+    },
+  ]);
+
+  readonly uploadFn: FileUploadFn = (file: File) =>
+    this.categoriesService.uploadImage(file).pipe(map((res) => res.payload.url));
 
   ngOnInit(): void {
     const routeId = this.route.snapshot.paramMap.get('id');
@@ -121,6 +152,42 @@ export class CategoryForm implements OnInit {
           );
         },
       });
+  }
+
+  handleSubmit(category: Record<string, any> | FormData): void {
+    const id = this.categoryId();
+    const data = category instanceof FormData ? Object.fromEntries(category.entries()) : category;
+    const image = typeof data['image'] === 'string' ? data['image'] : '';
+    const body = {
+      title: String(data['name'] ?? '').trim(),
+      description: String(data['name'] ?? '').trim(),
+      ...(image ? { image } : {}),
+    };
+
+    this.isSubmitting.set(true);
+    const request = (id
+      ? this.categoriesService.updateCategory(id, body)
+      : this.categoriesService.createCategory({ ...body, image })) as Observable<unknown>;
+
+    request.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () => {
+        this.isSubmitting.set(false);
+        this.messageService.show(
+          'success',
+          this.translate.instant(id ? 'categories.updateSuccess' : 'categories.createSuccess'),
+        );
+        this.router.navigate(['/admin/categories']);
+      },
+      error: (err: unknown) => {
+        this.isSubmitting.set(false);
+        const apiMessage = (err as { error?: { message?: string } })?.error?.message;
+        this.messageService.show(
+          'error',
+          apiMessage ||
+          this.translate.instant(id ? 'categories.updateFailed' : 'categories.createFailed'),
+        );
+      },
+    });
   }
 
   onFileSelected(event: Event): void {
@@ -235,3 +302,4 @@ export class CategoryForm implements OnInit {
     }
   }
 }
+

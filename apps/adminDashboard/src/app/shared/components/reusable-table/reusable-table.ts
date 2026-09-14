@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Pagination } from '@org/ui';
 import {
   ResolvedReusableTableColumn,
   ReusableTableAction,
@@ -16,7 +17,7 @@ const DEFAULT_ACTIONS: readonly ReusableTableAction[] = [
 @Component({
   selector: 'app-reusable-table',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, Pagination],
   templateUrl: './reusable-table.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -25,9 +26,11 @@ export class ReusableTable<T extends ReusableTableRow = ReusableTableRow> {
   readonly data = input<readonly T[]>([]);
   readonly columns = input.required<readonly ReusableTableColumn[]>();
   readonly emptyMessage = input('reusable-table.empty');
+  readonly totalRecords = input(0);
 
   /** Emits the complete row and the action/column that caused the click. */
   readonly actionClicked = output<ReusableTableActionEvent<T>>();
+  readonly pageChange = output<{ page: number; size: number; first: number }>();
 
   readonly resolvedColumns = computed<readonly ResolvedReusableTableColumn[]>(() =>
     this.columns().map((column, index) => ({

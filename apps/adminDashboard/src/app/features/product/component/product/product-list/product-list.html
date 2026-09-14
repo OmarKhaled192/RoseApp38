@@ -18,20 +18,13 @@
 
   <div class="relative mb-4">
     <i class="pi pi-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-    <input
-      type="text"
-      [ngModel]="searchTerm()"
-      (ngModelChange)="onSearchChange($event)"
+    <input type="text" [ngModel]="searchTerm()" (ngModelChange)="onSearchChange($event)"
       [placeholder]="'common.search' | translate"
-      class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#A6252A]/20 focus:border-[#A6252A]"
-    />
+      class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#A6252A]/20 focus:border-[#A6252A]" />
   </div>
 
-  <app-reusable-table [columns]="productColumns" [data]="products()" (actionClicked)="onAction($event)" />
-
-  <div class="pt-4">
-    <lib-pagination [totalRecords]="totalRecords()" (pageChange)="onPageChange($event)" />
-  </div>
+  <app-reusable-table [columns]="productColumns" [data]="products()" [totalRecords]="totalRecords()"
+    (actionClicked)="onAction($event)" (pageChange)="onPageChange($event)" />
 </div>
 
 <lib-checkout-delete-modal [open]="deletingProduct()" [title]="'product.confirmDeleteTitle' | translate"
