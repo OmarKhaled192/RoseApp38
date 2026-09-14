@@ -154,6 +154,7 @@
  "products": {
    "updateProduct": "Update Product",
     "addProduct": "Add Product",
+    "allProducts": "All Products",
     "addNewProduct": "Add a new product",
     "title": "Title",
     "titlePlaceholder": "Enter product title",

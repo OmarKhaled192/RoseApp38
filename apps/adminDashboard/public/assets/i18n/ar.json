@@ -153,6 +153,7 @@
    "products": {
   "updateProduct": "تحديث المنتج",
     "addProduct": "إضافة منتج",
+    "allProducts": "جميع المنتجات",
     "addNewProduct": "إضافة منتج جديد",
     "title": "العنوان",
     "titlePlaceholder": "أدخل عنوان المنتج",
