@@ -15,6 +15,10 @@ export interface CategoryItem {
   _count?: CategoryCount;
 }
 
+export interface Category {
+  category: CategoryItem
+}
+
 export interface CategoryQuery extends QueryParams {
   page?: number;
   limit?: number;

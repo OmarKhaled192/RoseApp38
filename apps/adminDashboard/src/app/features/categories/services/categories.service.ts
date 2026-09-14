@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse, ApiService, DataResponse } from '@org/data-access';
 import {
+  Category,
   CategoryItem,
   CategoryQuery,
   CreateCategoryDto,
@@ -13,7 +14,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class CategoriesService extends ApiService<CategoryItem> {
+export class CategoriesService extends ApiService<Category> {
   protected override endpoint = 'categories';
 
   constructor() {
@@ -23,10 +24,10 @@ export class CategoriesService extends ApiService<CategoryItem> {
   /**
    * Signal-based HttpResource for reactive queries in components.
    */
-  getCategoriesResource(params?: () => CategoryQuery) {
-    return this.getListResource<CategoryItem>(params);
-  }
 
+  getCategoriesResource(params: () => CategoryQuery) {
+    return this.getListResourceData<CategoryItem>('', params);
+  }
   /**
    * Standard Observable query for paginated categories.
    */
@@ -37,9 +38,11 @@ export class CategoriesService extends ApiService<CategoryItem> {
   /**
    * Fetch a single category by ID.
    */
-  getCategoryById(id: string): Observable<ApiResponse<CategoryItem>> {
-    return this.getById<CategoryItem>(id);
-  }
+
+  
+   getCategoryById(id: string) {
+      return this.getResourceById<CategoryItem>(id);
+    }
 
   /**
    * Create a new category (Admin only).
