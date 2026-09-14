@@ -1,0 +1,5 @@
+<lib-form-page [title]="titleText()">
+  <lib-dynamic-form [submitLabel]="submitButtonText()" [mode]="formMode()" [initialData]="category()"
+    [uploadFn]="uploadFn" [fields]="fields()" (valueChanges)="formValues.set($event)"
+    (formSubmit)="handleSubmit($event)" />
+</lib-form-page>

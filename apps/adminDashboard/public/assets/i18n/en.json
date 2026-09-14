@@ -6,7 +6,86 @@
   },
   "common": {
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "close": "Close",
+    "edit": "Edit",
+    "delete": "Delete",
+     "search": "Search...",
+    "name": "Name",
+    "products": "Products"
+  },
+  "table": {
+    "empty": "No data available."
+  },
+  "reusable-table": {
+    "empty": "No data available.",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search"
+  },
+  "reusableTable": {
+    "empty": "No data available.",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search"
+  },
+  "categories": {
+    "title": "All Categories",
+    "addCategory": "Add a new category",
+    "updateCategory": "Update Category",
+    "addCategoryTitle": "Add a New Category",
+    "updateCategoryTitle": "Update Category: {{name}}",
+    "name": "Name",
+    "namePlaceholder": "Enter category name",
+    "nameRequired": "Category name is required (at least 2 characters).",
+    "image": "Category image",
+    "imageRequired": "Category image is required.",
+    "imagePlaceholder": "Select an image (JPEG, PNG, WebP up to 5MB)",
+    "uploadFile": "Upload file",
+    "uploading": "Uploading...",
+    "changeImage": "Change image",
+    "viewImage": "View category image",
+    "previewTitle": "Category Image Preview",
+    "searchPlaceholder": "Search...",
+    "productsCount": "{{count}} products",
+    "products": "Products",
+    "empty": "No categories found.",
+    "loading": "Loading categories...",
+    "loadingDetails": "Loading category details...",
+    "backToList": "Back to Categories",
+    "currentImageHint": "Current category image linked. You may preview it or upload a replacement.",
+    "deleteModalTitle": "Delete Category",
+    "deleteModalConfirm": "Are you sure you want to delete \"{{name}}\"? This action cannot be undone.",
+    "deleteSuccess": "Category deleted successfully",
+    "createSuccess": "Category created successfully",
+    "updateSuccess": "Category updated successfully",
+    "deleteFailed": "Failed to delete category",
+    "createFailed": "Failed to create category",
+    "updateFailed": "Failed to update category",
+    "loadFailed": "Failed to load category details",
+    "invalidFileType": "Invalid file type. Please upload a JPEG, PNG, GIF, or WebP image.",
+    "fileSizeExceeded": "File size exceeds 5MB limit.",
+    "imageUploadSuccess": "Image uploaded successfully",
+    "imageUploadFailed": "Failed to upload image"
+  },
+  "errors": {
+    "actions": {
+      "home": "Return home",
+      "tryAgain": "Try again"
+    },
+    "unauthorized": {
+      "code": "401 / 403",
+      "title": "You are not authorized to access this page",
+      "message": "You do not have permission to view this page. Please contact support if you believe you should have access."
+    },
+    "notFound": {
+      "title": "This page does not exist.",
+      "message": "The page you are looking for may have moved, or the link may be incorrect. Check the address or return to the dashboard."
+    },
+    "server": {
+      "title": "Oops, something went wrong!",
+      "message": "We are having trouble loading this page. Refresh and try again, or come back in a few moments."
+    }
   },
   "dashboard": {
     "loading": "Loading dashboard data...",
@@ -63,6 +142,55 @@
       "occasions": "Occasions",
       "products": "Products",
       "preview": "Preview Website"
+    },
+    "errorPreview": {
+      "title": "Error page preview",
+      "message": "Open each state to check how it appears in the dashboard.",
+      "unauthorized": "401 / 403 Unauthorized",
+      "notFound": "404 Not found",
+      "server": "500 Server error"
+    }
+  },
+ "products": {
+   "updateProduct": "Update Product",
+    "addProduct": "Add Product",
+    "allProducts": "All Products",
+    "addNewProduct": "Add a new product",
+    "title": "Title",
+    "titlePlaceholder": "Enter product title",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter product description",
+    "price": "Price",
+    "pricePlaceholder": "e.g. 5000",
+    "discount": "Discount",
+    "discountPlaceholder": "e.g. 5",
+    "priceAfterDiscount": "Price After Discount",
+    "quantity": "Quantity",
+    "quantityPlaceholder": "e.g. 200",
+    "coverImage": "Cover Image",
+    "gallery": "Gallery",
+    "category": "Category",
+    "occasion": "Occasion",
+    "name": "Name",
+    "stock": "Stock",
+    "sales": "Sales",
+    "ratings": "Ratings",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "notifications": {
+    "product": {
+      "createSuccess": "Product created successfully",
+      "createFailed": "Failed to create product",
+      "updateSuccess": "Product updated successfully",
+      "updateFailed": "Failed to update product",
+      "deleteSuccess": "Product deleted successfully",
+      "deleteFailed": "Failed to delete product"
+    },
+    "profile": {
+      "photoUpdateSuccess": "Photo updated successfully",
+      "photoUpdateFailed": "Failed to update photo"
     }
   },
   "adminAccount": {
@@ -97,5 +225,16 @@
     "passwordMismatch": "Passwords do not match.",
     "passwordChanged": "Password changed successfully.",
     "passwordFailed": "Unable to change your password."
+  "customers": {
+    "name": "Name",
+    "balance": "Balance",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "breadcrumb": {
+    "productList": "Product List",
+    "addProduct": "Add Product",
+    "editProduct": "Edit Product"
   }
 }
