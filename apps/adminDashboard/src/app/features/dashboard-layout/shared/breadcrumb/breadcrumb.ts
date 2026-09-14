@@ -77,6 +77,11 @@ export class Breadcrumb implements OnInit {
       pageLabel = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
     }
 
+    if (urlSegments.includes('account')) {
+      this.items = [{ label: dashboardLabel, routerLink: '/admin' }, { label: this.getTranslatedString('adminAccount.title', 'Account Settings'), routerLink: '/admin/account/profile' }];
+      if (lastSegment === 'change-password') this.items.push({ label: this.getTranslatedString('adminAccount.changePassword', 'Change Password') });
+      return;
+    }
     if (pageLabel && lastSegment !== 'overview') {
       this.items = [
         {
