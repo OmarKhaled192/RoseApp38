@@ -36,72 +36,8 @@
       <span>{{ 'categories.loading' | translate }}</span>
     </div>
     } @else {
-    <app-reusable-table [data]="tableData()" [columns]="columns" emptyMessage="categories.empty"
-      (actionClicked)="onActionClicked($event)" />
-    }
-
-    <!-- Pagination Controls (Matching Image 1) -->
-    @if (totalPages() > 1 || totalRecords() > 0) {
-    <div class="mt-8 flex items-center justify-center gap-1.5 sm:gap-2">
-      <!-- First Page -->
-      <button type="button" (click)="goToPage(1)" [disabled]="currentPage() === 1"
-        class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
-        title="First page">
-        «
-      </button>
-
-      <!-- Previous Page -->
-      <button type="button" (click)="goToPage(currentPage() - 1)" [disabled]="currentPage() === 1"
-        class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
-        title="Previous page">
-        ‹
-      </button>
-
-      <!-- Pages -->
-      @if (visiblePages()[0] > 1) {
-      <button type="button" (click)="goToPage(1)"
-        class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm text-slate-700 transition hover:bg-slate-50">
-        1
-      </button>
-      @if (visiblePages()[0] > 2) {
-      <span class="px-1 text-slate-400">...</span>
-      }
-      }
-
-      @for (page of visiblePages(); track page) {
-      <button type="button" (click)="goToPage(page)" [class.bg-[#9E1B41]]="page === currentPage()"
-        [class.text-white]="page === currentPage()" [class.border-[#9E1B41]]="page === currentPage()"
-        [class.font-semibold]="page === currentPage()" [class.bg-white]="page !== currentPage()"
-        [class.text-slate-700]="page !== currentPage()" [class.border-slate-200]="page !== currentPage()"
-        [class.hover:bg-slate-50]="page !== currentPage()"
-        class="inline-flex h-9 w-9 items-center justify-center rounded-lg border text-sm transition">
-        {{ page }}
-      </button>
-      }
-
-      @if (visiblePages()[visiblePages().length - 1] < totalPages()) { @if (visiblePages()[visiblePages().length - 1] <
-        totalPages() - 1) { <span class="px-1 text-slate-400">...</span>
-        }
-        <button type="button" (click)="goToPage(totalPages())"
-          class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm text-slate-700 transition hover:bg-slate-50">
-          {{ totalPages() }}
-        </button>
-        }
-
-        <!-- Next Page -->
-        <button type="button" (click)="goToPage(currentPage() + 1)" [disabled]="currentPage() === totalPages()"
-          class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
-          title="Next page">
-          ›
-        </button>
-
-        <!-- Last Page -->
-        <button type="button" (click)="goToPage(totalPages())" [disabled]="currentPage() === totalPages()"
-          class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
-          title="Last page">
-          »
-        </button>
-    </div>
+    <app-reusable-table [data]="tableData()" [columns]="columns" [totalRecords]="totalRecords()"
+      emptyMessage="categories.empty" (actionClicked)="onActionClicked($event)" (pageChange)="onPageChange($event)" />
     }
   </div>
 </div>

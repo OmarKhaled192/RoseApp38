@@ -83,12 +83,6 @@ export class CategoriesList {
     return this.rawCategories().length;
   });
 
-  readonly totalPages = computed<number>(() => {
-    const total = this.totalRecords();
-    const limit = this.pageSize();
-    return Math.max(1, Math.ceil(total / limit));
-  });
-
   readonly tableData = computed<CategoryTableRow[]>(() =>
     this.rawCategories().map((cat) => ({
       id: cat.id,
@@ -184,24 +178,8 @@ export class CategoriesList {
     });
   }
 
-  goToPage(page: number): void {
-    if (page < 1 || page > this.totalPages() || page === this.currentPage()) {
-      return;
-    }
-    this.currentPage.set(page);
+  onPageChange(event: { page: number; size: number; first: number }): void {
+    this.currentPage.set(event.page + 1);
+    this.pageSize.set(event.size);
   }
-
-  readonly visiblePages = computed<number[]>(() => {
-    const total = this.totalPages();
-    const current = this.currentPage();
-    const pages: number[] = [];
-
-    const start = Math.max(1, current - 2);
-    const end = Math.min(total, current + 2);
-
-    for (let i = start; i <= end; i++) {
-      pages.push(i);
-    }
-    return pages;
-  });
 }
