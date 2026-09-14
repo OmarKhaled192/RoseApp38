@@ -27,16 +27,16 @@ export class CategoryForm implements OnInit {
   
   readonly inputMode = input<CategoryFormMode | undefined>(undefined);
   inputCategoryId = computed(() => this.routeParams()?.get('id') ?? null);
-readonly categoryResource = this.categoriesService.getResourceById(
-  computed(() => this.inputCategoryId() ?? '')
-);
+  readonly categoryResource = this.categoriesService.getResourceById(
+    computed(() => this.inputCategoryId() ?? '')
+  );
 
 readonly category = computed(() => {
   const c = this.categoryResource.value()?.payload.category ?? null;
   if (!c) return null;
-  return {
+  return  {
     ...c,
-      name: typeof c.title,
+      name: c.title,
   };
 });
 
