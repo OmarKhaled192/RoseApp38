@@ -16,8 +16,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { CategoriesService } from '../../services/categories.service';
 import { CategoryItem } from '../../models/category.model';
 import { Message } from '@org/data-access';
@@ -29,7 +29,7 @@ export type CategoryFormMode = 'create' | 'update';
 @Component({
   selector: 'app-category-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslatePipe, DynamicForm, FormPage],
+  imports: [CommonModule, ReactiveFormsModule, DynamicForm, FormPage],
   templateUrl: './category-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -154,12 +154,13 @@ export class CategoryForm implements OnInit {
       });
   }
 
-  handleSubmit(category: Record<string, unknown>): void {
+  handleSubmit(category: Record<string, any> | FormData): void {
     const id = this.categoryId();
-    const image = typeof category['image'] === 'string' ? category['image'] : '';
+    const data = category instanceof FormData ? Object.fromEntries(category.entries()) : category;
+    const image = typeof data['image'] === 'string' ? data['image'] : '';
     const body = {
-      title: String(category['name'] ?? '').trim(),
-      description: String(category['name'] ?? '').trim(),
+      title: String(data['name'] ?? '').trim(),
+      description: String(data['name'] ?? '').trim(),
       ...(image ? { image } : {}),
     };
 
