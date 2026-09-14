@@ -1,7 +1,11 @@
 export interface Occasion {
   id: string;
-  name: string;
-  products: number;
+  name?: string;
+  title?: string;
+  products?: number;
+  _count?: {
+    products?: number;
+  };
   image?: string;
 }
 

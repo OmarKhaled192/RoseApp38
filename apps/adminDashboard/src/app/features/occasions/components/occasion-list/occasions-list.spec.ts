@@ -1,7 +1,8 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, RouterModule } from '@angular/router';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
-import { OccasionsList } from '../occasions-list';
+import { OccasionsList } from './occasions-list';
 
 describe('OccasionsList', () => {
   let component: OccasionsList;
@@ -12,6 +13,7 @@ describe('OccasionsList', () => {
     await TestBed.configureTestingModule({
       imports: [OccasionsList, RouterModule],
       providers: [
+        provideHttpClient(),
         provideRouter([]),
         provideTranslateService({ lang: 'en', fallbackLang: 'en' }),
       ],
@@ -26,15 +28,8 @@ describe('OccasionsList', () => {
           searchPlaceholder: 'Search...',
           name: 'Name',
           products: 'Products',
-          productsLabel: 'products',
           edit: 'Edit',
           delete: 'Delete',
-          editLabel: 'Edit',
-          deleteLabel: 'Delete',
-          addTitle: 'Add a New Occasion',
-          editTitle: 'Edit Occasion',
-          addButton: 'Add Occasion',
-          updateButton: 'Update Occasion',
           actions: 'Actions',
         },
       },

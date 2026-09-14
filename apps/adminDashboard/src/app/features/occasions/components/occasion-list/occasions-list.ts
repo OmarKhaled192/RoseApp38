@@ -25,11 +25,17 @@ export class OccasionsList {
   readonly pageSize = signal(10);
 
   readonly occasionsResource = this.occasionService.getOccasions(() => ({
+    page: this.currentPage(),
+    limit: this.pageSize(),
     search: this.search(),
   }));
 
   readonly items = computed<OccasionItem[]>(() =>
-    (this.occasionsResource.value()?.payload.data ?? []).map((occasion) => ({ ...occasion })),
+    (this.occasionsResource.value()?.payload.data ?? []).map((occasion) => ({
+      ...occasion,
+      name: occasion.name ?? occasion.title ?? '',
+      products: occasion.products ?? occasion._count?.products ?? 0,
+    })),
   );
 
   readonly columns: readonly ReusableTableColumn[] = [
@@ -46,16 +52,9 @@ export class OccasionsList {
     },
   ];
 
-  readonly filteredItems = computed(() => {
-    return this.items();
-  });
+  readonly totalRecords = computed(() => this.occasionsResource.value()?.payload.metadata.total ?? 0);
 
-  readonly paginatedItems = computed(() => {
-    const start = (this.currentPage() - 1) * this.pageSize();
-    return this.filteredItems().slice(start, start + this.pageSize());
-  });
-
-  readonly totalRecords = computed(() => this.filteredItems().length);
+  readonly paginatedItems = this.items;
 
   onSearch(value: Event): void {
     const target = value.target as HTMLInputElement;
@@ -63,20 +62,21 @@ export class OccasionsList {
     this.currentPage.set(1);
   }
 
-  onPageChange({ page }: { page: number; size: number; first: number }): void {
+  onPageChange({ page, size }: { page: number; size: number; first: number }): void {
+    this.pageSize.set(size);
     this.currentPage.set(page + 1);
   }
 
-  onTableAction(event: ReusableTableActionEvent<OccasionItem>): void {
+  onTableAction(event: ReusableTableActionEvent): void {
     const { action, row } = event;
 
     if (action === 'edit') {
-      this.router.navigate(['/admin/occasions/edit', row.id]);
+      this.router.navigate(['/admin/occasions/edit', row['id']]);
       return;
     }
 
     if (action === 'delete') {
-      this.occasionService.deleteOccasion(row.id).subscribe(() => this.occasionsResource.reload());
+      this.occasionService.deleteOccasion(String(row['id'])).subscribe(() => this.occasionsResource.reload());
     }
   }
 

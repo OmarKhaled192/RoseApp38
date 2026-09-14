@@ -28,13 +28,13 @@ export const remoteRoutes: Route[] = [
                 path: 'occasions/add',
                 loadComponent: () =>
                     import('../features/occasions/components/occasion-form/occasion-form').then((m) => m.OccasionForm),
-                data: { mode: 'add' },
+                data: { mode: 'add', breadcrumb: 'addOccasion', breadcrumbParent: 'occasions' },
             },
             {
                 path: 'occasions/edit/:id',
                 loadComponent: () =>
                     import('../features/occasions/components/occasion-form/occasion-form').then((m) => m.OccasionForm),
-                data: { mode: 'edit' },
+                data: { mode: 'edit', breadcrumb: 'editOccasion', breadcrumbParent: 'occasions' },
             },
             {
                 path: 'product/add',
@@ -47,8 +47,6 @@ export const remoteRoutes: Route[] = [
                 loadComponent: () =>
                     import('../features/product/component/product/product').then((m) => m.Product),
                 data: { breadcrumbKey: 'breadcrumb.editProduct' }
-            },
-                    import('../features/product/component/product/product').then((m) => m.Product)
             },
             { path: '404', component: NotFoundPage },
             { path: '500', component: ServerErrorPage },

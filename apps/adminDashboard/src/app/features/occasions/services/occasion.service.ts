@@ -1,6 +1,6 @@
 import { HttpClient, HttpResourceRef } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ApiResponse, ApiService, DataResponse, QueryParams } from '@org/data-access';
+import { ApiResponse, ApiService, DataResponse, PaginationMetadata, QueryParams } from '@org/data-access';
 import { Observable } from 'rxjs';
 import { CreateOccasionPayload, Occasion, UpdateOccasionPayload } from '../models/occasion.model';
 
@@ -14,7 +14,11 @@ export class OccasionService extends ApiService<Occasion> {
     super(inject(HttpClient));
   }
 
-  getOccasions(params?: () => QueryParams): HttpResourceRef<ApiResponse<Occasion[]> | undefined> {
+  getOccasions(
+    params?: () => QueryParams,
+  ): HttpResourceRef<
+    ApiResponse<Occasion[], { data: Occasion[]; metadata: PaginationMetadata }> | undefined
+  > {
     return this.getListResource<Occasion>(params);
   }
 
@@ -30,8 +34,8 @@ export class OccasionService extends ApiService<Occasion> {
     return this.post<CreateOccasionPayload, Occasion>(payload);
   }
 
-  updateOccasion(id: string, payload: UpdateOccasionPayload): Observable<Occasion> {
-    return this.patch<UpdateOccasionPayload, Occasion>(id, payload);
+  updateOccasion(id: string, payload: UpdateOccasionPayload): Observable<DataResponse<Occasion>> {
+    return this.patch<UpdateOccasionPayload, DataResponse<Occasion>>(id, payload);
   }
 
   deleteOccasion(id: string): Observable<unknown> {

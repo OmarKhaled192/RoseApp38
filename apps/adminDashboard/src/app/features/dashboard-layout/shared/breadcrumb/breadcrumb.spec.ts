@@ -16,6 +16,16 @@ describe('Breadcrumb', () => {
           { path: 'admin/overview', component: Breadcrumb },
           { path: 'admin/categories', component: Breadcrumb },
           { path: 'admin/occasions', component: Breadcrumb },
+          {
+            path: 'admin/occasions/add',
+            component: Breadcrumb,
+            data: { breadcrumb: 'add', breadcrumbParent: 'occasions' },
+          },
+          {
+            path: 'admin/occasions/edit/:id',
+            component: Breadcrumb,
+            data: { breadcrumb: 'edit', breadcrumbParent: 'occasions' },
+          },
           { path: 'admin/products', component: Breadcrumb },
         ]),
         provideTranslateService(),
@@ -61,5 +71,17 @@ describe('Breadcrumb', () => {
     expect(component.items.length).toBe(2);
     expect(component.items[0].label).toBe('Dashboard');
     expect(component.items[1].label).toBe('Products');
+  });
+
+  it('should show occasions add breadcrumb', async () => {
+    await router.navigateByUrl('/admin/occasions/add');
+    component.updateBreadcrumb();
+    expect(component.items.map((item) => item.label)).toEqual(['Dashboard', 'Occasions', 'Add']);
+  });
+
+  it('should show occasions edit breadcrumb', async () => {
+    await router.navigateByUrl('/admin/occasions/edit/1');
+    component.updateBreadcrumb();
+    expect(component.items.map((item) => item.label)).toEqual(['Dashboard', 'Occasions', 'Edit']);
   });
 });
