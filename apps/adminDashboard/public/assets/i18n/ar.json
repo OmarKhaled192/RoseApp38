@@ -203,5 +203,11 @@
     "productList": "قائمة المنتجات",
     "addProduct": "إضافة منتج",
     "editProduct": "تعديل المنتج"
+  },
+   "form": {
+    "requiredMessage": "{{label}} مطلوب",
+    "selectPlaceholder": "اختر...",
+    "uploadLabel": "رفع ملف",
+    "uploading": "جاري الرفع..."
   }
 }

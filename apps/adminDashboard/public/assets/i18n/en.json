@@ -204,5 +204,11 @@
     "productList": "Product List",
     "addProduct": "Add Product",
     "editProduct": "Edit Product"
+  },
+    "form": {
+    "requiredMessage": "{{label}} is required",
+    "selectPlaceholder": "Select...",
+    "uploadLabel": "Upload file",
+    "uploading": "Uploading..."
   }
 }
