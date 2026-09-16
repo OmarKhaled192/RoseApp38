@@ -10,8 +10,12 @@ export interface Occasion {
 }
 
 export interface CreateOccasionPayload {
-  name: string;
+  title: string;
   image?: string | File;
+}
+
+export interface IOccasion {
+occasion:Occasion
 }
 
 export type UpdateOccasionPayload = Partial<CreateOccasionPayload>;

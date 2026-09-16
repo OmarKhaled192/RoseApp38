@@ -2,7 +2,7 @@ import { HttpClient, HttpResourceRef } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ApiResponse, ApiService, DataResponse, PaginationMetadata, QueryParams } from '@org/data-access';
 import { Observable } from 'rxjs';
-import { CreateOccasionPayload, Occasion, UpdateOccasionPayload } from '../models/occasion.model';
+import { CreateOccasionPayload, IOccasion, Occasion, UpdateOccasionPayload } from '../models/occasion.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,11 +26,15 @@ export class OccasionService extends ApiService<Occasion> {
     return this.getList<Occasion>(params);
   }
 
+    getOccasionDetail(id: () => string) {
+      return this.getResourceById<IOccasion>(id);
+    }
+
   getOccasion(id: string): HttpResourceRef<DataResponse<Occasion> | undefined> {
     return this.getResourceById(id);
   }
 
-  createOccasion(payload: CreateOccasionPayload): Observable<DataResponse<Occasion>> {
+  createOccasion(payload: any): Observable<DataResponse<Occasion>> {
     return this.post<CreateOccasionPayload, Occasion>(payload);
   }
 

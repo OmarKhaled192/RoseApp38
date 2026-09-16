@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { Message } from '@org/data-access';
-import { DynamicForm, FieldConfig } from '@org/ui';
+import { DataResponse, Message } from '@org/data-access';
+import { DynamicForm, FieldConfig, FileUploadFn } from '@org/ui';
 import { OccasionService } from '../../services/occasion.service';
-import { CreateOccasionPayload } from '../../models/occasion.model';
+import { ProductStore } from '../../../product/state/product.store';
+import { map } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-occasion-form',
@@ -20,27 +22,51 @@ export class OccasionForm {
   private readonly occasionService = inject(OccasionService);
   private readonly translate = inject(TranslateService);
   private readonly message = inject(Message);
+  private readonly productStore = inject(ProductStore);
+  private routeParams = toSignal(this.route.paramMap);
+  formValues = signal<Record<string, any>>({});
 
-  readonly mode = computed<'add' | 'edit'>(() =>
-    this.route.snapshot.data['mode'] === 'edit' ? 'edit' : 'add',
+  occasionId = computed(() => this.routeParams()?.get('id') ?? null);
+    readonly occasionResource = this.occasionService.getOccasionDetail(
+    computed(() => this.occasionId() ?? '')
   );
-  readonly occasionId = computed(() => this.route.snapshot.paramMap.get('id'));
 
-  readonly formTitle = computed(() =>
-    this.mode() === 'edit' ? 'dashboard.occasions.editTitle' : 'dashboard.occasions.addTitle',
+  readonly occasion = computed(() => {
+    const p = this.occasionResource.value()?.payload.occasion ?? null;
+    if (!p) return null;
+    return {
+      ...p,
+    };
+  });
+
+
+  
+  mode = computed<'create' | 'update'>(() =>
+    this.occasionId() ? 'update' : 'create'
   );
 
-  readonly submitLabel = computed(() =>
-    this.mode() === 'edit' ? 'dashboard.occasions.updateButton' : 'dashboard.occasions.addButton',
+ readonly  formTitle = computed(() => {
+    if (this.mode() === 'update') {
+      const title = this.occasion()?.title ?? '';
+        return `${this.translate.instant('dashboard.occasions.editTitle')}: ${title}`;
+    }
+    return this.translate.instant('dashboard.occasions.addTitle')
+  });
+
+
+  submitLabel = computed(() =>
+    this.mode() === 'update'
+      ? this.translate.instant('dashboard.occasions.updateButton')
+      : this.translate.instant('dashboard.occasions.addButton')
   );
 
   readonly formFields = computed<FieldConfig[]>(() => [
     {
       key: 'title',
-      label: this.translate.instant('dashboard.occasions.title'),
+      label: this.translate.instant('dashboard.occasions.name'),
       type: 'text',
       required: true,
-      placeholder: this.translate.instant('dashboard.occasions.titlePlaceholder'),
+      placeholder: this.translate.instant('dashboard.occasions.namePlaceholder'),
       row: 1,
     },
     {
@@ -54,12 +80,21 @@ export class OccasionForm {
     },
   ]);
 
-  onSubmit(data: Record<string, any> | FormData): void {
-    const payload = this.toPayload(data);
+  
+    uploadFn: FileUploadFn = (file: File) => {
+      const formData = new FormData();
+      formData.append('image', file);
+      return this.productStore.uploadPhoto(formData).pipe(
+        map(res => (res as unknown as DataResponse<{ url: string }>).payload.url)
+      );
+    };
+  
 
-    if (this.mode() === 'edit' && this.occasionId()) {
+  onSubmit(data:  Record<string, any>): void {
+
+    if ( this.occasionId()) {
       this.occasionService
-        .updateOccasion(this.occasionId()!, payload)
+        .updateOccasion(this.occasionId()!, data)
         .subscribe({
           next: (response) => {
             this.message.show('success', response.message || 'notifications.occasion.updateSuccess');
@@ -74,7 +109,7 @@ export class OccasionForm {
     }
 
     this.occasionService
-      .createOccasion(payload)
+      .createOccasion(data)
       .subscribe({
         next: (response) => {
           this.message.show('success', response.message || 'notifications.occasion.createSuccess');
@@ -85,16 +120,5 @@ export class OccasionForm {
           error?.error?.message || 'notifications.occasion.createFailed',
         ),
       });
-  }
-
-  private toPayload(data: Record<string, any> | FormData): CreateOccasionPayload {
-    if (data instanceof FormData) {
-      return data as unknown as CreateOccasionPayload;
-    }
-
-    return {
-      name: typeof data['name'] === 'string' ? data['name'].trim() : '',
-      image: data['image'] as string | File | undefined,
-    };
   }
 }
