@@ -28,7 +28,7 @@ export const remoteRoutes: Route[] = [
                 path: 'occasions/add',
                 loadComponent: () =>
                     import('../features/occasions/components/occasion-form/occasion-form').then((m) => m.OccasionForm),
-                data: { mode: 'add', breadcrumb: 'addOccasion', breadcrumbParent: 'occasions' },
+                data: { mode: 'add', breadcrumb: 'add Occasion', breadcrumbParent: 'occasions' },
             },
             {
                 path: 'occasions/edit/:id',

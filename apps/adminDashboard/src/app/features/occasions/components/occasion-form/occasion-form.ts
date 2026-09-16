@@ -36,11 +36,11 @@ export class OccasionForm {
 
   readonly formFields = computed<FieldConfig[]>(() => [
     {
-      key: 'name',
-      label: this.translate.instant('dashboard.occasions.name'),
+      key: 'title',
+      label: this.translate.instant('dashboard.occasions.title'),
       type: 'text',
       required: true,
-      placeholder: this.translate.instant('dashboard.occasions.namePlaceholder'),
+      placeholder: this.translate.instant('dashboard.occasions.titlePlaceholder'),
       row: 1,
     },
     {
