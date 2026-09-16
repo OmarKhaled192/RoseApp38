@@ -7,7 +7,7 @@ import {  TranslatePipe, TranslateService } from '@ngx-translate/core';
   selector: 'lib-select-field',
   imports: [FormField, SelectModule , TranslatePipe],
   template: `
-  <div class="flex flex-col gap-1 w-full">
+  <div class="flex flex-col gap-1 w-full" [class.untouched]="!control()().touched()">
   <label class="text-sm font-medium text-gray-700" [for]="field().key">{{ field().label }}{{ field().required ? ' *' : '' }}</label>
 
 <p-select
@@ -18,6 +18,12 @@ import {  TranslatePipe, TranslateService } from '@ngx-translate/core';
   optionLabel="label"
   optionValue="value"
   [placeholder]="'form.selectPlaceholder' | translate" />
+
+  @if (control()().touched() && control()().invalid()) {
+    <span class="text-red-600 text-xs">
+      {{ control()().errors()[0]?.message }}
+    </span>
+  }
 </div>`
 })
 export class SelectField {
