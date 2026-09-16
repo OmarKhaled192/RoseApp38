@@ -21,9 +21,9 @@ export class DynamicForm {
   private modelInitialized = signal(false);
   private lastFieldKeys = signal<string | null>(null);
   private userFormInstance: FieldTree<Record<string, any>> | null = null;
-  private inputsCache = new Map<string, { field: FieldConfig; control: any }>();
-  private lastGroupedFieldsKeys: string | null = null;
-  private groupedFieldsCache: FieldConfig[][] = [];
+private inputsCache = new Map<string, { field: FieldConfig; control: any }>();
+private lastGroupedFieldsKeys: string | null = null;
+private groupedFieldsCache: FieldConfig[][] = [];
   fields = input<FieldConfig[]>([]);
   mode = input<'create' | 'update'>('create');
   formSubmit = output<Record<string, any> | FormData>();
@@ -36,23 +36,30 @@ export class DynamicForm {
   FIELD_COMPONENTS = FIELD_COMPONENTS;
 
   groupedFields = computed(() => {
-    const currentMode = this.mode();
+  const currentMode = this.mode();
 
     const visibleFields = this.fields().filter(
       f => !f.hiddenIn?.includes(currentMode)
     );
 
-      const groups = new Map<number, FieldConfig[]>();
-      visibleFields.forEach((field, index) => {
-        const row = field.row ?? index;
-        if (!groups.has(row)) groups.set(row, []);
-        groups.get(row)!.push(field);
-      });
+    const groups = new Map<number, FieldConfig[]>();
+    visibleFields.forEach((field, index) => {
+      const row = field.row ?? index;
+      if (!groups.has(row)) groups.set(row, []);
+      groups.get(row)!.push(field);
+    });
     return Array.from(groups.values());
-  });
+});
 
   private modelSignal = signal<Record<string, any>>({});
   constructor() {
+     effect(() => {
+      const defaults = Object.fromEntries(
+          this.fields().map(f => [f.key, f.type === 'checkbox' ? false : ''])
+      );
+        const data = this.initialData();
+      this.modelSignal.set(data ? { ...defaults, ...data } : defaults);
+    });
 
     effect(() => {
       this.valueChanges.emit(this.modelSignal());
@@ -135,7 +142,7 @@ export class DynamicForm {
     return files;
   });
 
-  getInputs(field: FieldConfig) {
+getInputs(field: FieldConfig) {
     return { field, control: this.userForm()[field.key] };
   }
 
