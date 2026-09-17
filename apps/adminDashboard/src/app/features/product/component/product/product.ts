@@ -20,7 +20,6 @@ export class Product {
   private readonly categoryStore = inject(CategoryStore);
   private readonly translate = inject(TranslateService); 
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
 
   initialData = input<Record<string, any> | null>(null);
   formValues = signal<Record<string, any>>({});

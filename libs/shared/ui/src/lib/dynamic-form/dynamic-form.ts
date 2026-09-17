@@ -1,9 +1,13 @@
 import { NgComponentOutlet } from '@angular/common';
-import { Component, computed, effect, input, output, signal } from '@angular/core';
-import { form, required, readonly } from '@angular/forms/signals';
+import {
+  Component, computed, effect, input, output, signal,
+  Injector, inject, runInInjectionContext, untracked
+} from '@angular/core';
+import { form, required, readonly, FieldTree } from '@angular/forms/signals';
 import { FIELD_COMPONENTS } from '../../constant/field-registry';
 import { FieldConfig, FileUploadFn } from '../../models/field-types';
 import { forkJoin, map, of } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'lib-dynamic-form',
@@ -12,6 +16,14 @@ import { forkJoin, map, of } from 'rxjs';
   styleUrl: './dynamic-form.css',
 })
 export class DynamicForm {
+  private injector = inject(Injector);
+  private translate = inject(TranslateService);
+  private modelInitialized = signal(false);
+  private lastFieldKeys = signal<string | null>(null);
+  private userFormInstance: FieldTree<Record<string, any>> | null = null;
+private inputsCache = new Map<string, { field: FieldConfig; control: any }>();
+private lastGroupedFieldsKeys: string | null = null;
+private groupedFieldsCache: FieldConfig[][] = [];
   fields = input<FieldConfig[]>([]);
   mode = input<'create' | 'update'>('create');
   submitLabelInput = input<string | null>(null);
@@ -26,7 +38,7 @@ export class DynamicForm {
   FIELD_COMPONENTS = FIELD_COMPONENTS;
 
   groupedFields = computed(() => {
-    const currentMode = this.mode();
+  const currentMode = this.mode();
 
     const visibleFields = this.fields().filter(
       f => !f.hiddenIn?.includes(currentMode)
@@ -39,15 +51,15 @@ export class DynamicForm {
       groups.get(row)!.push(field);
     });
     return Array.from(groups.values());
-  });
+});
 
   private modelSignal = signal<Record<string, any>>({});
   constructor() {
-    effect(() => {
+     effect(() => {
       const defaults = Object.fromEntries(
-        this.fields().map(f => [f.key, f.type === 'checkbox' ? false : ''])
+          this.fields().map(f => [f.key, f.type === 'checkbox' ? false : ''])
       );
-      const data = this.initialData();
+        const data = this.initialData();
       this.modelSignal.set(data ? { ...defaults, ...data } : defaults);
     });
 
@@ -76,14 +88,51 @@ export class DynamicForm {
       }
     });
   }
-  userForm = form(this.modelSignal, (path) => {
-    this.fields().forEach(field => {
-      if (field.required) {
-        required(path[field.key], { message: `${field.label} مطلوب` });
+
+  userForm = computed(() => {
+    const currentFields = this.fields();
+    const data = this.initialData();
+
+    return untracked(() => {
+      const currentKeys = currentFields.map(f => f.key).sort().join(',');
+      const structureChanged = currentKeys !== this.lastFieldKeys();
+
+      if (!this.modelInitialized() || structureChanged) {
+        const defaults = Object.fromEntries(
+          currentFields.map(f => [f.key, f.type === 'checkbox' ? false : ''])
+        );
+        if (!this.modelInitialized()) {
+          this.modelSignal.set(data ? { ...defaults, ...data } : defaults);
+        }
+        this.modelInitialized.set(true);
+        this.lastFieldKeys.set(currentKeys);
       }
-      if (field.readonly) {
-        readonly(path[field.key]);
+
+      if (this.userFormInstance && !structureChanged) {
+        return this.userFormInstance;
       }
+
+      this.userFormInstance = runInInjectionContext(this.injector, () =>
+        form(this.modelSignal, (path) => {
+          currentFields.forEach((field) => {
+            required(path[field.key], {
+              when: () => {
+                const target = this.fields().find((f) => f.key === field.key);
+                return !!target?.required;
+              },
+              message: () =>
+                this.translate.instant('form.requiredMessage', { label: field.label }),
+            });
+
+            readonly(path[field.key], () => {
+              const target = this.fields().find((f) => f.key === field.key);
+              return !!target?.readonly;
+            });
+          });
+        })
+      );
+
+      return this.userFormInstance;
     });
   });
 
@@ -95,20 +144,22 @@ export class DynamicForm {
     return files;
   });
 
-  getInputs(field: FieldConfig) {
-    return { field, control: this.userForm[field.key] };
+getInputs(field: FieldConfig) {
+    return { field, control: this.userForm()[field.key] };
   }
 
   onSubmit(e: Event) {
     e.preventDefault();
-    if (this.userForm().invalid()) return;
 
+    if (this.userForm()().invalid()) {
+      this.userForm()().markAsTouched();
+      return;
+    }
     const allowedKeys = this.fields().map(f => f.key);
     const excludedKeys = this.fields()
       .filter(f => f.excludeFromSubmit)
       .map(f => f.key);
 
-    // ✅ بس المفاتيح المعرّفة في fields، واستبعاد المستثناة
     const model: Record<string, any> = {};
     allowedKeys.forEach(key => {
       if (!excludedKeys.includes(key)) {
@@ -116,7 +167,6 @@ export class DynamicForm {
       }
     });
 
-    // ✅ تحويل حقول النوع 'number' لأرقام حقيقية
     this.fields().forEach(field => {
       if (field.type === 'number' && !excludedKeys.includes(field.key) && field.key in model) {
         const val = model[field.key];

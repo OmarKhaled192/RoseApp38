@@ -7,6 +7,7 @@ import { LoadingState, Message, QueryParams } from '@org/data-access';
 import { Product, ProductData } from '@org/ui';
 import { ProductService } from '../services/product';
 import { UploadService } from '../services/upload';
+import { Router } from '@angular/router';
 
 export interface ProductState extends LoadingState {
   selectedId: string | null;
@@ -37,6 +38,7 @@ export const ProductStore = signalStore(
       productService = inject(ProductService),
       messageService = inject(Message),
       uploadService = inject(UploadService),
+       router = inject(Router),
       translate = inject(TranslateService)
     ) => ({
       getProductResource(id: () => string) {
@@ -55,7 +57,7 @@ export const ProductStore = signalStore(
                 next: () => {
                   patchState(store, { isLoading: false });
                   messageService.show('success', translate.instant('notifications.product.createSuccess'));
-                  store.productsResource.reload();
+                  router.navigate(['/admin/product']);
                 },
                 error: (err) => {
                   patchState(store, { isLoading: false });
@@ -77,6 +79,7 @@ export const ProductStore = signalStore(
                   patchState(store, { isLoading: false });
                   store.productsResource.reload();
                   messageService.show('success', translate.instant('notifications.product.updateSuccess'));
+                  router.navigate(['/admin/product']);
                 },
                 error: (err) => {
                   patchState(store, { isLoading: false });
