@@ -1,0 +1,200 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+  color: #1f2937;
+  background: #f8f8f8;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.occasions-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 18px 36px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 2vw, 2.5rem);
+  font-weight: 700;
+  color: #111827;
+}
+
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  background: #b91c1c;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 8px 18px rgba(185, 28, 28, 0.18);
+}
+
+.plus {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.toolbar {
+  margin-bottom: 12px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  min-height: 48px;
+  padding: 0 14px;
+}
+
+.search-icon {
+  color: #6b7280;
+  font-size: 1.25rem;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background: transparent;
+  color: #111827;
+  font-size: 1rem;
+}
+
+.table-wrap {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 2fr) minmax(130px, 1fr) minmax(180px, 1fr);
+  align-items: center;
+}
+
+.table-header {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.table-header > div,
+.table-row > div {
+  padding: 18px 16px;
+}
+
+.table-row {
+  border-bottom: 1px solid #eef2f7;
+  min-height: 72px;
+  background: #fff;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row:nth-child(even) {
+  background: rgba(249, 250, 251, 0.7);
+}
+
+.name {
+  font-weight: 600;
+  color: #111827;
+}
+
+.products {
+  color: #4b5563;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  background: transparent;
+  color: #2563eb;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+  text-decoration: none;
+}
+
+.edit-btn {
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #2563eb;
+  background: rgba(59, 130, 246, 0.04);
+}
+
+.delete-btn {
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #dc2626;
+  background: rgba(239, 68, 68, 0.04);
+}
+
+.pagination-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+@media (max-width: 768px) {
+  .occasions-page {
+    padding: 18px 12px 32px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .primary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .table-header,
+  .table-row {
+    min-width: 620px;
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
+}

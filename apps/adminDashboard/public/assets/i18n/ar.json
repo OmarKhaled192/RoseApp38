@@ -130,6 +130,26 @@
       "occasions": "المناسبات",
       "products": "المنتجات"
     },
+    "occasions": {
+      "title": "كل المناسبات",
+      "addAction": "إضافة مناسبة جديدة",
+      "searchPlaceholder": "بحث...",
+      "name": "الاسم",
+      "namePlaceholder": "أدخل اسم المناسبة",
+      "image": "صورة المناسبة",
+      "imagePlaceholder": "اختر صورة المناسبة",
+      "products": "المنتجات",
+      "productsLabel": "منتجات",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "editLabel": "تعديل",
+      "deleteLabel": "حذف",
+      "addTitle": "إضافة مناسبة جديدة",
+      "editTitle": "تعديل المناسبة",
+      "addButton": "إضافة المناسبة",
+      "updateButton": "تحديث المناسبة",
+      "actions": "الإجراءات"
+    },
     "userMenu": {
       "profile": "الملف الشخصي",
       "logout": "تسجيل الخروج"
@@ -140,7 +160,9 @@
       "categories": "الفئات",
       "occasions": "المناسبات",
       "products": "المنتجات",
-      "preview": "معاينة الموقع"
+      "preview": "معاينة الموقع",
+      "add": "إضافة",
+      "edit": "تعديل"
     },
     "errorPreview": {
       "title": "معاينة صفحات الخطأ",
@@ -179,6 +201,16 @@
     "delete": "حذف"
   },
   "notifications": {
+    "headers": {
+      "success": "نجاح",
+      "error": "خطأ"
+    },
+    "occasion": {
+      "createSuccess": "تم إنشاء المناسبة بنجاح",
+      "createFailed": "فشل إنشاء المناسبة",
+      "updateSuccess": "تم تحديث المناسبة بنجاح",
+      "updateFailed": "فشل تحديث المناسبة"
+    },
     "product": {
       "createSuccess": "تم إضافة المنتج بنجاح",
       "createFailed": "فشل في إضافة المنتج",
