@@ -23,7 +23,7 @@ export class DynamicForm {
   private userFormInstance: FieldTree<Record<string, any>> | null = null;
 private inputsCache = new Map<string, { field: FieldConfig; control: any }>();
 private lastGroupedFieldsKeys: string | null = null;
-private groupedFieldsCache: FieldConfig[][] = [];
+
   fields = input<FieldConfig[]>([]);
   mode = input<'create' | 'update'>('create');
   submitLabelInput = input<string | null>(null);
@@ -34,7 +34,6 @@ private groupedFieldsCache: FieldConfig[][] = [];
   submitLabel = input<string>('Add');
   isSubmitting = signal(false);
 
-  resolvedSubmitLabel = computed(() => this.submitLabelInput() ?? this.submitLabel());
   FIELD_COMPONENTS = FIELD_COMPONENTS;
 
   groupedFields = computed(() => {
