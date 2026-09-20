@@ -70,7 +70,10 @@ export class ProductList {
     }))
   );
 
-  totalRecords = computed(() => this.productResource.value()?.payload?.metadata.totalPages ?? 0);
+  totalRecords = computed(() => {
+    const res = this.productResource.value()?.payload;
+    return res?.metadata?.total ?? this.products().length;
+  });
 
   private searchDebounce?: ReturnType<typeof setTimeout>;
 

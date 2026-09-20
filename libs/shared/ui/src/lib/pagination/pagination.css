@@ -19,7 +19,9 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-.custom-paginator ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page[aria-current="page"] {
+.custom-paginator ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page[aria-current="page"],
+.custom-paginator ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected,
+.custom-paginator ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background: #a62626 !important;
     color: #ffffff !important;
     border-color: #a62626 !important;

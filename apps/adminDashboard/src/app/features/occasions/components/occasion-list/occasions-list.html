@@ -32,12 +32,12 @@
     <app-reusable-table
       [data]="paginatedItems()"
       [columns]="columns"
+      [totalRecords]="totalRecords()"
+      [first]="(currentPage() - 1) * pageSize()"
+      [pageSize]="pageSize()"
       (actionClicked)="onTableAction($event)"
+      (pageChange)="onPageChange($event)"
     >
     </app-reusable-table>
-</div>
-
-  <div class="pagination-wrap">
-    <lib-pagination [totalRecords]="totalRecords()" (pageChange)="onPageChange($event)" />
   </div>
 </section>

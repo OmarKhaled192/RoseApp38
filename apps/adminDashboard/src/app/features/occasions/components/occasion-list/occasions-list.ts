@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Pagination } from '@org/ui';
 import { ReusableTable, ReusableTableActionEvent, ReusableTableColumn } from '../../../../shared/components/reusable-table';
 import { OccasionService } from '../../services/occasion.service';
 import { Occasion } from '../../models/occasion.model';
@@ -12,7 +11,7 @@ export type OccasionItem = Occasion & Record<string, unknown>;
 @Component({
   selector: 'app-occasions-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, Pagination, TranslatePipe, ReusableTable],
+  imports: [CommonModule, RouterLink, TranslatePipe, ReusableTable],
   templateUrl: './occasions-list.html',
   styleUrl: './occasions-list.css',
 })

@@ -169,9 +169,9 @@ describe('CategoriesList Component', () => {
     expect(component.categoryToDelete()).toBeNull();
   });
 
-  it('should change current page when goToPage is called', () => {
-    expect(component.totalPages()).toBe(3);
-    component.goToPage(2);
+  it('should change current page when onPageChange is called', () => {
+    component.onPageChange({ page: 1, size: 10, first: 10 });
     expect(component.currentPage()).toBe(2);
+    expect(component.pageSize()).toBe(10);
   });
 });

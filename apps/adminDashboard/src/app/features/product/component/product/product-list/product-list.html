@@ -24,6 +24,7 @@
   </div>
 
   <app-reusable-table [columns]="productColumns" [data]="products()" [totalRecords]="totalRecords()"
+    [first]="first()" [pageSize]="pageSize()"
     (actionClicked)="onAction($event)" (pageChange)="onPageChange($event)" />
 </div>
 

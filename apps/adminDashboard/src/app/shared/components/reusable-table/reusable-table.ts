@@ -27,10 +27,18 @@ export class ReusableTable<T extends ReusableTableRow = ReusableTableRow> {
   readonly columns = input.required<readonly ReusableTableColumn[]>();
   readonly emptyMessage = input('reusable-table.empty');
   readonly totalRecords = input(0);
+  readonly pageSize = input(10);
+  readonly first = input(0);
 
   /** Emits the complete row and the action/column that caused the click. */
   readonly actionClicked = output<ReusableTableActionEvent<T>>();
   readonly pageChange = output<{ page: number; size: number; first: number }>();
+
+  readonly totalPages = computed(() => {
+    const size = this.pageSize();
+    if (size <= 0) return 0;
+    return Math.ceil(this.totalRecords() / size);
+  });
 
   readonly resolvedColumns = computed<readonly ResolvedReusableTableColumn[]>(() =>
     this.columns().map((column, index) => ({

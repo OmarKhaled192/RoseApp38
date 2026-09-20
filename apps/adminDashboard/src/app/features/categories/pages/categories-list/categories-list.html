@@ -37,6 +37,7 @@
     </div>
     } @else {
     <app-reusable-table [data]="tableData()" [columns]="columns" [totalRecords]="totalRecords()"
+      [first]="(currentPage() - 1) * pageSize()" [pageSize]="pageSize()"
       emptyMessage="categories.empty" (actionClicked)="onActionClicked($event)" (pageChange)="onPageChange($event)" />
     }
   </div>
