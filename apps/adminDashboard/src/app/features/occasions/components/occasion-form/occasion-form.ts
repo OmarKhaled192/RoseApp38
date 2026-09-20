@@ -70,13 +70,21 @@ export class OccasionForm {
       row: 1,
     },
     {
+      key: 'description',
+      label: this.translate.instant('dashboard.occasions.description'),
+      type: 'textarea',
+      required: false,
+      placeholder: this.translate.instant('dashboard.occasions.descriptionPlaceholder'),
+      row: 2,
+    },
+    {
       key: 'image',
       label: this.translate.instant('dashboard.occasions.image'),
       type: 'upload',
       required: true,
       accept: 'image/*',
       placeholder: this.translate.instant('dashboard.occasions.imagePlaceholder'),
-      row: 2,
+      row: 3,
     },
   ]);
 

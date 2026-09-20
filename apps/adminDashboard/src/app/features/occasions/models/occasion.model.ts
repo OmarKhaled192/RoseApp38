@@ -2,6 +2,7 @@ export interface Occasion {
   id: string;
   name?: string;
   title?: string;
+  description?: string;
   products?: number;
   _count?: {
     products?: number;
@@ -11,6 +12,7 @@ export interface Occasion {
 
 export interface CreateOccasionPayload {
   title: string;
+  description?: string;
   image?: string | File;
 }
 

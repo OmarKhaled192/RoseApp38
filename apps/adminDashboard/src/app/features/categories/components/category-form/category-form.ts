@@ -85,12 +85,20 @@ readonly category = computed(() => {
       row: 1,
     },
     {
+      key: 'description',
+      label: this.translate.instant('categories.description'),
+      type: 'textarea',
+      required: false,
+      placeholder: this.translate.instant('categories.descriptionPlaceholder'),
+      row: 2,
+    },
+    {
       key: 'image',
       label: this.translate.instant('categories.image'),
       type: 'upload',
       required: true,
       accept: 'image/jpeg,image/png,image/gif,image/webp',
-      row: 2,
+      row: 3,
       hiddenIn: ['update']
 
     },
@@ -99,7 +107,7 @@ readonly category = computed(() => {
       label: this.translate.instant('categories.image'),
       type: 'upload',
       accept: 'image/jpeg,image/png,image/gif,image/webp',
-      row: 2,
+      row: 3,
       hiddenIn: ['create']
     },
   ]);
@@ -126,7 +134,7 @@ readonly category = computed(() => {
     const image = typeof data['image'] === 'string' ? data['image'] : '';
     const body = {
       title: String(data['name'] ?? '').trim(),
-      description: String(data['name'] ?? '').trim(),
+      description: String(data['description'] ?? '').trim(),
       ...(image ? { image } : {}),
     };
 
