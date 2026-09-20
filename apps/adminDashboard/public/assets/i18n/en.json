@@ -10,7 +10,7 @@
     "close": "Close",
     "edit": "Edit",
     "delete": "Delete",
-     "search": "Search...",
+    "search": "Search...",
     "name": "Name",
     "products": "Products"
   },
@@ -173,8 +173,8 @@
       "server": "500 Server error"
     }
   },
- "products": {
-   "updateProduct": "Update Product",
+  "products": {
+    "updateProduct": "Update Product",
     "addProduct": "Add Product",
     "allProducts": "All Products",
     "addNewProduct": "Add a new product",
@@ -257,6 +257,7 @@
     "passwordMismatch": "Passwords do not match.",
     "passwordChanged": "Password changed successfully.",
     "passwordFailed": "Unable to change your password."
+  },
   "customers": {
     "name": "Name",
     "balance": "Balance",
@@ -269,7 +270,7 @@
     "addProduct": "Add Product",
     "editProduct": "Edit Product"
   },
-    "form": {
+  "form": {
     "requiredMessage": "{{label}} is required",
     "selectPlaceholder": "Select...",
     "uploadLabel": "Upload file",

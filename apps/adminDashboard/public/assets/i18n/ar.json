@@ -172,8 +172,8 @@
       "server": "500 خطأ في الخادم"
     }
   },
-   "products": {
-  "updateProduct": "تحديث المنتج",
+  "products": {
+    "updateProduct": "تحديث المنتج",
     "addProduct": "إضافة منتج",
     "allProducts": "جميع المنتجات",
     "addNewProduct": "إضافة منتج جديد",
@@ -256,6 +256,7 @@
     "passwordMismatch": "كلمتا المرور غير متطابقتين.",
     "passwordChanged": "تم تغيير كلمة المرور بنجاح.",
     "passwordFailed": "تعذر تغيير كلمة المرور."
+  },
   "customers": {
     "name": "الاسم",
     "balance": "الرصيد",
@@ -268,7 +269,7 @@
     "addProduct": "إضافة منتج",
     "editProduct": "تعديل المنتج"
   },
-   "form": {
+  "form": {
     "requiredMessage": "{{label}} مطلوب",
     "selectPlaceholder": "اختر...",
     "uploadLabel": "رفع ملف",
