@@ -7,9 +7,8 @@ import { ToastMsg } from '@org/ui';
 
 @Component({
   selector: 'app-dashboard-layout',
-  imports: [RouterOutlet, Navbar, Sidebar],
   providers: [AdminAccountStore],
   imports: [RouterOutlet, Navbar, Sidebar, ToastMsg],
   templateUrl: './dashboard-layout.html',
 })
-export class DashboardLayout {}
+export class DashboardLayout { }

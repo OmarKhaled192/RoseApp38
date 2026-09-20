@@ -77,12 +77,12 @@
               "maximumError": "8kb"
             }
           ],
-        "fileReplacements": [
-          {
-            "replace": "apps/shell/public/module-federation.manifest.json",
-            "with": "apps/shell/public/module-federation.manifest.prod.json"
-          }
-        ],
+          "fileReplacements": [
+            {
+              "replace": "apps/shell/public/module-federation.manifest.json",
+              "with": "apps/shell/public/module-federation.manifest.prod.json"
+            }
+          ],
           "outputHashing": "all"
         },
         "development": {
@@ -100,6 +100,11 @@
       "continuous": true,
       "executor": "@nx/angular:module-federation-dev-server",
       "options": {
+        "devRemotes": [
+          "adminDashboard",
+          "authApp",
+          "roseApp"
+        ],
         "port": 4200,
         "publicHost": "http://localhost:4200"
       },
