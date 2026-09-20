@@ -23,9 +23,10 @@ export class DynamicForm {
   private userFormInstance: FieldTree<Record<string, any>> | null = null;
 private inputsCache = new Map<string, { field: FieldConfig; control: any }>();
 private lastGroupedFieldsKeys: string | null = null;
-private groupedFieldsCache: FieldConfig[][] = [];
+
   fields = input<FieldConfig[]>([]);
   mode = input<'create' | 'update'>('create');
+  submitLabelInput = input<string | null>(null);
   formSubmit = output<Record<string, any> | FormData>();
   valueChanges = output<Record<string, any>>();
   initialData = input<Record<string, any> | null>(null);

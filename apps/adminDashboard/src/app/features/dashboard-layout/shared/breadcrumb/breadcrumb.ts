@@ -56,7 +56,9 @@ export class Breadcrumb implements OnInit {
     while (currentRoute?.firstChild) {
       currentRoute = currentRoute.firstChild;
     }
-    const routeBreadcrumb = currentRoute?.snapshot.data?.['breadcrumb'];
+    const routeData = currentRoute?.snapshot.data ?? {};
+    const routeBreadcrumb = routeData['breadcrumb'];
+    const breadcrumbParent = routeData['breadcrumbParent'];
 
     const currentUrl = (this.router.url || '').split('?')[0].split('#')[0];
     const urlSegments = currentUrl
@@ -64,6 +66,24 @@ export class Breadcrumb implements OnInit {
       .filter((segment) => segment && segment !== 'admin' && segment !== 'dashboard');
 
     const lastSegment = urlSegments[urlSegments.length - 1]?.toLowerCase();
+
+    if (breadcrumbParent && routeBreadcrumb) {
+      const parentInfo = SIDEBAR_ROUTE_MAP[breadcrumbParent.toLowerCase()];
+      const parentLabel = parentInfo
+        ? this.getTranslatedString(parentInfo.key, parentInfo.defaultLabel)
+        : this.toTitleCase(breadcrumbParent);
+      const childLabel = this.getTranslatedString(
+        `dashboard.breadcrumb.${routeBreadcrumb.toLowerCase()}`,
+        this.toTitleCase(routeBreadcrumb),
+      );
+
+      this.items = [
+        { label: dashboardLabel, routerLink: '/admin/overview' },
+        { label: parentLabel, routerLink: `/admin/${breadcrumbParent}` },
+        { label: childLabel },
+      ];
+      return;
+    }
 
     let pageLabel: string | null = null;
 
@@ -119,5 +139,9 @@ export class Breadcrumb implements OnInit {
   private getTranslatedString(key: string, defaultVal: string): string {
     const translated = this.translate.instant(key);
     return translated && translated !== key ? translated : defaultVal;
+  }
+
+  private toTitleCase(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
   }
 }

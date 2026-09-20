@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideTranslateService } from '@ngx-translate/core';
+import { MessageService } from 'primeng/api';
+import { providePrimeNG } from 'primeng/config';
 import { Product } from './product';
 
 describe('Product', () => {
@@ -8,6 +11,11 @@ describe('Product', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Product],
+      providers: [
+        MessageService,
+        providePrimeNG(),
+        provideTranslateService({ lang: 'en', fallbackLang: 'en' }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Product);

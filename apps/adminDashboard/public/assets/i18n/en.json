@@ -131,6 +131,26 @@
       "occasions": "Occasions",
       "products": "Products"
     },
+    "occasions": {
+      "title": "All Occasions",
+      "addAction": "Add a new occasion",
+      "searchPlaceholder": "Search...",
+      "name": "Name",
+      "namePlaceholder": "Enter occasion name",
+      "image": "Occasion image",
+      "imagePlaceholder": "Select an occasion image",
+      "products": "Products",
+      "productsLabel": "products",
+      "edit": "Edit",
+      "delete": "Delete",
+      "editLabel": "Edit",
+      "deleteLabel": "Delete",
+      "addTitle": "Add a New Occasion",
+      "editTitle": "Edit Occasion",
+      "addButton": "Add Occasion",
+      "updateButton": "Update Occasion",
+      "actions": "Actions"
+    },
     "userMenu": {
       "profile": "Profile",
       "logout": "Log out"
@@ -141,7 +161,9 @@
       "categories": "Categories",
       "occasions": "Occasions",
       "products": "Products",
-      "preview": "Preview Website"
+      "preview": "Preview Website",
+      "add": "Add",
+      "edit": "Edit"
     },
     "errorPreview": {
       "title": "Error page preview",
@@ -180,6 +202,16 @@
     "delete": "Delete"
   },
   "notifications": {
+    "headers": {
+      "success": "Success",
+      "error": "Error"
+    },
+    "occasion": {
+      "createSuccess": "Occasion created successfully",
+      "createFailed": "Failed to create occasion",
+      "updateSuccess": "Occasion updated successfully",
+      "updateFailed": "Failed to update occasion"
+    },
     "product": {
       "createSuccess": "Product created successfully",
       "createFailed": "Failed to create product",
